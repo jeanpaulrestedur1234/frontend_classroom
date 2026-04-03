@@ -73,7 +73,7 @@ export default function Features() {
   const { t } = useTranslation("landing");
 
   return (
-    <section id="features" className="relative py-24 sm:py-32 bg-zinc-950">
+    <section id="features" className="relative py-24 sm:py-32 bg-white">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/[0.03] rounded-full blur-3xl" />
@@ -89,7 +89,7 @@ export default function Features() {
             {t("features.sectionLabel")}
           </p>
           <h2
-            className="animate-fade-in-up font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-50 tracking-tight"
+            className="animate-fade-in-up font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-950 tracking-tight"
             style={{ animationDelay: "0.1s" }}
           >
             {t("features.title")}
@@ -107,7 +107,7 @@ export default function Features() {
           {features.map((feature, index) => (
             <div
               key={feature.titleKey}
-              className={`group animate-fade-in-up relative bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 hover:bg-white/[0.05] transition-all duration-300 ${feature.accentBorder}`}
+              className={`group animate-fade-in-up relative bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6 hover:bg-zinc-100 transition-all duration-300 ${feature.accentBorder}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Hover glow */}
@@ -115,11 +115,11 @@ export default function Features() {
 
               <div className="relative">
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${feature.accentBg} ${feature.accentColor} mb-5 border border-white/[0.06]`}
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${feature.accentBg} ${feature.accentColor} mb-5 border border-zinc-100`}
                 >
                   <feature.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-semibold text-zinc-100 mb-2 font-[family-name:var(--font-display)]">
+                <h3 className="text-lg font-semibold text-zinc-900 mb-2 font-[family-name:var(--font-display)]">
                   {t(feature.titleKey)}
                 </h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">

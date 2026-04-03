@@ -30,7 +30,7 @@ export default function UsersTable({
   const { t: tc } = useTranslation('common');
 
   return (
-    <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl overflow-hidden">
+    <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">
         <table className="min-w-full">
           <thead>
@@ -57,7 +57,7 @@ export default function UsersTable({
               <tr
                 key={u.id}
                 className={`transition-colors hover:bg-white/[0.04] ${
-                  idx !== users.length - 1 ? 'border-b border-white/[0.06]' : ''
+                  idx !== users.length - 1 ? 'border-b border-zinc-100' : ''
                 }`}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -65,7 +65,7 @@ export default function UsersTable({
                     <div className="h-9 w-9 rounded-full bg-gradient-to-br from-amber-400/20 to-amber-600/20 flex items-center justify-center text-sm font-semibold text-amber-400 shrink-0">
                       {u.full_name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-sm font-medium text-zinc-50">{u.full_name}</span>
+                    <span className="text-sm font-medium text-zinc-950">{u.full_name}</span>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400">

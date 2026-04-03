@@ -42,25 +42,25 @@ export default function PackageCard({ pkg, children }: PackageCardProps) {
 
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Clock className="h-4 w-4 text-zinc-600" />
+          <Clock className="h-4 w-4 text-zinc-400" />
           <span>{t('catalog.hoursPerWeek', { hours: pkg.hours_per_week })}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <CalendarDays className="h-4 w-4 text-zinc-600" />
+          <CalendarDays className="h-4 w-4 text-zinc-400" />
           <span>{t('catalog.weeks', { weeks: pkg.duration_weeks })}</span>
         </div>
       </div>
 
-      <div className="mt-auto pt-3 border-t border-white/[0.06]">
+      <div className="mt-auto pt-3 border-t border-zinc-100">
         {pkg.discount_pct > 0 ? (
           <div className="flex items-baseline gap-2">
             <span className="text-xl font-bold text-amber-400 font-[family-name:var(--font-display)]">
               {formatCurrency(finalPrice)}
             </span>
-            <span className="text-sm text-zinc-600 line-through">{formatCurrency(pkg.base_price)}</span>
+            <span className="text-sm text-zinc-400 line-through">{formatCurrency(pkg.base_price)}</span>
           </div>
         ) : (
-          <span className="text-xl font-bold text-zinc-50 font-[family-name:var(--font-display)]">
+          <span className="text-xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
             {formatCurrency(pkg.base_price)}
           </span>
         )}

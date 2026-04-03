@@ -85,8 +85,8 @@ export default function UserEditModal({
             onChange={(e) => setForm({ ...form, role: e.target.value })}
           />
 
-          <div className="flex items-center justify-between rounded-xl bg-white/[0.03] border border-white/[0.08] px-4 py-3">
-            <span className="text-sm font-medium text-zinc-300">{t('edit.isActive')}</span>
+          <div className="flex items-center justify-between rounded-xl bg-zinc-50 border border-zinc-200 px-4 py-3">
+            <span className="text-sm font-medium text-zinc-700">{t('edit.isActive')}</span>
             <button
               type="button"
               role="switch"

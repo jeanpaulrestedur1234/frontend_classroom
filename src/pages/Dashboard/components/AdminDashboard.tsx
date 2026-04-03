@@ -104,7 +104,7 @@ export default function AdminDashboard() {
 
       {/* Quick actions */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('admin.quickActions')}
         </h2>
         <div className="flex flex-wrap gap-3">
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
 
       {/* Recent activity */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('admin.recentActivity')}
         </h2>
         <Card>
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="h-8 w-1.5 rounded-full bg-amber-500/60" />
                     <div>
-                      <p className="text-sm font-medium text-zinc-100">
+                      <p className="text-sm font-medium text-zinc-900">
                         {t('admin.booking')} #{b.id.slice(0, 8)}
                       </p>
                       <p className="text-xs text-zinc-500">

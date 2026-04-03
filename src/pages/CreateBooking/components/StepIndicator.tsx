@@ -27,7 +27,7 @@ export default function StepIndicator({ current, skipRoom, t }: StepIndicatorPro
                     ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 shadow-lg shadow-amber-500/25'
                     : isDone
                       ? 'bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30'
-                      : 'bg-white/5 text-zinc-600 ring-1 ring-white/10'
+                      : 'bg-white/5 text-zinc-400 ring-1 ring-white/10'
                 }`}
               >
                 {isDone ? <CheckCircle className="w-4 h-4" /> : idx + 1}
@@ -35,10 +35,10 @@ export default function StepIndicator({ current, skipRoom, t }: StepIndicatorPro
               <span
                 className={`hidden sm:inline text-sm font-[family-name:var(--font-display)] ${
                   isActive
-                    ? 'font-medium text-zinc-100'
+                    ? 'font-medium text-zinc-900'
                     : isDone
                       ? 'text-amber-400'
-                      : 'text-zinc-600'
+                      : 'text-zinc-400'
                 }`}
               >
                 {t(`create.step.${key}`)}

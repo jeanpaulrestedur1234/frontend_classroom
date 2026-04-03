@@ -18,7 +18,7 @@ export default function Dashboard() {
     <div className="space-y-2">
       {/* Welcome header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h1 className="text-3xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('welcome', { name: user.full_name })}
         </h1>
         <p className="mt-1 text-sm text-zinc-500">{t('subtitle')}</p>

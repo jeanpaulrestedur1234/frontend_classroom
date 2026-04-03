@@ -42,26 +42,26 @@ export default function PaymentCard({
 
   return (
     <Card className="space-y-4 relative overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
 
       {/* Top row: ID + amount/status */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center">
-            <CreditCard className="h-5 w-5 text-zinc-500" />
+          <div className="w-10 h-10 rounded-xl bg-surface-100 border border-surface-200 flex items-center justify-center">
+            <CreditCard className="h-5 w-5 text-zinc-400" />
           </div>
           <div>
-            <p className="text-sm font-medium text-zinc-200">
+            <p className="text-sm font-medium text-zinc-900">
               #{truncateId(payment.id)}
             </p>
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs text-zinc-500">
               {t('table.studentId')}: {payment.student_id} &middot;{' '}
               {t('table.packageId')}: {truncateId(payment.student_package_id)}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-lg font-semibold text-zinc-100 font-[family-name:var(--font-display)]">
+          <span className="text-lg font-semibold text-zinc-900 font-[family-name:var(--font-display)]">
             {formatCurrency(payment.amount)}
           </span>
           <Badge variant={paymentBadgeVariant(payment.status)}>
@@ -73,23 +73,23 @@ export default function PaymentCard({
       {/* Details grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-2 text-xs">
         <div>
-          <span className="text-zinc-600">{t('table.createdAt')}</span>
-          <p className="text-zinc-400 mt-0.5">{formatDate(payment.created_at)}</p>
+          <span className="text-zinc-500">{t('table.createdAt')}</span>
+          <p className="text-zinc-700 mt-0.5">{formatDate(payment.created_at)}</p>
         </div>
         <div>
-          <span className="text-zinc-600">{t('table.updatedAt')}</span>
-          <p className="text-zinc-400 mt-0.5">{formatDate(payment.updated_at)}</p>
+          <span className="text-zinc-500">{t('table.updatedAt')}</span>
+          <p className="text-zinc-700 mt-0.5">{formatDate(payment.updated_at)}</p>
         </div>
         {payment.reviewed_at && (
           <div>
-            <span className="text-zinc-600">{t('table.reviewedAt')}</span>
-            <p className="text-zinc-400 mt-0.5">{formatDate(payment.reviewed_at)}</p>
+            <span className="text-zinc-500">{t('table.reviewedAt')}</span>
+            <p className="text-zinc-700 mt-0.5">{formatDate(payment.reviewed_at)}</p>
           </div>
         )}
         {payment.reviewed_by && (
           <div>
-            <span className="text-zinc-600">{t('table.reviewedBy')}</span>
-            <p className="text-zinc-400 mt-0.5">{payment.reviewed_by}</p>
+            <span className="text-zinc-500">{t('table.reviewedBy')}</span>
+            <p className="text-zinc-700 mt-0.5">{payment.reviewed_by}</p>
           </div>
         )}
       </div>
@@ -101,7 +101,7 @@ export default function PaymentCard({
             href={payment.payment_proof_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-amber-600 hover:text-amber-700 font-medium transition-colors"
           >
             <ExternalLink className="h-3 w-3" />
             {t('viewProof')}
@@ -111,8 +111,8 @@ export default function PaymentCard({
 
       {/* Rejection reason */}
       {payment.rejection_reason && (
-        <div className="rounded-xl bg-rose-500/10 border border-rose-500/20 px-3 py-2">
-          <p className="text-xs text-rose-400">
+        <div className="rounded-xl bg-rose-50 border border-rose-100 px-3 py-2">
+          <p className="text-xs text-rose-600">
             <span className="font-medium">{t('admin.rejectionReason')}:</span>{' '}
             {payment.rejection_reason}
           </p>

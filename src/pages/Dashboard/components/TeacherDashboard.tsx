@@ -127,7 +127,7 @@ export default function TeacherDashboard() {
 
       {/* Today's availability */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('teacher.availabilityToday', { day: dayName })}
         </h2>
         <Card>
@@ -143,7 +143,7 @@ export default function TeacherDashboard() {
                   className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3"
                 >
                   <Clock className="h-4 w-4 text-amber-400" />
-                  <span className="text-sm text-zinc-300">
+                  <span className="text-sm text-zinc-700">
                     {a.start_time} - {a.end_time}
                   </span>
                   <Badge variant={a.is_virtual ? 'info' : 'default'}>
@@ -160,7 +160,7 @@ export default function TeacherDashboard() {
 
       {/* Today's classes */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('teacher.myClassesToday')}
         </h2>
         <Card>
@@ -178,7 +178,7 @@ export default function TeacherDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="h-8 w-1.5 rounded-full bg-amber-500/60" />
                     <div>
-                      <p className="text-sm font-medium text-zinc-100">
+                      <p className="text-sm font-medium text-zinc-900">
                         {b.start_time} - {b.end_time}
                       </p>
                       <p className="text-xs text-zinc-500">

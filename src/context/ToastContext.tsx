@@ -90,7 +90,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               <span className="text-sm font-medium">{t.message}</span>
               <button
                 onClick={() => dismiss(t.id)}
-                className="ml-2 text-zinc-500 hover:text-zinc-300 transition-colors"
+                className="ml-2 text-zinc-500 hover:text-zinc-700 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>

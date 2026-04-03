@@ -14,7 +14,7 @@ const TIME_SLOTS = Array.from({ length: 15 }, (_, i) => {
 export function StepType({ t, tc, bookingType, setBookingType }: any) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.type')}
       </h2>
       <p className="text-sm text-zinc-400 mb-6">{t('create.selectType')}</p>
@@ -25,11 +25,11 @@ export function StepType({ t, tc, bookingType, setBookingType }: any) {
           className={`p-6 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
             bookingType === 'virtual'
               ? 'bg-sky-500/10 border-2 border-sky-500/40 ring-2 ring-sky-500/15 shadow-lg shadow-sky-500/10'
-              : 'bg-white/[0.03] border-2 border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.05]'
+              : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
           }`}
         >
-          <Monitor className={`w-8 h-8 mb-3 ${bookingType === 'virtual' ? 'text-sky-400' : 'text-zinc-600'}`} />
-          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'virtual' ? 'text-sky-300' : 'text-zinc-200'}`}>
+          <Monitor className={`w-8 h-8 mb-3 ${bookingType === 'virtual' ? 'text-sky-400' : 'text-zinc-400'}`} />
+          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'virtual' ? 'text-sky-300' : 'text-zinc-800'}`}>
             {tc('bookingTypes.virtual')}
           </h3>
           <p className="text-sm text-zinc-500 mt-1">{t('create.virtualDesc')}</p>
@@ -41,11 +41,11 @@ export function StepType({ t, tc, bookingType, setBookingType }: any) {
           className={`p-6 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
             bookingType === 'presencial'
               ? 'bg-amber-500/10 border-2 border-amber-500/40 ring-2 ring-amber-500/15 shadow-lg shadow-amber-500/10'
-              : 'bg-white/[0.03] border-2 border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.05]'
+              : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
           }`}
         >
-          <Building2 className={`w-8 h-8 mb-3 ${bookingType === 'presencial' ? 'text-amber-400' : 'text-zinc-600'}`} />
-          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'presencial' ? 'text-amber-300' : 'text-zinc-200'}`}>
+          <Building2 className={`w-8 h-8 mb-3 ${bookingType === 'presencial' ? 'text-amber-400' : 'text-zinc-400'}`} />
+          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'presencial' ? 'text-amber-300' : 'text-zinc-800'}`}>
             {tc('bookingTypes.presencial')}
           </h3>
           <p className="text-sm text-zinc-500 mt-1">{t('create.presencialDesc')}</p>
@@ -58,7 +58,7 @@ export function StepType({ t, tc, bookingType, setBookingType }: any) {
 export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId }: any) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.teacher')}
       </h2>
       <p className="text-sm text-zinc-400 mb-6">{t('create.selectTeacher')}</p>
@@ -75,7 +75,7 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId 
               className={`p-4 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
                 teacherId === teacher.id
                   ? 'bg-amber-500/10 border-2 border-amber-500/40 ring-2 ring-amber-500/15 shadow-lg shadow-amber-500/10'
-                  : 'bg-white/[0.03] border-2 border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.05]'
+                  : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId 
                   <User className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className={`text-sm font-medium ${teacherId === teacher.id ? 'text-amber-300' : 'text-zinc-200'}`}>
+                  <p className={`text-sm font-medium ${teacherId === teacher.id ? 'text-amber-300' : 'text-zinc-800'}`}>
                     {teacher.full_name}
                   </p>
                   <p className="text-xs text-zinc-500">{teacher.email}</p>
@@ -104,7 +104,7 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId 
 export function StepRoom({ t, tc, rooms, loading, roomId, setRoomId }: any) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.room')}
       </h2>
       <p className="text-sm text-zinc-400 mb-6">{t('create.selectRoom')}</p>
@@ -121,7 +121,7 @@ export function StepRoom({ t, tc, rooms, loading, roomId, setRoomId }: any) {
               className={`p-4 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
                 roomId === String(room.id)
                   ? 'bg-amber-500/10 border-2 border-amber-500/40 ring-2 ring-amber-500/15 shadow-lg shadow-amber-500/10'
-                  : 'bg-white/[0.03] border-2 border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.05]'
+                  : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ export function StepRoom({ t, tc, rooms, loading, roomId, setRoomId }: any) {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className={`text-sm font-medium ${roomId === String(room.id) ? 'text-amber-300' : 'text-zinc-200'}`}>
+                  <p className={`text-sm font-medium ${roomId === String(room.id) ? 'text-amber-300' : 'text-zinc-800'}`}>
                     {room.name}
                   </p>
                   <p className="text-xs text-zinc-500">
@@ -152,7 +152,7 @@ export function StepRoom({ t, tc, rooms, loading, roomId, setRoomId }: any) {
 export function StepDateTime({ t, scheduledDate, setScheduledDate, startTime, setStartTime }: any) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.datetime')}
       </h2>
       <p className="text-sm text-zinc-400 mb-6">{t('create.selectDate')}</p>
@@ -178,11 +178,11 @@ export function StepDateTime({ t, scheduledDate, setScheduledDate, startTime, se
 export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, isVirtual, scheduledDate, startTime, submitError }: any) {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.review')}
       </h2>
       <p className="text-sm text-zinc-400 mb-6">{t('create.reviewTitle')}</p>
-      <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-5 max-w-md">
+      <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-5 max-w-md">
         <div className="space-y-4 text-sm">
           <div className="flex items-center gap-3">
             {isVirtual ? (
@@ -196,7 +196,7 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
             )}
             <div>
               <span className="text-zinc-500 text-xs">{t('table.type')}</span>
-              <p className="font-medium text-zinc-100">{tc(`bookingTypes.${bookingType}`)}</p>
+              <p className="font-medium text-zinc-900">{tc(`bookingTypes.${bookingType}`)}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -205,7 +205,7 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
             </div>
             <div>
               <span className="text-zinc-500 text-xs">{t('table.teacher')}</span>
-              <p className="font-medium text-zinc-100">{selectedTeacher?.full_name ?? '-'}</p>
+              <p className="font-medium text-zinc-900">{selectedTeacher?.full_name ?? '-'}</p>
             </div>
           </div>
           {!isVirtual && selectedRoom && (
@@ -215,7 +215,7 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
               </div>
               <div>
                 <span className="text-zinc-500 text-xs">{t('table.room')}</span>
-                <p className="font-medium text-zinc-100">
+                <p className="font-medium text-zinc-900">
                   {selectedRoom.name} (cap. {selectedRoom.capacity})
                 </p>
               </div>
@@ -227,7 +227,7 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
             </div>
             <div>
               <span className="text-zinc-500 text-xs">{t('table.date')}</span>
-              <p className="font-medium text-zinc-100">{scheduledDate ? formatDate(scheduledDate) : '-'}</p>
+              <p className="font-medium text-zinc-900">{scheduledDate ? formatDate(scheduledDate) : '-'}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -236,7 +236,7 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
             </div>
             <div>
               <span className="text-zinc-500 text-xs">{t('table.time')}</span>
-              <p className="font-medium text-zinc-100">{startTime || '-'}</p>
+              <p className="font-medium text-zinc-900">{startTime || '-'}</p>
             </div>
           </div>
         </div>

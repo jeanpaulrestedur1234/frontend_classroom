@@ -50,7 +50,7 @@ export default function Login() {
   // Loading state while checking auth
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-zinc-950">
+      <div className="flex items-center justify-center min-h-screen bg-white">
         <div className="relative">
           <div className="h-12 w-12 rounded-full border-2 border-zinc-800" />
           <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-amber-500" />
@@ -60,7 +60,7 @@ export default function Login() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-zinc-950 overflow-hidden px-4">
+    <div className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-4">
       {/* ── Decorative background orbs ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Amber orb — top right */}
@@ -86,7 +86,7 @@ export default function Login() {
       {/* ── Main content ── */}
       <div className="relative w-full max-w-md">
         {/* Card */}
-        <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-8 shadow-2xl shadow-black/40">
+        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-8 shadow-2xl shadow-black/40">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
             <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 mb-4">
@@ -99,7 +99,7 @@ export default function Login() {
 
           {/* Title & subtitle */}
           <div className="text-center mb-8">
-            <h2 className="text-xl font-semibold font-[family-name:var(--font-display)] text-zinc-100">
+            <h2 className="text-xl font-semibold font-[family-name:var(--font-display)] text-zinc-900">
               {t('login.title')}
             </h2>
             <p className="text-sm text-zinc-500 mt-1">
@@ -128,7 +128,7 @@ export default function Login() {
                 placeholder={t('login.emailPlaceholder')}
                 className="pl-10"
               />
-              <Mail className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
+              <Mail className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
             </div>
 
             <div className="relative">
@@ -142,7 +142,7 @@ export default function Login() {
                 placeholder={t('login.passwordPlaceholder')}
                 className="pl-10"
               />
-              <Lock className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
+              <Lock className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
             </div>
 
             <Button

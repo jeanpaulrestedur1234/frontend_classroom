@@ -143,9 +143,9 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
   );
 
   const sidebarContent = (
-    <div className="flex h-full flex-col bg-zinc-950 border-r border-white/[0.06]">
+    <div className="flex h-full flex-col bg-white border-r border-zinc-100">
       {/* Logo & Toggle */}
-      <div className="flex h-16 items-center justify-between px-4 border-b border-white/[0.06]">
+      <div className="flex h-16 items-center justify-between px-4 border-b border-zinc-100">
         <div className="flex items-center gap-2.5 overflow-hidden">
           {/* Logo icon */}
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20">
@@ -161,7 +161,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         </div>
         <button
           onClick={onToggle}
-          className="hidden lg:flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.04] transition-all duration-200"
+          className="hidden lg:flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-white/[0.04] transition-all duration-200"
           aria-label="Toggle sidebar"
         >
           <ChevronLeft
@@ -184,7 +184,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
               }
               ${isActive
                 ? 'bg-amber-500/10 text-amber-400 border-l-2 border-amber-500 shadow-sm shadow-amber-500/5'
-                : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] border-l-2 border-transparent'
+                : 'text-zinc-500 hover:text-zinc-800 hover:bg-white/[0.04] border-l-2 border-transparent'
               }`
             }
           >
@@ -201,7 +201,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       </nav>
 
       {/* Bottom section */}
-      <div className="border-t border-white/[0.06] p-3 space-y-2">
+      <div className="border-t border-zinc-100 p-3 space-y-2">
         {/* Language switcher */}
         <div className={`flex ${expanded ? 'justify-start' : 'justify-center'}`}>
           <LanguageSwitcher compact={!expanded} />
@@ -210,7 +210,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         {/* Logout */}
         <button
           onClick={logout}
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${expanded ? '' : 'justify-center'
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-400 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${expanded ? '' : 'justify-center'
             }`}
         >
           <LogOut className="h-5 w-5 shrink-0" />
@@ -227,7 +227,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] text-zinc-400 hover:text-amber-400 hover:border-amber-500/30 transition-all duration-200 lg:hidden"
+        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-zinc-50 backdrop-blur-xl border border-zinc-200 text-zinc-400 hover:text-amber-400 hover:border-amber-500/30 transition-all duration-200 lg:hidden"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -251,7 +251,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         <div className="relative h-full">
           <button
             onClick={closeMobile}
-            className="absolute top-4 right-3 z-10 flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.06] transition-all duration-200"
+            className="absolute top-4 right-3 z-10 flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-800 hover:bg-zinc-100 transition-all duration-200"
             aria-label="Close menu"
           >
             <X className="h-5 w-5" />

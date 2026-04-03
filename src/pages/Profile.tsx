@@ -79,7 +79,7 @@ export default function Profile() {
     <div className="max-w-5xl mx-auto space-y-8">
       {/* Page header */}
       <div>
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] text-zinc-50">
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] text-zinc-950">
           {tc('navigation.profile')}
         </h1>
         <p className="text-sm text-zinc-400 mt-1">
@@ -100,7 +100,7 @@ export default function Profile() {
             </div>
 
             {/* Name */}
-            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-50">
+            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-950">
               {user.full_name}
             </h2>
 
@@ -111,7 +111,7 @@ export default function Profile() {
             </div>
 
             {/* Divider */}
-            <div className="w-full border-t border-white/[0.06] my-5" />
+            <div className="w-full border-t border-zinc-100 my-5" />
 
             {/* Role */}
             <div className="flex items-center gap-2 mb-3">
@@ -132,7 +132,7 @@ export default function Profile() {
             </div>
 
             {/* User ID */}
-            <div className="flex items-center gap-1.5 text-xs text-zinc-600 mt-5">
+            <div className="flex items-center gap-1.5 text-xs text-zinc-400 mt-5">
               <Hash className="w-3 h-3" />
               <span className="font-mono">{user.id}</span>
             </div>
@@ -142,7 +142,7 @@ export default function Profile() {
         {/* ── Right column: Edit form card ── */}
         <div className="lg:col-span-3">
           <Card>
-            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-50 mb-6">
+            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-950 mb-6">
               {tu('edit.title')}
             </h2>
 
@@ -184,7 +184,7 @@ export default function Profile() {
                   placeholder={user.full_name}
                   className="pl-10"
                 />
-                <User className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
+                <User className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
               </div>
 
               {/* Phone */}
@@ -198,7 +198,7 @@ export default function Profile() {
                   placeholder="+1 234 567 8900"
                   className="pl-10"
                 />
-                <Phone className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
+                <Phone className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
               </div>
 
               <div className="pt-2">

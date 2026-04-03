@@ -123,7 +123,7 @@ export default function TeacherAvailability() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-50 font-[family-name:var(--font-display)]">
+          <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
             {isAdmin ? t('adminTitle') : t('title')}
           </h1>
         </div>

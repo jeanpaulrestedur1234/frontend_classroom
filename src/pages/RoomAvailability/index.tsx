@@ -129,7 +129,7 @@ export default function RoomAvailability() {
     <div className="space-y-6">
       {/* -- Page Header -- */}
       <div>
-        <h1 className="text-2xl font-bold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('availability.title')}
         </h1>
       </div>
@@ -214,7 +214,7 @@ export default function RoomAvailability() {
                 {/* Date header */}
                 <div className="flex items-center gap-2 mb-4">
                   <CalendarDays className="w-4 h-4 text-amber-400" />
-                  <h3 className="text-sm font-semibold text-zinc-100 font-[family-name:var(--font-display)]">
+                  <h3 className="text-sm font-semibold text-zinc-900 font-[family-name:var(--font-display)]">
                     {formatDate(date)}
                   </h3>
                   <Badge variant="info">

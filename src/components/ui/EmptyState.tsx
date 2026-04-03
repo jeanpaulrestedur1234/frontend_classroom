@@ -13,7 +13,7 @@ export default function EmptyState({ icon, title, description, action }: EmptySt
       <div className="text-zinc-700 mb-4">
         {icon || <Inbox className="w-12 h-12" />}
       </div>
-      <h3 className="text-lg font-medium text-zinc-300 font-[family-name:var(--font-display)]">{title}</h3>
+      <h3 className="text-lg font-medium text-zinc-700 font-[family-name:var(--font-display)]">{title}</h3>
       {description && (
         <p className="mt-2 max-w-sm text-sm text-zinc-500">{description}</p>
       )}

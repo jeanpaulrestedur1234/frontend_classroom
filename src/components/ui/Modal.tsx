@@ -41,13 +41,13 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-[fadeIn_0.15s_ease-out]" />
 
       {/* Panel */}
-      <div className={`relative w-full ${sizeClasses[size]} animate-[fadeInUp_0.2s_ease-out] bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl shadow-black/50`}>
+      <div className={`relative w-full ${sizeClasses[size]} animate-[fadeInUp_0.2s_ease-out] bg-zinc-50 border border-white/10 rounded-2xl shadow-2xl shadow-black/50`}>
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-          <h3 className="text-lg font-semibold text-zinc-100 font-[family-name:var(--font-display)]">{title}</h3>
+          <h3 className="text-lg font-semibold text-zinc-900 font-[family-name:var(--font-display)]">{title}</h3>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-white/5 transition-colors"
+            className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-white/5 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

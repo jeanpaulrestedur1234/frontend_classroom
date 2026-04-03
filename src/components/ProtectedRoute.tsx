@@ -10,7 +10,7 @@ export default function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-zinc-950">
+      <div className="flex items-center justify-center h-screen bg-white">
         {/* Amber spinner */}
         <div className="relative">
           <div className="h-12 w-12 animate-spin rounded-full border-[3px] border-zinc-800 border-t-amber-500" />

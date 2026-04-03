@@ -39,7 +39,7 @@ export default function HowItWorks() {
   const { t } = useTranslation("landing");
 
   return (
-    <section id="how-it-works" className="relative py-24 sm:py-32 bg-zinc-950">
+    <section id="how-it-works" className="relative py-24 sm:py-32 bg-white">
       {/* Decorative */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-3xl" />
@@ -56,7 +56,7 @@ export default function HowItWorks() {
             {t("howItWorks.sectionLabel")}
           </p>
           <h2
-            className="animate-fade-in-up font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-50 tracking-tight"
+            className="animate-fade-in-up font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-950 tracking-tight"
             style={{ animationDelay: "0.1s" }}
           >
             {t("howItWorks.title")}
@@ -73,7 +73,7 @@ export default function HowItWorks() {
         <div className="relative">
           {/* Connecting line - desktop */}
           <div className="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-px">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
             <div className="w-full h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_8px,rgba(251,191,36,0.15)_8px,rgba(251,191,36,0.15)_16px)]" />
           </div>
 
@@ -91,21 +91,21 @@ export default function HowItWorks() {
                     <div className="absolute -inset-2 rounded-full bg-amber-500/10 blur-md" />
 
                     {/* Glass circle */}
-                    <div className="relative w-[104px] h-[104px] rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] flex items-center justify-center">
+                    <div className="relative w-[104px] h-[104px] rounded-full bg-zinc-50 backdrop-blur-xl border border-zinc-200 flex items-center justify-center">
                       <span className="text-3xl font-bold bg-gradient-to-b from-amber-400 to-amber-600 bg-clip-text text-transparent font-[family-name:var(--font-display)]">
                         {step.number}
                       </span>
                     </div>
 
                     {/* Icon badge */}
-                    <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-zinc-900 border border-white/[0.1] flex items-center justify-center shadow-lg">
+                    <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center shadow-lg">
                       <step.icon className="w-4 h-4 text-amber-400" />
                     </div>
                   </div>
                 </div>
 
                 {/* Text */}
-                <h3 className="mt-6 text-lg font-semibold text-zinc-100 font-[family-name:var(--font-display)]">
+                <h3 className="mt-6 text-lg font-semibold text-zinc-900 font-[family-name:var(--font-display)]">
                   {t(step.titleKey)}
                 </h3>
                 <p className="mt-2 text-zinc-400 text-sm leading-relaxed max-w-xs mx-auto">

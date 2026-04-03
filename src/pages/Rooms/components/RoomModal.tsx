@@ -82,8 +82,8 @@ export default function RoomModal({ isOpen, room, isSubmitting, onClose, onSubmi
           required
         />
 
-        <div className="flex items-center justify-between rounded-xl bg-white/[0.03] border border-white/[0.08] px-4 py-3">
-          <span className="text-sm font-medium text-zinc-300">{t('create.isActive')}</span>
+        <div className="flex items-center justify-between rounded-xl bg-zinc-50 border border-zinc-200 px-4 py-3">
+          <span className="text-sm font-medium text-zinc-700">{t('create.isActive')}</span>
           <button
             type="button"
             role="switch"

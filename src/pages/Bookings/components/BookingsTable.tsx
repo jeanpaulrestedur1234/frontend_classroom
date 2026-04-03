@@ -45,10 +45,10 @@ export default function BookingsTable({
   const isAdminOrTeacher = isAdmin || user.role === 'teacher';
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-white/[0.06]">
+    <div className="overflow-x-auto rounded-2xl border border-zinc-100">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-white/[0.06] bg-white/[0.04]">
+          <tr className="border-b border-zinc-100 bg-white/[0.04]">
             <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
               {t('table.date')}
             </th>
@@ -76,12 +76,12 @@ export default function BookingsTable({
           {bookings.map((b) => (
             <tr
               key={b.id}
-              className="border-b border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.05] transition-colors"
+              className="border-b border-white/[0.04] bg-zinc-50/50 hover:bg-zinc-100 transition-colors"
             >
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-50">
+              <td className="px-4 py-3 whitespace-nowrap text-zinc-950">
                 {formatDate(b.scheduled_date)}
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-300">
+              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
                 {b.start_time} - {b.end_time}
               </td>
               <td className="px-4 py-3">
@@ -94,10 +94,10 @@ export default function BookingsTable({
                   {tc(`status.${b.status}`)}
                 </Badge>
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-300">
+              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
                 {b.teacher?.full_name ?? '-'}
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-300">
+              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
                 {b.booking_type === 'presencial' ? b.room?.name ?? '-' : '-'}
               </td>
               <td className="px-4 py-3 text-right">

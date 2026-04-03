@@ -21,11 +21,11 @@ export default function WeeklyGrid({ availability }: WeeklyGridProps) {
 
   return (
     <div className="space-y-4">
-      <div className="overflow-x-auto rounded-2xl border border-white/[0.06]">
+      <div className="overflow-x-auto rounded-2xl border border-zinc-100">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/[0.06] bg-white/[0.04]">
-              <th className="sticky left-0 z-10 px-4 py-3 text-left font-medium text-zinc-400 w-20 bg-zinc-950 font-[family-name:var(--font-display)]">
+            <tr className="border-b border-zinc-100 bg-white/[0.04]">
+              <th className="sticky left-0 z-10 px-4 py-3 text-left font-medium text-zinc-400 w-20 bg-white font-[family-name:var(--font-display)]">
                 {t('hours')}
               </th>
               {Array.from({ length: 7 }, (_, idx) => (
@@ -42,9 +42,9 @@ export default function WeeklyGrid({ availability }: WeeklyGridProps) {
             {HOURS.map((hour) => (
               <tr
                 key={hour}
-                className="border-b border-white/[0.04] bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                className="border-b border-white/[0.04] bg-zinc-50/50 hover:bg-white/[0.04] transition-colors"
               >
-                <td className="sticky left-0 z-10 px-4 py-2 text-xs text-zinc-500 font-mono bg-zinc-950">
+                <td className="sticky left-0 z-10 px-4 py-2 text-xs text-zinc-500 font-mono bg-white">
                   {hour}
                 </td>
                 {Array.from({ length: 7 }, (_, dayIdx) => {

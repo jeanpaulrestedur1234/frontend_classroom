@@ -23,7 +23,7 @@ export default function StatCard({ icon, label, value, color }: StatCardProps) {
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-2xl font-bold text-zinc-100 font-[family-name:var(--font-display)]">
+        <p className="text-2xl font-bold text-zinc-900 font-[family-name:var(--font-display)]">
           {value}
         </p>
         <p className="text-sm text-zinc-500 truncate">{label}</p>

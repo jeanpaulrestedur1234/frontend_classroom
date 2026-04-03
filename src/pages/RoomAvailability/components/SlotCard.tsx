@@ -64,7 +64,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
 
   return (
     <div
-      className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05] transition-colors"
+      className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-zinc-50 border border-zinc-100 hover:bg-zinc-100 transition-colors"
     >
       {/* Time range */}
       <div className="flex items-center gap-3 sm:w-40 shrink-0">
@@ -72,7 +72,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
           className={`w-1.5 h-10 rounded-full ${occupancyBarColor(pct)}`}
         />
         <div>
-          <p className="text-sm font-medium text-zinc-100 font-mono flex items-center gap-1.5">
+          <p className="text-sm font-medium text-zinc-900 font-mono flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-zinc-500" />
             {slot.start_time} - {slot.end_time}
           </p>
@@ -84,7 +84,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
         <p className="text-xs text-zinc-500 mb-0.5">
           {tc('roles.teacher')}
         </p>
-        <p className="text-sm text-zinc-300 flex items-center gap-1.5">
+        <p className="text-sm text-zinc-700 flex items-center gap-1.5">
           <User className="w-3.5 h-3.5 text-zinc-500" />
           {slot.teacher_name ?? slot.teacher_id}
         </p>

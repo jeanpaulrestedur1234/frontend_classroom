@@ -90,7 +90,7 @@ export default function MyPackages() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-zinc-50 font-[family-name:var(--font-display)] tracking-tight">
+        <h1 className="text-3xl font-bold text-zinc-950 font-[family-name:var(--font-display)] tracking-tight">
           {t('myPackages.title')}
         </h1>
         <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-600" />

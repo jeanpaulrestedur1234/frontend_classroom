@@ -73,7 +73,7 @@ export default function AddPackageModal({ booking, onClose }: AddPackageModalPro
         <div className="space-y-4">
           <p className="text-sm text-zinc-400">
             {t('table.date')}:{' '}
-            <span className="font-medium text-zinc-100">
+            <span className="font-medium text-zinc-900">
               {formatDate(booking.scheduled_date)} {booking.start_time} - {booking.end_time}
             </span>
           </p>

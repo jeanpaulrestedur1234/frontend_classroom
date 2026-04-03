@@ -31,7 +31,7 @@ export default function AppLayout() {
     : '?';
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-white">
       <Sidebar
         expanded={sidebarExpanded}
         onToggle={() => setSidebarExpanded((prev) => !prev)}
@@ -44,7 +44,7 @@ export default function AppLayout() {
         }`}
       >
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-white/[0.06] bg-zinc-950/80 backdrop-blur-xl px-6 pl-16 lg:pl-6">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-zinc-100 bg-white/80 backdrop-blur-xl px-6 pl-16 lg:pl-6">
           <div>{/* Page title slot */}</div>
 
           {/* User info + language */}

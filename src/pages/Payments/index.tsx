@@ -98,7 +98,7 @@ export default function Payments() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-zinc-50 font-[family-name:var(--font-display)] tracking-tight">
+        <h1 className="text-3xl font-bold text-zinc-950 font-[family-name:var(--font-display)] tracking-tight">
           {isAdmin ? t('title') : t('student.title')}
         </h1>
         <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-600" />
@@ -116,7 +116,7 @@ export default function Payments() {
       {!loading && !error && (
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Filter className="h-4 w-4 text-zinc-600" />
+            <Filter className="h-4 w-4 text-zinc-400" />
             <Select
               options={[
                 { value: 'all', label: t('filter.allStatuses') },

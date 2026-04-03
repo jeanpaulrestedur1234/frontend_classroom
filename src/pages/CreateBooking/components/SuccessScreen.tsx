@@ -66,20 +66,20 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
           <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-4 ring-1 ring-emerald-500/20">
             <CheckCircle className="w-8 h-8 text-emerald-400" />
           </div>
-          <h2 className="text-xl font-bold text-zinc-50 mb-1 font-[family-name:var(--font-display)]">
+          <h2 className="text-xl font-bold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
             {t('create.success')}
           </h2>
           <p className="text-sm text-zinc-500">{t('create.success')}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-sm mt-4 border-t border-white/[0.06] pt-4">
+        <div className="grid grid-cols-2 gap-4 text-sm mt-4 border-t border-zinc-100 pt-4">
           <div>
             <span className="block text-zinc-500 text-xs mb-1">{t('table.date')}</span>
-            <span className="font-medium text-zinc-100">{formatDate(booking.scheduled_date)}</span>
+            <span className="font-medium text-zinc-900">{formatDate(booking.scheduled_date)}</span>
           </div>
           <div>
             <span className="block text-zinc-500 text-xs mb-1">{t('table.time')}</span>
-            <span className="font-medium text-zinc-100">
+            <span className="font-medium text-zinc-900">
               {booking.start_time} - {booking.end_time}
             </span>
           </div>
@@ -96,20 +96,20 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
           {booking.teacher && (
             <div>
               <span className="block text-zinc-500 text-xs mb-1">{t('table.teacher')}</span>
-              <span className="font-medium text-zinc-100">{booking.teacher.full_name}</span>
+              <span className="font-medium text-zinc-900">{booking.teacher.full_name}</span>
             </div>
           )}
           {booking.room && (
             <div>
               <span className="block text-zinc-500 text-xs mb-1">{t('table.room')}</span>
-              <span className="font-medium text-zinc-100">{booking.room.name}</span>
+              <span className="font-medium text-zinc-900">{booking.room.name}</span>
             </div>
           )}
         </div>
 
         {/* Package linking for students */}
         {isStudent && !showPackageStep && (
-          <div className="mt-6 border-t border-white/[0.06] pt-4">
+          <div className="mt-6 border-t border-zinc-100 pt-4">
             <button
               onClick={() => setShowPackageStep(true)}
               className="w-full flex items-center justify-between p-4 rounded-xl border border-dashed border-white/[0.12] text-sm text-zinc-400 hover:border-amber-500/30 hover:text-amber-400 hover:bg-amber-500/5 transition-all duration-200"
@@ -124,7 +124,7 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
         )}
 
         {showPackageStep && (
-          <div className="mt-4 border-t border-white/[0.06] pt-4 space-y-3">
+          <div className="mt-4 border-t border-zinc-100 pt-4 space-y-3">
             {packageLinked ? (
               <div className="text-center py-4">
                 <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-2">
@@ -164,7 +164,7 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
           </div>
         )}
 
-        <div className="flex justify-center gap-3 mt-6 pt-4 border-t border-white/[0.06]">
+        <div className="flex justify-center gap-3 mt-6 pt-4 border-t border-zinc-100">
           <Button variant="secondary" onClick={() => navigate('/app/bookings')}>
             {t('create.viewBookings')}
           </Button>

@@ -69,7 +69,7 @@ export default function MyPackageCard({
               <Badge variant={classTypeBadgeVariant(pkg.class_type)}>{tc(`classTypes.${pkg.class_type}`)}</Badge>
               <Badge variant={statusBadgeVariant(pkg.status)}>{tc(`status.${pkg.status}`)}</Badge>
             </div>
-            <p className="text-xs text-zinc-600 mt-1">ID: {pkg.id.slice(0, 8)}...</p>
+            <p className="text-xs text-zinc-400 mt-1">ID: {pkg.id.slice(0, 8)}...</p>
           </div>
         </div>
         <span className="text-lg font-bold text-amber-400 font-[family-name:var(--font-display)]">
@@ -77,22 +77,22 @@ export default function MyPackageCard({
         </span>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-white/[0.06]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-zinc-100">
         <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Clock className="h-4 w-4 text-zinc-600" />
+          <Clock className="h-4 w-4 text-zinc-400" />
           <span>{t('catalog.hoursPerWeek', { hours: pkg.hours_per_week })}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <CalendarDays className="h-4 w-4 text-zinc-600" />
+          <CalendarDays className="h-4 w-4 text-zinc-400" />
           <span>{t('catalog.weeks', { weeks: pkg.duration_weeks })}</span>
         </div>
         <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <BookOpen className="h-4 w-4 text-zinc-600" />
+          <BookOpen className="h-4 w-4 text-zinc-400" />
           <span>{t('myPackages.totalHours', { hours: totalHours })}</span>
         </div>
         {pkg.discount_pct > 0 && (
           <div className="flex items-center gap-2 text-sm text-zinc-400">
-            <CreditCard className="h-4 w-4 text-zinc-600" />
+            <CreditCard className="h-4 w-4 text-zinc-400" />
             <span>{t('catalog.discount', { pct: pkg.discount_pct })}</span>
           </div>
         )}
@@ -100,35 +100,35 @@ export default function MyPackageCard({
 
       <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-500">
         <span>
-          <span className="text-zinc-600">{t('myPackages.createdAt')}:</span> {formatDate(pkg.created_at)}
+          <span className="text-zinc-400">{t('myPackages.createdAt')}:</span> {formatDate(pkg.created_at)}
         </span>
         {pkg.activated_at && (
           <span>
-            <span className="text-zinc-600">{t('myPackages.activatedAt')}:</span> {formatDate(pkg.activated_at)}
+            <span className="text-zinc-400">{t('myPackages.activatedAt')}:</span> {formatDate(pkg.activated_at)}
           </span>
         )}
         {pkg.expires_at && (
           <span>
-            <span className="text-zinc-600">{t('myPackages.expiresAt')}:</span> {formatDate(pkg.expires_at)}
+            <span className="text-zinc-400">{t('myPackages.expiresAt')}:</span> {formatDate(pkg.expires_at)}
           </span>
         )}
       </div>
 
       {payments.length > 0 ? (
         <div className="space-y-3">
-          <h4 className="text-sm font-medium text-zinc-300 font-[family-name:var(--font-display)]">
+          <h4 className="text-sm font-medium text-zinc-700 font-[family-name:var(--font-display)]">
             {t('myPackages.payments')}
           </h4>
           <div className="space-y-2">
             {payments.map((payment) => (
               <div
                 key={payment.id}
-                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white/[0.02] border border-white/[0.05] px-4 py-3"
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-zinc-50/50 border border-white/[0.05] px-4 py-3"
               >
                 <div className="flex items-center gap-3">
-                  <CreditCard className="h-4 w-4 text-zinc-600" />
+                  <CreditCard className="h-4 w-4 text-zinc-400" />
                   <div>
-                    <span className="text-sm font-medium text-zinc-300">{formatCurrency(payment.amount)}</span>
+                    <span className="text-sm font-medium text-zinc-700">{formatCurrency(payment.amount)}</span>
                     <span className="ml-3">
                       <Badge variant={statusBadgeVariant(payment.status)}>{tc(`status.${payment.status}`)}</Badge>
                     </span>
@@ -161,7 +161,7 @@ export default function MyPackageCard({
           </div>
         </div>
       ) : (
-        <p className="text-xs text-zinc-600 italic">{t('myPackages.noPayments')}</p>
+        <p className="text-xs text-zinc-400 italic">{t('myPackages.noPayments')}</p>
       )}
 
       <div className="flex flex-wrap gap-3 pt-1">

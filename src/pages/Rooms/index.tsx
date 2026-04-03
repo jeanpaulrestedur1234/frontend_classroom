@@ -63,7 +63,7 @@ export default function Rooms() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('title')}
         </h1>
         <Button onClick={() => setCreateModalOpen(true)}>
@@ -75,7 +75,7 @@ export default function Rooms() {
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6">
+        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6">
           <EmptyState
             icon={<AlertTriangle className="h-12 w-12" />}
             title={tc('errors.generic')}
@@ -88,7 +88,7 @@ export default function Rooms() {
           />
         </div>
       ) : rooms?.length === 0 ? (
-        <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6">
+        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6">
           <EmptyState
             icon={<Building2 className="h-12 w-12" />}
             title={t('empty.title')}

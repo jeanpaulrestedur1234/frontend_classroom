@@ -87,7 +87,7 @@ export default function StudentDashboard() {
 
       {/* Next class */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
           {t('student.nextClass')}
         </h2>
         <Card>
@@ -97,7 +97,7 @@ export default function StudentDashboard() {
                 <CalendarDays className="h-7 w-7" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-medium text-zinc-100">
+                <p className="text-sm font-medium text-zinc-900">
                   {upcomingBooking.scheduled_date}
                 </p>
                 <p className="text-sm text-zinc-400">
@@ -125,7 +125,7 @@ export default function StudentDashboard() {
       {/* Active packages summary */}
       {packages.filter((p) => p.status === 'active').length > 0 && (
         <div className="mt-10">
-          <h2 className="mb-4 text-lg font-semibold text-zinc-50 font-[family-name:var(--font-display)]">
+          <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
             {t('student.activePackages')}
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -138,7 +138,7 @@ export default function StudentDashboard() {
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-zinc-200 truncate">
+                    <p className="text-sm font-medium text-zinc-800 truncate">
                       {tc(`classTypes.${p.class_type}`)}
                     </p>
                     <p className="text-xs text-zinc-500">

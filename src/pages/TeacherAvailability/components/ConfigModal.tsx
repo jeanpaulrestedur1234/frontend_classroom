@@ -87,7 +87,7 @@ export default function ConfigModal({
             {ranges.map((range, idx) => (
               <div
                 key={idx}
-                className="flex flex-wrap items-end gap-2 p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]"
+                className="flex flex-wrap items-end gap-2 p-3 rounded-xl bg-zinc-50 border border-zinc-200"
               >
                 <div className="w-32">
                   <Select
@@ -113,7 +113,7 @@ export default function ConfigModal({
                     options={TIME_OPTIONS}
                   />
                 </div>
-                <label className="flex items-center gap-2 text-sm text-zinc-300 pb-1 cursor-pointer">
+                <label className="flex items-center gap-2 text-sm text-zinc-700 pb-1 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={range.is_virtual ?? false}
@@ -143,7 +143,7 @@ export default function ConfigModal({
 
         {/* Preview */}
         {ranges.length > 0 && (
-          <div className="border-t border-white/[0.06] pt-3">
+          <div className="border-t border-zinc-100 pt-3">
             <div className="flex flex-wrap gap-2">
               {ranges.map((r, idx) => (
                 <span
@@ -175,7 +175,7 @@ export default function ConfigModal({
         )}
 
         {/* Actions */}
-        <div className="flex justify-end gap-2 pt-2 border-t border-white/[0.06]">
+        <div className="flex justify-end gap-2 pt-2 border-t border-zinc-100">
           <Button variant="secondary" size="sm" onClick={onClose} disabled={saving}>
             {tc('actions.cancel')}
           </Button>

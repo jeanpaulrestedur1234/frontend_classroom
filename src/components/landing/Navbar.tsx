@@ -25,7 +25,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-zinc-950/80 backdrop-blur-xl border-b border-white/[0.06] shadow-lg shadow-black/20"
+          ? "bg-white/80 backdrop-blur-xl border-b border-zinc-100 shadow-lg shadow-black/20"
           : "bg-transparent"
       }`}
     >
@@ -74,7 +74,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-amber-400 transition-colors duration-200 rounded-lg hover:bg-white/[0.03]"
+                className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-amber-400 transition-colors duration-200 rounded-lg hover:bg-zinc-50"
               >
                 {t(link.key)}
               </a>
@@ -94,7 +94,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden relative p-2 rounded-xl text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.05] transition-colors"
+            className="md:hidden relative p-2 rounded-xl text-zinc-400 hover:text-zinc-800 hover:bg-zinc-100 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -113,19 +113,19 @@ export default function Navbar() {
           mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-zinc-950/95 backdrop-blur-xl border-t border-white/[0.06]">
+        <div className="bg-white/95 backdrop-blur-xl border-t border-zinc-100">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-2.5 text-zinc-400 hover:text-amber-400 transition-colors text-sm font-medium rounded-xl hover:bg-white/[0.03]"
+                className="block px-4 py-2.5 text-zinc-400 hover:text-amber-400 transition-colors text-sm font-medium rounded-xl hover:bg-zinc-50"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(link.key)}
               </a>
             ))}
-            <div className="pt-3 border-t border-white/[0.06] flex items-center gap-3">
+            <div className="pt-3 border-t border-zinc-100 flex items-center gap-3">
               <LanguageSwitcher compact />
               <Link
                 to="/login"

@@ -144,7 +144,7 @@ export default function Bookings() {
           </p>
         </div>
 
-        {(user.role === 'student' || isAdmin) && (
+        {user.role === 'student' && (
           <Link to="/app/bookings/new">
             <Button>
               <Plus className="w-4 h-4" />
@@ -197,7 +197,7 @@ export default function Bookings() {
           title={t('empty.title')}
           description={statusFilter ? tc('emptyState.noResults') : t('empty.description')}
           action={
-            (user.role === 'student' || isAdmin) ? (
+            user.role === 'student' ? (
               <Link to="/app/bookings/new">
                 <Button>
                   <Plus className="w-4 h-4" />

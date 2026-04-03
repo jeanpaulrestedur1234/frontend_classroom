@@ -181,6 +181,7 @@ export default function Users() {
         <div className="space-y-4">
           <UsersTable
             users={filteredUsers}
+            currentUserId={currentUser?.id ?? ''}
             togglingUserId={togglingUserId}
             onEdit={setEditingUser}
             onToggleActive={handleToggleActive}

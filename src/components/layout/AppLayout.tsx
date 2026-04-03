@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import Sidebar from './Sidebar';
-import LanguageSwitcher from '../ui/LanguageSwitcher';
+import { useAuth } from '@/context/AuthContext';
+import Sidebar from '@/components/layout/Sidebar';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function AppLayout() {
   const { user } = useAuth();

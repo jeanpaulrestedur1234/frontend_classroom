@@ -18,7 +18,14 @@
       "Bash(curl -s https://backend-classroom-seven.vercel.app/api/auth/login -X POST -H 'Content-Type: application/json' -d '{\"email\":\"teacher@test.com\",\"password\":\"teacher123\"}')",
       "Bash(find . -type f \\\\\\( -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.css\" \\\\\\) -exec ls -lh {} \\\\;)",
       "Bash(sort -k2)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/locales/es/landing.json','utf8'\\)\\); console.log\\('ES OK'\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/i18n/locales/en/landing.json','utf8'\\)\\); console.log\\('EN OK'\\)\")",
+      "Bash(curl -s https://backend-classroom-seven.vercel.app/openapi.json -o openapi_fresh.json)",
+      "Bash(npx vite:*)",
+      "Bash(wc -l src/pages/*.tsx)",
+      "Bash(xargs wc:*)",
+      "Bash(find /c/Users/jean.acosta/Desktop/frontend/src/pages -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" \\\\\\) -exec wc -l {} +)"
     ]
   }
 }

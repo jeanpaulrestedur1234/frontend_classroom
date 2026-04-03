@@ -1,5 +1,28 @@
 {
   "title": "Payment Management",
+  "table": {
+    "paymentId": "Payment ID",
+    "studentId": "Student ID",
+    "packageId": "Package ID",
+    "amount": "Amount",
+    "status": "Status",
+    "proof": "Receipt",
+    "rejectionReason": "Rejection Reason",
+    "reviewedAt": "Reviewed At",
+    "reviewedBy": "Reviewed By",
+    "createdAt": "Created",
+    "updatedAt": "Updated"
+  },
+  "filter": {
+    "allStatuses": "All statuses",
+    "byStatus": "Filter by status"
+  },
+  "pagination": {
+    "showing": "Showing {{from}}-{{to}} of {{total}} results",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} of {{total}}"
+  },
   "admin": {
     "workflow": {
       "title": "Payment Flow",
@@ -26,6 +49,18 @@
   "student": {
     "title": "My Payments",
     "viewPackages": "View in My Packages",
-    "packageSummary": "Package and payment summary"
-  }
+    "packageSummary": "Package and payment summary",
+    "uploadReceipt": "Upload Receipt",
+    "uploadSuccess": "Receipt uploaded successfully",
+    "uploadError": "Error uploading receipt",
+    "uploadModal": {
+      "title": "Upload Payment Receipt",
+      "urlLabel": "Receipt URL",
+      "urlPlaceholder": "https://example.com/receipt.jpg"
+    }
+  },
+  "noPayments": "No payments found",
+  "noPaymentsDesc": "There are no payments matching the current filter.",
+  "viewProof": "View receipt",
+  "noProof": "No receipt"
 }

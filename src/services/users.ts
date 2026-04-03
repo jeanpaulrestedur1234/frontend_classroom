@@ -1,11 +1,11 @@
-import api from './api';
+import api from '@/services/api';
 import type {
   AdminUpdateUserDTO,
   CreateUserDTO,
   PaginatedResponse,
   UpdateUserDTO,
   UserDTO,
-} from '../types';
+} from '@/types';
 
 export async function createUser(data: CreateUserDTO): Promise<UserDTO> {
   const response = await api.post<UserDTO>('/api/users', data);
@@ -42,4 +42,9 @@ export async function adminUpdateUser(
 
 export async function deleteUser(id: string): Promise<void> {
   await api.delete(`/api/users/${id}`);
+}
+
+export async function listTeachers(): Promise<UserDTO[]> {
+  const response = await api.get<PaginatedResponse<UserDTO>>('/api/users/teachers');
+  return response.data.items;
 }

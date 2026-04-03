@@ -1,7 +1,7 @@
 import axios from 'axios';
-import type { LoginDTO, TokenRefreshDTO, TokenResponseDTO } from '../types';
+import type { LoginDTO, TokenRefreshDTO, TokenResponseDTO } from '@/types';
 
-const API_BASE_URL = 'https://backend-classroom-seven.vercel.app';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 export async function login(data: LoginDTO): Promise<TokenResponseDTO> {
   const response = await axios.post<TokenResponseDTO>(

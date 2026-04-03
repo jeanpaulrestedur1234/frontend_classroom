@@ -1,11 +1,11 @@
-import api from './api';
+import api from '@/services/api';
 import type {
   CreatePackageDTO,
   PackageDTO,
   PaginatedResponse,
   PaymentDTO,
   StudentPackageDTO,
-} from '../types';
+} from '@/types';
 
 export async function createPackage(data: CreatePackageDTO): Promise<PackageDTO> {
   const response = await api.post<PackageDTO>('/api/packages', data);

@@ -2,10 +2,10 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GraduationCap, AlertCircle, ArrowLeft, Lock, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
-import LanguageSwitcher from '../components/ui/LanguageSwitcher';
+import { useAuth } from '@/context/AuthContext';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export default function Login() {
   const { t } = useTranslation('auth');

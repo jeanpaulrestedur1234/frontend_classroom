@@ -6,9 +6,9 @@ import {
   type ReactNode,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { UserDTO, LoginDTO } from '../types';
-import { login as loginApi } from '../services/auth';
-import { getMe } from '../services/users';
+import type { UserDTO, LoginDTO } from '@/types';
+import { login as loginApi } from '@/services/auth';
+import { getMe } from '@/services/users';
 
 interface AuthContextValue {
   user: UserDTO | null;

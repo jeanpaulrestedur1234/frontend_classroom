@@ -17,9 +17,9 @@ import {
   ChevronLeft,
   DoorOpen,
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import type { UserRole } from '../../types';
-import LanguageSwitcher from '../ui/LanguageSwitcher';
+import { useAuth } from '@/context/AuthContext';
+import type { UserRole } from '@/types';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 interface NavItem {
   labelKey: string;
@@ -63,7 +63,7 @@ const navItems: NavItem[] = [
     labelKey: 'navigation.payments',
     to: '/app/payments',
     icon: <CreditCard className="h-5 w-5 shrink-0" />,
-    roles: ['super_admin', 'admin'],
+    roles: ['super_admin', 'admin', 'student'],
   },
   {
     labelKey: 'navigation.bookings',
@@ -165,9 +165,8 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
           aria-label="Toggle sidebar"
         >
           <ChevronLeft
-            className={`h-4 w-4 transition-transform duration-300 ${
-              !expanded ? 'rotate-180' : ''
-            }`}
+            className={`h-4 w-4 transition-transform duration-300 ${!expanded ? 'rotate-180' : ''
+              }`}
           />
         </button>
       </div>
@@ -181,13 +180,11 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
             end={item.to === '/app'}
             className={({ isActive }) =>
               `group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
-              ${
-                expanded ? '' : 'justify-center'
+              ${expanded ? '' : 'justify-center'
               }
-              ${
-                isActive
-                  ? 'bg-amber-500/10 text-amber-400 border-l-2 border-amber-500 shadow-sm shadow-amber-500/5'
-                  : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] border-l-2 border-transparent'
+              ${isActive
+                ? 'bg-amber-500/10 text-amber-400 border-l-2 border-amber-500 shadow-sm shadow-amber-500/5'
+                : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] border-l-2 border-transparent'
               }`
             }
           >
@@ -213,9 +210,8 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         {/* Logout */}
         <button
           onClick={logout}
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${
-            expanded ? '' : 'justify-center'
-          }`}
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${expanded ? '' : 'justify-center'
+            }`}
         >
           <LogOut className="h-5 w-5 shrink-0" />
           {expanded && (
@@ -239,20 +235,18 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
-          mobileOpen
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
-        }`}
+          }`}
         onClick={closeMobile}
         aria-hidden="true"
       />
 
       {/* Mobile sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-[260px] transform transition-transform duration-300 ease-out lg:hidden ${
-          mobileOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed inset-y-0 left-0 z-50 w-[260px] transform transition-transform duration-300 ease-out lg:hidden ${mobileOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="relative h-full">
           <button
@@ -268,9 +262,8 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
 
       {/* Desktop sidebar */}
       <aside
-        className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:flex-col transition-all duration-300 ease-out ${
-          expanded ? 'lg:w-[260px]' : 'lg:w-[72px]'
-        }`}
+        className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:flex-col transition-all duration-300 ease-out ${expanded ? 'lg:w-[260px]' : 'lg:w-[72px]'
+          }`}
       >
         {sidebarContent}
       </aside>

@@ -1,61 +1,108 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import AppLayout from './components/layout/AppLayout';
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { AuthProvider } from '@/context/AuthContext';
+import { ToastProvider } from '@/context/ToastContext';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import AppLayout from '@/components/layout/AppLayout';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
-import Users from './pages/Users';
-import Rooms from './pages/Rooms';
-import Packages from './pages/Packages';
-import MyPackages from './pages/MyPackages';
-import Payments from './pages/Payments';
-import Bookings from './pages/Bookings';
-import CreateBooking from './pages/CreateBooking';
-import TeacherAvailability from './pages/TeacherAvailability';
-import RoomAvailability from './pages/RoomAvailability';
+/* ──────────────────── Lazy-loaded pages ──────────────────────────────────── */
+
+const Landing = lazy(() => import('@/pages/Landing'));
+const Login = lazy(() => import('@/pages/Login'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
+
+// App pages (behind auth)
+const Dashboard = lazy(() => import('@/pages/Dashboard/index'));
+const Profile = lazy(() => import('@/pages/Profile'));
+const Users = lazy(() => import('@/pages/Users'));
+const Rooms = lazy(() => import('@/pages/Rooms'));
+const Packages = lazy(() => import('@/pages/Packages'));
+const MyPackages = lazy(() => import('@/pages/MyPackages'));
+const Payments = lazy(() => import('@/pages/Payments'));
+const Bookings = lazy(() => import('@/pages/Bookings'));
+const CreateBooking = lazy(() => import('@/pages/CreateBooking'));
+const TeacherAvailability = lazy(() => import('@/pages/TeacherAvailability'));
+const RoomAvailability = lazy(() => import('@/pages/RoomAvailability'));
+
+/* ──────────────────── Suspense wrapper ───────────────────────────────────── */
+
+function PageLoader() {
+  return <LoadingSpinner size="lg" className="min-h-[60vh]" />;
+}
+
+function SuspenseWrapper({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={<PageLoader />}>{children}</Suspense>;
+}
+
+function RootLayout() {
+  return (
+    <AuthProvider>
+      <ToastProvider>
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
+      </ToastProvider>
+    </AuthProvider>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/',
+        element: <SuspenseWrapper><Landing /></SuspenseWrapper>,
+      },
+      {
+        path: '/login',
+        element: <SuspenseWrapper><Login /></SuspenseWrapper>,
+      },
+      {
+        path: '/app',
+        element: (
+          <SuspenseWrapper>
+            <ProtectedRoute />
+          </SuspenseWrapper>
+        ),
+        children: [
+          {
+            element: <AppLayout />,
+            children: [
+              { index: true, element: <Dashboard /> },
+              { path: 'profile', element: <Profile /> },
+              { path: 'packages', element: <Packages /> },
+              { path: 'my-packages', element: <MyPackages /> },
+              { path: 'bookings', element: <Bookings /> },
+              { path: 'bookings/new', element: <CreateBooking /> },
+              { path: 'availability', element: <TeacherAvailability /> },
+              
+              /* Admin Specific Routes */
+              {
+                element: <ProtectedRoute allowedRoles={['admin', 'super_admin']} />,
+                children: [
+                  { path: 'users', element: <Users /> },
+                  { path: 'rooms', element: <Rooms /> },
+                  { path: 'payments', element: <Payments /> },
+                  { path: 'rooms/availability', element: <RoomAvailability /> },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: '*',
+        element: <SuspenseWrapper><NotFound /></SuspenseWrapper>,
+      },
+    ],
+  },
+]);
+
+/* ──────────────────── App ────────────────────────────────────────────────── */
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
-
-          {/* Protected app routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route element={<AppLayout />}>
-              <Route path="/app" element={<Dashboard />} />
-              <Route path="/app/profile" element={<Profile />} />
-
-              {/* Admin routes */}
-              <Route element={<ProtectedRoute allowedRoles={['admin', 'super_admin']} />}>
-                <Route path="/app/users" element={<Users />} />
-                <Route path="/app/rooms" element={<Rooms />} />
-                <Route path="/app/payments" element={<Payments />} />
-                <Route path="/app/rooms/availability" element={<RoomAvailability />} />
-              </Route>
-
-              {/* Packages - admin manages, students see catalog */}
-              <Route path="/app/packages" element={<Packages />} />
-
-              {/* Student routes */}
-              <Route path="/app/my-packages" element={<MyPackages />} />
-
-              {/* Bookings - all roles */}
-              <Route path="/app/bookings" element={<Bookings />} />
-              <Route path="/app/bookings/new" element={<CreateBooking />} />
-
-              {/* Teacher availability */}
-              <Route path="/app/availability" element={<TeacherAvailability />} />
-            </Route>
-          </Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }

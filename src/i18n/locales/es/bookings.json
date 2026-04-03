@@ -59,6 +59,12 @@
     "title": "No hay reservas",
     "description": "Las reservas aparecerán aquí cuando se creen."
   },
+  "pagination": {
+    "showing": "Mostrando {{from}}-{{to}} de {{total}}",
+    "page": "Página {{current}} de {{total}}",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
   "packageModal": {
     "title": "Vincular Paquete a Reserva",
     "selectPackage": "Selecciona un paquete activo",

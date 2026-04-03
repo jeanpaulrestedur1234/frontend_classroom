@@ -1,5 +1,5 @@
-import api from './api';
-import type { SetAvailabilityDTO, TeacherAvailabilityDTO } from '../types';
+import api from '@/services/api';
+import type { SetAvailabilityDTO, TeacherAvailabilityDTO } from '@/types';
 
 export async function getMyAvailability(): Promise<TeacherAvailabilityDTO[]> {
   const response = await api.get<TeacherAvailabilityDTO[]>(

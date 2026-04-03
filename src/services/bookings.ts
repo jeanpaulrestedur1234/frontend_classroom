@@ -1,10 +1,11 @@
-import api from './api';
+import api from '@/services/api';
 import type {
   BookStudentPackageDTO,
   CreateStudentBookingDTO,
   PaginatedResponse,
+  RoomAvailabilityResponse,
   StudentBookingDetailDto,
-} from '../types';
+} from '@/types';
 
 export async function createBooking(
   data: CreateStudentBookingDTO,
@@ -16,9 +17,14 @@ export async function createBooking(
   return response.data;
 }
 
-export async function listMyBookings(): Promise<StudentBookingDetailDto[]> {
-  const response = await api.get<PaginatedResponse<StudentBookingDetailDto>>('/api/bookings');
-  return Array.isArray(response.data.items) ? response.data.items : Array.isArray(response.data) ? response.data as unknown as StudentBookingDetailDto[] : [];
+export async function listMyBookings(
+  params: { status?: string; page?: number; page_size?: number } = {},
+): Promise<PaginatedResponse<StudentBookingDetailDto>> {
+  const response = await api.get<PaginatedResponse<StudentBookingDetailDto>>(
+    '/api/bookings',
+    { params },
+  );
+  return response.data;
 }
 
 export async function addPackageToBooking(
@@ -66,17 +72,21 @@ export async function getTeacherBookingAvailability(
     `/api/bookings/teacher/${teacherId}/availability`,
     { params: { start_date: startDate, end_date: endDate } },
   );
-  return response.data.items;
+  return Array.isArray(response.data.items)
+    ? response.data.items
+    : Array.isArray(response.data)
+      ? (response.data as unknown as StudentBookingDetailDto[])
+      : [];
 }
 
 export async function getRoomBookingAvailability(
-  roomId: string,
+  roomId: number,
   startDate: string,
   endDate: string,
-): Promise<StudentBookingDetailDto[]> {
-  const response = await api.get<PaginatedResponse<StudentBookingDetailDto>>(
+): Promise<RoomAvailabilityResponse> {
+  const response = await api.get<RoomAvailabilityResponse>(
     `/api/bookings/room/${roomId}/availability`,
     { params: { start_date: startDate, end_date: endDate } },
   );
-  return response.data.items;
+  return response.data;
 }

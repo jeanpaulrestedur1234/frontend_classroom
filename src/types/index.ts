@@ -212,6 +212,30 @@ export type BookStudentPackageDTO = {
   booking_id: string;
 };
 
+// ─── Room Availability Response ──────────────────────────────────────────────
+
+export type RoomAvailabilitySlot = {
+  booking_id: string;
+  teacher_id: string;
+  teacher_name?: string;
+  booking_type: BookingType;
+  status: BookingStatus;
+  scheduled_date: string;
+  start_time: string;
+  end_time: string;
+  student_count: number;
+};
+
+export type RoomAvailabilityResponse = {
+  room_id: number;
+  room_name: string;
+  room_capacity: number;
+  start_date: string;
+  end_date: string;
+  total_slots: number;
+  slots: RoomAvailabilitySlot[];
+};
+
 // ─── Auth context ────────────────────────────────────────────────────────────
 
 export type AuthUser = UserDTO;

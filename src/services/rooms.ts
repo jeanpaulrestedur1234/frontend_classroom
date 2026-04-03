@@ -1,5 +1,5 @@
-import api from './api';
-import type { CreateRoomDTO, PaginatedResponse, RoomDTO, UpdateRoomDTO } from '../types';
+import api from '@/services/api';
+import type { CreateRoomDTO, PaginatedResponse, RoomDTO, UpdateRoomDTO } from '@/types';
 
 export async function createRoom(data: CreateRoomDTO): Promise<RoomDTO> {
   const response = await api.post<RoomDTO>('/api/rooms', data);

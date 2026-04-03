@@ -50,6 +50,7 @@
       "urlPlaceholder": "https://example.com/receipt.jpg",
       "success": "Receipt uploaded successfully",
       "error": "Error uploading receipt"
-    }
+    },
+    "viewPayments": "View Payments"
   }
 }

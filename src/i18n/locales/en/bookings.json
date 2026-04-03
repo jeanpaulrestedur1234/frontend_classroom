@@ -32,13 +32,25 @@
   },
   "create": {
     "title": "New Booking",
+    "selectAvailability": "Choose an available slot from the teacher's calendar",
+    "choice": "Selected slot:",
+    "choosePackage": "Select an active package to use for this booking",
+    "packageUsed": "Package applied to booking successfully",
+    "package": "Package",
+    "noPackageSelected": "No package selected",
+    "packagePreview": "Package preview",
+    "packageId": "Package ID",
+    "selectPackageHint": "Select one package and click Next to continue.",
     "step": {
       "type": "Class Type",
       "teacher": "Select Teacher",
       "room": "Select Room",
       "datetime": "Date & Time",
+      "package": "Choose Package",
       "review": "Confirm Booking"
     },
+    "noActivePackage": "No active packages available"
+    ,
     "selectType": "How will your class be?",
     "virtualDesc": "Online class with no physical room needed",
     "presencialDesc": "In-person class at an academy room",
@@ -59,6 +71,15 @@
     "title": "No bookings",
     "description": "Bookings will appear here once created."
   },
+  "viewModes": {
+    "week": "Weekly calendar",
+    "table": "Table"
+  },
+  "weeklyCalendar": "Weekly calendar view",
+  "noClassesInDay": "No classes this day",
+  "unknownTeacher": "Unknown teacher",
+  "unknownRoom": "Unknown room",
+  "virtual": "Virtual",
   "pagination": {
     "showing": "Showing {{from}}-{{to}} of {{total}}",
     "page": "Page {{current}} of {{total}}",

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Package, AlertCircle } from 'lucide-react';
 import { useQuery, useMutation } from '@/hooks';
 import { useToast } from '@/context/ToastContext';
-import { getMyPackages, activatePackage, createPaymentIntent } from '@/services/packages';
+import { getMyPackages, activatePackage } from '@/services/packages';
 import { uploadReceipt } from '@/services/payments';
 
 import Button from '@/components/ui/Button';
@@ -18,15 +18,13 @@ export default function MyPackages() {
   const { t: tc } = useTranslation('common');
   const { success: toastSuccess, error: toastError } = useToast();
 
-  const { data, loading, error, refetch, setData } = useQuery<StudentPackageWithPayments[]>(getMyPackages);
+  const { data, loading, error, refetch } = useQuery<StudentPackageWithPayments[]>(getMyPackages);
   const packages = data ?? [];
 
   const activateMut = useMutation(activatePackage);
-  const createPaymentMut = useMutation(createPaymentIntent);
   const uploadMut = useMutation(uploadReceipt);
 
   const [activatingId, setActivatingId] = useState<string | null>(null);
-  const [creatingPaymentId, setCreatingPaymentId] = useState<string | null>(null);
   const [uploadModal, setUploadModal] = useState<{ open: boolean; paymentId: string; packageId: string }>({
     open: false,
     paymentId: '',
@@ -50,29 +48,6 @@ export default function MyPackages() {
     }
   }
 
-  async function handleCreatePayment(spId: string) {
-    setCreatingPaymentId(spId);
-    try {
-      const payment = await createPaymentMut.execute(spId);
-      toastSuccess(t('myPackages.uploadModal.success'));
-      setData(
-        packages.map((p) => {
-          if (p.id === spId) {
-            return {
-              ...p,
-              payments: [...(p.payments || []), payment],
-            };
-          }
-          return p;
-        }),
-      );
-      setUploadModal({ open: true, paymentId: payment.id, packageId: spId });
-    } catch {
-      toastError(tc('errors.generic'));
-    } finally {
-      setCreatingPaymentId(null);
-    }
-  }
 
   async function handleUploadReceipt(paymentId: string, url: string) {
     try {
@@ -121,9 +96,7 @@ export default function MyPackages() {
               key={pkg.id}
               pkg={pkg}
               activatingId={activatingId}
-              creatingPaymentId={creatingPaymentId}
               onActivate={handleActivate}
-              onCreatePayment={handleCreatePayment}
               onUploadModalOpen={(paymentId, packageId) =>
                 setUploadModal({ open: true, paymentId, packageId })
               }

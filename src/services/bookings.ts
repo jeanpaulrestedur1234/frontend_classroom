@@ -9,11 +9,12 @@ import type {
 
 export async function createBooking(
   data: CreateStudentBookingDTO,
+  studentPackageId?: string,
 ): Promise<StudentBookingDetailDto> {
-  const response = await api.post<StudentBookingDetailDto>(
-    '/api/bookings',
-    data,
-  );
+  const url = studentPackageId
+    ? `/api/bookings?student_package_id=${encodeURIComponent(studentPackageId)}`
+    : '/api/bookings';
+  const response = await api.post<StudentBookingDetailDto>(url, data);
   return response.data;
 }
 

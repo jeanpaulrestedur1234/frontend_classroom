@@ -57,7 +57,7 @@ const navItems: NavItem[] = [
     labelKey: 'navigation.packages',
     to: '/app/packages',
     icon: <Package className="h-5 w-5 shrink-0" />,
-    roles: ['super_admin', 'admin'],
+    roles: ['super_admin', 'admin', 'student'],
   },
   {
     labelKey: 'navigation.payments',

@@ -85,8 +85,14 @@ const router = createBrowserRouter([
                 children: [
                   { path: 'users', element: <Users /> },
                   { path: 'rooms', element: <Rooms /> },
-                  { path: 'payments', element: <Payments /> },
                   { path: 'rooms/availability', element: <RoomAvailability /> },
+                ],
+              },
+              /* Payments Route for Admins and Students */
+              {
+                element: <ProtectedRoute allowedRoles={['admin', 'super_admin', 'student']} />,
+                children: [
+                  { path: 'payments', element: <Payments /> },
                 ],
               },
             ],

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CreditCard, Filter, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -26,8 +27,15 @@ export default function Payments() {
 
   const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
 
+  const location = useLocation();
+  const query = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const packageId = query.get('package_id') ?? undefined;
+
   // API hooks
-  const { data: allPayments, loading, error, refetch } = usePaginatedQuery<PaymentDTO>(listPayments, { pageSize: PAGE_SIZE });
+  const { data: allPayments, loading, error, refetch } = usePaginatedQuery<PaymentDTO>(
+    (page) => listPayments(page, PAGE_SIZE, packageId),
+    { pageSize: PAGE_SIZE },
+  );
   const approveMut = useMutation(approvePayment);
   const uploadMut = useMutation(uploadReceipt);
 

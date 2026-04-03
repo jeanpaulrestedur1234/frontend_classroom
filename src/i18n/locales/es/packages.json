@@ -50,6 +50,7 @@
       "urlPlaceholder": "https://ejemplo.com/comprobante.jpg",
       "success": "Comprobante cargado exitosamente",
       "error": "Error al cargar comprobante"
-    }
+    },
+    "viewPayments": "Ver pagos"
   }
 }

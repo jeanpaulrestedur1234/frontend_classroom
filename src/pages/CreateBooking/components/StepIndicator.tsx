@@ -1,17 +1,22 @@
 import { CheckCircle } from 'lucide-react';
 import type { TFunction } from 'i18next';
 
-export const STEP_KEYS = ['type', 'teacher', 'room', 'datetime', 'review'] as const;
+export const STEP_KEYS = ['type', 'teacher', 'room', 'datetime', 'package', 'review'] as const;
 
 interface StepIndicatorProps {
   current: number;
   skipRoom: boolean;
+  skipPackage: boolean;
   t: TFunction;
 }
 
-export default function StepIndicator({ current, skipRoom, t }: StepIndicatorProps) {
-  const visibleSteps = skipRoom ? STEP_KEYS.filter((_, i) => i !== 2) : [...STEP_KEYS];
-  const visibleCurrent = skipRoom && current > 2 ? current - 1 : current;
+export default function StepIndicator({ current, skipRoom, skipPackage, t }: StepIndicatorProps) {
+  const hiddenIndexes = new Set<number>();
+  if (skipRoom) hiddenIndexes.add(2);
+  if (skipPackage) hiddenIndexes.add(4);
+
+  const visibleSteps = STEP_KEYS.filter((_, idx) => !hiddenIndexes.has(idx));
+  const visibleCurrent = visibleSteps.indexOf(STEP_KEYS[current]);
 
   return (
     <div className="flex items-center justify-center gap-2 mb-8">

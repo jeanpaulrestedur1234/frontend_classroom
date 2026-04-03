@@ -1,9 +1,13 @@
-import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play, Plus, Upload } from 'lucide-react';
+import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play, Upload } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
+import Modal from '@/components/ui/Modal';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { formatDate, formatCurrency } from '@/utils';
+import { getPaymentByPackageId } from '@/services/payments';
 import type { StudentPackageDTO, PaymentDTO, ClassType } from '@/types';
 
 export interface StudentPackageWithPayments extends StudentPackageDTO {
@@ -13,9 +17,7 @@ export interface StudentPackageWithPayments extends StudentPackageDTO {
 interface MyPackageCardProps {
   pkg: StudentPackageWithPayments;
   activatingId: string | null;
-  creatingPaymentId: string | null;
   onActivate: (id: string) => void;
-  onCreatePayment: (id: string) => void;
   onUploadModalOpen: (paymentId: string, packageId: string) => void;
 }
 
@@ -42,13 +44,29 @@ function classTypeBadgeVariant(ct: ClassType): 'info' | 'success' | 'warning' {
 export default function MyPackageCard({
   pkg,
   activatingId,
-  creatingPaymentId,
   onActivate,
-  onCreatePayment,
   onUploadModalOpen,
 }: MyPackageCardProps) {
   const { t } = useTranslation('packages');
   const { t: tc } = useTranslation('common');
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [paymentsData, setPaymentsData] = useState<PaymentDTO[]>([]);
+  const [paymentsLoading, setPaymentsLoading] = useState(false);
+
+  useEffect(() => {
+    if (modalOpen) {
+      setPaymentsLoading(true);
+      getPaymentByPackageId(pkg.id)
+        .then((response) => {
+          setPaymentsData(response);
+          setPaymentsLoading(false);
+        })
+        .catch(() => {
+          setPaymentsLoading(false);
+        });
+    }
+  }, [modalOpen, pkg.id]);
 
   const totalHours = pkg.hours_per_week * pkg.duration_weeks;
   const payments = pkg.payments || [];
@@ -56,7 +74,8 @@ export default function MyPackageCard({
   const hasPendingPayment = payments.some((p) => p.status === 'pending' || p.status === 'notified');
 
   return (
-    <Card className="space-y-5 relative overflow-hidden">
+    <>
+      <Card className="space-y-5 relative overflow-hidden">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
 
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -172,18 +191,6 @@ export default function MyPackageCard({
           </Button>
         )}
 
-        {!hasConfirmedPayment && !hasPendingPayment && (
-          <Button
-            size="sm"
-            variant="secondary"
-            loading={creatingPaymentId === pkg.id}
-            onClick={() => onCreatePayment(pkg.id)}
-          >
-            <Plus className="h-4 w-4" />
-            {t('myPackages.newPayment')}
-          </Button>
-        )}
-
         {hasPendingPayment && (
           <Button
             size="sm"
@@ -199,7 +206,69 @@ export default function MyPackageCard({
             {t('myPackages.uploadReceipt')}
           </Button>
         )}
+
+        <Button
+          size="sm"
+          variant="secondary"
+          onClick={() => setModalOpen(true)}
+        >
+          <ExternalLink className="h-3 w-3" />
+          {t('myPackages.viewPayments')}
+        </Button>
       </div>
     </Card>
+
+    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={t('myPackages.payments')}>
+      <div className="space-y-4">
+        {paymentsLoading ? (
+          <LoadingSpinner />
+        ) : Array.isArray(paymentsData) && paymentsData.length > 0 ? (
+          paymentsData.map((payment) => (
+            <div
+              key={payment.id}
+              className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-zinc-50/50 border border-white/[0.05] px-4 py-3"
+            >
+              <div className="flex items-center gap-3">
+                <CreditCard className="h-4 w-4 text-zinc-400" />
+                <div>
+                  <span className="text-sm font-medium text-zinc-700">{formatCurrency(payment.amount)}</span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge variant={statusBadgeVariant(payment.status)}>{tc(`status.${payment.status}`)}</Badge>
+                    <span className="text-xs text-zinc-500">{formatDate(payment.created_at)}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {payment.payment_proof_url && (
+                  <a
+                    href={payment.payment_proof_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 transition-colors"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    {tc('actions.viewDetails')}
+                  </a>
+                )}
+                {payment.rejection_reason && (
+                  <span className="text-xs text-rose-400">{payment.rejection_reason}</span>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-sm text-zinc-400 italic">{t('myPackages.noPayments')}</p>
+        )}
+        {!paymentsLoading && Array.isArray(paymentsData) && paymentsData.some((p) => p.status === 'confirmed') && pkg.status !== 'active' && (
+          <div className="pt-4 border-t border-zinc-200">
+            <Button size="sm" loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)}>
+              <Play className="h-4 w-4" />
+              {t('myPackages.activatePackage')}
+            </Button>
+          </div>
+        )}
+      </div>
+    </Modal>
+    </>
   );
 }

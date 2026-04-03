@@ -32,13 +32,25 @@
   },
   "create": {
     "title": "Nueva Reserva",
+    "selectAvailability": "Elige una franja de disponibilidad en el calendario del profesor",
+    "choice": "Franja seleccionada:",
+    "choosePackage": "Selecciona un paquete activo para esta reserva",
+    "packageUsed": "Paquete aplicado a la reserva exitosamente",
+    "package": "Paquete",
+    "noPackageSelected": "No has seleccionado paquete",
+    "packagePreview": "Vista previa del paquete",
+    "packageId": "ID del paquete",
+    "selectPackageHint": "Selecciona un paquete y haz clic en Siguiente para continuar.",
     "step": {
       "type": "Tipo de Clase",
       "teacher": "Seleccionar Profesor",
       "room": "Seleccionar Salón",
       "datetime": "Fecha y Hora",
+      "package": "Elegir Paquete",
       "review": "Confirmar Reserva"
     },
+    "noActivePackage": "No hay paquetes activos disponibles"
+    ,
     "selectType": "¿Cómo será tu clase?",
     "virtualDesc": "Clase en línea sin necesidad de salón físico",
     "presencialDesc": "Clase presencial en un salón de la academia",
@@ -59,6 +71,15 @@
     "title": "No hay reservas",
     "description": "Las reservas aparecerán aquí cuando se creen."
   },
+  "viewModes": {
+    "week": "Calendario semanal",
+    "table": "Tabla"
+  },
+  "weeklyCalendar": "Vista semanal",
+  "noClassesInDay": "No hay clases en este día",
+  "unknownTeacher": "Profesor desconocido",
+  "unknownRoom": "Salón desconocido",
+  "virtual": "Virtual",
   "pagination": {
     "showing": "Mostrando {{from}}-{{to}} de {{total}}",
     "page": "Página {{current}} de {{total}}",

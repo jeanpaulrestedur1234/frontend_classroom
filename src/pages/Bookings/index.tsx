@@ -15,10 +15,27 @@ import EmptyState from '@/components/ui/EmptyState';
 
 import BookingsFilter from './components/BookingsFilter';
 import BookingsTable from './components/BookingsTable';
+import WeeklyGrid from '../TeacherAvailability/components/WeeklyGrid';
 import BookingDetailModal from './components/BookingDetailModal';
 import AddPackageModal from './components/AddPackageModal';
 
 const PAGE_SIZE = 20;
+
+function bookingToAvailability(booking: StudentBookingDetailDto) {
+  const date = new Date(booking.scheduled_date);
+  const jsDay = date.getDay();
+  const apiDay = jsDay === 0 ? 6 : jsDay - 1;
+
+  return {
+    id: booking.id,
+    teacher_id: Number(booking.teacher?.id ?? 0),
+    day_of_week: apiDay,
+    start_time: booking.start_time,
+    end_time: booking.end_time,
+    is_virtual: booking.booking_type === 'virtual',
+    created_at: booking.created_at,
+  };
+}
 
 export default function Bookings() {
   const { user } = useAuth();
@@ -30,6 +47,7 @@ export default function Bookings() {
 
   /* filters */
   const [statusFilter, setStatusFilter] = useState('');
+  const [viewMode, setViewMode] = useState<'table' | 'week'>('week');
 
   /* server-side paginated query */
   const fetcher = useCallback(
@@ -136,6 +154,23 @@ export default function Bookings() {
         )}
       </div>
 
+      <div className="flex items-center gap-2">
+        <Button
+          size="sm"
+          variant={viewMode === 'week' ? 'primary' : 'secondary'}
+          onClick={() => setViewMode('week')}
+        >
+          {t('viewModes.week')}
+        </Button>
+        <Button
+          size="sm"
+          variant={viewMode === 'table' ? 'primary' : 'secondary'}
+          onClick={() => setViewMode('table')}
+        >
+          {t('viewModes.table')}
+        </Button>
+      </div>
+
       {/* Filters */}
       <BookingsFilter
         statusFilter={statusFilter}
@@ -174,15 +209,21 @@ export default function Bookings() {
         />
       ) : (
         <>
-          <BookingsTable
-            bookings={bookings}
-            user={user}
-            actionLoading={isMutatingAny ? 'loading' : null}
-            onViewDetail={setDetailBooking}
-            onConfirm={handleConfirm}
-            onCancel={handleCancel}
-            onAddPackage={setPackageModalBooking}
-          />
+          {viewMode === 'week' ? (
+            <WeeklyGrid
+              availability={bookings.map(bookingToAvailability)}
+            />
+          ) : (
+            <BookingsTable
+              bookings={bookings}
+              user={user}
+              actionLoading={isMutatingAny ? 'loading' : null}
+              onViewDetail={setDetailBooking}
+              onConfirm={handleConfirm}
+              onCancel={handleCancel}
+              onAddPackage={setPackageModalBooking}
+            />
+          )}
 
           {/* Pagination info */}
           {total > 0 && (

@@ -18,9 +18,10 @@ import { useToast } from '@/context/ToastContext';
 interface SuccessScreenProps {
   booking: StudentBookingDetailDto;
   onReset: () => void;
+  usedPackageId?: string;
 }
 
-export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) {
+export default function SuccessScreen({ booking, onReset, usedPackageId }: SuccessScreenProps) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation('bookings');
@@ -108,7 +109,7 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
         </div>
 
         {/* Package linking for students */}
-        {isStudent && !showPackageStep && (
+        {isStudent && !usedPackageId && !showPackageStep && (
           <div className="mt-6 border-t border-zinc-100 pt-4">
             <button
               onClick={() => setShowPackageStep(true)}
@@ -120,6 +121,12 @@ export default function SuccessScreen({ booking, onReset }: SuccessScreenProps) 
               </span>
               <ArrowRight className="w-4 h-4" />
             </button>
+          </div>
+        )}
+
+        {isStudent && usedPackageId && (
+          <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
+            {t('create.packageUsed')}
           </div>
         )}
 

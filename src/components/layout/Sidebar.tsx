@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
   User,
@@ -13,12 +14,15 @@ import {
   LogOut,
   Menu,
   X,
+  ChevronLeft,
+  DoorOpen,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import type { UserRole } from '../../types';
+import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 interface NavItem {
-  label: string;
+  labelKey: string;
   to: string;
   icon: React.ReactNode;
   roles: UserRole[];
@@ -26,83 +30,94 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: 'Dashboard',
+    labelKey: 'navigation.dashboard',
     to: '/app',
     icon: <LayoutDashboard className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin', 'teacher', 'student'],
   },
   {
-    label: 'Mi Perfil',
+    labelKey: 'navigation.profile',
     to: '/app/profile',
     icon: <User className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin', 'teacher', 'student'],
   },
   {
-    label: 'Usuarios',
+    labelKey: 'navigation.users',
     to: '/app/users',
     icon: <Users className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
-    label: 'Salones',
+    labelKey: 'navigation.rooms',
     to: '/app/rooms',
     icon: <Building2 className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
-    label: 'Paquetes',
+    labelKey: 'navigation.packages',
     to: '/app/packages',
     icon: <Package className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
-    label: 'Pagos',
+    labelKey: 'navigation.payments',
     to: '/app/payments',
     icon: <CreditCard className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
-    label: 'Reservas',
+    labelKey: 'navigation.bookings',
     to: '/app/bookings',
     icon: <CalendarDays className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
-    label: 'Mi Disponibilidad',
+    labelKey: 'navigation.roomAvailability',
+    to: '/app/rooms/availability',
+    icon: <DoorOpen className="h-5 w-5 shrink-0" />,
+    roles: ['super_admin', 'admin'],
+  },
+  {
+    labelKey: 'navigation.myAvailability',
     to: '/app/availability',
     icon: <Clock className="h-5 w-5 shrink-0" />,
     roles: ['teacher'],
   },
   {
-    label: 'Mis Clases',
+    labelKey: 'navigation.myClasses',
     to: '/app/bookings',
     icon: <CalendarDays className="h-5 w-5 shrink-0" />,
     roles: ['teacher'],
   },
   {
-    label: 'Mis Paquetes',
+    labelKey: 'navigation.myPackages',
     to: '/app/my-packages',
     icon: <Package className="h-5 w-5 shrink-0" />,
     roles: ['student'],
   },
   {
-    label: 'Reservar Clase',
+    labelKey: 'navigation.newBooking',
     to: '/app/bookings/new',
     icon: <CalendarPlus className="h-5 w-5 shrink-0" />,
     roles: ['student'],
   },
   {
-    label: 'Mis Reservas',
+    labelKey: 'navigation.myBookings',
     to: '/app/bookings',
     icon: <CalendarDays className="h-5 w-5 shrink-0" />,
     roles: ['student'],
   },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  expanded: boolean;
+  onToggle: () => void;
+}
+
+export default function Sidebar({ expanded, onToggle }: SidebarProps) {
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
   const location = useLocation();
-  const [expanded, setExpanded] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Close mobile sidebar on route change
@@ -121,22 +136,39 @@ export default function Sidebar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const closeMobile = useCallback(() => setMobileOpen(false), []);
+
   const filteredItems = navItems.filter(
     (item) => user && item.roles.includes(user.role),
   );
 
   const sidebarContent = (
-    <div className="flex h-full flex-col bg-white border-r border-gray-200">
+    <div className="flex h-full flex-col bg-zinc-950 border-r border-white/[0.06]">
       {/* Logo & Toggle */}
-      <div className="flex h-16 items-center justify-between px-4 border-b border-gray-100">
-        <span className="text-xl font-bold text-primary-700 overflow-hidden whitespace-nowrap">
-          {expanded ? 'ClassRoom Pro' : 'CP'}
-        </span>
+      <div className="flex h-16 items-center justify-between px-4 border-b border-white/[0.06]">
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          {/* Logo icon */}
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20">
+            <span className="text-sm font-bold font-[family-name:var(--font-display)] text-zinc-950">
+              CP
+            </span>
+          </div>
+          {expanded && (
+            <span className="text-lg font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent whitespace-nowrap transition-opacity duration-300">
+              {t('appName')}
+            </span>
+          )}
+        </div>
         <button
-          onClick={() => setExpanded(!expanded)}
-          className="hidden lg:flex rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+          onClick={onToggle}
+          className="hidden lg:flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.04] transition-all duration-200"
+          aria-label="Toggle sidebar"
         >
-          <Menu className="h-5 w-5" />
+          <ChevronLeft
+            className={`h-4 w-4 transition-transform duration-300 ${
+              !expanded ? 'rotate-180' : ''
+            }`}
+          />
         </button>
       </div>
 
@@ -144,36 +176,51 @@ export default function Sidebar() {
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
         {filteredItems.map((item) => (
           <NavLink
-            key={item.to + item.label}
+            key={item.to + item.labelKey}
             to={item.to}
             end={item.to === '/app'}
             className={({ isActive }) =>
-              `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors
+              `group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200
+              ${
+                expanded ? '' : 'justify-center'
+              }
               ${
                 isActive
-                  ? 'bg-primary-50 text-primary-700'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-amber-500/10 text-amber-400 border-l-2 border-amber-500 shadow-sm shadow-amber-500/5'
+                  : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.04] border-l-2 border-transparent'
               }`
             }
           >
-            {item.icon}
+            <span className="shrink-0 transition-colors duration-200">
+              {item.icon}
+            </span>
             {expanded && (
-              <span className="overflow-hidden whitespace-nowrap">
-                {item.label}
+              <span className="overflow-hidden whitespace-nowrap transition-opacity duration-200">
+                {t(item.labelKey)}
               </span>
             )}
           </NavLink>
         ))}
       </nav>
 
-      {/* Logout */}
-      <div className="border-t border-gray-100 p-3">
+      {/* Bottom section */}
+      <div className="border-t border-white/[0.06] p-3 space-y-2">
+        {/* Language switcher */}
+        <div className={`flex ${expanded ? 'justify-start' : 'justify-center'}`}>
+          <LanguageSwitcher compact={!expanded} />
+        </div>
+
+        {/* Logout */}
         <button
           onClick={logout}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-600 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${
+            expanded ? '' : 'justify-center'
+          }`}
         >
           <LogOut className="h-5 w-5 shrink-0" />
-          {expanded && <span>Cerrar Sesión</span>}
+          {expanded && (
+            <span className="whitespace-nowrap">{t('navigation.logout')}</span>
+          )}
         </button>
       </div>
     </div>
@@ -184,28 +231,34 @@ export default function Sidebar() {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-40 rounded-lg bg-white p-2 shadow-md lg:hidden"
+        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] text-zinc-400 hover:text-amber-400 hover:border-amber-500/30 transition-all duration-200 lg:hidden"
+        aria-label="Open menu"
       >
-        <Menu className="h-5 w-5 text-gray-700" />
+        <Menu className="h-5 w-5" />
       </button>
 
       {/* Mobile overlay */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
+      <div
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          mobileOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={closeMobile}
+        aria-hidden="true"
+      />
 
       {/* Mobile sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-200 lg:hidden
-          ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed inset-y-0 left-0 z-50 w-[260px] transform transition-transform duration-300 ease-out lg:hidden ${
+          mobileOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
         <div className="relative h-full">
           <button
-            onClick={() => setMobileOpen(false)}
-            className="absolute top-4 right-3 rounded-lg p-1 text-gray-400 hover:bg-gray-100"
+            onClick={closeMobile}
+            className="absolute top-4 right-3 z-10 flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.06] transition-all duration-200"
+            aria-label="Close menu"
           >
             <X className="h-5 w-5" />
           </button>
@@ -215,8 +268,9 @@ export default function Sidebar() {
 
       {/* Desktop sidebar */}
       <aside
-        className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:flex-col transition-all duration-200
-          ${expanded ? 'lg:w-64' : 'lg:w-16'}`}
+        className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:flex-col transition-all duration-300 ease-out ${
+          expanded ? 'lg:w-[260px]' : 'lg:w-[72px]'
+        }`}
       >
         {sidebarContent}
       </aside>

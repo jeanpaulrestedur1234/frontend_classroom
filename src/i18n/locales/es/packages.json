@@ -1,0 +1,55 @@
+{
+  "catalog": {
+    "title": "Catálogo de Paquetes",
+    "newPackage": "Nuevo Paquete",
+    "hoursPerWeek": "{{hours}} hrs/semana",
+    "weeks": "{{weeks}} semanas",
+    "discount": "{{pct}}% descuento",
+    "empty": {
+      "title": "No hay paquetes",
+      "description": "Crea el primer paquete educativo."
+    }
+  },
+  "create": {
+    "title": "Crear Paquete",
+    "classType": "Tipo de clase",
+    "hoursPerWeek": "Horas por semana",
+    "durationWeeks": "Duración (semanas)",
+    "basePrice": "Precio base",
+    "discountPct": "Descuento (%)",
+    "success": "Paquete creado exitosamente",
+    "error": "Error al crear paquete"
+  },
+  "student": {
+    "availablePackages": "Paquetes Disponibles",
+    "acquire": "Adquirir",
+    "acquired": "¡Adquirido!",
+    "acquireError": "Error al adquirir paquete"
+  },
+  "myPackages": {
+    "title": "Mis Paquetes",
+    "totalHours": "Total: {{hours}} horas",
+    "totalPrice": "Precio total",
+    "createdAt": "Adquirido",
+    "activatedAt": "Activado",
+    "expiresAt": "Vence",
+    "payments": "Pagos",
+    "activatePackage": "Activar Paquete",
+    "uploadReceipt": "Subir Comprobante",
+    "newPayment": "Nuevo Pago",
+    "noPayments": "Sin pagos registrados",
+    "activateSuccess": "Paquete activado exitosamente",
+    "activateError": "Error al activar paquete",
+    "empty": {
+      "title": "No tienes paquetes",
+      "description": "Adquiere tu primer paquete en el catálogo."
+    },
+    "uploadModal": {
+      "title": "Subir Comprobante de Pago",
+      "urlLabel": "URL del comprobante",
+      "urlPlaceholder": "https://ejemplo.com/comprobante.jpg",
+      "success": "Comprobante cargado exitosamente",
+      "error": "Error al cargar comprobante"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "title": "Payment Management",
+  "admin": {
+    "workflow": {
+      "title": "Payment Flow",
+      "step1": "The student acquires a package",
+      "step2": "A payment intent is generated",
+      "step3": "The student uploads the receipt",
+      "step4": "The administrator approves or rejects"
+    },
+    "apiNote": "Payments appear when students upload receipts. Use each student's packages section to review individual payments.",
+    "filterByStatus": "Filter by status",
+    "allStatuses": "All statuses",
+    "amount": "Amount",
+    "proofUrl": "View receipt",
+    "rejectionReason": "Rejection reason",
+    "approveSuccess": "Payment approved successfully",
+    "rejectSuccess": "Payment rejected successfully",
+    "error": "Error processing payment",
+    "rejectModal": {
+      "title": "Reject Payment",
+      "reasonLabel": "Rejection reason",
+      "reasonPlaceholder": "Describe the reason for rejection..."
+    }
+  },
+  "student": {
+    "title": "My Payments",
+    "viewPackages": "View in My Packages",
+    "packageSummary": "Package and payment summary"
+  }
+}

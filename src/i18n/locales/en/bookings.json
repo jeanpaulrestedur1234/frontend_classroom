@@ -1,0 +1,67 @@
+{
+  "title": "Bookings",
+  "myBookings": "My Bookings",
+  "manageBookings": "Booking Management",
+  "filterByStatus": "Filter by status",
+  "allStatuses": "All statuses",
+  "dateFrom": "From",
+  "dateTo": "To",
+  "table": {
+    "date": "Date",
+    "time": "Time",
+    "type": "Type",
+    "status": "Status",
+    "teacher": "Teacher",
+    "room": "Room",
+    "actions": "Actions"
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "addPackage": "Add Package",
+    "confirmSuccess": "Booking confirmed",
+    "cancelSuccess": "Booking cancelled",
+    "addPackageSuccess": "Package linked successfully",
+    "error": "Error processing action"
+  },
+  "detail": {
+    "title": "Booking Details",
+    "bookingId": "Booking ID",
+    "createdAt": "Created on",
+    "updatedAt": "Updated on"
+  },
+  "create": {
+    "title": "New Booking",
+    "step": {
+      "type": "Class Type",
+      "teacher": "Select Teacher",
+      "room": "Select Room",
+      "datetime": "Date & Time",
+      "review": "Confirm Booking"
+    },
+    "selectType": "How will your class be?",
+    "virtualDesc": "Online class with no physical room needed",
+    "presencialDesc": "In-person class at an academy room",
+    "selectTeacher": "Choose your teacher",
+    "selectRoom": "Choose the room",
+    "selectDate": "Class date",
+    "selectTime": "Start time",
+    "reviewTitle": "Your booking summary",
+    "submitBooking": "Create Booking",
+    "success": "Booking created successfully!",
+    "linkPackage": "Link Package",
+    "selectPackage": "Select an active package",
+    "createAnother": "Create Another Booking",
+    "viewBookings": "View My Bookings",
+    "error": "Error creating booking"
+  },
+  "empty": {
+    "title": "No bookings",
+    "description": "Bookings will appear here once created."
+  },
+  "packageModal": {
+    "title": "Link Package to Booking",
+    "selectPackage": "Select an active package",
+    "noActivePackages": "You have no active packages available."
+  }
+}

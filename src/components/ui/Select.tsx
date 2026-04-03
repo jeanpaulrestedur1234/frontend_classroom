@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
@@ -7,42 +8,44 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, error, options, className = '', id, ...rest }, ref) => {
-    const selectId = id || label?.toLowerCase().replace(/\s+/g, '-');
+  ({ label, error, options, className = '', ...props }, ref) => {
+    const { t } = useTranslation();
+    const id = props.id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     return (
-      <div className="w-full">
+      <div className="space-y-1.5">
         {label && (
-          <label
-            htmlFor={selectId}
-            className="mb-1 block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor={id} className="block text-sm font-medium text-zinc-300">
             {label}
           </label>
         )}
         <select
           ref={ref}
-          id={selectId}
-          className={`block w-full rounded-lg border px-3 py-2 text-sm shadow-sm
-            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-            disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500
-            ${error ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
-            ${className}`}
-          {...rest}
+          id={id}
+          className={`
+            block w-full rounded-xl px-4 py-2.5 text-sm appearance-none
+            bg-white/5 border border-white/10 text-zinc-100
+            transition-all duration-200
+            hover:border-white/20
+            focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20
+            disabled:opacity-40 disabled:cursor-not-allowed
+            ${error ? 'border-rose-500/50 focus:border-rose-500/50 focus:ring-rose-500/20' : ''}
+            ${className}
+          `}
+          {...props}
         >
-          <option value="">Seleccionar...</option>
+          <option value="" className="bg-zinc-900 text-zinc-400">{t('select.placeholder')}</option>
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
+            <option key={opt.value} value={opt.value} className="bg-zinc-900 text-zinc-100">
               {opt.label}
             </option>
           ))}
         </select>
-        {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+        {error && <p className="text-xs text-rose-400 mt-1">{error}</p>}
       </div>
     );
   },
 );
 
 Select.displayName = 'Select';
-
 export default Select;

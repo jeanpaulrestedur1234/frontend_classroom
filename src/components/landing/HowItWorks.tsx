@@ -1,78 +1,126 @@
-import { UserPlus, Settings, CalendarCheck, TrendingUp } from "lucide-react";
+import { UserPlus, Settings, CalendarCheck, TrendingUp, type LucideIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const steps = [
+interface Step {
+  number: string;
+  icon: LucideIcon;
+  titleKey: string;
+  descKey: string;
+}
+
+const steps: Step[] = [
   {
     number: "1",
     icon: UserPlus,
-    title: "Registra tu equipo",
-    description:
-      "Los administradores crean cuentas para profesores y estudiantes.",
+    titleKey: "howItWorks.steps.1.title",
+    descKey: "howItWorks.steps.1.description",
   },
   {
     number: "2",
     icon: Settings,
-    title: "Configura tu oferta",
-    description:
-      "Define paquetes educativos, salones y horarios disponibles.",
+    titleKey: "howItWorks.steps.2.title",
+    descKey: "howItWorks.steps.2.description",
   },
   {
     number: "3",
     icon: CalendarCheck,
-    title: "Los estudiantes reservan",
-    description:
-      "Los alumnos adquieren paquetes y reservan sus clases.",
+    titleKey: "howItWorks.steps.3.title",
+    descKey: "howItWorks.steps.3.description",
   },
   {
     number: "4",
     icon: TrendingUp,
-    title: "Gestiona y crece",
-    description:
-      "Monitorea pagos, ocupación y rendimiento desde el dashboard.",
+    titleKey: "howItWorks.steps.4.title",
+    descKey: "howItWorks.steps.4.description",
   },
 ];
 
 export default function HowItWorks() {
+  const { t } = useTranslation("landing");
+
   return (
-    <section id="how-it-works" className="py-20 sm:py-28 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="how-it-works" className="relative py-24 sm:py-32 bg-zinc-950">
+      {/* Decorative */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/[0.02] rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-indigo-600 font-semibold text-sm uppercase tracking-wide mb-2">
-            Proceso
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <p
+            className="animate-fade-in-up text-amber-400 font-semibold text-sm uppercase tracking-widest mb-3 font-[family-name:var(--font-display)]"
+            style={{ animationDelay: "0s" }}
+          >
+            {t("howItWorks.sectionLabel")}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
-            ¿Cómo funciona?
+          <h2
+            className="animate-fade-in-up font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl font-bold text-zinc-50 tracking-tight"
+            style={{ animationDelay: "0.1s" }}
+          >
+            {t("howItWorks.title")}
           </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Cuatro simples pasos para transformar la gestión de tu academia.
+          <p
+            className="animate-fade-in-up mt-4 text-lg text-zinc-400 leading-relaxed"
+            style={{ animationDelay: "0.2s" }}
+          >
+            {t("howItWorks.subtitle")}
           </p>
         </div>
 
         {/* Steps */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-          {steps.map((step, index) => (
-            <div key={step.number} className="relative text-center">
-              {/* Connector line (desktop) */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-[60%] w-[calc(100%-20%)] h-0.5 bg-indigo-200" />
-              )}
+        <div className="relative">
+          {/* Connecting line - desktop */}
+          <div className="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-px">
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+            <div className="w-full h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_8px,rgba(251,191,36,0.15)_8px,rgba(251,191,36,0.15)_16px)]" />
+          </div>
 
-              {/* Number circle */}
-              <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-600 text-white text-2xl font-bold mb-6 shadow-lg shadow-indigo-600/25">
-                {step.number}
-                <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                  <step.icon className="w-4 h-4 text-indigo-600" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+            {steps.map((step, index) => (
+              <div
+                key={step.number}
+                className="animate-fade-in-up relative text-center"
+                style={{ animationDelay: `${index * 0.15}s` }}
+              >
+                {/* Number circle */}
+                <div className="relative inline-flex flex-col items-center">
+                  <div className="relative">
+                    {/* Outer glow ring */}
+                    <div className="absolute -inset-2 rounded-full bg-amber-500/10 blur-md" />
+
+                    {/* Glass circle */}
+                    <div className="relative w-[104px] h-[104px] rounded-full bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] flex items-center justify-center">
+                      <span className="text-3xl font-bold bg-gradient-to-b from-amber-400 to-amber-600 bg-clip-text text-transparent font-[family-name:var(--font-display)]">
+                        {step.number}
+                      </span>
+                    </div>
+
+                    {/* Icon badge */}
+                    <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-zinc-900 border border-white/[0.1] flex items-center justify-center shadow-lg">
+                      <step.icon className="w-4 h-4 text-amber-400" />
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {step.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
-                {step.description}
-              </p>
-            </div>
-          ))}
+                {/* Text */}
+                <h3 className="mt-6 text-lg font-semibold text-zinc-100 font-[family-name:var(--font-display)]">
+                  {t(step.titleKey)}
+                </h3>
+                <p className="mt-2 text-zinc-400 text-sm leading-relaxed max-w-xs mx-auto">
+                  {t(step.descKey)}
+                </p>
+
+                {/* Mobile connector arrow (between items on mobile) */}
+                {index < steps.length - 1 && (
+                  <div className="sm:hidden flex justify-center mt-6 mb-2">
+                    <div className="w-px h-8 bg-gradient-to-b from-amber-500/20 to-transparent" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

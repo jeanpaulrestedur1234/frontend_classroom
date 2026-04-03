@@ -6,36 +6,36 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className = '', id, ...rest }, ref) => {
-    const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+  ({ label, error, className = '', ...props }, ref) => {
+    const id = props.id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     return (
-      <div className="w-full">
+      <div className="space-y-1.5">
         {label && (
-          <label
-            htmlFor={inputId}
-            className="mb-1 block text-sm font-medium text-gray-700"
-          >
+          <label htmlFor={id} className="block text-sm font-medium text-zinc-300">
             {label}
           </label>
         )}
         <input
           ref={ref}
-          id={inputId}
-          className={`block w-full rounded-lg border px-3 py-2 text-sm shadow-sm
-            placeholder:text-gray-400
-            focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
-            disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500
-            ${error ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'}
-            ${className}`}
-          {...rest}
+          id={id}
+          className={`
+            block w-full rounded-xl px-4 py-2.5 text-sm
+            bg-white/5 border border-white/10 text-zinc-100 placeholder:text-zinc-600
+            transition-all duration-200
+            hover:border-white/20
+            focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20
+            disabled:opacity-40 disabled:cursor-not-allowed
+            ${error ? 'border-rose-500/50 focus:border-rose-500/50 focus:ring-rose-500/20' : ''}
+            ${className}
+          `}
+          {...props}
         />
-        {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+        {error && <p className="text-xs text-rose-400 mt-1">{error}</p>}
       </div>
     );
   },
 );
 
 Input.displayName = 'Input';
-
 export default Input;

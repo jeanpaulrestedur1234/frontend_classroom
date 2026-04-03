@@ -1,10 +1,15 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, AlertCircle, ArrowLeft } from 'lucide-react';
+import { GraduationCap, AlertCircle, ArrowLeft, Lock, Mail } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 
 export default function Login() {
+  const { t } = useTranslation('auth');
+  const { t: tc } = useTranslation('common');
   const { user, login, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
@@ -35,112 +40,137 @@ export default function Login() {
       } else if (Array.isArray(detail)) {
         setError(detail.map((d: any) => d.msg).join('. '));
       } else {
-        setError('Error al iniciar sesion. Verifica tus credenciales.');
+        setError(t('login.error'));
       }
     } finally {
       setSubmitting(false);
     }
   }
 
-  // Don't render the form while checking auth state
+  // Loading state while checking auth
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-indigo-600" />
+      <div className="flex items-center justify-center min-h-screen bg-zinc-950">
+        <div className="relative">
+          <div className="h-12 w-12 rounded-full border-2 border-zinc-800" />
+          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-amber-500" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 overflow-hidden px-4">
-      {/* Background decoration */}
+    <div className="relative min-h-screen flex items-center justify-center bg-zinc-950 overflow-hidden px-4">
+      {/* ── Decorative background orbs ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl" />
+        {/* Amber orb — top right */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-amber-500/5 blur-[120px]" />
+        {/* Purple orb — bottom left */}
+        <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-600/5 blur-[140px]" />
+        {/* Subtle grid texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
       </div>
 
-      <div className="relative w-full max-w-md">
-        {/* Back to landing */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-600 transition-colors mb-6"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Volver al inicio
-        </Link>
+      {/* ── Language switcher — top right corner ── */}
+      <div className="absolute top-6 right-6 z-10">
+        <LanguageSwitcher />
+      </div>
 
+      {/* ── Main content ── */}
+      <div className="relative w-full max-w-md">
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl shadow-indigo-200/50 border border-gray-100 p-8">
+        <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-2xl p-8 shadow-2xl shadow-black/40">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="flex items-center gap-2 text-indigo-600 mb-2">
-              <GraduationCap className="w-10 h-10" />
+            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 mb-4">
+              <GraduationCap className="w-7 h-7 text-zinc-950" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">ClassRoom Pro</h1>
-            <p className="text-sm text-gray-500 mt-1">
-              Inicia sesion en tu cuenta
+            <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+              {tc('appName')}
+            </h1>
+          </div>
+
+          {/* Title & subtitle */}
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-semibold font-[family-name:var(--font-display)] text-zinc-100">
+              {t('login.title')}
+            </h2>
+            <p className="text-sm text-zinc-500 mt-1">
+              {t('login.subtitle')}
             </p>
           </div>
 
           {/* Error alert */}
           {error && (
-            <div className="flex items-start gap-3 p-3 mb-6 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-3 p-3.5 mb-6 rounded-xl bg-rose-500/[0.07] backdrop-blur border border-rose-500/15 text-rose-300 text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-400" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-1.5"
-              >
-                Correo electronico
-              </label>
-              <input
+            <div className="relative">
+              <Input
                 id="email"
                 type="email"
                 required
+                label={t('login.email')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="tu@correo.com"
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow text-sm"
+                placeholder={t('login.emailPlaceholder')}
+                className="pl-10"
               />
+              <Mail className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
             </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1.5"
-              >
-                Contrasena
-              </label>
-              <input
+            <div className="relative">
+              <Input
                 id="password"
                 type="password"
                 required
+                label={t('login.password')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="********"
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow text-sm"
+                placeholder={t('login.passwordPlaceholder')}
+                className="pl-10"
               />
+              <Lock className="absolute left-3 top-[38px] w-4 h-4 text-zinc-600 pointer-events-none" />
             </div>
 
             <Button
               type="submit"
+              variant="primary"
               loading={submitting}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500"
               size="lg"
+              className="w-full"
             >
-              Iniciar Sesion
+              {t('login.submit')}
             </Button>
           </form>
         </div>
 
-        <p className="text-center text-xs text-gray-400 mt-6">
-          &copy; {new Date().getFullYear()} ClassRoom Pro. Todos los derechos reservados.
+        {/* Back to home link */}
+        <div className="flex justify-center mt-6">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-amber-400 transition-colors duration-200"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            {t('login.backToHome')}
+          </Link>
+        </div>
+
+        {/* Copyright */}
+        <p className="text-center text-xs text-zinc-700 mt-6">
+          &copy; {new Date().getFullYear()} {tc('appName')}
         </p>
       </div>
     </div>

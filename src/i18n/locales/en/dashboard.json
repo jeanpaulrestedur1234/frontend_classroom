@@ -1,0 +1,36 @@
+{
+  "welcome": "Welcome, {{name}}",
+  "subtitle": "Here's a summary of your activity.",
+  "admin": {
+    "totalUsers": "Total Users",
+    "activeRooms": "Active Rooms",
+    "availablePackages": "Available Packages",
+    "pendingBookings": "Pending Bookings",
+    "quickActions": "Quick actions",
+    "newUser": "New User",
+    "newRoom": "New Room",
+    "newPackage": "New Package",
+    "recentActivity": "Recent activity",
+    "noRecentActivity": "No recent activity.",
+    "booking": "Booking"
+  },
+  "teacher": {
+    "myAvailability": "My Availability",
+    "blocks": "blocks",
+    "classesToday": "Classes Today",
+    "totalBookings": "Total Bookings",
+    "availabilityToday": "Availability today ({{day}})",
+    "noAvailabilityToday": "You have no availability configured for today.",
+    "myClassesToday": "My Classes Today",
+    "noClassesToday": "You have no classes scheduled for today.",
+    "configureAvailability": "Configure availability"
+  },
+  "student": {
+    "activePackages": "Active Packages",
+    "totalBookings": "Total Bookings",
+    "totalPackages": "Total Packages",
+    "nextClass": "Next Class",
+    "noUpcomingClasses": "You have no upcoming classes.",
+    "bookClass": "Book a Class"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "navbar": {
+    "features": "Features",
+    "howItWorks": "How it Works",
+    "benefits": "Benefits",
+    "login": "Sign In"
+  },
+  "hero": {
+    "badge": "Educational management platform",
+    "title": "Manage your academy the",
+    "titleHighlight": "smart way",
+    "description": "The all-in-one platform to manage classes, teachers, rooms, payments, and bookings for your academy.",
+    "cta": "Get started",
+    "ctaSecondary": "See features",
+    "mockup": {
+      "students": "Students",
+      "classesToday": "Classes today",
+      "teachers": "Teachers",
+      "scheduleTitle": "Today's schedule",
+      "newBooking": "New booking confirmed"
+    }
+  },
+  "features": {
+    "sectionLabel": "Features",
+    "title": "Everything you need in one place",
+    "subtitle": "Powerful tools designed for modern educational management",
+    "items": {
+      "users": {
+        "title": "User Management",
+        "description": "Full role control: administrators, teachers, and students with hierarchical permissions."
+      },
+      "bookings": {
+        "title": "Smart Bookings",
+        "description": "Booking system with automatic schedule, capacity, and availability validation."
+      },
+      "packages": {
+        "title": "Flexible Packages",
+        "description": "Create and manage educational packages with pricing, discounts, and hour tracking."
+      },
+      "payments": {
+        "title": "Secure Payments",
+        "description": "Complete payment flow with receipts, administrative approval, and auditing."
+      },
+      "rooms": {
+        "title": "Room Management",
+        "description": "Manage physical rooms with real-time capacity control and availability."
+      },
+      "availability": {
+        "title": "Teacher Availability",
+        "description": "Teachers manage their weekly schedule with automatic overlap validation."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "Process",
+    "title": "How does it work?",
+    "subtitle": "Four simple steps to transform your academy management",
+    "steps": {
+      "1": {
+        "title": "Register your team",
+        "description": "Administrators create accounts for teachers and students."
+      },
+      "2": {
+        "title": "Set up your offerings",
+        "description": "Define educational packages, rooms, and available schedules."
+      },
+      "3": {
+        "title": "Students book classes",
+        "description": "Students purchase packages and book their classes."
+      },
+      "4": {
+        "title": "Manage and grow",
+        "description": "Monitor payments, occupancy, and performance from the dashboard."
+      }
+    }
+  },
+  "benefits": {
+    "title": "Why choose ClassRoom Pro?",
+    "sectionLabel": "Advantages",
+    "subtitle": "Designed for academies seeking operational excellence",
+    "statsCardTitle": "Trusted by hundreds of academies",
+    "exploreFeatures": "Explore all features",
+    "items": [
+      "Save time by automating booking management",
+      "Avoid schedule conflicts with smart validation",
+      "Complete financial control with payment flow",
+      "Role-based access for enhanced security",
+      "Scalable: from small academies to large institutions"
+    ],
+    "stats": {
+      "uptime": { "value": "99.9%", "label": "Guaranteed uptime" },
+      "support": { "value": "24/7", "label": "Technical support" },
+      "academies": { "value": "500+", "label": "Active academies" }
+    }
+  },
+  "footer": {
+    "description": "The comprehensive platform for smart management of academies and educational centers.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "howItWorks": "How it Works",
+      "benefits": "Benefits",
+      "pricing": "Pricing"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "docs": "Documentation",
+      "contact": "Contact",
+      "status": "Status"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} ClassRoom Pro. All rights reserved.",
+    "madeWith": "Made with dedication for education"
+  }
+}

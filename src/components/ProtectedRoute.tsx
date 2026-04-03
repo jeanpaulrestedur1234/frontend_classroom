@@ -10,8 +10,12 @@ export default function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+      <div className="flex items-center justify-center h-screen bg-zinc-950">
+        {/* Amber spinner */}
+        <div className="relative">
+          <div className="h-12 w-12 animate-spin rounded-full border-[3px] border-zinc-800 border-t-amber-500" />
+          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-[3px] border-transparent border-b-amber-400/30" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
+        </div>
       </div>
     );
   }

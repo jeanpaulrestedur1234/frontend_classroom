@@ -17,7 +17,8 @@
       "Bash(curl -s https://backend-classroom-seven.vercel.app/api/auth/login -X POST -H 'Content-Type: application/json' -d '{\"email\":\"student@test.com\",\"password\":\"student123\"}')",
       "Bash(curl -s https://backend-classroom-seven.vercel.app/api/auth/login -X POST -H 'Content-Type: application/json' -d '{\"email\":\"teacher@test.com\",\"password\":\"teacher123\"}')",
       "Bash(find . -type f \\\\\\( -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.css\" \\\\\\) -exec ls -lh {} \\\\;)",
-      "Bash(sort -k2)"
+      "Bash(sort -k2)",
+      "Bash(python:*)"
     ]
   }
 }

@@ -1,0 +1,123 @@
+{
+  "appName": "ClassRoom Pro",
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "confirm": "Confirm",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "clearFilters": "Clear filters",
+    "retry": "Retry",
+    "loading": "Loading...",
+    "viewDetails": "View details",
+    "activate": "Activate",
+    "reject": "Reject",
+    "approve": "Approve"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled",
+    "completed": "Completed",
+    "notified": "Notified",
+    "rejected": "Rejected"
+  },
+  "roles": {
+    "super_admin": "Super Admin",
+    "admin": "Administrator",
+    "teacher": "Teacher",
+    "student": "Student"
+  },
+  "classTypes": {
+    "open_group": "Open Group",
+    "closed_group": "Closed Group",
+    "private": "Private"
+  },
+  "bookingTypes": {
+    "virtual": "Virtual",
+    "presencial": "In-Person"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "profile": "My Profile",
+    "users": "Users",
+    "rooms": "Rooms",
+    "packages": "Packages",
+    "payments": "Payments",
+    "bookings": "Bookings",
+    "availability": "Availability",
+    "myPackages": "My Packages",
+    "newBooking": "Book a Class",
+    "myBookings": "My Bookings",
+    "myClasses": "My Classes",
+    "myAvailability": "My Availability",
+    "roomAvailability": "Room Availability",
+    "logout": "Log out"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email",
+    "minLength": "Minimum {{min}} characters",
+    "positiveNumber": "Must be a positive number"
+  },
+  "errors": {
+    "generic": "An error has occurred",
+    "network": "Connection error",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Access denied",
+    "notFound": "Not found"
+  },
+  "emptyState": {
+    "noData": "No data available",
+    "noResults": "No results found"
+  },
+  "language": {
+    "es": "Español",
+    "en": "English",
+    "switchLanguage": "Language"
+  },
+  "pagination": {
+    "showing": "Showing",
+    "of": "of",
+    "results": "results"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "hoursPerWeek": "hrs/week",
+    "weeks": "weeks",
+    "sessions": "sessions"
+  },
+  "currency": {
+    "symbol": "$",
+    "code": "USD"
+  },
+  "days": {
+    "0": "Monday",
+    "1": "Tuesday",
+    "2": "Wednesday",
+    "3": "Thursday",
+    "4": "Friday",
+    "5": "Saturday",
+    "6": "Sunday"
+  },
+  "select": {
+    "placeholder": "Select...",
+    "all": "All"
+  },
+  "confirm": {
+    "deleteTitle": "Confirm deletion",
+    "deleteMessage": "Are you sure you want to delete this item? This action cannot be undone.",
+    "yes": "Yes, delete",
+    "no": "Cancel"
+  }
+}

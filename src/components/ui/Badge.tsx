@@ -4,18 +4,16 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<string, string> = {
-  success: 'bg-green-50 text-green-700 ring-green-600/20',
-  warning: 'bg-yellow-50 text-yellow-700 ring-yellow-600/20',
-  danger: 'bg-red-50 text-red-700 ring-red-600/20',
-  info: 'bg-blue-50 text-blue-700 ring-blue-600/20',
-  default: 'bg-gray-50 text-gray-600 ring-gray-500/20',
+  success: 'bg-emerald-500/10 text-emerald-400 ring-1 ring-inset ring-emerald-500/20',
+  warning: 'bg-amber-500/10 text-amber-400 ring-1 ring-inset ring-amber-500/20',
+  danger: 'bg-rose-500/10 text-rose-400 ring-1 ring-inset ring-rose-500/20',
+  info: 'bg-sky-500/10 text-sky-400 ring-1 ring-inset ring-sky-500/20',
+  default: 'bg-white/5 text-zinc-400 ring-1 ring-inset ring-white/10',
 };
 
 export default function Badge({ variant = 'default', children }: BadgeProps) {
   return (
-    <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${variantClasses[variant]}`}
-    >
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${variantClasses[variant]}`}>
       {children}
     </span>
   );

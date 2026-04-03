@@ -1,0 +1,121 @@
+{
+  "navbar": {
+    "features": "Características",
+    "howItWorks": "Cómo funciona",
+    "benefits": "Beneficios",
+    "login": "Iniciar Sesión"
+  },
+  "hero": {
+    "badge": "Plataforma de gestión educativa",
+    "title": "Gestiona tu academia de forma",
+    "titleHighlight": "inteligente",
+    "description": "La plataforma todo-en-uno para administrar clases, profesores, salones, pagos y reservas de tu academia.",
+    "cta": "Comenzar ahora",
+    "ctaSecondary": "Ver características",
+    "mockup": {
+      "students": "Estudiantes",
+      "classesToday": "Clases hoy",
+      "teachers": "Profesores",
+      "scheduleTitle": "Horario del día",
+      "newBooking": "Nueva reserva confirmada"
+    }
+  },
+  "features": {
+    "sectionLabel": "Características",
+    "title": "Todo lo que necesitas en un solo lugar",
+    "subtitle": "Herramientas potentes diseñadas para la gestión educativa moderna",
+    "items": {
+      "users": {
+        "title": "Gestión de Usuarios",
+        "description": "Control total de roles: administradores, profesores y estudiantes con permisos jerárquicos."
+      },
+      "bookings": {
+        "title": "Reservas Inteligentes",
+        "description": "Sistema de reservas con validación automática de horarios, capacidad y disponibilidad."
+      },
+      "packages": {
+        "title": "Paquetes Flexibles",
+        "description": "Crea y gestiona paquetes educativos con precios, descuentos y control de horas."
+      },
+      "payments": {
+        "title": "Pagos Seguros",
+        "description": "Flujo completo de pagos con comprobantes, aprobación administrativa y auditoría."
+      },
+      "rooms": {
+        "title": "Gestión de Salones",
+        "description": "Administra salones físicos con control de capacidad y disponibilidad en tiempo real."
+      },
+      "availability": {
+        "title": "Disponibilidad Docente",
+        "description": "Los profesores gestionan su horario semanal con validación de traslapes automática."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "Proceso",
+    "title": "¿Cómo funciona?",
+    "subtitle": "Cuatro simples pasos para transformar la gestión de tu academia",
+    "steps": {
+      "1": {
+        "title": "Registra tu equipo",
+        "description": "Los administradores crean cuentas para profesores y estudiantes."
+      },
+      "2": {
+        "title": "Configura tu oferta",
+        "description": "Define paquetes educativos, salones y horarios disponibles."
+      },
+      "3": {
+        "title": "Los estudiantes reservan",
+        "description": "Los alumnos adquieren paquetes y reservan sus clases."
+      },
+      "4": {
+        "title": "Gestiona y crece",
+        "description": "Monitorea pagos, ocupación y rendimiento desde el dashboard."
+      }
+    }
+  },
+  "benefits": {
+    "title": "¿Por qué elegir ClassRoom Pro?",
+    "sectionLabel": "Ventajas",
+    "subtitle": "Diseñado para academias que buscan excelencia operativa",
+    "statsCardTitle": "La confianza de cientos de academias",
+    "exploreFeatures": "Explorar todas las características",
+    "items": [
+      "Ahorra tiempo automatizando la gestión de reservas",
+      "Evita conflictos de horario con validación inteligente",
+      "Control financiero completo con flujo de pagos",
+      "Acceso basado en roles para mayor seguridad",
+      "Escalable: desde academias pequeñas hasta grandes instituciones"
+    ],
+    "stats": {
+      "uptime": { "value": "99.9%", "label": "Uptime garantizado" },
+      "support": { "value": "24/7", "label": "Soporte técnico" },
+      "academies": { "value": "500+", "label": "Academias activas" }
+    }
+  },
+  "footer": {
+    "description": "La plataforma integral para la gestión inteligente de academias y centros educativos.",
+    "product": {
+      "title": "Producto",
+      "features": "Características",
+      "howItWorks": "Cómo funciona",
+      "benefits": "Beneficios",
+      "pricing": "Precios"
+    },
+    "support": {
+      "title": "Soporte",
+      "helpCenter": "Centro de ayuda",
+      "docs": "Documentación",
+      "contact": "Contacto",
+      "status": "Estado"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos de servicio",
+      "privacy": "Política de privacidad",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} ClassRoom Pro. Todos los derechos reservados.",
+    "madeWith": "Hecho con dedicación para la educación"
+  }
+}

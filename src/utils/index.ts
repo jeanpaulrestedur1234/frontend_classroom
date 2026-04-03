@@ -3,13 +3,16 @@ export function formatDate(dateStr: string): string {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
+    timeZone: 'America/Bogota',
   });
 }
 
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('es-CO', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(amount);
 }
 
@@ -40,6 +43,22 @@ export function paymentStatusLabel(status: string): string {
     rejected: 'Rechazado',
   };
   return map[status] ?? status;
+}
+
+export function formatTime(timeStr: string): string {
+  const clean = timeStr.replace('Z', '');
+  return clean.slice(0, 5);
+}
+
+export function formatDateTime(dateStr: string): string {
+  return new Date(dateStr).toLocaleString('es-CO', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'America/Bogota',
+  });
 }
 
 export function getStatusColor(status: string): string {

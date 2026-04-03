@@ -1,0 +1,28 @@
+import api from './api';
+import type { SetAvailabilityDTO, TeacherAvailabilityDTO } from '../types';
+
+export async function getMyAvailability(): Promise<TeacherAvailabilityDTO[]> {
+  const response = await api.get<TeacherAvailabilityDTO[]>(
+    '/api/teachers/availability',
+  );
+  return response.data;
+}
+
+export async function setMyAvailability(
+  data: SetAvailabilityDTO,
+): Promise<TeacherAvailabilityDTO[]> {
+  const response = await api.post<TeacherAvailabilityDTO[]>(
+    '/api/teachers/availability',
+    data,
+  );
+  return response.data;
+}
+
+export async function getTeacherAvailability(
+  teacherId: string,
+): Promise<TeacherAvailabilityDTO[]> {
+  const response = await api.get<TeacherAvailabilityDTO[]>(
+    `/api/teachers/${teacherId}/availability`,
+  );
+  return response.data;
+}

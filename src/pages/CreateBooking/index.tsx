@@ -7,7 +7,7 @@ import { getTeacherAvailability } from '@/services/availability';
 import { listTeachers } from '@/services/users';
 import { listRooms } from '@/services/rooms';
 import { getMyPackages } from '@/services/packages';
-import type { UserDTO, RoomDTO, BookingType, StudentBookingDetailDto, TeacherAvailabilityDTO, StudentPackageDTO } from '@/types';
+import type { UserDTO, RoomDTO, BookingType, StudentBookingDetailDto, TeacherBookingAvailabilityDTO, StudentPackageDTO } from '@/types';
 
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -41,7 +41,7 @@ export default function CreateBooking() {
   /* data */
   const [teachers, setTeachers] = useState<UserDTO[]>([]);
   const [rooms, setRooms] = useState<RoomDTO[]>([]);
-  const [teacherAvailability, setTeacherAvailability] = useState<TeacherAvailabilityDTO[]>([]);
+  const [teacherAvailability, setTeacherAvailability] = useState<TeacherBookingAvailabilityDTO[]>([]);
   const [myPackages, setMyPackages] = useState<StudentPackageDTO[]>([]);
   const [selectedPackageId, setSelectedPackageId] = useState('');
   const [loadingData, setLoadingData] = useState(false);

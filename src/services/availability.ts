@@ -1,5 +1,5 @@
 import api from '@/services/api';
-import type { SetAvailabilityDTO, TeacherAvailabilityDTO } from '@/types';
+import type { SetAvailabilityDTO, TeacherAvailabilityDTO, TeacherBookingAvailabilityDTO } from '@/types';
 
 export async function getMyAvailability(): Promise<TeacherAvailabilityDTO[]> {
   const response = await api.get<TeacherAvailabilityDTO[]>(
@@ -20,8 +20,8 @@ export async function setMyAvailability(
 
 export async function getTeacherAvailability(
   teacherId: string,
-): Promise<TeacherAvailabilityDTO[]> {
-  const response = await api.get<TeacherAvailabilityDTO[]>(
+): Promise<TeacherBookingAvailabilityDTO[]> {
+  const response = await api.get<TeacherBookingAvailabilityDTO[]>(
     `/api/teachers/${teacherId}/availability`,
   );
   return response.data;

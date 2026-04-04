@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { CalendarDays, Plus, AlertTriangle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CalendarDays, Plus, AlertCircle, ChevronLeft, ChevronRight, ListFilter } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
 import { usePaginatedQuery, useMutation } from '@/hooks';
@@ -47,13 +47,19 @@ export default function Bookings() {
 
   /* filters */
   const [statusFilter, setStatusFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
   const [viewMode, setViewMode] = useState<'table' | 'week'>('week');
 
   /* server-side paginated query */
   const fetcher = useCallback(
     (page: number, pageSize: number) =>
-      listMyBookings({ status: statusFilter || undefined, page, page_size: pageSize }),
-    [statusFilter],
+      listMyBookings({
+        status: statusFilter || undefined,
+        booking_type: typeFilter || undefined,
+        page,
+        page_size: pageSize,
+      }),
+    [statusFilter, typeFilter],
   );
 
   const {
@@ -75,11 +81,9 @@ export default function Bookings() {
   /* re-fetch from page 1 when status filter changes */
   useEffect(() => {
     setPage(1);
-    // fetcherRef inside the hook always has the latest fetcher,
-    // so refetch() will use the updated statusFilter value.
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusFilter]);
+  }, [statusFilter, typeFilter]);
 
   /* mutations */
   const confirmMut = useMutation(confirmBooking);
@@ -101,6 +105,7 @@ export default function Bookings() {
 
   function handleClearFilters() {
     setStatusFilter('');
+    setTypeFilter('');
     setPage(1);
   }
 
@@ -139,7 +144,8 @@ export default function Bookings() {
           <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
             {isAdmin ? t('manageBookings') : t('myBookings')}
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-zinc-400 mt-1 flex items-center gap-2">
+            <ListFilter className="hidden sm:block w-4 h-4" />
             {isAdmin ? t('manageBookings') : t('myBookings')}
           </p>
         </div>
@@ -175,6 +181,8 @@ export default function Bookings() {
       <BookingsFilter
         statusFilter={statusFilter}
         setStatusFilter={handleStatusChange}
+        typeFilter={typeFilter}
+        setTypeFilter={setTypeFilter}
         onClear={handleClearFilters}
       />
 
@@ -184,7 +192,7 @@ export default function Bookings() {
       ) : error ? (
         <Card>
           <div className="flex flex-col items-center gap-3 py-8 text-center">
-            <AlertTriangle className="w-10 h-10 text-rose-400" />
+            <AlertCircle className="w-10 h-10 text-rose-400" />
             <p className="text-sm text-rose-400">{error}</p>
             <Button variant="secondary" size="sm" onClick={refetch}>
               {tc('actions.retry')}

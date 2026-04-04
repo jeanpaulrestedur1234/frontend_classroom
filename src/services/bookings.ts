@@ -19,7 +19,12 @@ export async function createBooking(
 }
 
 export async function listMyBookings(
-  params: { status?: string; page?: number; page_size?: number } = {},
+  params: {
+    status?: string;
+    booking_type?: string;
+    page?: number;
+    page_size?: number;
+  } = {},
 ): Promise<PaginatedResponse<StudentBookingDetailDto>> {
   const response = await api.get<PaginatedResponse<StudentBookingDetailDto>>(
     '/api/bookings',

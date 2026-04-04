@@ -32,9 +32,21 @@ function getSlot(day: number, hour: string, avail: TeacherAvailabilityDTO[]): Te
 }
 
 export function StepDateTime({
-  t, tc, teacherAvailability, loading, scheduledDate, setScheduledDate, startTime, setStartTime,
+  t,
+  tc,
+  teacherAvailability,
+  loading,
+  scheduledDate,
+  setScheduledDate,
+  startTime,
+  setStartTime,
+  bookingType,
 }: any) {
-  const hasAvailability = (teacherAvailability?.length ?? 0) > 0;
+  const filteredAvailability = teacherAvailability.filter(
+    (slot: any) => slot.is_virtual === (bookingType === 'virtual')
+  );
+
+  const hasAvailability = (filteredAvailability?.length ?? 0) > 0;
 
   return (
     <div>
@@ -71,7 +83,7 @@ export function StepDateTime({
                       {hour}
                     </td>
                     {Array.from({ length: 7 }, (_, dayIdx) => {
-                      const slot = getSlot(dayIdx, hour, teacherAvailability);
+                      const slot = getSlot(dayIdx, hour, filteredAvailability);
                       const dayDate = getDayDate(dayIdx);
                       const selected = scheduledDate === dayDate && startTime === hour;
                       const slotTime = new Date(`${dayDate}T${hour}:00`);

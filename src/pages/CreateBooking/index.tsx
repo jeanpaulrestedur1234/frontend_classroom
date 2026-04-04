@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CircleCheck } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { createBooking } from '@/services/bookings';
 import { getTeacherAvailability } from '@/services/availability';
@@ -208,8 +208,8 @@ export default function CreateBooking() {
             loading={loadingData}
             scheduledDate={scheduledDate}
             setScheduledDate={setScheduledDate}
-            startTime={startTime}
             setStartTime={setStartTime}
+            bookingType={bookingType}
           />
         );
       case 4:
@@ -267,7 +267,7 @@ export default function CreateBooking() {
           </Button>
         ) : (
           <Button onClick={handleSubmit} loading={submitting}>
-            <CheckCircle className="w-4 h-4" />
+            <CircleCheck className="w-4 h-4" />
             {t('create.submitBooking')}
           </Button>
         )}

@@ -5,6 +5,7 @@ import type {
   PaginatedResponse,
   PaymentDTO,
   StudentPackageDTO,
+  AcquirePackageResponse,
 } from '@/types';
 
 export async function createPackage(data: CreatePackageDTO): Promise<PackageDTO> {
@@ -19,8 +20,8 @@ export async function listPackages(): Promise<PackageDTO[]> {
 
 export async function acquirePackage(
   packageId: string,
-): Promise<StudentPackageDTO> {
-  const response = await api.post<StudentPackageDTO>(
+): Promise<AcquirePackageResponse> {
+  const response = await api.post<AcquirePackageResponse>(
     `/api/packages/${packageId}/acquire`,
   );
   return response.data;

@@ -120,6 +120,11 @@ export type StudentPackageDTO = {
   updated_at: string;
 };
 
+export type AcquirePackageResponse = {
+  student_package: StudentPackageDTO;
+  payment: PaymentDTO;
+};
+
 // ─── Payments ────────────────────────────────────────────────────────────────
 
 export type PaymentDTO = {

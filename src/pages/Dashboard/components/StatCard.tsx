@@ -26,7 +26,7 @@ export default function StatCard({ icon, label, value, color }: StatCardProps) {
         <p className="text-2xl font-bold text-zinc-900 font-[family-name:var(--font-display)]">
           {value}
         </p>
-        <p className="text-sm text-zinc-500 truncate">{label}</p>
+        <p className="text-xs text-zinc-500 leading-tight">{label}</p>
       </div>
     </Card>
   );

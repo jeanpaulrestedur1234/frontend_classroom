@@ -6,6 +6,7 @@ import Badge from '@/components/ui/Badge';
 
 interface UsersTableProps {
   users: UserDTO[];
+  currentUserId: string;
   togglingUserId: string | null;
   onEdit: (u: UserDTO) => void;
   onToggleActive: (u: UserDTO) => void;
@@ -21,6 +22,7 @@ const ROLE_BADGE_VARIANT: Record<UserRole, 'success' | 'info' | 'warning' | 'def
 
 export default function UsersTable({
   users,
+  currentUserId,
   togglingUserId,
   onEdit,
   onToggleActive,
@@ -99,9 +101,11 @@ export default function UsersTable({
                         <UserCheck className="h-4 w-4 text-emerald-400" />
                       )}
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => onDelete(u)} title={tc('actions.delete')}>
-                      <Trash2 className="h-4 w-4 text-rose-400" />
-                    </Button>
+                    {u.role !== 'super_admin' && u.id !== currentUserId && (
+                      <Button variant="ghost" size="sm" onClick={() => onDelete(u)} title={tc('actions.delete')}>
+                        <Trash2 className="h-4 w-4 text-rose-400" />
+                      </Button>
+                    )}
                   </div>
                 </td>
               </tr>

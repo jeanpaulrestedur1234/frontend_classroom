@@ -1,39 +1,60 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Package, ShoppingCart, CheckCircle } from 'lucide-react';
-import { useQuery, useMutation } from '@/hooks';
-import { listPackages, acquirePackage } from '@/services/packages';
+import { useQuery } from '@/hooks';
+import { listPackages, acquirePackage, createPaymentIntent } from '@/services/packages';
+import { uploadReceipt } from '@/services/payments';
+import { uploadFile } from '@/services/upload';
 
 import Button from '@/components/ui/Button';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
 import PackageCard from './PackageCard';
+import UploadReceiptModal from './UploadReceiptModal';
 
 export default function StudentPackages() {
   const { t } = useTranslation('packages');
   const { t: tc } = useTranslation('common');
 
   const { data: packages, loading, error, refetch } = useQuery(listPackages);
-  const acquireMut = useMutation(acquirePackage);
 
   const [acquiringId, setAcquiringId] = useState<string | null>(null);
   const [successId, setSuccessId] = useState<string | null>(null);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [selectedPkgId, setSelectedPkgId] = useState<string | null>(null);
 
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  async function handleAcquire(packageId: string) {
-    setAcquiringId(packageId);
+  function handleAcquire(packageId: string) {
+    setSelectedPkgId(packageId);
+    setIsUploadModalOpen(true);
+  }
+
+  async function handleConfirmUpload(file: File) {
+    if (!selectedPkgId) return;
+    
+    setAcquiringId(selectedPkgId);
     try {
-      await acquireMut.execute(packageId);
-      setSuccessId(packageId);
+      // 1. Mock upload
+      const receiptUrl = await uploadFile(file);
+      
+      // 2. Acquire package (creates StudentPackage)
+      const studentPkg = await acquirePackage(selectedPkgId);
+      
+      // 3. Create payment
+      const payment = await createPaymentIntent(studentPkg.id);
+      
+      // 4. Upload receipt
+      await uploadReceipt(payment.id, { payment_proof_url: receiptUrl });
+      
+      setSuccessId(selectedPkgId);
       setTimeout(() => setSuccessId(null), 3000);
-    } catch {
-      // Assuming a global error handler handles the notification.
     } finally {
       setAcquiringId(null);
+      setSelectedPkgId(null);
     }
   }
 
@@ -99,6 +120,11 @@ export default function StudentPackages() {
           })}
         </div>
       )}
+      <UploadReceiptModal
+        isOpen={isUploadModalOpen}
+        onClose={() => setIsUploadModalOpen(false)}
+        onConfirm={handleConfirmUpload}
+      />
     </div>
   );
 }

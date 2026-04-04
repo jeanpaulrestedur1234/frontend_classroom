@@ -1,4 +1,4 @@
-import { Monitor, Building2, Users, Lock, CheckCircle2, Clock, Info } from 'lucide-react';
+import { Monitor, Building2, Users, Lock, CheckCircle2, Clock, Info, BadgeCheck } from 'lucide-react';
 import type { TeacherBookingAvailabilityDTO, AvailabilitySlot } from '@/types';
 import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
@@ -48,7 +48,8 @@ function formatTime(t: string) {
 type SlotState =
   | { kind: 'past' }
   | { kind: 'free' }
-  | { kind: 'virtual_booked'; count: number }          // virtual: show count, still bookable
+  | { kind: 'already_booked'; count: number }           // current user is already in this slot
+  | { kind: 'virtual_booked'; count: number }           // virtual: show count, still bookable
   | { kind: 'presencial_available'; count: number; capacity: number; roomName: string } // same room, has space
   | { kind: 'presencial_full'; count: number; capacity: number; roomName: string }      // same room, full
   | { kind: 'wrong_room'; roomName: string }            // booked in a different room
@@ -57,8 +58,9 @@ type SlotState =
 function resolveSlotState(
   slot: AvailabilitySlot,
   isVirtual: boolean,
-  roomId: string,     // "" if not chosen yet
+  roomId: string,
   isPast: boolean,
+  myPackageIds: string[],
 ): SlotState {
   if (isPast) return { kind: 'past' };
 
@@ -70,6 +72,13 @@ function resolveSlotState(
 
   // Booked slot
   const booking = slot.booking!;
+
+  // Check if the current user is already enrolled in this slot
+  const alreadyIn = myPackageIds.length > 0 &&
+    booking.students.some((s) => myPackageIds.includes(s.student_package_id));
+  if (alreadyIn) {
+    return { kind: 'already_booked', count: booking.student_count };
+  }
 
   if (isVirtual) {
     // Virtual: always joinable, just show how many are in
@@ -118,6 +127,17 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
   const isVirtual = slot.is_virtual;
 
   switch (state.kind) {
+    case 'already_booked':
+      return (
+        <div
+          title={`You are enrolled · ${state.count} student${state.count !== 1 ? 's' : ''} total`}
+          className="w-full rounded-lg px-1.5 py-2 text-xs font-semibold bg-emerald-50 text-emerald-700 ring-2 ring-emerald-400 flex flex-col items-center gap-0.5 cursor-default"
+        >
+          <BadgeCheck className="w-3.5 h-3.5" />
+          <span className="leading-tight text-center">You're in</span>
+        </div>
+      );
+
     case 'past':
       return (
         <div className="w-full rounded-lg px-1.5 py-2 text-xs font-medium cursor-not-allowed bg-zinc-100 text-zinc-400 ring-1 ring-zinc-200 flex flex-col items-center gap-0.5">
@@ -245,6 +265,7 @@ export function StepDateTime({
   setStartTime,
   bookingType,
   roomId = '',
+  myPackageIds = [] as string[],
 }: any) {
   const isVirtual = bookingType === 'virtual';
 
@@ -348,11 +369,12 @@ export function StepDateTime({
 
                         if (!slot) return <td key={dayIdx} className="px-1.5 py-1.5"><div className="h-10" /></td>;
 
-                        const state = resolveSlotState(slot, isVirtual, roomId, isPast);
+                        const state = resolveSlotState(slot, isVirtual, roomId, isPast, myPackageIds);
                         const isClickable =
                           state.kind === 'free' ||
                           state.kind === 'virtual_booked' ||
                           state.kind === 'presencial_available';
+                        // Already enrolled: don't let them re-book the same slot
 
                         return (
                           <td key={dayIdx} className="px-1.5 py-1.5 text-center">

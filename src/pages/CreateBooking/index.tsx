@@ -212,6 +212,7 @@ export default function CreateBooking() {
             setStartTime={setStartTime}
             bookingType={bookingType}
             roomId={roomId}
+            myPackageIds={myPackages.map((p) => p.id)}
           />
         );
       case 4:

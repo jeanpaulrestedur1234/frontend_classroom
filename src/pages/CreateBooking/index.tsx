@@ -208,6 +208,7 @@ export default function CreateBooking() {
             loading={loadingData}
             scheduledDate={scheduledDate}
             setScheduledDate={setScheduledDate}
+            startTime={startTime}
             setStartTime={setStartTime}
             bookingType={bookingType}
           />

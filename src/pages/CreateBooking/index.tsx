@@ -201,7 +201,7 @@ export default function CreateBooking() {
         return <StepRoom t={t} tc={tc} rooms={rooms} loading={loadingData} roomId={roomId} setRoomId={setRoomId} />;
       case 3:
         return (
-          <StepDateTime
+        <StepDateTime
             t={t}
             tc={tc}
             teacherAvailability={teacherAvailability}
@@ -211,6 +211,7 @@ export default function CreateBooking() {
             startTime={startTime}
             setStartTime={setStartTime}
             bookingType={bookingType}
+            roomId={roomId}
           />
         );
       case 4:

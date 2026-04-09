@@ -29,10 +29,10 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-zinc-950 shadow-lg shadow-blue-500/25'
+                    ? 'bg-gradient-to-r from-[var(--primary)] to-blue-600 text-white shadow-lg shadow-[var(--primary)]/25'
                     : isDone
-                      ? 'bg-blue-500/15 text-blue-400 ring-1 ring-blue-500/30'
-                      : 'bg-white/5 text-zinc-400 ring-1 ring-white/10'
+                      ? 'bg-[var(--primary)]/15 text-[var(--primary)] ring-1 ring-[var(--primary)]/30'
+                      : 'bg-[var(--bg-subtle)] text-[var(--text-muted)] ring-1 ring-[var(--border-main)]'
                 }`}
               >
                 {isDone ? <CheckCircle className="w-4 h-4" /> : idx + 1}
@@ -40,10 +40,10 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
               <span
                 className={`hidden sm:inline text-sm font-[family-name:var(--font-display)] ${
                   isActive
-                    ? 'font-medium text-zinc-900'
+                    ? 'font-medium text-[var(--text-main)]'
                     : isDone
-                      ? 'text-blue-400'
-                      : 'text-zinc-400'
+                      ? 'text-[var(--primary)]'
+                      : 'text-[var(--text-muted)]'
                 }`}
               >
                 {t(`create.step.${key}`)}
@@ -52,7 +52,7 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
             {idx < visibleSteps.length - 1 && (
               <div
                 className={`w-8 h-px transition-colors ${
-                  idx < visibleCurrent ? 'bg-blue-500/50' : 'bg-white/10'
+                  idx < visibleCurrent ? 'bg-[var(--primary)]/50' : 'bg-[var(--border-main)]'
                 }`}
               />
             )}

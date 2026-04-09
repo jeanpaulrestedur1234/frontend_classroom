@@ -5,13 +5,13 @@ export function StepPackage({ t, tc, myPackages, selectedPackageId, setSelectedP
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
+      <h2 className="text-lg font-semibold text-[var(--text-heading)] mb-1 font-[family-name:var(--font-display)]">
         {t('create.step.package')}
       </h2>
-      <p className="text-sm text-zinc-400 mb-6">{t('create.choosePackage')}</p>
+      <p className="text-sm text-[var(--text-muted)] mb-6">{t('create.choosePackage')}</p>
 
       {myPackages.length === 0 ? (
-        <p className="text-sm text-zinc-500">{t('create.noActivePackage')}</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('create.noActivePackage')}</p>
       ) : (
         <Select
           label={t('create.selectPackage')}
@@ -25,15 +25,15 @@ export function StepPackage({ t, tc, myPackages, selectedPackageId, setSelectedP
       )}
 
       {selectedPackage && (
-        <div className="mt-4 rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-sm">
-          <p className="font-semibold text-zinc-700">{t('create.packagePreview')}</p>
-          <p className="text-zinc-600">{tc(`classTypes.${selectedPackage.class_type}`)}</p>
-          <p className="text-zinc-600">{selectedPackage.hours_per_week}h/wk · {selectedPackage.duration_weeks}w</p>
-          <p className="text-zinc-600">{t('create.packageId')}: {selectedPackage.id}</p>
+        <div className="mt-4 rounded-xl border border-[var(--border-main)] bg-[var(--bg-subtle)] p-3 text-sm">
+          <p className="font-semibold text-[var(--text-body)]">{t('create.packagePreview')}</p>
+          <p className="text-[var(--text-muted)]">{tc(`classTypes.${selectedPackage.class_type}`)}</p>
+          <p className="text-[var(--text-muted)]">{selectedPackage.hours_per_week}h/wk · {selectedPackage.duration_weeks}w</p>
+          <p className="text-[var(--text-muted)]">{t('create.packageId')}: {selectedPackage.id}</p>
         </div>
       )}
 
-      <p className="mt-3 text-xs text-zinc-500">{t('create.selectPackageHint')}</p>
+      <p className="mt-3 text-xs text-[var(--text-dim)]">{t('create.selectPackageHint')}</p>
     </div>
   );
 }

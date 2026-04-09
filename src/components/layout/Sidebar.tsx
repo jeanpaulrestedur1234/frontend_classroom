@@ -201,11 +201,11 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         <button
           onClick={toggleTheme}
           className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-200 ${expanded ? '' : 'justify-center'}`}
-          title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+          title={theme === 'light' ? t('navigation.darkMode') : t('navigation.lightMode')}
         >
           {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           {expanded && (
-            <span className="whitespace-nowrap">{theme === 'light' ? t('theme.dark') : t('theme.light')}</span>
+            <span className="whitespace-nowrap">{theme === 'light' ? t('navigation.darkMode') : t('navigation.lightMode')}</span>
           )}
         </button>
 

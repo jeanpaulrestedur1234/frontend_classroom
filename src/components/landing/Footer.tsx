@@ -44,9 +44,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-white border-t border-zinc-100">
+    <footer className="relative bg-[var(--bg-surface)] border-t border-[var(--border-main)]">
       {/* Top decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
@@ -55,7 +55,7 @@ export default function Footer() {
             <a href="#" className="inline-flex items-center mb-5">
               <img src="/valley-logo.png" alt="Valley Spanish School" className="h-10" />
             </a>
-            <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
+            <p className="text-[var(--text-muted)] text-sm leading-relaxed max-w-xs">
               {t("footer.description")}
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* Link columns */}
           {linkGroups.map((group) => (
             <div key={group.titleKey}>
-              <h4 className="text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-4 font-[family-name:var(--font-display)]">
+              <h4 className="text-xs font-semibold text-[var(--text-body)] uppercase tracking-wider mb-4 font-[family-name:var(--font-display)]">
                 {t(group.titleKey)}
               </h4>
               <ul className="space-y-3">
@@ -71,7 +71,7 @@ export default function Footer() {
                   <li key={link.labelKey}>
                     <a
                       href={link.href}
-                      className="text-zinc-500 hover:text-zinc-700 text-sm transition-colors duration-200"
+                      className="text-[var(--text-muted)] hover:text-[var(--text-main)] text-sm transition-colors duration-200"
                     >
                       {t(link.labelKey)}
                     </a>
@@ -83,11 +83,11 @@ export default function Footer() {
         </div>
 
         {/* Divider + copyright */}
-        <div className="border-t border-zinc-100 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-zinc-400 text-sm">
+        <div className="border-t border-[var(--border-main)] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[var(--text-muted)] text-sm">
             {t("footer.copyright", { year: currentYear })}
           </p>
-          <p className="text-zinc-700 text-xs">
+          <p className="text-[var(--text-dim)] text-xs">
             {t("footer.madeWith")}
           </p>
         </div>

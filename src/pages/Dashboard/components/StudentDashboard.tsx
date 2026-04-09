@@ -19,8 +19,6 @@ import type { StudentBookingDetailDto, StudentPackageDTO } from '@/types';
 import StatCard from './StatCard';
 import QuickAction from './QuickAction';
 
-/* ──────────────────────────── Student Dashboard ──────────────────────────── */
-
 export default function StudentDashboard() {
   const { t } = useTranslation('dashboard');
   const { t: tc } = useTranslation('common');
@@ -38,12 +36,9 @@ export default function StudentDashboard() {
           getMyPackages(),
           listMyBookings({ page_size: 10 }),
         ]);
-        if (s.status === 'fulfilled')
-          setStats(s.value as StudentDashboardStats);
-        if (pkg.status === 'fulfilled')
-          setPackages(Array.isArray(pkg.value) ? pkg.value : []);
-        if (bk.status === 'fulfilled')
-          setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
+        if (s.status === 'fulfilled') setStats(s.value as StudentDashboardStats);
+        if (pkg.status === 'fulfilled') setPackages(Array.isArray(pkg.value) ? pkg.value : []);
+        if (bk.status === 'fulfilled') setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
       } finally {
         setLoading(false);
       }
@@ -63,59 +58,40 @@ export default function StudentDashboard() {
 
   return (
     <>
-      {/* Stats from API */}
+      {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard
-          icon={<Package className="h-6 w-6" />}
-          label={t('student.activePackages')}
-          value={stats?.active_packages ?? 0}
-          color="blue"
-        />
-        <StatCard
-          icon={<CalendarDays className="h-6 w-6" />}
-          label={t('student.pendingBookings')}
-          value={stats?.pending_bookings ?? 0}
-          color="sky"
-        />
-        <StatCard
-          icon={<CheckCircle2 className="h-6 w-6" />}
-          label={t('student.completedBookings')}
-          value={stats?.completed_bookings ?? 0}
-          color="emerald"
-        />
+        <StatCard icon={<Package className="h-6 w-6" />} label={t('student.activePackages')} value={stats?.active_packages ?? 0} color="blue" />
+        <StatCard icon={<CalendarDays className="h-6 w-6" />} label={t('student.pendingBookings')} value={stats?.pending_bookings ?? 0} color="sky" />
+        <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('student.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>
 
       {/* Next class */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('student.nextClass')}
         </h2>
         <Card>
           {upcomingBooking ? (
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
                 <CalendarDays className="h-7 w-7" />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-medium text-zinc-900">
+                <p className="text-sm font-medium text-[var(--text-main)]">
                   {upcomingBooking.scheduled_date}
                 </p>
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-[var(--text-muted)]">
                   {upcomingBooking.start_time} - {upcomingBooking.end_time}
                 </p>
-                <p className="mt-0.5 text-xs text-zinc-500">
+                <p className="mt-0.5 text-xs text-[var(--text-dim)]">
                   {tc(`bookingTypes.${upcomingBooking.booking_type}`)}
-                  {upcomingBooking.teacher
-                    ? ` - ${upcomingBooking.teacher.full_name}`
-                    : ''}
-                  {upcomingBooking.room
-                    ? ` - ${upcomingBooking.room.name}`
-                    : ''}
+                  {upcomingBooking.teacher ? ` - ${upcomingBooking.teacher.full_name}` : ''}
+                  {upcomingBooking.room ? ` - ${upcomingBooking.room.name}` : ''}
                 </p>
               </div>
             </div>
           ) : (
-            <p className="py-4 text-center text-sm text-zinc-500">
+            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
               {t('student.noUpcomingClasses')}
             </p>
           )}
@@ -125,7 +101,7 @@ export default function StudentDashboard() {
       {/* Active packages summary */}
       {packages.filter((p) => p.status === 'active').length > 0 && (
         <div className="mt-10">
-          <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
+          <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
             {t('student.activePackages')}
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -134,14 +110,14 @@ export default function StudentDashboard() {
               .slice(0, 4)
               .map((p) => (
                 <Card key={p.id} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-zinc-800 truncate">
+                    <p className="text-sm font-medium text-[var(--text-main)] truncate">
                       {tc(`classTypes.${p.class_type}`)}
                     </p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-[var(--text-muted)]">
                       {p.hours_per_week}h/wk &middot; {p.duration_weeks}w
                     </p>
                   </div>

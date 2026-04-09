@@ -85,15 +85,15 @@ export default function UserEditModal({
             onChange={(e) => setForm({ ...form, role: e.target.value })}
           />
 
-          <div className="flex items-center justify-between rounded-xl bg-zinc-50 border border-zinc-200 px-4 py-3">
-            <span className="text-sm font-medium text-zinc-700">{t('edit.isActive')}</span>
+          <div className="flex items-center justify-between rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-main)] px-4 py-3">
+            <span className="text-sm font-medium text-[var(--text-body)]">{t('edit.isActive')}</span>
             <button
               type="button"
               role="switch"
               aria-checked={form.is_active}
               onClick={() => setForm({ ...form, is_active: !form.is_active })}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 ${
-                form.is_active ? 'bg-blue-500' : 'bg-zinc-700'
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-main)] ${
+                form.is_active ? 'bg-[var(--primary)]' : 'bg-[var(--border-strong)]'
               }`}
             >
               <span

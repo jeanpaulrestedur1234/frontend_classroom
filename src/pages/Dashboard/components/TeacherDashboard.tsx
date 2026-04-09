@@ -22,8 +22,6 @@ import type {
 } from '@/types';
 import StatCard from './StatCard';
 
-/* ────────────────────────────── helpers ───────────────────────────────────── */
-
 function jsDayToApiDay(jsDay: number): number {
   return jsDay === 0 ? 6 : jsDay - 1;
 }
@@ -32,27 +30,19 @@ function bookingBadgeVariant(
   status: string,
 ): 'success' | 'warning' | 'danger' | 'default' {
   switch (status) {
-    case 'confirmed':
-      return 'success';
-    case 'pending':
-      return 'warning';
-    case 'cancelled':
-      return 'danger';
-    default:
-      return 'default';
+    case 'confirmed': return 'success';
+    case 'pending':   return 'warning';
+    case 'cancelled': return 'danger';
+    default:          return 'default';
   }
 }
-
-/* ──────────────────────────── Teacher Dashboard ──────────────────────────── */
 
 export default function TeacherDashboard() {
   const { t } = useTranslation('dashboard');
   const { t: tc } = useTranslation('common');
 
   const [stats, setStats] = useState<TeacherDashboardStats | null>(null);
-  const [availability, setAvailability] = useState<TeacherAvailabilityDTO[]>(
-    [],
-  );
+  const [availability, setAvailability] = useState<TeacherAvailabilityDTO[]>([]);
   const [bookings, setBookings] = useState<StudentBookingDetailDto[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,12 +54,9 @@ export default function TeacherDashboard() {
           getMyAvailability(),
           listMyBookings({ page_size: 20 }),
         ]);
-        if (s.status === 'fulfilled')
-          setStats(s.value as TeacherDashboardStats);
-        if (avail.status === 'fulfilled')
-          setAvailability(Array.isArray(avail.value) ? avail.value : []);
-        if (bk.status === 'fulfilled')
-          setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
+        if (s.status === 'fulfilled') setStats(s.value as TeacherDashboardStats);
+        if (avail.status === 'fulfilled') setAvailability(Array.isArray(avail.value) ? avail.value : []);
+        if (bk.status === 'fulfilled') setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
       } finally {
         setLoading(false);
       }
@@ -83,56 +70,31 @@ export default function TeacherDashboard() {
   const apiDow = jsDayToApiDay(jsDow);
 
   const todayClasses = bookings.filter(
-    (b) =>
-      b.scheduled_date === todayStr &&
-      (b.status === 'confirmed' || b.status === 'pending'),
+    (b) => b.scheduled_date === todayStr && (b.status === 'confirmed' || b.status === 'pending'),
   );
-
-  const todayAvailability = availability.filter(
-    (a) => a.day_of_week === apiDow,
-  );
+  const todayAvailability = availability.filter((a) => a.day_of_week === apiDow);
   const dayName = tc(`days.${apiDow}`);
 
   if (loading) return <LoadingSpinner size="lg" />;
 
   return (
     <>
-      {/* Stats from API */}
+      {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          icon={<Clock className="h-6 w-6" />}
-          label={t('teacher.myAvailability')}
-          value={`${availability.length} ${t('teacher.blocks')}`}
-          color="sky"
-        />
-        <StatCard
-          icon={<CalendarDays className="h-6 w-6" />}
-          label={t('teacher.classesToday')}
-          value={todayClasses.length}
-          color="violet"
-        />
-        <StatCard
-          icon={<CalendarDays className="h-6 w-6" />}
-          label={t('teacher.pendingBookings')}
-          value={stats?.pending_bookings ?? 0}
-          color="blue"
-        />
-        <StatCard
-          icon={<CheckCircle2 className="h-6 w-6" />}
-          label={t('teacher.completedBookings')}
-          value={stats?.completed_bookings ?? 0}
-          color="emerald"
-        />
+        <StatCard icon={<Clock className="h-6 w-6" />} label={t('teacher.myAvailability')} value={`${availability.length} ${t('teacher.blocks')}`} color="sky" />
+        <StatCard icon={<CalendarDays className="h-6 w-6" />} label={t('teacher.classesToday')} value={todayClasses.length} color="violet" />
+        <StatCard icon={<CalendarDays className="h-6 w-6" />} label={t('teacher.pendingBookings')} value={stats?.pending_bookings ?? 0} color="blue" />
+        <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('teacher.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>
 
       {/* Today's availability */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('teacher.availabilityToday', { day: dayName })}
         </h2>
         <Card>
           {todayAvailability.length === 0 ? (
-            <p className="py-4 text-center text-sm text-zinc-500">
+            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
               {t('teacher.noAvailabilityToday')}
             </p>
           ) : (
@@ -140,16 +102,14 @@ export default function TeacherDashboard() {
               {todayAvailability.map((a) => (
                 <li
                   key={a.id}
-                  className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3"
+                  className="flex items-center gap-3 rounded-xl bg-[var(--bg-subtle)] p-3"
                 >
-                  <Clock className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm text-zinc-700">
+                  <Clock className="h-4 w-4 text-[var(--primary)]" />
+                  <span className="text-sm text-[var(--text-body)]">
                     {a.start_time} - {a.end_time}
                   </span>
-                  <Badge variant={a.is_virtual ? 'info' : 'default'}>
-                    {tc(
-                      `bookingTypes.${a.is_virtual ? 'virtual' : 'presencial'}`,
-                    )}
+                  <Badge variant={a.is_virtual ? 'virtual' : 'presencial'}>
+                    {tc(`bookingTypes.${a.is_virtual ? 'virtual' : 'presencial'}`)}
                   </Badge>
                 </li>
               ))}
@@ -160,28 +120,28 @@ export default function TeacherDashboard() {
 
       {/* Today's classes */}
       <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('teacher.myClassesToday')}
         </h2>
         <Card>
           {todayClasses.length === 0 ? (
-            <p className="py-4 text-center text-sm text-zinc-500">
+            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
               {t('teacher.noClassesToday')}
             </p>
           ) : (
-            <ul className="divide-y divide-white/[0.06]">
+            <ul className="divide-y divide-[var(--border-main)]">
               {todayClasses.map((b) => (
                 <li
                   key={b.id}
                   className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-1.5 rounded-full bg-blue-500/60" />
+                    <div className="h-8 w-1.5 rounded-full bg-[var(--primary)]/60" />
                     <div>
-                      <p className="text-sm font-medium text-zinc-900">
+                      <p className="text-sm font-medium text-[var(--text-main)]">
                         {b.start_time} - {b.end_time}
                       </p>
-                      <p className="text-xs text-zinc-500">
+                      <p className="text-xs text-[var(--text-muted)]">
                         {tc(`bookingTypes.${b.booking_type}`)}
                         {b.room ? ` - ${b.room.name}` : ''}
                       </p>
@@ -201,7 +161,7 @@ export default function TeacherDashboard() {
       <div className="mt-8">
         <Link
           to="/app/availability"
-          className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--primary)] transition-colors hover:opacity-80"
         >
           {t('teacher.configureAvailability')}
           <ArrowRight className="h-4 w-4" />

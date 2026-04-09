@@ -15,9 +15,9 @@ interface UsersTableProps {
 
 const ROLE_BADGE_VARIANT: Record<UserRole, 'success' | 'info' | 'warning' | 'default'> = {
   super_admin: 'success',
-  admin: 'info',
-  teacher: 'warning',
-  student: 'default',
+  admin:       'info',
+  teacher:     'warning',
+  student:     'default',
 };
 
 export default function UsersTable({
@@ -32,24 +32,24 @@ export default function UsersTable({
   const { t: tc } = useTranslation('common');
 
   return (
-    <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl overflow-hidden">
+    <div className="bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl overflow-hidden">
       <div className="overflow-x-auto">
         <table className="min-w-full">
           <thead>
-            <tr className="bg-white/[0.04]">
-              <th className="px-6 py-3.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
+            <tr className="bg-[var(--bg-subtle)] border-b border-[var(--border-main)]">
+              <th className="px-6 py-3.5 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                 {t('table.name')}
               </th>
-              <th className="px-6 py-3.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                 {t('table.email')}
               </th>
-              <th className="px-6 py-3.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                 {t('table.role')}
               </th>
-              <th className="px-6 py-3.5 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                 {t('table.status')}
               </th>
-              <th className="px-6 py-3.5 text-right text-xs font-medium text-zinc-500 uppercase tracking-wider">
+              <th className="px-6 py-3.5 text-right text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                 {t('table.actions')}
               </th>
             </tr>
@@ -58,19 +58,19 @@ export default function UsersTable({
             {users.map((u, idx) => (
               <tr
                 key={u.id}
-                className={`transition-colors hover:bg-white/[0.04] ${
-                  idx !== users.length - 1 ? 'border-b border-zinc-100' : ''
+                className={`transition-colors hover:bg-[var(--bg-surface-hover)] ${
+                  idx !== users.length - 1 ? 'border-b border-[var(--border-main)]' : ''
                 }`}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-400/20 to-blue-600/20 flex items-center justify-center text-sm font-semibold text-blue-400 shrink-0">
+                    <div className="h-9 w-9 rounded-full bg-[var(--primary)]/10 flex items-center justify-center text-sm font-semibold text-[var(--primary)] shrink-0">
                       {u.full_name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-sm font-medium text-zinc-950">{u.full_name}</span>
+                    <span className="text-sm font-medium text-[var(--text-main)]">{u.full_name}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-zinc-400">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--text-muted)]">
                   {u.email}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -96,14 +96,14 @@ export default function UsersTable({
                       title={u.is_active ? tc('status.inactive') : tc('actions.activate')}
                     >
                       {u.is_active ? (
-                        <UserX className="h-4 w-4 text-blue-400" />
+                        <UserX className="h-4 w-4 text-[var(--primary)]" />
                       ) : (
-                        <UserCheck className="h-4 w-4 text-emerald-400" />
+                        <UserCheck className="h-4 w-4 text-emerald-500" />
                       )}
                     </Button>
                     {u.role !== 'super_admin' && u.id !== currentUserId && (
                       <Button variant="ghost" size="sm" onClick={() => onDelete(u)} title={tc('actions.delete')}>
-                        <Trash2 className="h-4 w-4 text-rose-400" />
+                        <Trash2 className="h-4 w-4 text-rose-500" />
                       </Button>
                     )}
                   </div>

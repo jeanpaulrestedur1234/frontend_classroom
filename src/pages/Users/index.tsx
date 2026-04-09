@@ -118,7 +118,7 @@ export default function Users() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
+        <h1 className="text-2xl font-bold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('title')}
         </h1>
         <Button onClick={() => setShowCreate(true)}>
@@ -129,13 +129,13 @@ export default function Users() {
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)]" />
           <input
             type="text"
             placeholder={t('searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="block w-full rounded-xl pl-10 pr-4 py-2.5 text-sm bg-zinc-50 backdrop-blur-xl border border-zinc-200 text-zinc-900 placeholder:text-zinc-400 transition-all duration-200 hover:border-zinc-300 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20"
+            className="block w-full rounded-xl pl-10 pr-4 py-2.5 text-sm bg-[var(--bg-surface)] border border-[var(--border-strong)] text-[var(--text-main)] placeholder:text-[var(--text-dim)] transition-all duration-200 hover:border-[var(--primary)]/50 focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20"
           />
         </div>
         <Select
@@ -149,7 +149,7 @@ export default function Users() {
       {loading ? (
         <LoadingSpinner />
       ) : error ? (
-        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl p-6">
           <EmptyState
             icon={<AlertTriangle className="h-12 w-12" />}
             title={tc('errors.generic')}
@@ -162,7 +162,7 @@ export default function Users() {
           />
         </div>
       ) : filteredUsers.length === 0 ? (
-        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl p-6">
           <EmptyState
             icon={<UsersIcon className="h-12 w-12" />}
             title={users?.length === 0 ? t('empty.title') : tc('emptyState.noResults')}
@@ -188,7 +188,7 @@ export default function Users() {
             onDelete={setDeletingUser}
           />
           {/* Result count */}
-          <div className="border-t border-zinc-100 px-6 py-3 text-xs text-zinc-500 bg-zinc-50 rounded-xl border">
+          <div className="border-t border-[var(--border-main)] px-6 py-3 text-xs text-[var(--text-muted)] bg-[var(--bg-subtle)] rounded-xl border border-[var(--border-main)]">
             {tc('pagination.showing')} {filteredUsers.length} {tc('pagination.of')} {(users ?? []).length}{' '}
             {tc('pagination.results')}
           </div>

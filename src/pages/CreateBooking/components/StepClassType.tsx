@@ -29,12 +29,12 @@ export function StepType({ t, tc, bookingType, setBookingType }: any) {
           onClick={() => setBookingType('presencial')}
           className={`p-6 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
             bookingType === 'presencial'
-              ? 'bg-amber-500/10 border-2 border-amber-500/40 ring-2 ring-amber-500/15 shadow-lg shadow-amber-500/10'
+              ? 'bg-blue-500/10 border-2 border-blue-500/40 ring-2 ring-blue-500/15 shadow-lg shadow-blue-500/10'
               : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
           }`}
         >
-          <Building2 className={`w-8 h-8 mb-3 ${bookingType === 'presencial' ? 'text-amber-400' : 'text-zinc-400'}`} />
-          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'presencial' ? 'text-amber-300' : 'text-zinc-800'}`}>
+          <Building2 className={`w-8 h-8 mb-3 ${bookingType === 'presencial' ? 'text-blue-400' : 'text-zinc-400'}`} />
+          <h3 className={`font-semibold font-[family-name:var(--font-display)] ${bookingType === 'presencial' ? 'text-blue-300' : 'text-zinc-800'}`}>
             {tc('bookingTypes.presencial')}
           </h3>
           <p className="text-sm text-zinc-500 mt-1">{t('create.presencialDesc')}</p>

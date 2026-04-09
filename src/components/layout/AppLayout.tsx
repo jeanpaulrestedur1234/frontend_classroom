@@ -55,8 +55,8 @@ export default function AppLayout() {
               <span className="hidden text-sm font-medium text-zinc-400 sm:block">
                 {user?.full_name}
               </span>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20">
-                <span className="text-xs font-bold font-[family-name:var(--font-display)] text-zinc-950">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20">
+                <span className="text-xs font-bold font-[family-name:var(--font-display)] text-white">
                   {initials}
                 </span>
               </div>

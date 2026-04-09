@@ -20,8 +20,8 @@ export default function RoomCard({ room, onEdit, onDelete }: RoomCardProps) {
       <div>
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-400/20 to-amber-600/20 flex items-center justify-center shrink-0">
-              <Building2 className="h-5 w-5 text-amber-400" />
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-400/20 to-blue-600/20 flex items-center justify-center shrink-0">
+              <Building2 className="h-5 w-5 text-blue-400" />
             </div>
             <div>
               <h3 className="text-sm font-semibold text-zinc-950 font-[family-name:var(--font-display)]">

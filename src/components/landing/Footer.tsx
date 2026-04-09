@@ -46,45 +46,14 @@ export default function Footer() {
   return (
     <footer className="relative bg-white border-t border-zinc-100">
       {/* Top decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-18">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a
-              href="#"
-              className="inline-flex items-center gap-2.5 font-[family-name:var(--font-display)] font-bold text-xl mb-5"
-            >
-              <div className="relative flex items-center justify-center w-7 h-7">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="w-5 h-5"
-                  stroke="url(#footer-logo-gradient)"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <defs>
-                    <linearGradient
-                      id="footer-logo-gradient"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stopColor="#fbbf24" />
-                      <stop offset="100%" stopColor="#d97706" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                </svg>
-              </div>
-              <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
-                ClassRoom Pro
-              </span>
+            <a href="#" className="inline-flex items-center mb-5">
+              <img src="/valley-logo.png" alt="Valley Spanish School" className="h-10" />
             </a>
             <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
               {t("footer.description")}

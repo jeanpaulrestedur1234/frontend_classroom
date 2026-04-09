@@ -9,9 +9,9 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
       {/* Decorative radial gradients */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-amber-500/5 blur-3xl" />
+        <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-blue-600/5 blur-3xl" />
         <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-500/5 blur-3xl" />
-        <div className="absolute top-[40%] left-[30%] w-[400px] h-[400px] rounded-full bg-amber-500/[0.03] blur-3xl" />
+        <div className="absolute top-[40%] left-[30%] w-[400px] h-[400px] rounded-full bg-blue-600/[0.03] blur-3xl" />
         {/* Grid pattern overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -33,8 +33,8 @@ export default function Hero() {
               style={{ animationDelay: "0s" }}
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
               </span>
               {t("hero.badge")}
             </div>
@@ -45,7 +45,7 @@ export default function Hero() {
               style={{ animationDelay: "0.1s" }}
             >
               {t("hero.title")}{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text text-transparent">
                 {t("hero.titleHighlight")}
               </span>
             </h1>
@@ -65,7 +65,7 @@ export default function Hero() {
             >
               <Link
                 to="/login"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-zinc-950 font-semibold font-[family-name:var(--font-display)] hover:from-amber-300 hover:to-amber-500 transition-all duration-200 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30"
+                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 text-white font-semibold font-[family-name:var(--font-display)] hover:bg-blue-700 transition-all duration-200 shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30"
               >
                 {t("hero.cta")}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -86,7 +86,7 @@ export default function Hero() {
           >
             <div className="relative">
               {/* Ambient glow behind card */}
-              <div className="absolute -inset-4 bg-amber-500/[0.07] rounded-3xl blur-2xl" />
+              <div className="absolute -inset-4 bg-blue-600/[0.07] rounded-3xl blur-2xl" />
 
               {/* Main card */}
               <div className="relative bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-6 shadow-2xl shadow-black/40">
@@ -100,9 +100,9 @@ export default function Hero() {
                   <span className="ml-2 text-xs text-zinc-500 font-[family-name:var(--font-display)]">
                     Dashboard
                   </span>
-                  <div className="ml-auto flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20">
-                    <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                    <span className="text-xs text-amber-400 font-medium">
+                  <div className="ml-auto flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-blue-600/10 border border-blue-600/20">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    <span className="text-xs text-blue-500 font-medium">
                       Live
                     </span>
                   </div>
@@ -115,7 +115,7 @@ export default function Hero() {
                       Icon: Users,
                       value: "248",
                       label: t("hero.mockup.students"),
-                      accent: "amber",
+                      accent: "blue",
                     },
                     {
                       Icon: CalendarCheck,
@@ -136,8 +136,8 @@ export default function Hero() {
                     >
                       <stat.Icon
                         className={`w-5 h-5 mx-auto mb-2 ${
-                          stat.accent === "amber"
-                            ? "text-amber-400"
+                          stat.accent === "blue"
+                            ? "text-blue-500"
                             : stat.accent === "emerald"
                             ? "text-emerald-400"
                             : "text-sky-400"
@@ -160,23 +160,23 @@ export default function Hero() {
                   </p>
                   {[
                     {
-                      name: "Ingles B2",
+                      name: "Spanish A1",
                       teacher: "Prof. Garcia",
-                      room: "Salon 3",
+                      room: "Room A",
                       time: "09:00 - 10:30",
-                      color: "bg-amber-400",
+                      color: "bg-blue-500",
                     },
                     {
-                      name: "Frances A1",
-                      teacher: "Prof. Dupont",
-                      room: "Salon 1",
+                      name: "Spanish B1",
+                      teacher: "Prof. Martinez",
+                      room: "Room B",
                       time: "10:30 - 12:00",
                       color: "bg-emerald-400",
                     },
                     {
-                      name: "Aleman A2",
-                      teacher: "Prof. Muller",
-                      room: "Salon 5",
+                      name: "Conversation Club",
+                      teacher: "Prof. Lopez",
+                      room: "Room C",
                       time: "14:00 - 15:30",
                       color: "bg-sky-400",
                     },

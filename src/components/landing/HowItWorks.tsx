@@ -42,7 +42,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="relative py-24 sm:py-32 bg-white">
       {/* Decorative */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/[0.03] rounded-full blur-3xl" />
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/[0.02] rounded-full blur-3xl" />
       </div>
 
@@ -50,7 +50,7 @@ export default function HowItWorks() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-20">
           <p
-            className="animate-fade-in-up text-amber-400 font-semibold text-sm uppercase tracking-widest mb-3 font-[family-name:var(--font-display)]"
+            className="animate-fade-in-up text-blue-500 font-semibold text-sm uppercase tracking-widest mb-3 font-[family-name:var(--font-display)]"
             style={{ animationDelay: "0s" }}
           >
             {t("howItWorks.sectionLabel")}
@@ -73,8 +73,8 @@ export default function HowItWorks() {
         <div className="relative">
           {/* Connecting line - desktop */}
           <div className="hidden lg:block absolute top-[52px] left-[12%] right-[12%] h-px">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
-            <div className="w-full h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_8px,rgba(251,191,36,0.15)_8px,rgba(251,191,36,0.15)_16px)]" />
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
+            <div className="w-full h-px bg-[repeating-linear-gradient(90deg,transparent,transparent_8px,rgba(37,99,235,0.15)_8px,rgba(37,99,235,0.15)_16px)]" />
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -88,18 +88,18 @@ export default function HowItWorks() {
                 <div className="relative inline-flex flex-col items-center">
                   <div className="relative">
                     {/* Outer glow ring */}
-                    <div className="absolute -inset-2 rounded-full bg-amber-500/10 blur-md" />
+                    <div className="absolute -inset-2 rounded-full bg-blue-600/10 blur-md" />
 
                     {/* Glass circle */}
                     <div className="relative w-[104px] h-[104px] rounded-full bg-zinc-50 backdrop-blur-xl border border-zinc-200 flex items-center justify-center">
-                      <span className="text-3xl font-bold bg-gradient-to-b from-amber-400 to-amber-600 bg-clip-text text-transparent font-[family-name:var(--font-display)]">
+                      <span className="text-3xl font-bold bg-gradient-to-b from-blue-500 to-blue-700 bg-clip-text text-transparent font-[family-name:var(--font-display)]">
                         {step.number}
                       </span>
                     </div>
 
                     {/* Icon badge */}
                     <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center shadow-lg">
-                      <step.icon className="w-4 h-4 text-amber-400" />
+                      <step.icon className="w-4 h-4 text-blue-500" />
                     </div>
                   </div>
                 </div>
@@ -115,7 +115,7 @@ export default function HowItWorks() {
                 {/* Mobile connector arrow (between items on mobile) */}
                 {index < steps.length - 1 && (
                   <div className="sm:hidden flex justify-center mt-6 mb-2">
-                    <div className="w-px h-8 bg-gradient-to-b from-amber-500/20 to-transparent" />
+                    <div className="w-px h-8 bg-gradient-to-b from-blue-600/20 to-transparent" />
                   </div>
                 )}
               </div>

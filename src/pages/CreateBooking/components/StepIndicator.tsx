@@ -29,9 +29,9 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 shadow-lg shadow-amber-500/25'
+                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-zinc-950 shadow-lg shadow-blue-500/25'
                     : isDone
-                      ? 'bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30'
+                      ? 'bg-blue-500/15 text-blue-400 ring-1 ring-blue-500/30'
                       : 'bg-white/5 text-zinc-400 ring-1 ring-white/10'
                 }`}
               >
@@ -42,7 +42,7 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
                   isActive
                     ? 'font-medium text-zinc-900'
                     : isDone
-                      ? 'text-amber-400'
+                      ? 'text-blue-400'
                       : 'text-zinc-400'
                 }`}
               >
@@ -52,7 +52,7 @@ export default function StepIndicator({ current, skipRoom, skipPackage, t }: Ste
             {idx < visibleSteps.length - 1 && (
               <div
                 className={`w-8 h-px transition-colors ${
-                  idx < visibleCurrent ? 'bg-amber-500/50' : 'bg-white/10'
+                  idx < visibleCurrent ? 'bg-blue-500/50' : 'bg-white/10'
                 }`}
               />
             )}

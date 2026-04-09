@@ -109,7 +109,7 @@ export default function Payments() {
         <h1 className="text-3xl font-bold text-zinc-950 font-[family-name:var(--font-display)] tracking-tight">
           {isAdmin ? t('title') : t('student.title')}
         </h1>
-        <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-600" />
+        <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
       </div>
 
       {/* Error banner */}

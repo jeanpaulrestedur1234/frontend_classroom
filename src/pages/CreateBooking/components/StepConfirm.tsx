@@ -17,8 +17,8 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
                 <Monitor className="w-4 h-4 text-sky-400" />
               </div>
             ) : (
-              <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                <Building2 className="w-4 h-4 text-amber-400" />
+              <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <Building2 className="w-4 h-4 text-blue-400" />
               </div>
             )}
             <div>
@@ -58,8 +58,8 @@ export function StepReview({ t, tc, bookingType, selectedTeacher, selectedRoom, 
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-              <Clock className="w-4 h-4 text-amber-400" />
+            <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
+              <Clock className="w-4 h-4 text-blue-400" />
             </div>
             <div>
               <span className="text-zinc-500 text-xs">{t('table.time')}</span>

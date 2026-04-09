@@ -1,0 +1,121 @@
+{
+  "navbar": {
+    "features": "Features",
+    "howItWorks": "How it Works",
+    "benefits": "Benefits",
+    "login": "Sign In"
+  },
+  "hero": {
+    "badge": "Spanish School in Medellín, Colombia",
+    "title": "Learn Spanish the",
+    "titleHighlight": "immersive way",
+    "description": "Book your classes, track your progress, and connect with native Colombian teachers. The all-in-one platform for your Spanish learning journey.",
+    "cta": "Start Learning",
+    "ctaSecondary": "See features",
+    "mockup": {
+      "students": "Students",
+      "classesToday": "Classes today",
+      "teachers": "Teachers",
+      "scheduleTitle": "Today's schedule",
+      "newBooking": "New booking confirmed"
+    }
+  },
+  "features": {
+    "sectionLabel": "Features",
+    "title": "Everything you need in one place",
+    "subtitle": "Powerful tools designed for modern educational management",
+    "items": {
+      "users": {
+        "title": "Easy Registration",
+        "description": "Your account is ready in minutes. Access your dashboard to see your classes and progress."
+      },
+      "bookings": {
+        "title": "Smart Booking",
+        "description": "See your teacher's real availability and book classes that fit your schedule."
+      },
+      "packages": {
+        "title": "Flexible Packages",
+        "description": "Choose from Open Group, Closed Group, or Private classes. 1 to 6 weeks with progressive discounts."
+      },
+      "payments": {
+        "title": "Secure Payments",
+        "description": "Pay with bank transfer, credit card, or cash. Your booking is confirmed once payment is approved."
+      },
+      "rooms": {
+        "title": "In-Person & Virtual",
+        "description": "Learn in our classrooms in Medellín or join virtual classes from anywhere in the world."
+      },
+      "availability": {
+        "title": "Real-Time Schedule",
+        "description": "Check your upcoming classes, hours remaining, and teacher availability at any time."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "Process",
+    "title": "How does it work?",
+    "subtitle": "Four simple steps to start your Spanish learning journey",
+    "steps": {
+      "1": {
+        "title": "Create your account",
+        "description": "Your teacher will register you in the platform."
+      },
+      "2": {
+        "title": "Choose your package",
+        "description": "Pick the class type and duration that fits your goals: Open Group, Closed Group, or Private."
+      },
+      "3": {
+        "title": "Book your classes",
+        "description": "Select your teacher, schedule, and preferred modality — in-person or virtual."
+      },
+      "4": {
+        "title": "Start learning",
+        "description": "Attend your classes, track your hours, and enjoy learning Spanish in Medellín."
+      }
+    }
+  },
+  "benefits": {
+    "title": "Why choose Valley Spanish School?",
+    "sectionLabel": "Advantages",
+    "subtitle": "The best way to learn Spanish in Medellín",
+    "statsCardTitle": "Our numbers speak",
+    "exploreFeatures": "Explore all features",
+    "items": [
+      "Native Colombian teachers with years of experience",
+      "Flexible scheduling: in-person and virtual classes",
+      "Small groups for personalized attention",
+      "Track your progress and class hours in real-time",
+      "Located in the heart of Medellín"
+    ],
+    "stats": {
+      "uptime": { "value": "6+", "label": "Expert teachers" },
+      "support": { "value": "4", "label": "Modern classrooms" },
+      "academies": { "value": "100%", "label": "Personalized attention" }
+    }
+  },
+  "footer": {
+    "description": "Learn Spanish in Medellín with native Colombian teachers. In-person and virtual classes for all levels.",
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "howItWorks": "How it Works",
+      "benefits": "Benefits",
+      "pricing": "Pricing"
+    },
+    "support": {
+      "title": "Support",
+      "helpCenter": "Help Center",
+      "docs": "Documentation",
+      "contact": "Contact",
+      "status": "Status"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} Valley Spanish School. All rights reserved.",
+    "madeWith": "Made with dedication for education"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "navbar": {
+    "features": "Características",
+    "howItWorks": "Cómo funciona",
+    "benefits": "Beneficios",
+    "login": "Iniciar Sesión"
+  },
+  "hero": {
+    "badge": "Escuela de español en Medellín, Colombia",
+    "title": "Aprende español de forma",
+    "titleHighlight": "inmersiva",
+    "description": "Reserva tus clases, sigue tu progreso y conéctate con profesores colombianos nativos. La plataforma todo-en-uno para tu viaje de aprendizaje de español.",
+    "cta": "Empezar a aprender",
+    "ctaSecondary": "Ver características",
+    "mockup": {
+      "students": "Estudiantes",
+      "classesToday": "Clases hoy",
+      "teachers": "Profesores",
+      "scheduleTitle": "Horario del día",
+      "newBooking": "Nueva reserva confirmada"
+    }
+  },
+  "features": {
+    "sectionLabel": "Características",
+    "title": "Todo lo que necesitas en un solo lugar",
+    "subtitle": "Herramientas potentes diseñadas para la gestión educativa moderna",
+    "items": {
+      "users": {
+        "title": "Registro fácil",
+        "description": "Tu cuenta está lista en minutos. Accede a tu panel para ver tus clases y progreso."
+      },
+      "bookings": {
+        "title": "Reservas inteligentes",
+        "description": "Ve la disponibilidad real de tu profesor y reserva clases que se adapten a tu horario."
+      },
+      "packages": {
+        "title": "Paquetes flexibles",
+        "description": "Elige entre Grupo abierto, Grupo cerrado o clases privadas. De 1 a 6 semanas con descuentos progresivos."
+      },
+      "payments": {
+        "title": "Pagos seguros",
+        "description": "Paga con transferencia bancaria, tarjeta de crédito o efectivo. Tu reserva se confirma una vez aprobado el pago."
+      },
+      "rooms": {
+        "title": "Presencial y virtual",
+        "description": "Aprende en nuestras aulas en Medellín o únete a clases virtuales desde cualquier parte del mundo."
+      },
+      "availability": {
+        "title": "Horario en tiempo real",
+        "description": "Consulta tus próximas clases, horas restantes y disponibilidad del profesor en cualquier momento."
+      }
+    }
+  },
+  "howItWorks": {
+    "sectionLabel": "Proceso",
+    "title": "¿Cómo funciona?",
+    "subtitle": "Cuatro simples pasos para comenzar tu aprendizaje de español",
+    "steps": {
+      "1": {
+        "title": "Crea tu cuenta",
+        "description": "Tu profesor te registrará en la plataforma."
+      },
+      "2": {
+        "title": "Elige tu paquete",
+        "description": "Escoge el tipo de clase y la duración según tus objetivos: Grupo abierto, Grupo cerrado o Privadas."
+      },
+      "3": {
+        "title": "Reserva tus clases",
+        "description": "Selecciona tu profesor, horario y modalidad preferida: presencial o virtual."
+      },
+      "4": {
+        "title": "Empieza a aprender",
+        "description": "Asiste a tus clases, lleva el control de tus horas y disfruta aprendiendo español en Medellín."
+      }
+    }
+  },
+  "benefits": {
+    "title": "¿Por qué elegir Valley Spanish School?",
+    "sectionLabel": "Ventajas",
+    "subtitle": "La mejor forma de aprender español en Medellín",
+    "statsCardTitle": "Nuestros números hablan",
+    "exploreFeatures": "Explorar todas las características",
+    "items": [
+      "Profesores colombianos nativos con años de experiencia",
+      "Horarios flexibles: clases presenciales y virtuales",
+      "Grupos pequeños para atención personalizada",
+      "Sigue tu progreso y horas de clase en tiempo real",
+      "Ubicados en el corazón de Medellín"
+    ],
+    "stats": {
+      "uptime": { "value": "6+", "label": "Profesores expertos" },
+      "support": { "value": "4", "label": "Salones modernos" },
+      "academies": { "value": "100%", "label": "Atención personalizada" }
+    }
+  },
+  "footer": {
+    "description": "Aprende español en Medellín con profesores colombianos nativos. Clases presenciales y virtuales para todos los niveles.",
+    "product": {
+      "title": "Producto",
+      "features": "Características",
+      "howItWorks": "Cómo funciona",
+      "benefits": "Beneficios",
+      "pricing": "Precios"
+    },
+    "support": {
+      "title": "Soporte",
+      "helpCenter": "Centro de ayuda",
+      "docs": "Documentación",
+      "contact": "Contacto",
+      "status": "Estado"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos de servicio",
+      "privacy": "Política de privacidad",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} Valley Spanish School. Todos los derechos reservados.",
+    "madeWith": "Hecho con dedicación para la educación"
+  }
+}

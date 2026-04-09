@@ -1,0 +1,66 @@
+{
+  "title": "Payment Management",
+  "table": {
+    "paymentId": "Payment ID",
+    "studentId": "Student ID",
+    "packageId": "Package ID",
+    "amount": "Amount",
+    "status": "Status",
+    "proof": "Receipt",
+    "rejectionReason": "Rejection Reason",
+    "reviewedAt": "Reviewed At",
+    "reviewedBy": "Reviewed By",
+    "createdAt": "Created",
+    "updatedAt": "Updated"
+  },
+  "filter": {
+    "allStatuses": "All statuses",
+    "byStatus": "Filter by status"
+  },
+  "pagination": {
+    "showing": "Showing {{from}}-{{to}} of {{total}} results",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{current}} of {{total}}"
+  },
+  "admin": {
+    "workflow": {
+      "title": "Payment Flow",
+      "step1": "The student acquires a package",
+      "step2": "A payment intent is generated",
+      "step3": "The student uploads the receipt",
+      "step4": "The administrator approves or rejects"
+    },
+    "apiNote": "Payments appear when students upload receipts. Use each student's packages section to review individual payments.",
+    "filterByStatus": "Filter by status",
+    "allStatuses": "All statuses",
+    "amount": "Amount",
+    "proofUrl": "View receipt",
+    "rejectionReason": "Rejection reason",
+    "approveSuccess": "Payment approved successfully",
+    "rejectSuccess": "Payment rejected successfully",
+    "error": "Error processing payment",
+    "rejectModal": {
+      "title": "Reject Payment",
+      "reasonLabel": "Rejection reason",
+      "reasonPlaceholder": "Describe the reason for rejection..."
+    }
+  },
+  "student": {
+    "title": "My Payments",
+    "viewPackages": "View in My Packages",
+    "packageSummary": "Package and payment summary",
+    "uploadReceipt": "Upload Receipt",
+    "uploadSuccess": "Receipt uploaded successfully",
+    "uploadError": "Error uploading receipt",
+    "uploadModal": {
+      "title": "Upload Payment Receipt",
+      "urlLabel": "Receipt URL",
+      "urlPlaceholder": "https://example.com/receipt.jpg"
+    }
+  },
+  "noPayments": "No payments found",
+  "noPaymentsDesc": "There are no payments matching the current filter.",
+  "viewProof": "View receipt",
+  "noProof": "No receipt"
+}

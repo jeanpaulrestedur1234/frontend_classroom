@@ -1,0 +1,94 @@
+{
+  "title": "Reservas",
+  "myBookings": "Mis Reservas",
+  "manageBookings": "Gestión de Reservas",
+  "filterByStatus": "Filtrar por estado",
+  "allStatuses": "Todos los estados",
+  "dateFrom": "Desde",
+  "dateTo": "Hasta",
+  "table": {
+    "date": "Fecha",
+    "time": "Horario",
+    "type": "Tipo",
+    "status": "Estado",
+    "teacher": "Profesor",
+    "room": "Salón",
+    "actions": "Acciones"
+  },
+  "actions": {
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "addPackage": "Agregar Paquete",
+    "confirmSuccess": "Reserva confirmada",
+    "cancelSuccess": "Reserva cancelada",
+    "addPackageSuccess": "Paquete vinculado exitosamente",
+    "error": "Error al procesar la acción"
+  },
+  "detail": {
+    "title": "Detalle de Reserva",
+    "bookingId": "ID de Reserva",
+    "createdAt": "Creada el",
+    "updatedAt": "Actualizada el"
+  },
+  "create": {
+    "title": "Nueva Reserva",
+    "selectAvailability": "Elige una franja de disponibilidad en el calendario del profesor",
+    "choice": "Franja seleccionada:",
+    "choosePackage": "Selecciona un paquete activo para esta reserva",
+    "packageUsed": "Paquete aplicado a la reserva exitosamente",
+    "package": "Paquete",
+    "noPackageSelected": "No has seleccionado paquete",
+    "packagePreview": "Vista previa del paquete",
+    "packageId": "ID del paquete",
+    "selectPackageHint": "Selecciona un paquete y haz clic en Siguiente para continuar.",
+    "step": {
+      "type": "Tipo de Clase",
+      "teacher": "Seleccionar Profesor",
+      "room": "Seleccionar Salón",
+      "datetime": "Fecha y Hora",
+      "package": "Elegir Paquete",
+      "review": "Confirmar Reserva"
+    },
+    "noActivePackage": "No hay paquetes activos disponibles"
+    ,
+    "selectType": "¿Cómo será tu clase?",
+    "virtualDesc": "Clase en línea sin necesidad de salón físico",
+    "presencialDesc": "Clase presencial en un salón de la academia",
+    "selectTeacher": "Elige tu profesor",
+    "selectRoom": "Elige el salón",
+    "selectDate": "Fecha de la clase",
+    "selectTime": "Hora de inicio",
+    "reviewTitle": "Resumen de tu reserva",
+    "submitBooking": "Crear Reserva",
+    "success": "¡Reserva creada exitosamente!",
+    "linkPackage": "Vincular Paquete",
+    "selectPackage": "Selecciona un paquete activo",
+    "createAnother": "Crear Otra Reserva",
+    "viewBookings": "Ver Mis Reservas",
+    "error": "Error al crear la reserva"
+  },
+  "empty": {
+    "title": "No hay reservas",
+    "description": "Las reservas aparecerán aquí cuando se creen."
+  },
+  "viewModes": {
+    "week": "Calendario semanal",
+    "table": "Tabla"
+  },
+  "weeklyCalendar": "Vista semanal",
+  "noClassesInDay": "No hay clases en este día",
+  "unknownTeacher": "Profesor desconocido",
+  "unknownRoom": "Salón desconocido",
+  "virtual": "Virtual",
+  "pagination": {
+    "showing": "Mostrando {{from}}-{{to}} de {{total}}",
+    "page": "Página {{current}} de {{total}}",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "packageModal": {
+    "title": "Vincular Paquete a Reserva",
+    "selectPackage": "Selecciona un paquete activo",
+    "noActivePackages": "No tienes paquetes activos disponibles."
+  }
+}

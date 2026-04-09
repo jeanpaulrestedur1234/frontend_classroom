@@ -179,8 +179,8 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
           title={`${state.roomName} · ${state.count}/${state.capacity} students`}
           className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${
             selected
-              ? 'bg-blue-500/30 text-blue-700 ring-2 ring-blue-500 ring-offset-1'
-              : 'bg-blue-400/15 text-blue-600 ring-1 ring-blue-500/20 hover:bg-blue-400/30 hover:ring-blue-500/40'
+              ? 'bg-amber-500/30 text-amber-700 ring-2 ring-amber-500 ring-offset-1'
+              : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20 hover:bg-amber-400/30 hover:ring-amber-500/40'
           }`}
         >
           {selected ? (
@@ -233,10 +233,10 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
             selected
               ? isVirtual
                 ? 'bg-sky-500/30 text-sky-700 ring-2 ring-sky-500 ring-offset-1'
-                : 'bg-blue-500/30 text-blue-700 ring-2 ring-blue-500 ring-offset-1'
+                : 'bg-amber-500/30 text-amber-700 ring-2 ring-amber-500 ring-offset-1'
               : isVirtual
               ? 'bg-sky-400/15 text-sky-500 ring-1 ring-sky-500/20 hover:bg-sky-400/30 hover:ring-sky-500/40'
-              : 'bg-blue-400/15 text-blue-600 ring-1 ring-blue-500/20 hover:bg-blue-400/30 hover:ring-blue-500/40'
+              : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20 hover:bg-amber-400/30 hover:ring-amber-500/40'
           }`}
         >
           {selected ? (
@@ -293,7 +293,7 @@ export function StepDateTime({
       </p>
 
       {showRoomHint && (
-        <div className="mb-4 flex items-start gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-700">
+        <div className="mb-4 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-700">
           <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span>Go back and select a room first — availability depends on your chosen room's capacity.</span>
         </div>
@@ -401,7 +401,7 @@ export function StepDateTime({
           {/* Legend */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-zinc-500 pt-1">
             <div className="flex items-center gap-1.5">
-              <div className="h-3.5 w-3.5 rounded bg-blue-400/20 ring-1 ring-blue-400/40" />
+              <div className="h-3.5 w-3.5 rounded bg-amber-400/20 ring-1 ring-amber-400/40" />
               <span>Free — presencial</span>
             </div>
             <div className="flex items-center gap-1.5">

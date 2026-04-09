@@ -71,9 +71,9 @@ export default function AddPackageModal({ booking, onClose }: AddPackageModalPro
     <Modal isOpen={!!booking} onClose={onClose} title={t('packageModal.title')}>
       {booking && (
         <div className="space-y-4">
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-[var(--text-muted)]">
             {t('table.date')}:{' '}
-            <span className="font-medium text-zinc-900">
+            <span className="font-medium text-[var(--text-main)]">
               {formatDate(booking.scheduled_date)} {booking.start_time} - {booking.end_time}
             </span>
           </p>
@@ -81,16 +81,16 @@ export default function AddPackageModal({ booking, onClose }: AddPackageModalPro
           {success ? (
             <div className="text-center py-6">
               <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-3">
-                <CheckCircle className="w-6 h-6 text-emerald-400" />
+                <CheckCircle className="w-6 h-6 text-emerald-500" />
               </div>
-              <p className="text-sm font-medium text-emerald-400">
+              <p className="text-sm font-medium text-emerald-500">
                 {t('actions.addPackageSuccess')}
               </p>
             </div>
           ) : loading && myPackages.length === 0 ? (
             <LoadingSpinner size="sm" />
           ) : myPackages.length === 0 ? (
-            <p className="text-sm text-zinc-500 text-center py-6">
+            <p className="text-sm text-[var(--text-muted)] text-center py-6">
               {t('packageModal.noActivePackages')}
             </p>
           ) : (

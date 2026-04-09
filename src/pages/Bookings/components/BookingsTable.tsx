@@ -15,9 +15,9 @@ interface BookingsTableProps {
   onAddPackage: (b: StudentBookingDetailDto) => void;
 }
 
-export function statusBadgeVariant(status: BookingStatus) {
+export function statusBadgeVariant(status: BookingStatus): 'warning' | 'success' | 'danger' | 'info' {
   const map: Record<BookingStatus, 'warning' | 'success' | 'danger' | 'info'> = {
-    pending: 'warning',
+    pending:   'warning',
     confirmed: 'success',
     cancelled: 'danger',
     completed: 'info',
@@ -25,8 +25,8 @@ export function statusBadgeVariant(status: BookingStatus) {
   return map[status];
 }
 
-export function typeBadgeVariant(type: string): 'info' | 'default' {
-  return type === 'virtual' ? 'info' : 'default';
+export function typeBadgeVariant(type: string): 'virtual' | 'presencial' {
+  return type === 'virtual' ? 'virtual' : 'presencial';
 }
 
 export default function BookingsTable({
@@ -45,29 +45,29 @@ export default function BookingsTable({
   const isAdminOrTeacher = isAdmin || user.role === 'teacher';
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-zinc-100">
+    <div className="overflow-x-auto rounded-2xl border border-[var(--border-main)] bg-[var(--bg-surface)]">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-zinc-100 bg-white/[0.04]">
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+          <tr className="border-b border-[var(--border-main)] bg-[var(--bg-subtle)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.date')}
             </th>
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.time')}
             </th>
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.type')}
             </th>
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.status')}
             </th>
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.teacher')}
             </th>
-            <th className="px-4 py-3 text-left font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.room')}
             </th>
-            <th className="px-4 py-3 text-right font-medium text-zinc-400 font-[family-name:var(--font-display)]">
+            <th className="px-4 py-3 text-right font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]">
               {t('table.actions')}
             </th>
           </tr>
@@ -76,12 +76,12 @@ export default function BookingsTable({
           {bookings.map((b) => (
             <tr
               key={b.id}
-              className="border-b border-white/[0.04] bg-zinc-50/50 hover:bg-zinc-100 transition-colors"
+              className="border-b border-[var(--border-main)] last:border-0 hover:bg-[var(--bg-surface-hover)] transition-colors"
             >
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-950">
+              <td className="px-4 py-3 whitespace-nowrap text-[var(--text-main)] font-medium">
                 {formatDate(b.scheduled_date)}
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
+              <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
                 {b.start_time} - {b.end_time}
               </td>
               <td className="px-4 py-3">
@@ -94,10 +94,10 @@ export default function BookingsTable({
                   {tc(`status.${b.status}`)}
                 </Badge>
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
+              <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
                 {b.teacher?.full_name ?? '-'}
               </td>
-              <td className="px-4 py-3 whitespace-nowrap text-zinc-700">
+              <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
                 {b.booking_type === 'presencial' ? b.room?.name ?? '-' : '-'}
               </td>
               <td className="px-4 py-3 text-right">
@@ -119,7 +119,7 @@ export default function BookingsTable({
                       onClick={() => onConfirm(b.id)}
                       title={t('actions.confirm')}
                     >
-                      <CheckCircle className="w-4 h-4 text-emerald-400" />
+                      <CheckCircle className="w-4 h-4 text-emerald-500" />
                     </Button>
                   )}
 
@@ -131,7 +131,7 @@ export default function BookingsTable({
                       onClick={() => onCancel(b.id)}
                       title={t('actions.cancel')}
                     >
-                      <XCircle className="w-4 h-4 text-rose-400" />
+                      <XCircle className="w-4 h-4 text-rose-500" />
                     </Button>
                   )}
 
@@ -142,7 +142,7 @@ export default function BookingsTable({
                       onClick={() => onAddPackage(b)}
                       title={t('actions.addPackage')}
                     >
-                      <Package className="w-4 h-4 text-blue-400" />
+                      <Package className="w-4 h-4 text-[var(--primary)]" />
                     </Button>
                   )}
                 </div>

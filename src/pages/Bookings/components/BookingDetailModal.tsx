@@ -36,52 +36,52 @@ export default function BookingDetailModal({
       <div className="space-y-5">
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('detail.bookingId')}</span>
-            <span className="font-medium text-zinc-900 font-mono text-xs">{booking.id}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('detail.bookingId')}</span>
+            <span className="font-medium text-[var(--text-body)] font-mono text-xs">{booking.id}</span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.status')}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.status')}</span>
             <Badge variant={statusBadgeVariant(booking.status)}>
               {tc(`status.${booking.status}`)}
             </Badge>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.date')}</span>
-            <span className="font-medium text-zinc-900">{formatDate(booking.scheduled_date)}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.date')}</span>
+            <span className="font-medium text-[var(--text-main)]">{formatDate(booking.scheduled_date)}</span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.time')}</span>
-            <span className="font-medium text-zinc-900">
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.time')}</span>
+            <span className="font-medium text-[var(--text-main)]">
               {booking.start_time} - {booking.end_time}
             </span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.type')}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.type')}</span>
             <Badge variant={typeBadgeVariant(booking.booking_type)}>
               {tc(`bookingTypes.${booking.booking_type}`)}
             </Badge>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.teacher')}</span>
-            <span className="font-medium text-zinc-900">{booking.teacher?.full_name ?? '-'}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.teacher')}</span>
+            <span className="font-medium text-[var(--text-main)]">{booking.teacher?.full_name ?? '-'}</span>
           </div>
           {booking.booking_type === 'presencial' && (
             <div>
-              <span className="block text-zinc-500 text-xs mb-1">{t('table.room')}</span>
-              <span className="font-medium text-zinc-900">{booking.room?.name ?? '-'}</span>
+              <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.room')}</span>
+              <span className="font-medium text-[var(--text-main)]">{booking.room?.name ?? '-'}</span>
             </div>
           )}
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('detail.createdAt')}</span>
-            <span className="font-medium text-zinc-900">{formatDate(booking.created_at)}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('detail.createdAt')}</span>
+            <span className="font-medium text-[var(--text-main)]">{formatDate(booking.created_at)}</span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('detail.updatedAt')}</span>
-            <span className="font-medium text-zinc-900">{formatDate(booking.updated_at)}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('detail.updatedAt')}</span>
+            <span className="font-medium text-[var(--text-main)]">{formatDate(booking.updated_at)}</span>
           </div>
         </div>
 
-        <div className="flex justify-end gap-2 pt-4 border-t border-zinc-100">
+        <div className="flex justify-end gap-2 pt-4 border-t border-[var(--border-main)]">
           {isAdminOrTeacher && booking.status === 'pending' && (
             <Button
               size="sm"

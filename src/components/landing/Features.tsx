@@ -23,9 +23,9 @@ const features: FeatureItem[] = [
     icon: ShieldCheck,
     titleKey: "features.items.users.title",
     descKey: "features.items.users.description",
-    accentColor: "text-amber-400",
-    accentBg: "bg-amber-500/10",
-    accentBorder: "group-hover:border-amber-500/20",
+    accentColor: "text-blue-500",
+    accentBg: "bg-blue-600/10",
+    accentBorder: "group-hover:border-blue-600/20",
   },
   {
     icon: CalendarDays,
@@ -76,14 +76,14 @@ export default function Features() {
     <section id="features" className="relative py-24 sm:py-32 bg-white">
       {/* Decorative background elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-amber-500/[0.03] rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/[0.03] rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p
-            className="animate-fade-in-up text-amber-400 font-semibold text-sm uppercase tracking-widest mb-3 font-[family-name:var(--font-display)]"
+            className="animate-fade-in-up text-blue-500 font-semibold text-sm uppercase tracking-widest mb-3 font-[family-name:var(--font-display)]"
             style={{ animationDelay: "0s" }}
           >
             {t("features.sectionLabel")}

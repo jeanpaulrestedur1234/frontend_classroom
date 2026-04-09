@@ -6,11 +6,11 @@
     "login": "Iniciar Sesión"
   },
   "hero": {
-    "badge": "Plataforma de gestión educativa",
-    "title": "Gestiona tu academia de forma",
-    "titleHighlight": "inteligente",
-    "description": "La plataforma todo-en-uno para administrar clases, profesores, salones, pagos y reservas de tu academia.",
-    "cta": "Comenzar ahora",
+    "badge": "Escuela de español en Medellín, Colombia",
+    "title": "Aprende español de forma",
+    "titleHighlight": "inmersiva",
+    "description": "Reserva tus clases, sigue tu progreso y conéctate con profesores colombianos nativos. La plataforma todo-en-uno para tu viaje de aprendizaje de español.",
+    "cta": "Empezar a aprender",
     "ctaSecondary": "Ver características",
     "mockup": {
       "students": "Estudiantes",
@@ -26,75 +26,75 @@
     "subtitle": "Herramientas potentes diseñadas para la gestión educativa moderna",
     "items": {
       "users": {
-        "title": "Gestión de Usuarios",
-        "description": "Control total de roles: administradores, profesores y estudiantes con permisos jerárquicos."
+        "title": "Registro fácil",
+        "description": "Tu cuenta está lista en minutos. Accede a tu panel para ver tus clases y progreso."
       },
       "bookings": {
-        "title": "Reservas Inteligentes",
-        "description": "Sistema de reservas con validación automática de horarios, capacidad y disponibilidad."
+        "title": "Reservas inteligentes",
+        "description": "Ve la disponibilidad real de tu profesor y reserva clases que se adapten a tu horario."
       },
       "packages": {
-        "title": "Paquetes Flexibles",
-        "description": "Crea y gestiona paquetes educativos con precios, descuentos y control de horas."
+        "title": "Paquetes flexibles",
+        "description": "Elige entre Grupo abierto, Grupo cerrado o clases privadas. De 1 a 6 semanas con descuentos progresivos."
       },
       "payments": {
-        "title": "Pagos Seguros",
-        "description": "Flujo completo de pagos con comprobantes, aprobación administrativa y auditoría."
+        "title": "Pagos seguros",
+        "description": "Paga con transferencia bancaria, tarjeta de crédito o efectivo. Tu reserva se confirma una vez aprobado el pago."
       },
       "rooms": {
-        "title": "Gestión de Salones",
-        "description": "Administra salones físicos con control de capacidad y disponibilidad en tiempo real."
+        "title": "Presencial y virtual",
+        "description": "Aprende en nuestras aulas en Medellín o únete a clases virtuales desde cualquier parte del mundo."
       },
       "availability": {
-        "title": "Disponibilidad Docente",
-        "description": "Los profesores gestionan su horario semanal con validación de traslapes automática."
+        "title": "Horario en tiempo real",
+        "description": "Consulta tus próximas clases, horas restantes y disponibilidad del profesor en cualquier momento."
       }
     }
   },
   "howItWorks": {
     "sectionLabel": "Proceso",
     "title": "¿Cómo funciona?",
-    "subtitle": "Cuatro simples pasos para transformar la gestión de tu academia",
+    "subtitle": "Cuatro simples pasos para comenzar tu aprendizaje de español",
     "steps": {
       "1": {
-        "title": "Registra tu equipo",
-        "description": "Los administradores crean cuentas para profesores y estudiantes."
+        "title": "Crea tu cuenta",
+        "description": "Tu profesor te registrará en la plataforma."
       },
       "2": {
-        "title": "Configura tu oferta",
-        "description": "Define paquetes educativos, salones y horarios disponibles."
+        "title": "Elige tu paquete",
+        "description": "Escoge el tipo de clase y la duración según tus objetivos: Grupo abierto, Grupo cerrado o Privadas."
       },
       "3": {
-        "title": "Los estudiantes reservan",
-        "description": "Los alumnos adquieren paquetes y reservan sus clases."
+        "title": "Reserva tus clases",
+        "description": "Selecciona tu profesor, horario y modalidad preferida: presencial o virtual."
       },
       "4": {
-        "title": "Gestiona y crece",
-        "description": "Monitorea pagos, ocupación y rendimiento desde el dashboard."
+        "title": "Empieza a aprender",
+        "description": "Asiste a tus clases, lleva el control de tus horas y disfruta aprendiendo español en Medellín."
       }
     }
   },
   "benefits": {
-    "title": "¿Por qué elegir ClassRoom Pro?",
+    "title": "¿Por qué elegir Valley Spanish School?",
     "sectionLabel": "Ventajas",
-    "subtitle": "Diseñado para academias que buscan excelencia operativa",
-    "statsCardTitle": "La confianza de cientos de academias",
+    "subtitle": "La mejor forma de aprender español en Medellín",
+    "statsCardTitle": "Nuestros números hablan",
     "exploreFeatures": "Explorar todas las características",
     "items": [
-      "Ahorra tiempo automatizando la gestión de reservas",
-      "Evita conflictos de horario con validación inteligente",
-      "Control financiero completo con flujo de pagos",
-      "Acceso basado en roles para mayor seguridad",
-      "Escalable: desde academias pequeñas hasta grandes instituciones"
+      "Profesores colombianos nativos con años de experiencia",
+      "Horarios flexibles: clases presenciales y virtuales",
+      "Grupos pequeños para atención personalizada",
+      "Sigue tu progreso y horas de clase en tiempo real",
+      "Ubicados en el corazón de Medellín"
     ],
     "stats": {
-      "uptime": { "value": "99.9%", "label": "Uptime garantizado" },
-      "support": { "value": "24/7", "label": "Soporte técnico" },
-      "academies": { "value": "500+", "label": "Academias activas" }
+      "uptime": { "value": "6+", "label": "Profesores expertos" },
+      "support": { "value": "4", "label": "Salones modernos" },
+      "academies": { "value": "100%", "label": "Atención personalizada" }
     }
   },
   "footer": {
-    "description": "La plataforma integral para la gestión inteligente de academias y centros educativos.",
+    "description": "Aprende español en Medellín con profesores colombianos nativos. Clases presenciales y virtuales para todos los niveles.",
     "product": {
       "title": "Producto",
       "features": "Características",
@@ -115,7 +115,7 @@
       "privacy": "Política de privacidad",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} ClassRoom Pro. Todos los derechos reservados.",
+    "copyright": "© {{year}} Valley Spanish School. Todos los derechos reservados.",
     "madeWith": "Hecho con dedicación para la educación"
   }
 }

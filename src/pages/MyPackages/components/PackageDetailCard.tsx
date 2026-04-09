@@ -81,13 +81,13 @@ export default function PackageDetailCard({
   return (
     <Card className="space-y-5 relative overflow-hidden">
       {/* Top accent line */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
 
       {/* Package header */}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-            <BookOpen className="h-5 w-5 text-amber-400" />
+          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+            <BookOpen className="h-5 w-5 text-blue-400" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export default function PackageDetailCard({
             </p>
           </div>
         </div>
-        <span className="text-lg font-bold text-amber-400 font-[family-name:var(--font-display)]">
+        <span className="text-lg font-bold text-blue-400 font-[family-name:var(--font-display)]">
           {formatCurrency(pkg.total_price)}
         </span>
       </div>
@@ -181,7 +181,7 @@ export default function PackageDetailCard({
                       href={payment.payment_proof_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 transition-colors"
+                      className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
                     >
                       <ExternalLink className="h-3 w-3" />
                       {tc('actions.viewDetails')}

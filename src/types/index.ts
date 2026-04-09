@@ -120,6 +120,11 @@ export type StudentPackageDTO = {
   updated_at: string;
 };
 
+export type AcquirePackageResponse = {
+  student_package: StudentPackageDTO;
+  payment: PaymentDTO;
+};
+
 // ─── Payments ────────────────────────────────────────────────────────────────
 
 export type PaymentDTO = {
@@ -166,6 +171,43 @@ export type AvailabilityRangeDTO = {
 
 export type SetAvailabilityDTO = {
   ranges: AvailabilityRangeDTO[];
+};
+
+// ─── Teacher Booking Availability (with slot occupancy) ───────────────────────
+
+export type BookingStudentRef = {
+  student_package_id: string;
+  student_id: number;
+  student_name: string;
+};
+
+export type SlotBookingInfo = {
+  booking_id: string;
+  booking_type: BookingType;
+  status: BookingStatus;
+  scheduled_date: string;
+  student_count: number;
+  students: BookingStudentRef[];
+  room: { id: number; name: string; capacity: number } | null;
+};
+
+export type AvailabilitySlot = {
+  day_of_week: number;
+  start_time: string;
+  end_time: string;
+  is_virtual: boolean;
+  is_booked: boolean;
+  booking: SlotBookingInfo | null;
+};
+
+export type TeacherBookingAvailabilityDTO = {
+  availability_id: string;
+  teacher_id: number;
+  day_of_week: number;
+  is_virtual: boolean;
+  range_start: string;
+  range_end: string;
+  slots: AvailabilitySlot[];
 };
 
 // ─── Ref types (embedded references) ─────────────────────────────────────────

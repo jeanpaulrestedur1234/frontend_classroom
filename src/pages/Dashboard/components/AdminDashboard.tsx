@@ -92,7 +92,7 @@ export default function AdminDashboard() {
           icon={<CalendarDays className="h-6 w-6" />}
           label={t('admin.pendingBookings')}
           value={stats?.pending_bookings ?? 0}
-          color="amber"
+          color="blue"
         />
         <StatCard
           icon={<CheckCircle2 className="h-6 w-6" />}
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
                   className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-1.5 rounded-full bg-amber-500/60" />
+                    <div className="h-8 w-1.5 rounded-full bg-blue-500/60" />
                     <div>
                       <p className="text-sm font-medium text-zinc-900">
                         {t('admin.booking')} #{b.id.slice(0, 8)}

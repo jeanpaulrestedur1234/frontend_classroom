@@ -115,7 +115,7 @@ export default function TeacherDashboard() {
           icon={<CalendarDays className="h-6 w-6" />}
           label={t('teacher.pendingBookings')}
           value={stats?.pending_bookings ?? 0}
-          color="amber"
+          color="blue"
         />
         <StatCard
           icon={<CheckCircle2 className="h-6 w-6" />}
@@ -142,7 +142,7 @@ export default function TeacherDashboard() {
                   key={a.id}
                   className="flex items-center gap-3 rounded-xl bg-white/[0.04] p-3"
                 >
-                  <Clock className="h-4 w-4 text-amber-400" />
+                  <Clock className="h-4 w-4 text-blue-400" />
                   <span className="text-sm text-zinc-700">
                     {a.start_time} - {a.end_time}
                   </span>
@@ -176,7 +176,7 @@ export default function TeacherDashboard() {
                   className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-1.5 rounded-full bg-amber-500/60" />
+                    <div className="h-8 w-1.5 rounded-full bg-blue-500/60" />
                     <div>
                       <p className="text-sm font-medium text-zinc-900">
                         {b.start_time} - {b.end_time}
@@ -201,7 +201,7 @@ export default function TeacherDashboard() {
       <div className="mt-8">
         <Link
           to="/app/availability"
-          className="inline-flex items-center gap-2 text-sm font-medium text-amber-400 transition-colors hover:text-amber-300"
+          className="inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors hover:text-blue-300"
         >
           {t('teacher.configureAvailability')}
           <ArrowRight className="h-4 w-4" />

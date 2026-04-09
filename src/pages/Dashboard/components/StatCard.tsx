@@ -4,11 +4,11 @@ export interface StatCardProps {
   icon: React.ReactNode;
   label: string;
   value: string | number;
-  color: 'amber' | 'sky' | 'emerald' | 'rose' | 'violet';
+  color: 'blue' | 'sky' | 'emerald' | 'rose' | 'violet';
 }
 
 const colorMap: Record<StatCardProps['color'], { bg: string; text: string }> = {
-  amber:   { bg: 'bg-amber-500/10',   text: 'text-amber-400' },
+  blue:    { bg: 'bg-blue-500/10',    text: 'text-blue-400' },
   sky:     { bg: 'bg-sky-500/10',      text: 'text-sky-400' },
   emerald: { bg: 'bg-emerald-500/10',  text: 'text-emerald-400' },
   rose:    { bg: 'bg-rose-500/10',     text: 'text-rose-400' },

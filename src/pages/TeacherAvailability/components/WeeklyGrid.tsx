@@ -56,7 +56,7 @@ export default function WeeklyGrid({ availability }: WeeklyGridProps) {
                           className={`rounded-lg px-2 py-1.5 text-xs font-medium transition-all ${
                             slot.is_virtual
                               ? 'bg-sky-400/15 text-sky-400 ring-1 ring-sky-500/20'
-                              : 'bg-amber-400/15 text-amber-400 ring-1 ring-amber-500/20'
+                              : 'bg-blue-400/15 text-blue-400 ring-1 ring-blue-500/20'
                           }`}
                           title={`${slot.start_time} - ${slot.end_time} (${slot.is_virtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial')})`}
                         >
@@ -90,7 +90,7 @@ export default function WeeklyGrid({ availability }: WeeklyGridProps) {
             <span>{t('legend.virtual')}</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-amber-400/15 ring-1 ring-amber-500/20" />
+            <div className="w-4 h-4 rounded bg-blue-400/15 ring-1 ring-blue-500/20" />
             <span>{t('legend.presencial')}</span>
           </div>
         </div>

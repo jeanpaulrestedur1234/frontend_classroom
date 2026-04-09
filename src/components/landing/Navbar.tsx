@@ -32,40 +32,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
-          <a
-            href="#"
-            className="flex items-center gap-2.5 font-[family-name:var(--font-display)] font-bold text-xl"
-          >
-            <div className="relative flex items-center justify-center w-8 h-8">
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 opacity-20 blur-sm" />
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                className="w-6 h-6 relative"
-                stroke="url(#logo-gradient)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <defs>
-                  <linearGradient
-                    id="logo-gradient"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                  >
-                    <stop offset="0%" stopColor="#fbbf24" />
-                    <stop offset="100%" stopColor="#d97706" />
-                  </linearGradient>
-                </defs>
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-              </svg>
-            </div>
-            <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
-              ClassRoom Pro
-            </span>
+          <a href="#" className="flex items-center">
+            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-10" />
           </a>
 
           {/* Desktop links */}
@@ -74,7 +42,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-amber-400 transition-colors duration-200 rounded-lg hover:bg-zinc-50"
+                className="relative px-4 py-2 text-sm font-medium text-zinc-400 hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-zinc-50"
               >
                 {t(link.key)}
               </a>
@@ -86,7 +54,7 @@ export default function Navbar() {
             <LanguageSwitcher compact />
             <Link
               to="/login"
-              className="inline-flex items-center px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-zinc-950 text-sm font-semibold font-[family-name:var(--font-display)] hover:from-amber-300 hover:to-amber-500 transition-all duration-200 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30"
+              className="inline-flex items-center px-5 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold font-[family-name:var(--font-display)] hover:bg-blue-700 transition-all duration-200 shadow-lg shadow-blue-600/20"
             >
               {t("navbar.login")}
             </Link>
@@ -119,7 +87,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="block px-4 py-2.5 text-zinc-400 hover:text-amber-400 transition-colors text-sm font-medium rounded-xl hover:bg-zinc-50"
+                className="block px-4 py-2.5 text-zinc-400 hover:text-blue-500 transition-colors text-sm font-medium rounded-xl hover:bg-zinc-50"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(link.key)}
@@ -129,7 +97,7 @@ export default function Navbar() {
               <LanguageSwitcher compact />
               <Link
                 to="/login"
-                className="flex-1 text-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 text-zinc-950 text-sm font-semibold font-[family-name:var(--font-display)] hover:from-amber-300 hover:to-amber-500 transition-all duration-200 shadow-lg shadow-amber-500/20"
+                className="flex-1 text-center px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold font-[family-name:var(--font-display)] hover:bg-blue-700 transition-all duration-200 shadow-lg shadow-blue-600/20"
                 onClick={() => setMobileOpen(false)}
               >
                 {t("navbar.login")}

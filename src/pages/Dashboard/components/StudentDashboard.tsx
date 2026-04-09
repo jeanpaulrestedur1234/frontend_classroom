@@ -69,7 +69,7 @@ export default function StudentDashboard() {
           icon={<Package className="h-6 w-6" />}
           label={t('student.activePackages')}
           value={stats?.active_packages ?? 0}
-          color="amber"
+          color="blue"
         />
         <StatCard
           icon={<CalendarDays className="h-6 w-6" />}
@@ -93,7 +93,7 @@ export default function StudentDashboard() {
         <Card>
           {upcomingBooking ? (
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
                 <CalendarDays className="h-7 w-7" />
               </div>
               <div className="min-w-0">
@@ -134,7 +134,7 @@ export default function StudentDashboard() {
               .slice(0, 4)
               .map((p) => (
                 <Card key={p.id} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">

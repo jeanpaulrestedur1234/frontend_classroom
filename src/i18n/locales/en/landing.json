@@ -6,11 +6,11 @@
     "login": "Sign In"
   },
   "hero": {
-    "badge": "Educational management platform",
-    "title": "Manage your academy the",
-    "titleHighlight": "smart way",
-    "description": "The all-in-one platform to manage classes, teachers, rooms, payments, and bookings for your academy.",
-    "cta": "Get started",
+    "badge": "Spanish School in Medellín, Colombia",
+    "title": "Learn Spanish the",
+    "titleHighlight": "immersive way",
+    "description": "Book your classes, track your progress, and connect with native Colombian teachers. The all-in-one platform for your Spanish learning journey.",
+    "cta": "Start Learning",
     "ctaSecondary": "See features",
     "mockup": {
       "students": "Students",
@@ -26,75 +26,75 @@
     "subtitle": "Powerful tools designed for modern educational management",
     "items": {
       "users": {
-        "title": "User Management",
-        "description": "Full role control: administrators, teachers, and students with hierarchical permissions."
+        "title": "Easy Registration",
+        "description": "Your account is ready in minutes. Access your dashboard to see your classes and progress."
       },
       "bookings": {
-        "title": "Smart Bookings",
-        "description": "Booking system with automatic schedule, capacity, and availability validation."
+        "title": "Smart Booking",
+        "description": "See your teacher's real availability and book classes that fit your schedule."
       },
       "packages": {
         "title": "Flexible Packages",
-        "description": "Create and manage educational packages with pricing, discounts, and hour tracking."
+        "description": "Choose from Open Group, Closed Group, or Private classes. 1 to 6 weeks with progressive discounts."
       },
       "payments": {
         "title": "Secure Payments",
-        "description": "Complete payment flow with receipts, administrative approval, and auditing."
+        "description": "Pay with bank transfer, credit card, or cash. Your booking is confirmed once payment is approved."
       },
       "rooms": {
-        "title": "Room Management",
-        "description": "Manage physical rooms with real-time capacity control and availability."
+        "title": "In-Person & Virtual",
+        "description": "Learn in our classrooms in Medellín or join virtual classes from anywhere in the world."
       },
       "availability": {
-        "title": "Teacher Availability",
-        "description": "Teachers manage their weekly schedule with automatic overlap validation."
+        "title": "Real-Time Schedule",
+        "description": "Check your upcoming classes, hours remaining, and teacher availability at any time."
       }
     }
   },
   "howItWorks": {
     "sectionLabel": "Process",
     "title": "How does it work?",
-    "subtitle": "Four simple steps to transform your academy management",
+    "subtitle": "Four simple steps to start your Spanish learning journey",
     "steps": {
       "1": {
-        "title": "Register your team",
-        "description": "Administrators create accounts for teachers and students."
+        "title": "Create your account",
+        "description": "Your teacher will register you in the platform."
       },
       "2": {
-        "title": "Set up your offerings",
-        "description": "Define educational packages, rooms, and available schedules."
+        "title": "Choose your package",
+        "description": "Pick the class type and duration that fits your goals: Open Group, Closed Group, or Private."
       },
       "3": {
-        "title": "Students book classes",
-        "description": "Students purchase packages and book their classes."
+        "title": "Book your classes",
+        "description": "Select your teacher, schedule, and preferred modality — in-person or virtual."
       },
       "4": {
-        "title": "Manage and grow",
-        "description": "Monitor payments, occupancy, and performance from the dashboard."
+        "title": "Start learning",
+        "description": "Attend your classes, track your hours, and enjoy learning Spanish in Medellín."
       }
     }
   },
   "benefits": {
-    "title": "Why choose ClassRoom Pro?",
+    "title": "Why choose Valley Spanish School?",
     "sectionLabel": "Advantages",
-    "subtitle": "Designed for academies seeking operational excellence",
-    "statsCardTitle": "Trusted by hundreds of academies",
+    "subtitle": "The best way to learn Spanish in Medellín",
+    "statsCardTitle": "Our numbers speak",
     "exploreFeatures": "Explore all features",
     "items": [
-      "Save time by automating booking management",
-      "Avoid schedule conflicts with smart validation",
-      "Complete financial control with payment flow",
-      "Role-based access for enhanced security",
-      "Scalable: from small academies to large institutions"
+      "Native Colombian teachers with years of experience",
+      "Flexible scheduling: in-person and virtual classes",
+      "Small groups for personalized attention",
+      "Track your progress and class hours in real-time",
+      "Located in the heart of Medellín"
     ],
     "stats": {
-      "uptime": { "value": "99.9%", "label": "Guaranteed uptime" },
-      "support": { "value": "24/7", "label": "Technical support" },
-      "academies": { "value": "500+", "label": "Active academies" }
+      "uptime": { "value": "6+", "label": "Expert teachers" },
+      "support": { "value": "4", "label": "Modern classrooms" },
+      "academies": { "value": "100%", "label": "Personalized attention" }
     }
   },
   "footer": {
-    "description": "The comprehensive platform for smart management of academies and educational centers.",
+    "description": "Learn Spanish in Medellín with native Colombian teachers. In-person and virtual classes for all levels.",
     "product": {
       "title": "Product",
       "features": "Features",
@@ -115,7 +115,7 @@
       "privacy": "Privacy Policy",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} ClassRoom Pro. All rights reserved.",
+    "copyright": "© {{year}} Valley Spanish School. All rights reserved.",
     "madeWith": "Made with dedication for education"
   }
 }

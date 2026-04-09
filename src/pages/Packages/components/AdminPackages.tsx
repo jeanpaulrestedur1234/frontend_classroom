@@ -43,7 +43,7 @@ export default function AdminPackages() {
           <h1 className="text-3xl font-bold text-zinc-950 font-[family-name:var(--font-display)] tracking-tight">
             {t('catalog.title')}
           </h1>
-          <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-600" />
+          <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
         </div>
         <Button onClick={() => setShowModal(true)}>
           <Plus className="h-4 w-4" />

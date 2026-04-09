@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CircleCheck } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { createBooking } from '@/services/bookings';
 import { getTeacherAvailability } from '@/services/availability';
 import { listTeachers } from '@/services/users';
 import { listRooms } from '@/services/rooms';
 import { getMyPackages } from '@/services/packages';
-import type { UserDTO, RoomDTO, BookingType, StudentBookingDetailDto, TeacherAvailabilityDTO, StudentPackageDTO } from '@/types';
+import type { UserDTO, RoomDTO, BookingType, StudentBookingDetailDto, TeacherBookingAvailabilityDTO, StudentPackageDTO } from '@/types';
 
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -41,7 +41,7 @@ export default function CreateBooking() {
   /* data */
   const [teachers, setTeachers] = useState<UserDTO[]>([]);
   const [rooms, setRooms] = useState<RoomDTO[]>([]);
-  const [teacherAvailability, setTeacherAvailability] = useState<TeacherAvailabilityDTO[]>([]);
+  const [teacherAvailability, setTeacherAvailability] = useState<TeacherBookingAvailabilityDTO[]>([]);
   const [myPackages, setMyPackages] = useState<StudentPackageDTO[]>([]);
   const [selectedPackageId, setSelectedPackageId] = useState('');
   const [loadingData, setLoadingData] = useState(false);
@@ -201,7 +201,7 @@ export default function CreateBooking() {
         return <StepRoom t={t} tc={tc} rooms={rooms} loading={loadingData} roomId={roomId} setRoomId={setRoomId} />;
       case 3:
         return (
-          <StepDateTime
+        <StepDateTime
             t={t}
             tc={tc}
             teacherAvailability={teacherAvailability}
@@ -210,6 +210,9 @@ export default function CreateBooking() {
             setScheduledDate={setScheduledDate}
             startTime={startTime}
             setStartTime={setStartTime}
+            bookingType={bookingType}
+            roomId={roomId}
+            myPackageIds={myPackages.map((p) => p.id)}
           />
         );
       case 4:
@@ -267,7 +270,7 @@ export default function CreateBooking() {
           </Button>
         ) : (
           <Button onClick={handleSubmit} loading={submitting}>
-            <CheckCircle className="w-4 h-4" />
+            <CircleCheck className="w-4 h-4" />
             {t('create.submitBooking')}
           </Button>
         )}

@@ -113,7 +113,7 @@ export default function SuccessScreen({ booking, onReset, usedPackageId }: Succe
           <div className="mt-6 border-t border-zinc-100 pt-4">
             <button
               onClick={() => setShowPackageStep(true)}
-              className="w-full flex items-center justify-between p-4 rounded-xl border border-dashed border-white/[0.12] text-sm text-zinc-400 hover:border-amber-500/30 hover:text-amber-400 hover:bg-amber-500/5 transition-all duration-200"
+              className="w-full flex items-center justify-between p-4 rounded-xl border border-dashed border-white/[0.12] text-sm text-zinc-400 hover:border-blue-500/30 hover:text-blue-400 hover:bg-blue-500/5 transition-all duration-200"
             >
               <span className="flex items-center gap-2">
                 <Package className="w-4 h-4" />

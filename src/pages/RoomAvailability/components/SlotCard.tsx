@@ -12,13 +12,13 @@ function occupancyPct(studentCount: number, capacity: number): number {
 
 function occupancyBarColor(pct: number): string {
   if (pct >= 90) return 'bg-rose-500';
-  if (pct >= 60) return 'bg-amber-500';
+  if (pct >= 60) return 'bg-blue-500';
   return 'bg-emerald-500';
 }
 
 function occupancyTextColor(pct: number): string {
   if (pct >= 90) return 'text-rose-400';
-  if (pct >= 60) return 'text-amber-400';
+  if (pct >= 60) return 'text-blue-400';
   return 'text-emerald-400';
 }
 

@@ -48,6 +48,8 @@
       "title": "Subir Comprobante de Pago",
       "urlLabel": "URL del comprobante",
       "urlPlaceholder": "https://ejemplo.com/comprobante.jpg",
+      "fileLabel": "Archivo del comprobante",
+      "confirm": "Confirmar y Adquirir",
       "success": "Comprobante cargado exitosamente",
       "error": "Error al cargar comprobante"
     },

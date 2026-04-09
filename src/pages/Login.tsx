@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, AlertCircle, ArrowLeft, Lock, Mail } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Lock, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
 import Button from '@/components/ui/Button';
@@ -53,7 +53,7 @@ export default function Login() {
       <div className="flex items-center justify-center min-h-screen bg-white">
         <div className="relative">
           <div className="h-12 w-12 rounded-full border-2 border-zinc-800" />
-          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-amber-500" />
+          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-blue-600" />
         </div>
       </div>
     );
@@ -64,7 +64,7 @@ export default function Login() {
       {/* ── Decorative background orbs ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Amber orb — top right */}
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-amber-500/5 blur-[120px]" />
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-blue-600/5 blur-[120px]" />
         {/* Purple orb — bottom left */}
         <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-600/5 blur-[140px]" />
         {/* Subtle grid texture */}
@@ -89,10 +89,8 @@ export default function Login() {
         <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-8 shadow-2xl shadow-black/40">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20 mb-4">
-              <GraduationCap className="w-7 h-7 text-zinc-950" />
-            </div>
-            <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
+            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-12 mb-4" />
+            <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
               {tc('appName')}
             </h1>
           </div>
@@ -161,7 +159,7 @@ export default function Login() {
         <div className="flex justify-center mt-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-amber-400 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-blue-500 transition-colors duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             {t('login.backToHome')}

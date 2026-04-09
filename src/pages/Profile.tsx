@@ -93,7 +93,7 @@ export default function Profile() {
         <div className="lg:col-span-2">
           <Card className="flex flex-col items-center text-center py-8 px-6">
             {/* Avatar */}
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 mb-4">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 mb-4">
               <span className="text-2xl font-bold font-[family-name:var(--font-display)] text-zinc-950">
                 {initials}
               </span>

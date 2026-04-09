@@ -48,6 +48,8 @@
       "title": "Upload Payment Receipt",
       "urlLabel": "Receipt URL",
       "urlPlaceholder": "https://example.com/receipt.jpg",
+      "fileLabel": "Receipt File",
+      "confirm": "Confirm and Acquire",
       "success": "Receipt uploaded successfully",
       "error": "Error uploading receipt"
     },

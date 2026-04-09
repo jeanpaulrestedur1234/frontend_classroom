@@ -79,10 +79,10 @@ export default function Profile() {
     <div className="max-w-5xl mx-auto space-y-8">
       {/* Page header */}
       <div>
-        <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] text-zinc-950">
+        <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] text-[var(--text-heading)]">
           {tc('navigation.profile')}
         </h1>
-        <p className="text-sm text-zinc-400 mt-1">
+        <p className="text-sm text-[var(--text-muted)] mt-1">
           {tu('edit.title')}
         </p>
       </div>
@@ -94,29 +94,29 @@ export default function Profile() {
           <Card className="flex flex-col items-center text-center py-8 px-6">
             {/* Avatar */}
             <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 mb-4">
-              <span className="text-2xl font-bold font-[family-name:var(--font-display)] text-zinc-950">
+              <span className="text-2xl font-bold font-[family-name:var(--font-display)] text-white">
                 {initials}
               </span>
             </div>
 
             {/* Name */}
-            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-950">
+            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-[var(--text-heading)]">
               {user.full_name}
             </h2>
 
             {/* Email */}
-            <div className="flex items-center gap-1.5 text-sm text-zinc-400 mt-1">
+            <div className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] mt-1">
               <Mail className="w-3.5 h-3.5" />
               <span>{user.email}</span>
             </div>
 
             {/* Divider */}
-            <div className="w-full border-t border-zinc-100 my-5" />
+            <div className="w-full border-t border-[var(--border-main)] my-5" />
 
             {/* Role */}
             <div className="flex items-center gap-2 mb-3">
-              <Shield className="w-4 h-4 text-zinc-500" />
-              <span className="text-xs text-zinc-500 uppercase tracking-wider">
+              <Shield className="w-4 h-4 text-[var(--text-muted)]" />
+              <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">
                 {tc('roles.' + user.role)}
               </span>
             </div>
@@ -132,7 +132,7 @@ export default function Profile() {
             </div>
 
             {/* User ID */}
-            <div className="flex items-center gap-1.5 text-xs text-zinc-400 mt-5">
+            <div className="flex items-center gap-1.5 text-xs text-[var(--text-dim)] mt-5">
               <Hash className="w-3 h-3" />
               <span className="font-mono">{user.id}</span>
             </div>
@@ -142,7 +142,7 @@ export default function Profile() {
         {/* ── Right column: Edit form card ── */}
         <div className="lg:col-span-3">
           <Card>
-            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-zinc-950 mb-6">
+            <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-[var(--text-heading)] mb-6">
               {tu('edit.title')}
             </h2>
 
@@ -184,7 +184,7 @@ export default function Profile() {
                   placeholder={user.full_name}
                   className="pl-10"
                 />
-                <User className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
+                <User className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
               </div>
 
               {/* Phone */}
@@ -198,7 +198,7 @@ export default function Profile() {
                   placeholder="+1 234 567 8900"
                   className="pl-10"
                 />
-                <Phone className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
+                <Phone className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
               </div>
 
               <div className="pt-2">

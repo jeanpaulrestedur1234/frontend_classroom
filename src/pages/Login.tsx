@@ -18,7 +18,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (!authLoading && user) {
       navigate('/app', { replace: true });
@@ -47,38 +46,26 @@ export default function Login() {
     }
   }
 
-  // Loading state while checking auth
   if (authLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="flex items-center justify-center min-h-screen bg-[var(--bg-main)]">
         <div className="relative">
-          <div className="h-12 w-12 rounded-full border-2 border-zinc-800" />
-          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-blue-600" />
+          <div className="h-12 w-12 rounded-full border-2 border-[var(--border-strong)]" />
+          <div className="absolute inset-0 h-12 w-12 animate-spin rounded-full border-2 border-transparent border-t-[var(--primary)]" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden px-4">
+    <div className="relative min-h-screen flex items-center justify-center bg-[var(--bg-main)] overflow-hidden px-4">
       {/* ── Decorative background orbs ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Amber orb — top right */}
-        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-blue-600/5 blur-[120px]" />
-        {/* Purple orb — bottom left */}
-        <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-purple-600/5 blur-[140px]" />
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[var(--primary)]/5 blur-[120px]" />
+        <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-violet-600/5 blur-[140px]" />
       </div>
 
-      {/* ── Language switcher — top right corner ── */}
+      {/* ── Language switcher ── */}
       <div className="absolute top-6 right-6 z-10">
         <LanguageSwitcher />
       </div>
@@ -86,29 +73,29 @@ export default function Login() {
       {/* ── Main content ── */}
       <div className="relative w-full max-w-md">
         {/* Card */}
-        <div className="bg-zinc-50 backdrop-blur-xl border border-zinc-200 rounded-2xl p-8 shadow-2xl shadow-black/40">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl p-8 shadow-2xl shadow-black/10">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
             <img src="/valley-logo.png" alt="Valley Spanish School" className="h-12 mb-4" />
-            <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-[var(--primary)] via-blue-500 to-violet-500 bg-clip-text text-transparent">
               {tc('appName')}
             </h1>
           </div>
 
           {/* Title & subtitle */}
           <div className="text-center mb-8">
-            <h2 className="text-xl font-semibold font-[family-name:var(--font-display)] text-zinc-900">
+            <h2 className="text-xl font-semibold font-[family-name:var(--font-display)] text-[var(--text-heading)]">
               {t('login.title')}
             </h2>
-            <p className="text-sm text-zinc-500 mt-1">
+            <p className="text-sm text-[var(--text-muted)] mt-1">
               {t('login.subtitle')}
             </p>
           </div>
 
           {/* Error alert */}
           {error && (
-            <div className="flex items-start gap-3 p-3.5 mb-6 rounded-xl bg-rose-500/[0.07] backdrop-blur border border-rose-500/15 text-rose-300 text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-400" />
+            <div className="flex items-start gap-3 p-3.5 mb-6 rounded-xl bg-rose-500/[0.07] border border-rose-500/15 text-rose-500 text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -126,7 +113,7 @@ export default function Login() {
                 placeholder={t('login.emailPlaceholder')}
                 className="pl-10"
               />
-              <Mail className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
+              <Mail className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
             </div>
 
             <div className="relative">
@@ -140,7 +127,7 @@ export default function Login() {
                 placeholder={t('login.passwordPlaceholder')}
                 className="pl-10"
               />
-              <Lock className="absolute left-3 top-[38px] w-4 h-4 text-zinc-400 pointer-events-none" />
+              <Lock className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
             </div>
 
             <Button
@@ -159,7 +146,7 @@ export default function Login() {
         <div className="flex justify-center mt-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-blue-500 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors duration-200"
           >
             <ArrowLeft className="w-4 h-4" />
             {t('login.backToHome')}
@@ -167,7 +154,7 @@ export default function Login() {
         </div>
 
         {/* Copyright */}
-        <p className="text-center text-xs text-zinc-700 mt-6">
+        <p className="text-center text-xs text-[var(--text-dim)] mt-6">
           &copy; {new Date().getFullYear()} {tc('appName')}
         </p>
       </div>

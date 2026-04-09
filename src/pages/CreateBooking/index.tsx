@@ -248,7 +248,7 @@ export default function CreateBooking() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
+        <h1 className="text-2xl font-bold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('create.title')}
         </h1>
       </div>

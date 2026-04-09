@@ -123,7 +123,7 @@ export default function TeacherAvailability() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-950 font-[family-name:var(--font-display)]">
+          <h1 className="text-2xl font-bold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
             {isAdmin ? t('adminTitle') : t('title')}
           </h1>
         </div>
@@ -141,7 +141,7 @@ export default function TeacherAvailability() {
         <div className="flex items-start gap-3 p-4 rounded-2xl bg-blue-500/5 border border-blue-500/15 backdrop-blur-xl">
           <AlertTriangle className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-blue-300">
+            <p className="text-sm font-medium text-[var(--primary)]">
               {isFriday() ? t('fridayReady') : t('fridayWarning', { day: getCurrentDayName(tc) })}
             </p>
           </div>

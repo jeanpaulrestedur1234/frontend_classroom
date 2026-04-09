@@ -1,4 +1,8 @@
 {
+  "theme": {
+    "dark": "Modo Oscuro",
+    "light": "Modo Claro"
+  },
   "appName": "Valley Spanish School",
   "actions": {
     "save": "Guardar",

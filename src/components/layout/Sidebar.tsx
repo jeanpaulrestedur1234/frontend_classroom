@@ -3,8 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   LayoutDashboard,
-  User,
-  Users,
+  User as UserIcon,
+  Users as UsersIcon,
   Building2,
   Package,
   CreditCard,
@@ -13,11 +13,14 @@ import {
   CalendarPlus,
   LogOut,
   Menu,
-  X,
+  X as XIcon,
   ChevronLeft,
   DoorOpen,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
 import type { UserRole } from '@/types';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
@@ -38,13 +41,13 @@ const navItems: NavItem[] = [
   {
     labelKey: 'navigation.profile',
     to: '/app/profile',
-    icon: <User className="h-5 w-5 shrink-0" />,
+    icon: <UserIcon className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin', 'teacher', 'student'],
   },
   {
     labelKey: 'navigation.users',
     to: '/app/users',
-    icon: <Users className="h-5 w-5 shrink-0" />,
+    icon: <UsersIcon className="h-5 w-5 shrink-0" />,
     roles: ['super_admin', 'admin'],
   },
   {
@@ -116,6 +119,7 @@ interface SidebarProps {
 
 export default function Sidebar({ expanded, onToggle }: SidebarProps) {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -143,20 +147,16 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
   );
 
   const sidebarContent = (
-    <div className="flex h-full flex-col bg-white border-r border-zinc-100">
+    <div className="flex h-full flex-col bg-[var(--bg-surface)] border-r border-[var(--border-main)] transition-colors duration-300">
       {/* Logo & Toggle */}
-      <div className="flex h-16 items-center justify-between px-4 border-b border-zinc-100">
+      <div className="flex h-16 items-center justify-between px-4 border-b border-[var(--border-main)]">
         <div className="flex items-center gap-2.5 overflow-hidden">
           {/* Logo */}
-          {expanded ? (
-            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-8" />
-          ) : (
-            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-6 w-6 object-contain" />
-          )}
+          <img src="/valley-logo.png" alt="Valley Spanish School" className={expanded ? "h-8" : "h-6 w-6 object-contain"} />
         </div>
         <button
           onClick={onToggle}
-          className="hidden lg:flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-700 hover:bg-white/[0.04] transition-all duration-200"
+          className="hidden lg:flex items-center justify-center h-8 w-8 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-surface-hover)] transition-all duration-200"
           aria-label="Toggle sidebar"
         >
           <ChevronLeft
@@ -178,8 +178,8 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
               ${expanded ? '' : 'justify-center'
               }
               ${isActive
-                ? 'bg-blue-500/10 text-blue-400 border-l-2 border-blue-500 shadow-sm shadow-blue-500/5'
-                : 'text-zinc-500 hover:text-zinc-800 hover:bg-white/[0.04] border-l-2 border-transparent'
+                ? 'bg-[var(--primary)]/10 text-[var(--primary)] border-l-2 border-[var(--primary)] shadow-sm shadow-blue-500/5'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-surface-hover)] border-l-2 border-transparent'
               }`
             }
           >
@@ -196,7 +196,19 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       </nav>
 
       {/* Bottom section */}
-      <div className="border-t border-zinc-100 p-3 space-y-2">
+      <div className="border-t border-[var(--border-main)] p-3 space-y-2">
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--primary)]/10 transition-all duration-200 ${expanded ? '' : 'justify-center'}`}
+          title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+        >
+          {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          {expanded && (
+            <span className="whitespace-nowrap">{theme === 'light' ? t('theme.dark') : t('theme.light')}</span>
+          )}
+        </button>
+
         {/* Language switcher */}
         <div className={`flex ${expanded ? 'justify-start' : 'justify-center'}`}>
           <LanguageSwitcher compact={!expanded} />
@@ -205,7 +217,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         {/* Logout */}
         <button
           onClick={logout}
-          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-zinc-400 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${expanded ? '' : 'justify-center'
+          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-200 ${expanded ? '' : 'justify-center'
             }`}
         >
           <LogOut className="h-5 w-5 shrink-0" />
@@ -222,7 +234,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-zinc-50 backdrop-blur-xl border border-zinc-200 text-zinc-400 hover:text-blue-400 hover:border-blue-500/30 transition-all duration-200 lg:hidden"
+        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-[var(--bg-surface)] backdrop-blur-xl border border-[var(--border-main)] text-[var(--text-muted)] hover:text-[var(--primary)] hover:border-[var(--primary)]/30 transition-all duration-200 lg:hidden"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />
@@ -246,10 +258,10 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
         <div className="relative h-full">
           <button
             onClick={closeMobile}
-            className="absolute top-4 right-3 z-10 flex items-center justify-center h-8 w-8 rounded-lg text-zinc-500 hover:text-zinc-800 hover:bg-zinc-100 transition-all duration-200"
+            className="absolute top-4 right-3 z-10 flex items-center justify-center h-8 w-8 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-surface-hover)] transition-all duration-200"
             aria-label="Close menu"
           >
-            <X className="h-5 w-5" />
+            <XIcon className="h-5 w-5" />
           </button>
           {sidebarContent}
         </div>

@@ -15,7 +15,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={id} className="block text-sm font-medium text-zinc-700">
+          <label htmlFor={id} className="block text-sm font-medium text-[var(--text-muted)]">
             {label}
           </label>
         )}
@@ -24,19 +24,19 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           id={id}
           className={`
             block w-full rounded-xl px-4 py-2.5 text-sm appearance-none
-            bg-white/5 border border-white/10 text-zinc-900
+            bg-[var(--bg-surface)] border border-[var(--border-strong)] text-[var(--text-main)]
             transition-all duration-200
-            hover:border-white/20
-            focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20
+            hover:border-[var(--primary)]/50
+            focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20
             disabled:opacity-40 disabled:cursor-not-allowed
             ${error ? 'border-rose-500/50 focus:border-rose-500/50 focus:ring-rose-500/20' : ''}
             ${className}
           `}
           {...props}
         >
-          <option value="" className="bg-zinc-50 text-zinc-400">{t('select.placeholder')}</option>
+          <option value="" className="bg-[var(--bg-surface)] text-[var(--text-dim)]">{t('select.placeholder')}</option>
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-zinc-50 text-zinc-900">
+            <option key={opt.value} value={opt.value} className="bg-[var(--bg-surface)] text-[var(--text-main)]">
               {opt.label}
             </option>
           ))}

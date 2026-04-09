@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
 import { ToastProvider } from '@/context/ToastContext';
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -38,13 +39,15 @@ function SuspenseWrapper({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
   return (
-    <AuthProvider>
-      <ToastProvider>
-        <ErrorBoundary>
-          <Outlet />
-        </ErrorBoundary>
-      </ToastProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <ToastProvider>
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
+        </ToastProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

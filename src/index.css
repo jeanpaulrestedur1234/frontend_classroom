@@ -5,16 +5,16 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
 
   /* Neutrals - Light Mode Defaults */
-  --color-bg-main: #fcfcfd;
+  --color-bg-main: #f4f4f5;
   --color-bg-surface: #ffffff;
-  --color-bg-surface-hover: #f9f9fb;
+  --color-bg-surface-hover: #f4f4f5;
   
-  --color-text-main: #18181b;
+  --color-text-main: #09090b;
   --color-text-muted: #71717a;
   --color-text-dim: #a1a1aa;
   
-  --color-border-main: #f4f4f5;
-  --color-border-strong: #e4e4e7;
+  --color-border-main: #e4e4e7;
+  --color-border-strong: #d4d4d8;
 
   /* Accents */
   --color-primary-50: #eff6ff;
@@ -25,11 +25,11 @@
   /* Booking Types */
   --color-virtual-bg: rgba(99, 102, 241, 0.1);
   --color-virtual-text: #6366f1;
-  --color-virtual-border: rgba(99, 102, 241, 0.2);
+  --color-virtual-border: rgba(99, 102, 241, 0.25);
 
   --color-presencial-bg: rgba(20, 184, 166, 0.1);
-  --color-presencial-text: #14b8a6;
-  --color-presencial-border: rgba(20, 184, 166, 0.2);
+  --color-presencial-text: #0d9488;
+  --color-presencial-border: rgba(20, 184, 166, 0.25);
 
   --color-glass: rgba(255, 255, 255, 0.7);
   --color-glass-border: rgba(0, 0, 0, 0.05);
@@ -37,42 +37,78 @@
 
 @layer base {
   :root {
-    --bg-main: #fcfcfd;
-    --bg-surface: #ffffff;
-    --bg-surface-hover: #f9f9fb;
+    /* ── Surface layers (solves "mixing whites" — layered hierarchy) ── */
+    --bg-main: #f4f4f5;        /* Page background — off-white, sets the floor */
+    --bg-surface: #ffffff;     /* Cards/panels — true white, clearly lifts above bg-main */
+    --bg-elevated: #ffffff;    /* Modals/dropdowns — same as surface in light mode */
+    --bg-subtle: #f9f9fb;      /* Alternate rows, sub-sections */
+    --bg-surface-hover: #f4f4f5;
+
+    /* ── Text hierarchy ── */
     --text-main: #09090b;
-    --text-muted: #52525b;
+    --text-heading: #09090b;
+    --text-body: #3f3f46;
+    --text-muted: #71717a;
     --text-dim: #a1a1aa;
-    --border-main: #f4f4f5;
-    --border-strong: #e4e4e7;
-    
+
+    /* ── Borders ── */
+    --border-main: #e4e4e7;
+    --border-strong: #d4d4d8;
+
+    /* ── Brand / accent ── */
     --primary: #3b82f6;
     --primary-hover: #2563eb;
-    
+
+    /* ── Booking types — Virtual: Indigo, Presencial: Teal ── */
     --virtual: #6366f1;
     --virtual-bg: rgba(99, 102, 241, 0.1);
-    --presencial: #14b8a6;
-    --presencial-bg: rgba(20, 184, 166, 0.1);
+    --virtual-border: rgba(99, 102, 241, 0.25);
+
+    --presencial: #0d9488;
+    --presencial-bg: rgba(13, 148, 136, 0.1);
+    --presencial-border: rgba(13, 148, 136, 0.25);
+
+    /* ── Sidebar ── */
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #e4e4e7;
   }
 
-  .dark {
-    --bg-main: #09090b;
-    --bg-surface: #18181b;
+  html.dark {
+    /* ── Surface layers — clear separation between every depth ── */
+    --bg-main: #0c0c0e;        /* Page background — near black */
+    --bg-surface: #18181b;     /* Cards — dark zinc, clearly above bg-main */
+    --bg-elevated: #1e1e22;    /* Modals — lighter than cards */
+    --bg-subtle: #111113;      /* Alt rows — slightly darker than bg-main */
     --bg-surface-hover: #27272a;
+
+    /* ── Text hierarchy ── */
     --text-main: #fafafa;
+    --text-heading: #f4f4f5;
+    --text-body: #d4d4d8;
     --text-muted: #a1a1aa;
     --text-dim: #71717a;
+
+    /* ── Borders ── */
     --border-main: #27272a;
     --border-strong: #3f3f46;
-    
+
+    /* ── Brand / accent ── */
     --primary: #60a5fa;
     --primary-hover: #3b82f6;
 
+    /* ── Booking types — brighter for dark backgrounds ── */
     --virtual: #818cf8;
     --virtual-bg: rgba(129, 140, 248, 0.15);
+    --virtual-border: rgba(129, 140, 248, 0.3);
+
     --presencial: #2dd4bf;
     --presencial-bg: rgba(45, 212, 191, 0.15);
-    
+    --presencial-border: rgba(45, 212, 191, 0.3);
+
+    /* ── Sidebar ── */
+    --sidebar-bg: #18181b;
+    --sidebar-border: #27272a;
+
     --color-glass: rgba(24, 24, 27, 0.7);
     --color-glass-border: rgba(255, 255, 255, 0.05);
   }
@@ -105,7 +141,8 @@ body::before {
   background-size: 256px 256px;
 }
 
-.dark body::before {
+/* Fixed: .dark is on <html>, so dark body::before must be html.dark body::before */
+html.dark body::before {
   opacity: 0.03;
 }
 
@@ -116,7 +153,7 @@ body::before {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  color: var(--text-main);
+  color: var(--text-heading);
 }
 
 /* Scrollbar styling */

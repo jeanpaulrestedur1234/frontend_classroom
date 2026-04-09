@@ -65,7 +65,9 @@
     "myClasses": "Mis Clases",
     "myAvailability": "Mi Disponibilidad",
     "roomAvailability": "Disponibilidad Salones",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "lightMode": "Modo Claro",
+    "darkMode": "Modo Oscuro"
   },
   "validation": {
     "required": "Este campo es obligatorio",

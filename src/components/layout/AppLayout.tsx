@@ -31,7 +31,7 @@ export default function AppLayout() {
     : '?';
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[var(--bg-main)]">
       <Sidebar
         expanded={sidebarExpanded}
         onToggle={() => setSidebarExpanded((prev) => !prev)}
@@ -44,7 +44,7 @@ export default function AppLayout() {
         }`}
       >
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-zinc-100 bg-white/80 backdrop-blur-xl px-6 pl-16 lg:pl-6">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-[var(--border-main)] bg-[var(--bg-surface)]/80 backdrop-blur-xl px-6 pl-16 lg:pl-6">
           <div>{/* Page title slot */}</div>
 
           {/* User info + language */}
@@ -52,7 +52,7 @@ export default function AppLayout() {
             <LanguageSwitcher compact />
 
             <div className="flex items-center gap-3">
-              <span className="hidden text-sm font-medium text-zinc-400 sm:block">
+              <span className="hidden text-sm font-medium text-[var(--text-muted)] sm:block">
                 {user?.full_name}
               </span>
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20">

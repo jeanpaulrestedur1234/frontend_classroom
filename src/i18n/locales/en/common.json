@@ -61,7 +61,9 @@
     "myClasses": "My Classes",
     "myAvailability": "My Availability",
     "roomAvailability": "Room Availability",
-    "logout": "Log out"
+    "logout": "Log out",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
   },
   "validation": {
     "required": "This field is required",

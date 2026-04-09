@@ -14,7 +14,7 @@ const sizes: Record<string, string> = {
 export default function LoadingSpinner({ size = 'md', className = '' }: LoadingSpinnerProps) {
   return (
     <div className={`flex items-center justify-center py-12 ${className}`}>
-      <Loader2 className={`${sizes[size]} animate-spin text-blue-500`} />
+      <Loader2 className={`${sizes[size]} animate-spin text-[var(--primary)]`} />
     </div>
   );
 }

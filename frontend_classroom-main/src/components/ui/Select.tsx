@@ -27,7 +27,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             bg-white/5 border border-white/10 text-zinc-900
             transition-all duration-200
             hover:border-white/20
-            focus:outline-none focus:border-amber-500/50 focus:ring-2 focus:ring-amber-500/20
+            focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20
             disabled:opacity-40 disabled:cursor-not-allowed
             ${error ? 'border-rose-500/50 focus:border-rose-500/50 focus:ring-rose-500/20' : ''}
             ${className}

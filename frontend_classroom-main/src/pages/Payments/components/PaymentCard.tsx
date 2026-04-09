@@ -42,7 +42,7 @@ export default function PaymentCard({
 
   return (
     <Card className="space-y-4 relative overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
 
       {/* Top row: ID + amount/status */}
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -101,7 +101,7 @@ export default function PaymentCard({
             href={payment.payment_proof_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs text-amber-600 hover:text-amber-700 font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-700 font-medium transition-colors"
           >
             <ExternalLink className="h-3 w-3" />
             {t('viewProof')}

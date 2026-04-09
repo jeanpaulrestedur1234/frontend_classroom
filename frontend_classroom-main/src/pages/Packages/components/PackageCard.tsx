@@ -28,7 +28,7 @@ export default function PackageCard({ pkg, children }: PackageCardProps) {
   return (
     <Card hover className="flex flex-col gap-4 relative overflow-hidden">
       {/* Subtle gold accent line at top */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
 
       <div className="flex items-center justify-between">
         <Badge variant={classTypeBadgeVariant(pkg.class_type)}>{tc(`classTypes.${pkg.class_type}`)}</Badge>
@@ -54,7 +54,7 @@ export default function PackageCard({ pkg, children }: PackageCardProps) {
       <div className="mt-auto pt-3 border-t border-zinc-100">
         {pkg.discount_pct > 0 ? (
           <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-amber-400 font-[family-name:var(--font-display)]">
+            <span className="text-xl font-bold text-blue-400 font-[family-name:var(--font-display)]">
               {formatCurrency(finalPrice)}
             </span>
             <span className="text-sm text-zinc-400 line-through">{formatCurrency(pkg.base_price)}</span>

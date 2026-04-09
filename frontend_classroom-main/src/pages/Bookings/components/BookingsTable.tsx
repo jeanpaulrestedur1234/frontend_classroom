@@ -142,7 +142,7 @@ export default function BookingsTable({
                       onClick={() => onAddPackage(b)}
                       title={t('actions.addPackage')}
                     >
-                      <Package className="w-4 h-4 text-amber-400" />
+                      <Package className="w-4 h-4 text-blue-400" />
                     </Button>
                   )}
                 </div>

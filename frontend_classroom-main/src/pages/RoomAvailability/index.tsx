@@ -213,7 +213,7 @@ export default function RoomAvailability() {
               <Card key={date}>
                 {/* Date header */}
                 <div className="flex items-center gap-2 mb-4">
-                  <CalendarDays className="w-4 h-4 text-amber-400" />
+                  <CalendarDays className="w-4 h-4 text-blue-400" />
                   <h3 className="text-sm font-semibold text-zinc-900 font-[family-name:var(--font-display)]">
                     {formatDate(date)}
                   </h3>

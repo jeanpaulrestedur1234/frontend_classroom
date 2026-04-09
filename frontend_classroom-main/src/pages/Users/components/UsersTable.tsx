@@ -64,7 +64,7 @@ export default function UsersTable({
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-gradient-to-br from-amber-400/20 to-amber-600/20 flex items-center justify-center text-sm font-semibold text-amber-400 shrink-0">
+                    <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-400/20 to-blue-600/20 flex items-center justify-center text-sm font-semibold text-blue-400 shrink-0">
                       {u.full_name.charAt(0).toUpperCase()}
                     </div>
                     <span className="text-sm font-medium text-zinc-950">{u.full_name}</span>
@@ -96,7 +96,7 @@ export default function UsersTable({
                       title={u.is_active ? tc('status.inactive') : tc('actions.activate')}
                     >
                       {u.is_active ? (
-                        <UserX className="h-4 w-4 text-amber-400" />
+                        <UserX className="h-4 w-4 text-blue-400" />
                       ) : (
                         <UserCheck className="h-4 w-4 text-emerald-400" />
                       )}

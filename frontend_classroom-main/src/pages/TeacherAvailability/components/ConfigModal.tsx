@@ -118,7 +118,7 @@ export default function ConfigModal({
                     type="checkbox"
                     checked={range.is_virtual ?? false}
                     onChange={(e) => updateRange(idx, 'is_virtual', e.target.checked)}
-                    className="rounded border-white/20 bg-white/5 text-amber-500 focus:ring-amber-500/30 focus:ring-offset-zinc-900"
+                    className="rounded border-white/20 bg-white/5 text-blue-500 focus:ring-blue-500/30 focus:ring-offset-zinc-900"
                   />
                   {t('configModal.isVirtual')}
                 </label>
@@ -151,7 +151,7 @@ export default function ConfigModal({
                   className={`text-xs px-2.5 py-1 rounded-full font-medium ${
                     r.is_virtual
                       ? 'bg-sky-500/10 text-sky-400 ring-1 ring-inset ring-sky-500/20'
-                      : 'bg-amber-500/10 text-amber-400 ring-1 ring-inset ring-amber-500/20'
+                      : 'bg-blue-500/10 text-blue-400 ring-1 ring-inset ring-blue-500/20'
                   }`}
                 >
                   {tc(`days.${r.day_of_week}`)} {r.start_time}-{r.end_time}

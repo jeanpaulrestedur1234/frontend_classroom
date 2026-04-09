@@ -40,7 +40,7 @@ const icons: Record<ToastVariant, React.ReactNode> = {
 const styles: Record<ToastVariant, string> = {
   success: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
   error: 'bg-rose-500/10 border-rose-500/20 text-rose-400',
-  warning: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
+  warning: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
   info: 'bg-sky-500/10 border-sky-500/20 text-sky-400',
 };
 

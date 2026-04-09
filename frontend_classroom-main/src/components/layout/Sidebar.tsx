@@ -147,16 +147,11 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       {/* Logo & Toggle */}
       <div className="flex h-16 items-center justify-between px-4 border-b border-zinc-100">
         <div className="flex items-center gap-2.5 overflow-hidden">
-          {/* Logo icon */}
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20">
-            <span className="text-sm font-bold font-[family-name:var(--font-display)] text-zinc-950">
-              CP
-            </span>
-          </div>
-          {expanded && (
-            <span className="text-lg font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent whitespace-nowrap transition-opacity duration-300">
-              {t('appName')}
-            </span>
+          {/* Logo */}
+          {expanded ? (
+            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-8" />
+          ) : (
+            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-6 w-6 object-contain" />
           )}
         </div>
         <button
@@ -183,7 +178,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
               ${expanded ? '' : 'justify-center'
               }
               ${isActive
-                ? 'bg-amber-500/10 text-amber-400 border-l-2 border-amber-500 shadow-sm shadow-amber-500/5'
+                ? 'bg-blue-500/10 text-blue-400 border-l-2 border-blue-500 shadow-sm shadow-blue-500/5'
                 : 'text-zinc-500 hover:text-zinc-800 hover:bg-white/[0.04] border-l-2 border-transparent'
               }`
             }
@@ -227,7 +222,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-zinc-50 backdrop-blur-xl border border-zinc-200 text-zinc-400 hover:text-amber-400 hover:border-amber-500/30 transition-all duration-200 lg:hidden"
+        className="fixed top-4 left-4 z-50 flex items-center justify-center h-10 w-10 rounded-xl bg-zinc-50 backdrop-blur-xl border border-zinc-200 text-zinc-400 hover:text-blue-400 hover:border-blue-500/30 transition-all duration-200 lg:hidden"
         aria-label="Open menu"
       >
         <Menu className="h-5 w-5" />

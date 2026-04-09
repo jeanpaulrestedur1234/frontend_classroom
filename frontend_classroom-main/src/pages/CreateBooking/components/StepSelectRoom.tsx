@@ -21,20 +21,20 @@ export function StepRoom({ t, tc, rooms, loading, roomId, setRoomId }: any) {
               onClick={() => setRoomId(String(room.id))}
               className={`p-4 rounded-2xl text-left transition-all duration-200 backdrop-blur-xl ${
                 roomId === String(room.id)
-                  ? 'bg-amber-500/10 border-2 border-amber-500/40 ring-2 ring-amber-500/15 shadow-lg shadow-amber-500/10'
+                  ? 'bg-blue-500/10 border-2 border-blue-500/40 ring-2 ring-blue-500/15 shadow-lg shadow-blue-500/10'
                   : 'bg-zinc-50 border-2 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
               }`}
             >
               <div className="flex items-center gap-3">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    roomId === String(room.id) ? 'bg-amber-500/15 text-amber-400' : 'bg-white/5 text-zinc-500'
+                    roomId === String(room.id) ? 'bg-blue-500/15 text-blue-400' : 'bg-white/5 text-zinc-500'
                   }`}
                 >
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className={`text-sm font-medium ${roomId === String(room.id) ? 'text-amber-300' : 'text-zinc-800'}`}>
+                  <p className={`text-sm font-medium ${roomId === String(room.id) ? 'text-blue-300' : 'text-zinc-800'}`}>
                     {room.name}
                   </p>
                   <p className="text-xs text-zinc-500">

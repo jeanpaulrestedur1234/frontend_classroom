@@ -92,8 +92,8 @@ export default function UserEditModal({
               role="switch"
               aria-checked={form.is_active}
               onClick={() => setForm({ ...form, is_active: !form.is_active })}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 ${
-                form.is_active ? 'bg-amber-500' : 'bg-zinc-700'
+              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 ${
+                form.is_active ? 'bg-blue-500' : 'bg-zinc-700'
               }`}
             >
               <span

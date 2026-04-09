@@ -10,9 +10,9 @@
   --color-surface-200: #e4e4e7;
   --color-surface-300: #d4d4d8;
 
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
+  --color-accent-400: #60a5fa;
+  --color-accent-500: #3b82f6;
+  --color-accent-600: #2563eb;
 
   --color-glass: rgba(255, 255, 255, 0.7);
   --color-glass-border: rgba(0, 0, 0, 0.05);
@@ -103,6 +103,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Focus ring override */
 *:focus-visible {
-  outline: 2px solid rgba(245, 158, 11, 0.5);
+  outline: 2px solid rgba(59, 130, 246, 0.5);
   outline-offset: 2px;
 }

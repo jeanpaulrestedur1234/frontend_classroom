@@ -23,7 +23,7 @@ export default function RoomDeleteModal({ room, isSubmitting, onClose, onConfirm
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-rose-500/10 ring-1 ring-inset ring-rose-500/20">
               <AlertTriangle className="h-5 w-5 text-rose-400" />
             </div>
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
               {t('delete.message', { name: room.name })}
             </p>
           </div>

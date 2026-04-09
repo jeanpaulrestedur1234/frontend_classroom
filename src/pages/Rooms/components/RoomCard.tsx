@@ -24,7 +24,7 @@ export default function RoomCard({ room, onEdit, onDelete }: RoomCardProps) {
               <Building2 className="h-5 w-5 text-blue-400" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-950 font-[family-name:var(--font-display)]">
+              <h3 className="text-sm font-semibold text-[var(--text-main)] font-[family-name:var(--font-display)]">
                 {room.name}
               </h3>
               <Badge variant={room.is_active ? 'success' : 'danger'}>
@@ -34,15 +34,15 @@ export default function RoomCard({ room, onEdit, onDelete }: RoomCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Users className="h-4 w-4 text-zinc-500" />
+        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
+          <Users className="h-4 w-4 text-[var(--text-muted)]" />
           <span>
-            {t('capacity')}: <span className="font-medium text-zinc-800">{room.capacity}</span> {t('students')}
+            {t('capacity')}: <span className="font-medium text-[var(--text-body)]">{room.capacity}</span> {t('students')}
           </span>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-5 pt-4 border-t border-zinc-100">
+      <div className="flex items-center gap-2 mt-5 pt-4 border-t border-[var(--border-main)]">
         <Button variant="ghost" size="sm" onClick={() => onEdit(room)} className="flex-1">
           <Pencil className="h-3.5 w-3.5" />
           {tc('actions.edit')}

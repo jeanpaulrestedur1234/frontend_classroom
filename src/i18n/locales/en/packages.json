@@ -1,0 +1,56 @@
+{
+  "catalog": {
+    "title": "Package Catalog",
+    "newPackage": "New Package",
+    "hoursPerWeek": "{{hours}} hrs/week",
+    "weeks": "{{weeks}} weeks",
+    "discount": "{{pct}}% discount",
+    "empty": {
+      "title": "No packages",
+      "description": "Create the first educational package."
+    }
+  },
+  "create": {
+    "title": "Create Package",
+    "classType": "Class type",
+    "hoursPerWeek": "Hours per week",
+    "durationWeeks": "Duration (weeks)",
+    "basePrice": "Base price",
+    "discountPct": "Discount (%)",
+    "success": "Package created successfully",
+    "error": "Error creating package"
+  },
+  "student": {
+    "availablePackages": "Available Packages",
+    "acquire": "Acquire",
+    "acquired": "Acquired!",
+    "acquireError": "Error acquiring package"
+  },
+  "myPackages": {
+    "title": "My Packages",
+    "totalHours": "Total: {{hours}} hours",
+    "totalPrice": "Total price",
+    "createdAt": "Acquired",
+    "activatedAt": "Activated",
+    "expiresAt": "Expires",
+    "payments": "Payments",
+    "activatePackage": "Activate Package",
+    "uploadReceipt": "Upload Receipt",
+    "newPayment": "New Payment",
+    "noPayments": "No payments recorded",
+    "activateSuccess": "Package activated successfully",
+    "activateError": "Error activating package",
+    "empty": {
+      "title": "You have no packages",
+      "description": "Acquire your first package from the catalog."
+    },
+    "uploadModal": {
+      "title": "Upload Payment Receipt",
+      "urlLabel": "Receipt URL",
+      "urlPlaceholder": "https://example.com/receipt.jpg",
+      "success": "Receipt uploaded successfully",
+      "error": "Error uploading receipt"
+    },
+    "viewPayments": "View Payments"
+  }
+}

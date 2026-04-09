@@ -63,57 +63,59 @@ export default function SuccessScreen({ booking, onReset, usedPackageId }: Succe
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <Card>
+        {/* Success header */}
         <div className="text-center py-4">
           <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-4 ring-1 ring-emerald-500/20">
-            <CheckCircle className="w-8 h-8 text-emerald-400" />
+            <CheckCircle className="w-8 h-8 text-emerald-500" />
           </div>
-          <h2 className="text-xl font-bold text-zinc-950 mb-1 font-[family-name:var(--font-display)]">
+          <h2 className="text-xl font-bold text-[var(--text-heading)] mb-1 font-[family-name:var(--font-display)]">
             {t('create.success')}
           </h2>
-          <p className="text-sm text-zinc-500">{t('create.success')}</p>
+          <p className="text-sm text-[var(--text-muted)]">{t('create.success')}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-sm mt-4 border-t border-zinc-100 pt-4">
+        {/* Booking details grid */}
+        <div className="grid grid-cols-2 gap-4 text-sm mt-4 border-t border-[var(--border-main)] pt-4">
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.date')}</span>
-            <span className="font-medium text-zinc-900">{formatDate(booking.scheduled_date)}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.date')}</span>
+            <span className="font-medium text-[var(--text-main)]">{formatDate(booking.scheduled_date)}</span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.time')}</span>
-            <span className="font-medium text-zinc-900">
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.time')}</span>
+            <span className="font-medium text-[var(--text-main)]">
               {booking.start_time} - {booking.end_time}
             </span>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.type')}</span>
-            <Badge variant={booking.booking_type === 'virtual' ? 'info' : 'default'}>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.type')}</span>
+            <Badge variant={booking.booking_type === 'virtual' ? 'virtual' : 'presencial'}>
               {tc(`bookingTypes.${booking.booking_type}`)}
             </Badge>
           </div>
           <div>
-            <span className="block text-zinc-500 text-xs mb-1">{t('table.status')}</span>
+            <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.status')}</span>
             <Badge variant="warning">{tc('status.pending')}</Badge>
           </div>
           {booking.teacher && (
             <div>
-              <span className="block text-zinc-500 text-xs mb-1">{t('table.teacher')}</span>
-              <span className="font-medium text-zinc-900">{booking.teacher.full_name}</span>
+              <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.teacher')}</span>
+              <span className="font-medium text-[var(--text-main)]">{booking.teacher.full_name}</span>
             </div>
           )}
           {booking.room && (
             <div>
-              <span className="block text-zinc-500 text-xs mb-1">{t('table.room')}</span>
-              <span className="font-medium text-zinc-900">{booking.room.name}</span>
+              <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.room')}</span>
+              <span className="font-medium text-[var(--text-main)]">{booking.room.name}</span>
             </div>
           )}
         </div>
 
         {/* Package linking for students */}
         {isStudent && !usedPackageId && !showPackageStep && (
-          <div className="mt-6 border-t border-zinc-100 pt-4">
+          <div className="mt-6 border-t border-[var(--border-main)] pt-4">
             <button
               onClick={() => setShowPackageStep(true)}
-              className="w-full flex items-center justify-between p-4 rounded-xl border border-dashed border-white/[0.12] text-sm text-zinc-400 hover:border-blue-500/30 hover:text-blue-400 hover:bg-blue-500/5 transition-all duration-200"
+              className="w-full flex items-center justify-between p-4 rounded-xl border border-dashed border-[var(--border-strong)] text-sm text-[var(--text-muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)] hover:bg-[var(--primary)]/5 transition-all duration-200"
             >
               <span className="flex items-center gap-2">
                 <Package className="w-4 h-4" />
@@ -125,26 +127,26 @@ export default function SuccessScreen({ booking, onReset, usedPackageId }: Succe
         )}
 
         {isStudent && usedPackageId && (
-          <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
+          <div className="mt-6 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-500">
             {t('create.packageUsed')}
           </div>
         )}
 
         {showPackageStep && (
-          <div className="mt-4 border-t border-zinc-100 pt-4 space-y-3">
+          <div className="mt-4 border-t border-[var(--border-main)] pt-4 space-y-3">
             {packageLinked ? (
               <div className="text-center py-4">
                 <div className="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-2">
-                  <CheckCircle className="w-5 h-5 text-emerald-400" />
+                  <CheckCircle className="w-5 h-5 text-emerald-500" />
                 </div>
-                <p className="text-sm font-medium text-emerald-400">
+                <p className="text-sm font-medium text-emerald-500">
                   {t('actions.addPackageSuccess')}
                 </p>
               </div>
             ) : packageLoading && myPackages.length === 0 ? (
               <LoadingSpinner size="sm" />
             ) : myPackages.length === 0 ? (
-              <p className="text-sm text-zinc-500 text-center py-4">
+              <p className="text-sm text-[var(--text-muted)] text-center py-4">
                 {t('packageModal.noActivePackages')}
               </p>
             ) : (
@@ -171,7 +173,8 @@ export default function SuccessScreen({ booking, onReset, usedPackageId }: Succe
           </div>
         )}
 
-        <div className="flex justify-center gap-3 mt-6 pt-4 border-t border-zinc-100">
+        {/* Actions */}
+        <div className="flex justify-center gap-3 mt-6 pt-4 border-t border-[var(--border-main)]">
           <Button variant="secondary" onClick={() => navigate('/app/bookings')}>
             {t('create.viewBookings')}
           </Button>

@@ -64,7 +64,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
 
   return (
     <div
-      className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-zinc-50 border border-zinc-100 hover:bg-zinc-100 transition-colors"
+      className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-main)] hover:bg-[var(--bg-surface-hover)] transition-colors"
     >
       {/* Time range */}
       <div className="flex items-center gap-3 sm:w-40 shrink-0">
@@ -72,8 +72,8 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
           className={`w-1.5 h-10 rounded-full ${occupancyBarColor(pct)}`}
         />
         <div>
-          <p className="text-sm font-medium text-zinc-900 font-mono flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-zinc-500" />
+          <p className="text-sm font-medium text-[var(--text-heading)] font-mono flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-[var(--text-muted)]" />
             {slot.start_time} - {slot.end_time}
           </p>
         </div>
@@ -81,11 +81,11 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
 
       {/* Teacher */}
       <div className="sm:w-44 shrink-0">
-        <p className="text-xs text-zinc-500 mb-0.5">
+        <p className="text-xs text-[var(--text-muted)] mb-0.5">
           {tc('roles.teacher')}
         </p>
-        <p className="text-sm text-zinc-700 flex items-center gap-1.5">
-          <User className="w-3.5 h-3.5 text-zinc-500" />
+        <p className="text-sm text-[var(--text-body)] flex items-center gap-1.5">
+          <User className="w-3.5 h-3.5 text-[var(--text-muted)]" />
           {slot.teacher_name ?? slot.teacher_id}
         </p>
       </div>
@@ -103,7 +103,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
       {/* Occupancy progress */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-1.5">
-          <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+          <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
             <Users className="w-3 h-3" />
             <span>
               {slot.student_count} / {capacity}
@@ -115,7 +115,7 @@ export default function SlotCard({ slot, capacity }: SlotCardProps) {
             {pct}%
           </span>
         </div>
-        <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+        <div className="w-full h-2 rounded-full bg-[var(--border-main)] overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-500 ${occupancyBarColor(pct)}`}
             style={{ width: `${pct}%` }}

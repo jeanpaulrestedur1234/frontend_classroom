@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CreditCard, Filter, ChevronLeft, ChevronRight, AlertCircle } from 'lucide-react';
+import { CreditCard, ListFilter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/context/ToastContext';
 import { usePaginatedQuery, useMutation } from '@/hooks';
@@ -32,7 +32,7 @@ export default function Payments() {
   const packageId = query.get('package_id') ?? undefined;
 
   // API hooks
-  const { data: allPayments, loading, error, refetch } = usePaginatedQuery<PaymentDTO>(
+  const { data: allPayments, loading, refetch } = usePaginatedQuery<PaymentDTO>(
     (page) => listPayments(page, PAGE_SIZE, packageId),
     { pageSize: PAGE_SIZE },
   );
@@ -112,19 +112,11 @@ export default function Payments() {
         <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
       </div>
 
-      {/* Error banner */}
-      {error && !loading && (
-        <div className="rounded-xl bg-rose-500/10 border border-rose-500/20 p-4 flex items-start gap-3">
-          <AlertCircle className="h-4 w-4 text-rose-400 mt-0.5 shrink-0" />
-          <p className="text-sm text-rose-400">{error}</p>
-        </div>
-      )}
-
       {/* Status filter + result info bar */}
-      {!loading && !error && (
+      {!loading && (
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Filter className="h-4 w-4 text-[var(--text-muted)]" />
+            <ListFilter className="h-4 w-4 text-[var(--text-muted)]" />
             <Select
               options={[
                 { value: 'all', label: t('filter.allStatuses') },
@@ -157,7 +149,7 @@ export default function Payments() {
       {loading && <LoadingSpinner />}
 
       {/* Empty state */}
-      {!loading && !error && filteredPayments.length === 0 && (
+      {!loading && filteredPayments.length === 0 && (
         <EmptyState
           icon={<CreditCard className="h-12 w-12" />}
           title={t('noPayments')}
@@ -166,7 +158,7 @@ export default function Payments() {
       )}
 
       {/* Payment cards */}
-      {!loading && !error && pagePayments.length > 0 && (
+      {!loading && pagePayments.length > 0 && (
         <div className="space-y-4">
           {pagePayments.map((payment) => (
             <PaymentCard
@@ -183,7 +175,7 @@ export default function Payments() {
       )}
 
       {/* Pagination controls */}
-      {!loading && !error && totalFiltered > displayPageSize && (
+      {!loading && totalFiltered > displayPageSize && (
         <div className="flex items-center justify-between pt-2">
           <Button
             size="sm"

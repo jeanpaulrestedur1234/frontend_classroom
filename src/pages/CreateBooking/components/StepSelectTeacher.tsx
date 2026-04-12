@@ -2,8 +2,10 @@ import { User, AlertCircle } from 'lucide-react';
 import type { UserDTO } from '@/types';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId, teacherAvailability }: any) {
-  const selectedTeacherHasSlots = teacherId ? (teacherAvailability && teacherAvailability.length > 0) : true;
+export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId, teacherAvailability, bookingType }: any) {
+  const isVirtual = bookingType === 'virtual';
+  const matchingAvailability = teacherAvailability?.filter((a: any) => isVirtual ? a.is_virtual : !a.is_virtual);
+  const selectedTeacherHasMatchingSlots = teacherId ? (matchingAvailability && matchingAvailability.length > 0) : true;
 
   return (
     <div>
@@ -49,15 +51,21 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId,
             ))}
           </div>
 
-          {!selectedTeacherHasSlots && !loading && teacherId && (
+          {!selectedTeacherHasMatchingSlots && !loading && teacherId && (
             <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-4 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
               <AlertCircle className="h-5 w-5 text-orange-400 mt-0.5 shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-orange-400">
-                  {t('create.errors.noAvailabilityTitle', 'Profesor sin disponibilidad')}
+                  {isVirtual 
+                    ? t('create.errors.noVirtualAvailabilityTitle', 'Profesor sin disponibilidad virtual')
+                    : t('create.errors.noPresencialAvailabilityTitle', 'Profesor sin disponibilidad presencial')
+                  }
                 </p>
                 <p className="text-xs text-orange-400/80 mt-1">
-                  {t('create.errors.noAvailabilityDesc', 'Este profesor no tiene horarios configurados en este momento. Por favor selecciona otro profesor para continuar.')}
+                  {isVirtual
+                    ? t('create.errors.noVirtualAvailabilityDesc', 'Este profesor no tiene horarios virtuales configurados. Por favor selecciona otro profesor para continuar.')
+                    : t('create.errors.noPresencialAvailabilityDesc', 'Este profesor no tiene horarios presenciales configurados. Por favor selecciona otro profesor para continuar.')
+                  }
                 </p>
               </div>
             </div>

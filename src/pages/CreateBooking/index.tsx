@@ -101,11 +101,15 @@ export default function CreateBooking() {
   const hasPackageStep = isStudent;
 
   function canNext(): boolean {
+    const hasMatchingAvailability = teacherAvailability.some(
+      (a) => (isVirtual ? a.is_virtual : !a.is_virtual)
+    );
+
     switch (step) {
       case 0:
         return bookingType !== '';
       case 1:
-        return teacherId !== '' && !loadingData && teacherAvailability.length > 0;
+        return teacherId !== '' && !loadingData && hasMatchingAvailability;
       case 2:
         return isVirtual || roomId !== '';
       case 3:
@@ -205,6 +209,7 @@ export default function CreateBooking() {
             teacherId={teacherId}
             setTeacherId={setTeacherId}
             teacherAvailability={teacherAvailability}
+            bookingType={bookingType}
           />
         );
       case 2:

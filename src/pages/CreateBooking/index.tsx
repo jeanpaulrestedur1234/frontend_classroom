@@ -105,7 +105,7 @@ export default function CreateBooking() {
       case 0:
         return bookingType !== '';
       case 1:
-        return teacherId !== '';
+        return teacherId !== '' && !loadingData && teacherAvailability.length > 0;
       case 2:
         return isVirtual || roomId !== '';
       case 3:
@@ -196,7 +196,17 @@ export default function CreateBooking() {
       case 0:
         return <StepType t={t} tc={tc} bookingType={bookingType} setBookingType={setBookingType} />;
       case 1:
-        return <StepTeacher t={t} tc={tc} teachers={teachers} loading={loadingData} teacherId={teacherId} setTeacherId={setTeacherId} />;
+        return (
+          <StepTeacher
+            t={t}
+            tc={tc}
+            teachers={teachers}
+            loading={loadingData}
+            teacherId={teacherId}
+            setTeacherId={setTeacherId}
+            teacherAvailability={teacherAvailability}
+          />
+        );
       case 2:
         return <StepRoom t={t} tc={tc} rooms={rooms} loading={loadingData} roomId={roomId} setRoomId={setRoomId} />;
       case 3:

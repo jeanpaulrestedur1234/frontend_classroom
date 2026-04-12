@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import {
-  User,
+  Users as UserIcon,
   Mail,
   Phone,
-  Shield,
+  Lock as Shield,
   Hash,
-  Save,
+  Check as Save,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
@@ -157,7 +157,7 @@ export default function Profile() {
                   placeholder={user.full_name}
                   className="pl-10"
                 />
-                <User className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
+                <UserIcon className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
               </div>
 
               {/* Phone */}

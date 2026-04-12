@@ -29,6 +29,7 @@ export default function UserEditModal({
     phone: '',
     role: '',
     is_active: true,
+    configuration_days: [] as string[],
   });
 
   const [errorFullName, setErrorFullName] = useState<string | undefined>();
@@ -40,6 +41,15 @@ export default function UserEditModal({
         phone: user.phone || '',
         role: user.role,
         is_active: user.is_active,
+        configuration_days: user.metadata?.configuration_days || [
+          'mon',
+          'tue',
+          'wed',
+          'thu',
+          'fri',
+          'sat',
+          'sun',
+        ],
       });
       setErrorFullName(undefined);
     }
@@ -53,12 +63,37 @@ export default function UserEditModal({
       return;
     }
 
+    const metadata = {
+      ...(user.metadata || {}),
+      ...(form.role === 'teacher' ? { configuration_days: form.configuration_days } : {}),
+    };
+
     onSubmit(user.id, {
       full_name: form.full_name.trim(),
       phone: form.phone.trim() || undefined,
       role: form.role,
       is_active: form.is_active,
+      metadata,
     });
+  }
+
+  const CONFIG_DAYS = [
+    { code: 'mon', label: 'L' },
+    { code: 'tue', label: 'M' },
+    { code: 'wed', label: 'Mi' },
+    { code: 'thu', label: 'J' },
+    { code: 'fri', label: 'V' },
+    { code: 'sat', label: 'S' },
+    { code: 'sun', label: 'D' },
+  ];
+
+  function toggleDay(code: string) {
+    setForm((prev) => ({
+      ...prev,
+      configuration_days: prev.configuration_days.includes(code)
+        ? prev.configuration_days.filter((d) => d !== code)
+        : [...prev.configuration_days, code],
+    }));
   }
 
   return (
@@ -84,6 +119,38 @@ export default function UserEditModal({
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}
           />
+
+          {/* Teacher Configuration Days */}
+          {form.role === 'teacher' && (
+            <div className="space-y-3 p-4 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-main)]">
+              <label className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                {t('edit.configurationDays')}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {CONFIG_DAYS.map((day) => {
+                  const isActive = form.configuration_days.includes(day.code);
+                  return (
+                    <button
+                      key={day.code}
+                      type="button"
+                      onClick={() => toggleDay(day.code)}
+                      className={`h-9 w-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
+                        isActive
+                          ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20 scale-110'
+                          : 'bg-[var(--bg-surface)] text-[var(--text-dim)] border border-[var(--border-main)] hover:border-[var(--primary)]/50 hover:text-[var(--primary)]'
+                      }`}
+                      title={tc(`days.${['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].indexOf(day.code)}`)}
+                    >
+                      {day.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-[10px] text-[var(--text-dim)] italic">
+                * Determina qué días el profesor puede configurar su disponibilidad.
+              </p>
+            </div>
+          )}
 
           <div className="flex items-center justify-between rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-main)] px-4 py-3">
             <span className="text-sm font-medium text-[var(--text-body)]">{t('edit.isActive')}</span>

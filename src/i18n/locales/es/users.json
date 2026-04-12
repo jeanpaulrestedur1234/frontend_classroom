@@ -27,6 +27,7 @@
     "phone": "Teléfono",
     "role": "Rol",
     "isActive": "Usuario activo",
+    "configurationDays": "Días de configuración (Profesor)",
     "success": "Usuario actualizado exitosamente",
     "error": "Error al actualizar usuario"
   },

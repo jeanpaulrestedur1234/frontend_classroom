@@ -27,6 +27,8 @@
     "phone": "Phone",
     "role": "Role",
     "isActive": "Active user",
+    "configurationDays": "Configuration Days (Teacher)",
+    "configurationDaysHint": "* Determines which days the teacher can configure their availability.",
     "success": "User updated successfully",
     "error": "Error updating user"
   },

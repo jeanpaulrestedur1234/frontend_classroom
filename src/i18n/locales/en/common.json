@@ -112,6 +112,15 @@
     "5": "Saturday",
     "6": "Sunday"
   },
+  "shortDays": {
+    "mon": "M",
+    "tue": "T",
+    "wed": "W",
+    "thu": "T",
+    "fri": "F",
+    "sat": "S",
+    "sun": "S"
+  },
   "select": {
     "placeholder": "Select...",
     "all": "All"

@@ -78,13 +78,13 @@ export default function UserEditModal({
   }
 
   const CONFIG_DAYS = [
-    { code: 'mon', label: 'L' },
-    { code: 'tue', label: 'M' },
-    { code: 'wed', label: 'Mi' },
-    { code: 'thu', label: 'J' },
-    { code: 'fri', label: 'V' },
-    { code: 'sat', label: 'S' },
-    { code: 'sun', label: 'D' },
+    { code: 'mon', label: tc('shortDays.mon') },
+    { code: 'tue', label: tc('shortDays.tue') },
+    { code: 'wed', label: tc('shortDays.wed') },
+    { code: 'thu', label: tc('shortDays.thu') },
+    { code: 'fri', label: tc('shortDays.fri') },
+    { code: 'sat', label: tc('shortDays.sat') },
+    { code: 'sun', label: tc('shortDays.sun') },
   ];
 
   function toggleDay(code: string) {
@@ -147,7 +147,7 @@ export default function UserEditModal({
                 })}
               </div>
               <p className="text-[10px] text-[var(--text-dim)] italic">
-                * Determina qué días el profesor puede configurar su disponibilidad.
+                {t('edit.configurationDaysHint')}
               </p>
             </div>
           )}

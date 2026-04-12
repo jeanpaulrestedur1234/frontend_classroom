@@ -28,6 +28,7 @@
     "role": "Rol",
     "isActive": "Usuario activo",
     "configurationDays": "Días de configuración (Profesor)",
+    "configurationDaysHint": "* Determina qué días el profesor puede configurar su disponibilidad.",
     "success": "Usuario actualizado exitosamente",
     "error": "Error al actualizar usuario"
   },

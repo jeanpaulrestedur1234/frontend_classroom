@@ -65,7 +65,13 @@
     "selectPackage": "Select an active package",
     "createAnother": "Create Another Booking",
     "viewBookings": "View My Bookings",
-    "error": "Error creating booking"
+    "error": "Error creating booking",
+    "errors": {
+      "noVirtualAvailabilityTitle": "Teacher without virtual availability",
+      "noVirtualAvailabilityDesc": "This teacher has no virtual slots configured. Please select another teacher to continue.",
+      "noPresencialAvailabilityTitle": "Teacher without in-person availability",
+      "noPresencialAvailabilityDesc": "This teacher has no in-person slots configured. Please select another teacher to continue."
+    }
   },
   "empty": {
     "title": "No bookings",

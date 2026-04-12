@@ -57,14 +57,14 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId,
               <div>
                 <p className="text-sm font-semibold text-orange-400">
                   {isVirtual 
-                    ? t('create.errors.noVirtualAvailabilityTitle', 'Profesor sin disponibilidad virtual')
-                    : t('create.errors.noPresencialAvailabilityTitle', 'Profesor sin disponibilidad presencial')
+                    ? t('create.errors.noVirtualAvailabilityTitle')
+                    : t('create.errors.noPresencialAvailabilityTitle')
                   }
                 </p>
                 <p className="text-xs text-orange-400/80 mt-1">
                   {isVirtual
-                    ? t('create.errors.noVirtualAvailabilityDesc', 'Este profesor no tiene horarios virtuales configurados. Por favor selecciona otro profesor para continuar.')
-                    : t('create.errors.noPresencialAvailabilityDesc', 'Este profesor no tiene horarios presenciales configurados. Por favor selecciona otro profesor para continuar.')
+                    ? t('create.errors.noVirtualAvailabilityDesc')
+                    : t('create.errors.noPresencialAvailabilityDesc')
                   }
                 </p>
               </div>

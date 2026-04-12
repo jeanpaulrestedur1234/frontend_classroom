@@ -85,7 +85,7 @@ export default function MyPackages() {
           }
         />
       ) : (
-        <div className="space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {packages.map((pkg) => (
             <MyPackageCard
               key={pkg.id}

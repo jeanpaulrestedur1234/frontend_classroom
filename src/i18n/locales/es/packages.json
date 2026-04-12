@@ -53,6 +53,10 @@
       "success": "Comprobante cargado exitosamente",
       "error": "Error al cargar comprobante"
     },
-    "viewPayments": "Ver pagos"
+    "viewPayments": "Ver pagos",
+    "consumedClasses": "Clases consumidas",
+    "totalClasses": "Total de clases",
+    "usage": "Uso del paquete",
+    "remaining": "{{count}} restantes"
   }
 }

@@ -1,4 +1,4 @@
-import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play, Upload } from 'lucide-react';
+import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play, FileUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '@/components/ui/Card';
@@ -68,207 +68,236 @@ export default function MyPackageCard({
     }
   }, [modalOpen, pkg.id]);
 
-  const totalHours = pkg.hours_per_week * pkg.duration_weeks;
+  const totalClasses = pkg.hours_per_week * pkg.duration_weeks;
+  const consumed = pkg.bookings_count || 0;
+  const remaining = Math.max(0, totalClasses - consumed);
+  const progress = Math.min(100, (consumed / totalClasses) * 100);
+
   const payments = pkg.payments || [];
   const hasConfirmedPayment = payments.some((p) => p.status === 'confirmed');
   const hasPendingPayment = payments.some((p) => p.status === 'pending' || p.status === 'notified');
 
   return (
     <>
-      <Card className="space-y-5 relative overflow-hidden">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
-
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-            <BookOpen className="h-5 w-5 text-blue-400" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <Badge variant={classTypeBadgeVariant(pkg.class_type)}>{tc(`classTypes.${pkg.class_type}`)}</Badge>
-              <Badge variant={statusBadgeVariant(pkg.status)}>{tc(`status.${pkg.status}`)}</Badge>
+      <Card className="flex flex-col h-full bg-[var(--bg-surface)] border border-[var(--border-main)] hover:border-[var(--primary)]/30 transition-all duration-300 shadow-sm hover:shadow-xl group overflow-hidden">
+        {/* Top Header with Gradient */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--primary)]/20 via-[var(--primary)] to-[var(--primary)]/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+        
+        <div className="p-6 space-y-6 flex-1">
+          {/* Header Area */}
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center border border-[var(--primary)]/20 shadow-inner">
+                <BookOpen className="h-6 w-6 text-[var(--primary)]" />
+              </div>
+              <div>
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <Badge variant={classTypeBadgeVariant(pkg.class_type)} className="uppercase text-[9px] tracking-wider font-bold">
+                    {tc(`classTypes.${pkg.class_type}`)}
+                  </Badge>
+                  <Badge variant={statusBadgeVariant(pkg.status)} className="capitalize px-2 py-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-current mr-1.5 inline-block animate-pulse" />
+                    {tc(`status.${pkg.status}`)}
+                  </Badge>
+                </div>
+                <h3 className="text-sm font-semibold text-[var(--text-heading)]">
+                  {pkg.hours_per_week} {tc('time.hoursPerWeek')} • {pkg.duration_weeks} {tc('time.weeks')}
+                </h3>
+              </div>
             </div>
-            <p className="text-xs text-zinc-400 mt-1">ID: {pkg.id.slice(0, 8)}...</p>
+            <div className="text-right">
+              <span className="text-lg font-bold text-[var(--primary)] font-[family-name:var(--font-display)]">
+                {formatCurrency(pkg.total_price)}
+              </span>
+              <p className="text-[10px] text-[var(--text-dim)] uppercase tracking-tighter">
+                {t('myPackages.totalPrice')}
+              </p>
+            </div>
           </div>
-        </div>
-        <span className="text-lg font-bold text-blue-400 font-[family-name:var(--font-display)]">
-          {formatCurrency(pkg.total_price)}
-        </span>
-      </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-zinc-100">
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Clock className="h-4 w-4 text-zinc-400" />
-          <span>{t('catalog.hoursPerWeek', { hours: pkg.hours_per_week })}</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <CalendarDays className="h-4 w-4 text-zinc-400" />
-          <span>{t('catalog.weeks', { weeks: pkg.duration_weeks })}</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <BookOpen className="h-4 w-4 text-zinc-400" />
-          <span>{t('myPackages.totalHours', { hours: totalHours })}</span>
-        </div>
-        {pkg.discount_pct > 0 && (
-          <div className="flex items-center gap-2 text-sm text-zinc-400">
-            <CreditCard className="h-4 w-4 text-zinc-400" />
-            <span>{t('catalog.discount', { pct: pkg.discount_pct })}</span>
+          {/* Usage Stats Section */}
+          <div className="p-4 rounded-2xl bg-[var(--bg-subtle)]/50 border border-[var(--border-main)] space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Play className="h-4 w-4 text-[var(--primary)]" />
+                <span className="text-xs font-semibold text-[var(--text-body)] capitalize">{t('myPackages.usage')}</span>
+              </div>
+              <span className="text-xs font-mono font-bold text-[var(--primary)]">
+                {consumed} / {totalClasses} {t('myPackages.totalClasses')}
+              </span>
+            </div>
+            
+            <div className="space-y-2">
+              <div className="w-full h-2.5 bg-[var(--border-main)] rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[var(--primary)] to-blue-400 rounded-full transition-all duration-1000 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-[10px] text-[var(--text-dim)] font-medium">
+                <span>{Math.round(progress)}% {tc('actions.completed', 'Completado')}</span>
+                <span>{t('myPackages.remaining', { count: remaining })}</span>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-500">
-        <span>
-          <span className="text-zinc-400">{t('myPackages.createdAt')}:</span> {formatDate(pkg.created_at)}
-        </span>
-        {pkg.activated_at && (
-          <span>
-            <span className="text-zinc-400">{t('myPackages.activatedAt')}:</span> {formatDate(pkg.activated_at)}
-          </span>
-        )}
-        {pkg.expires_at && (
-          <span>
-            <span className="text-zinc-400">{t('myPackages.expiresAt')}:</span> {formatDate(pkg.expires_at)}
-          </span>
-        )}
-      </div>
+          {/* Details Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 group/item">
+              <div className="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] flex items-center justify-center border border-[var(--border-main)]">
+                <Clock className="h-4 w-4 text-[var(--text-muted)]" />
+              </div>
+              <div>
+                <p className="text-[10px] uppercase text-[var(--text-dim)] tracking-wider">{t('myPackages.createdAt')}</p>
+                <p className="text-xs font-medium text-[var(--text-body)]">{formatDate(pkg.created_at)}</p>
+              </div>
+            </div>
+            {pkg.activated_at && (
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] flex items-center justify-center border border-[var(--border-main)]">
+                  <CalendarDays className="h-4 w-4 text-[var(--text-muted)]" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase text-[var(--text-dim)] tracking-wider">{t('myPackages.activatedAt')}</p>
+                  <p className="text-xs font-medium text-[var(--text-body)]">{formatDate(pkg.activated_at)}</p>
+                </div>
+              </div>
+            )}
+            {pkg.expires_at && (
+              <div className="col-span-2 flex items-center gap-3 pt-2 mt-2 border-t border-[var(--border-main)]/50">
+                <div className="w-8 h-8 rounded-lg bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
+                  <CalendarDays className="h-4 w-4 text-orange-500" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase text-[var(--text-dim)] tracking-wider font-bold text-orange-500/70">{t('myPackages.expiresAt')}</p>
+                  <p className="text-xs font-bold text-[var(--text-body)]">{formatDate(pkg.expires_at)}</p>
+                </div>
+              </div>
+            )}
+          </div>
 
-      {payments.length > 0 ? (
-        <div className="space-y-3">
-          <h4 className="text-sm font-medium text-zinc-700 font-[family-name:var(--font-display)]">
-            {t('myPackages.payments')}
-          </h4>
-          <div className="space-y-2">
-            {payments.map((payment) => (
+          {/* Payment History Preview */}
+          {payments.length > 0 && (
+            <div className="pt-4 border-t border-[var(--border-main)]">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-dim)]">
+                  {t('myPackages.payments')}
+                </h4>
+                <button 
+                  onClick={() => setModalOpen(true)}
+                  className="text-[10px] text-[var(--primary)] hover:underline font-bold"
+                >
+                  {t('myPackages.viewPayments')}
+                </button>
+              </div>
+              <div className="space-y-2">
+                {payments.slice(0, 1).map((payment) => (
+                  <div key={payment.id} className="p-3 rounded-xl bg-[var(--bg-subtle)]/30 border border-[var(--border-main)] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="h-3 w-3 text-[var(--text-muted)]" />
+                      <span className="text-xs font-medium">{formatCurrency(payment.amount)}</span>
+                    </div>
+                    <Badge variant={statusBadgeVariant(payment.status)} className="text-[9px] uppercase">
+                      {tc(`status.${payment.status}`)}
+                    </Badge>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Action Footer */}
+        <div className="px-6 py-4 bg-[var(--bg-subtle)]/50 border-t border-[var(--border-main)] flex flex-wrap gap-2">
+          {pkg.status === 'inactive' && hasConfirmedPayment && (
+            <Button size="sm" loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)} className="flex-1">
+              <Play className="h-4 w-4" />
+              {t('myPackages.activatePackage')}
+            </Button>
+          )}
+
+          {hasPendingPayment && (
+            <Button
+              size="sm"
+              variant="secondary"
+              className="flex-1"
+              onClick={() => {
+                const pendingPayment = payments.find((p) => p.status === 'pending');
+                if (pendingPayment) {
+                  onUploadModalOpen(pendingPayment.id, pkg.id);
+                }
+              }}
+            >
+              <FileUp className="h-4 w-4 text-orange-500" />
+              {t('myPackages.uploadReceipt')}
+            </Button>
+          )}
+        </div>
+      </Card>
+
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={t('myPackages.payments')}>
+        <div className="space-y-4">
+          {paymentsLoading ? (
+            <LoadingSpinner />
+          ) : Array.isArray(paymentsData) && paymentsData.length > 0 ? (
+            paymentsData.map((payment) => (
               <div
                 key={payment.id}
-                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-zinc-50/50 border border-white/[0.05] px-4 py-3"
+                className="flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border-main)] px-4 py-4"
               >
-                <div className="flex items-center gap-3">
-                  <CreditCard className="h-4 w-4 text-zinc-400" />
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[var(--bg-surface)] flex items-center justify-center border border-[var(--border-main)] shadow-sm text-[var(--primary)]">
+                    <CreditCard className="h-5 w-5" />
+                  </div>
                   <div>
-                    <span className="text-sm font-medium text-zinc-700">{formatCurrency(payment.amount)}</span>
-                    <span className="ml-3">
-                      <Badge variant={statusBadgeVariant(payment.status)}>{tc(`status.${payment.status}`)}</Badge>
-                    </span>
+                    <span className="text-base font-bold text-[var(--text-heading)]">{formatCurrency(payment.amount)}</span>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <Badge variant={statusBadgeVariant(payment.status)} className="text-[10px] uppercase px-1.5 py-0">
+                        {tc(`status.${payment.status}`)}
+                      </Badge>
+                      <span className="text-[10px] text-[var(--text-dim)] font-medium">
+                        {formatDate(payment.created_at)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   {payment.payment_proof_url && (
                     <a
                       href={payment.payment_proof_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
+                      className="p-2 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)]/20 transition-colors"
+                      title={tc('actions.viewDetails')}
                     >
-                      <ExternalLink className="h-3 w-3" />
-                      {tc('actions.viewDetails')}
+                      <ExternalLink className="h-4 w-4" />
                     </a>
                   )}
-                  {payment.status === 'pending' && (
-                    <Button size="sm" variant="secondary" onClick={() => onUploadModalOpen(payment.id, pkg.id)}>
-                      <Upload className="h-3 w-3" />
-                      {t('myPackages.uploadReceipt')}
-                    </Button>
-                  )}
-                  {payment.rejection_reason && (
-                    <span className="text-xs text-rose-400">{payment.rejection_reason}</span>
+                  {payment.status === 'rejected' && payment.rejection_reason && (
+                    <span className="text-xs font-semibold text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                      {payment.rejection_reason}
+                    </span>
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <p className="text-xs text-zinc-400 italic">{t('myPackages.noPayments')}</p>
-      )}
-
-      <div className="flex flex-wrap gap-3 pt-1">
-        {pkg.status === 'inactive' && hasConfirmedPayment && (
-          <Button size="sm" loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)}>
-            <Play className="h-4 w-4" />
-            {t('myPackages.activatePackage')}
-          </Button>
-        )}
-
-        {hasPendingPayment && (
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={() => {
-              const pendingPayment = payments.find((p) => p.status === 'pending');
-              if (pendingPayment) {
-                onUploadModalOpen(pendingPayment.id, pkg.id);
-              }
-            }}
-          >
-            <Upload className="h-4 w-4" />
-            {t('myPackages.uploadReceipt')}
-          </Button>
-        )}
-
-        <Button
-          size="sm"
-          variant="secondary"
-          onClick={() => setModalOpen(true)}
-        >
-          <ExternalLink className="h-3 w-3" />
-          {t('myPackages.viewPayments')}
-        </Button>
-      </div>
-    </Card>
-
-    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={t('myPackages.payments')}>
-      <div className="space-y-4">
-        {paymentsLoading ? (
-          <LoadingSpinner />
-        ) : Array.isArray(paymentsData) && paymentsData.length > 0 ? (
-          paymentsData.map((payment) => (
-            <div
-              key={payment.id}
-              className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-zinc-50/50 border border-white/[0.05] px-4 py-3"
-            >
-              <div className="flex items-center gap-3">
-                <CreditCard className="h-4 w-4 text-zinc-400" />
-                <div>
-                  <span className="text-sm font-medium text-zinc-700">{formatCurrency(payment.amount)}</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Badge variant={statusBadgeVariant(payment.status)}>{tc(`status.${payment.status}`)}</Badge>
-                    <span className="text-xs text-zinc-500">{formatDate(payment.created_at)}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                {payment.payment_proof_url && (
-                  <a
-                    href={payment.payment_proof_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    <ExternalLink className="h-3 w-3" />
-                    {tc('actions.viewDetails')}
-                  </a>
-                )}
-                {payment.rejection_reason && (
-                  <span className="text-xs text-rose-400">{payment.rejection_reason}</span>
-                )}
-              </div>
+            ))
+          ) : (
+            <div className="py-12 text-center space-y-3">
+              <CreditCard className="h-12 w-12 text-[var(--border-strong)] mx-auto animate-bounce" />
+              <p className="text-sm text-[var(--text-dim)] italic font-medium">{t('myPackages.noPayments')}</p>
             </div>
-          ))
-        ) : (
-          <p className="text-sm text-zinc-400 italic">{t('myPackages.noPayments')}</p>
-        )}
-        {!paymentsLoading && Array.isArray(paymentsData) && paymentsData.some((p) => p.status === 'confirmed') && pkg.status !== 'active' && (
-          <div className="pt-4 border-t border-zinc-200">
-            <Button size="sm" loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)}>
-              <Play className="h-4 w-4" />
-              {t('myPackages.activatePackage')}
-            </Button>
-          </div>
-        )}
-      </div>
-    </Modal>
+          )}
+          
+          {!paymentsLoading && Array.isArray(paymentsData) && paymentsData.some((p) => p.status === 'confirmed') && pkg.status !== 'active' && (
+            <div className="pt-6 mt-2 border-t border-[var(--border-main)]">
+              <Button loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)} className="w-full">
+                <Play className="h-4 w-4" />
+                {t('myPackages.activatePackage')}
+              </Button>
+            </div>
+          )}
+        </div>
+      </Modal>
     </>
   );
 }

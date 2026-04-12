@@ -117,6 +117,7 @@ export type StudentPackageDTO = {
   created_at: string;
   activated_at: string | null;
   expires_at: string | null;
+  bookings_count: number;
   updated_at: string;
 };
 

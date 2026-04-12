@@ -1,6 +1,7 @@
 interface BadgeProps {
   variant?: 'success' | 'warning' | 'danger' | 'info' | 'default' | 'virtual' | 'presencial';
   children: React.ReactNode;
+  className?: string;
 }
 
 const variantClasses: Record<string, string> = {
@@ -13,9 +14,9 @@ const variantClasses: Record<string, string> = {
   presencial: 'bg-[var(--presencial-bg)] text-[var(--presencial)] ring-1 ring-inset ring-[var(--presencial-border)]',
 };
 
-export default function Badge({ variant = 'default', children }: BadgeProps) {
+export default function Badge({ variant = 'default', children, className = '' }: BadgeProps) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${variantClasses[variant]}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${variantClasses[variant]} ${className}`}>
       {children}
     </span>
   );

@@ -53,6 +53,10 @@
       "success": "Receipt uploaded successfully",
       "error": "Error uploading receipt"
     },
-    "viewPayments": "View Payments"
+    "viewPayments": "View Payments",
+    "consumedClasses": "Consumed classes",
+    "totalClasses": "Total classes",
+    "usage": "Package usage",
+    "remaining": "{{count}} remaining"
   }
 }

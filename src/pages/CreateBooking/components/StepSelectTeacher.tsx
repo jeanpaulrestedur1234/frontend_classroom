@@ -1,4 +1,4 @@
-import { User, AlertCircle } from 'lucide-react';
+import { User, CircleAlert } from 'lucide-react';
 import type { UserDTO } from '@/types';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
@@ -53,7 +53,7 @@ export function StepTeacher({ t, tc, teachers, loading, teacherId, setTeacherId,
 
           {!selectedTeacherHasMatchingSlots && !loading && teacherId && (
             <div className="rounded-xl bg-orange-500/10 border border-orange-500/20 p-4 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-              <AlertCircle className="h-5 w-5 text-orange-400 mt-0.5 shrink-0" />
+              <CircleAlert className="h-5 w-5 text-orange-400 mt-0.5 shrink-0" />
               <div>
                 <p className="text-sm font-semibold text-orange-400">
                   {isVirtual 

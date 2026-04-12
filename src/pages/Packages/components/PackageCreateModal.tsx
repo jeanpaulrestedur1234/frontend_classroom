@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useToast } from '@/context/ToastContext';
 import { createPackage } from '@/services/packages';
 import type { CreatePackageDTO, ClassType } from '@/types';
 import Modal from '@/components/ui/Modal';
@@ -21,13 +22,14 @@ export default function PackageCreateModal({
   const { t } = useTranslation('packages');
   const { t: tc } = useTranslation('common');
 
+  const { toast: toastNotify } = useToast();
+
   const [classType, setClassType] = useState<string>('');
   const [hoursPerWeek, setHoursPerWeek] = useState('');
   const [durationWeeks, setDurationWeeks] = useState('');
   const [basePrice, setBasePrice] = useState('');
   const [discountPct, setDiscountPct] = useState('0');
   const [creating, setCreating] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
 
   function resetForm() {
     setClassType('');
@@ -35,7 +37,6 @@ export default function PackageCreateModal({
     setDurationWeeks('');
     setBasePrice('');
     setDiscountPct('0');
-    setFormError(null);
   }
 
   function handleClose() {
@@ -44,10 +45,8 @@ export default function PackageCreateModal({
   }
 
   async function handleCreate() {
-    setFormError(null);
-
     if (!classType || !hoursPerWeek || !durationWeeks || !basePrice) {
-      setFormError(tc('validation.required'));
+      toastNotify(tc('validation.required'), 'error');
       return;
     }
 
@@ -65,7 +64,7 @@ export default function PackageCreateModal({
       resetForm();
       onSuccess();
     } catch {
-      setFormError(t('create.error'));
+      // Handled by global interceptor
     } finally {
       setCreating(false);
     }
@@ -126,10 +125,6 @@ export default function PackageCreateModal({
           placeholder="0"
         />
 
-        {formError && (
-          <p className="text-sm text-rose-400">{formError}</p>
-        )}
-
         <div className="flex justify-end gap-3 pt-2">
           <Button variant="secondary" onClick={handleClose}>
             {tc('actions.cancel')}
@@ -142,3 +137,4 @@ export default function PackageCreateModal({
     </Modal>
   );
 }
+

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Package, AlertCircle } from 'lucide-react';
+import { Package } from 'lucide-react';
 import { useQuery, useMutation } from '@/hooks';
 import { useToast } from '@/context/ToastContext';
 import { getMyPackages, activatePackage } from '@/services/packages';
@@ -18,7 +18,7 @@ export default function MyPackages() {
   const { t: tc } = useTranslation('common');
   const { success: toastSuccess, error: toastError } = useToast();
 
-  const { data, loading, error, refetch } = useQuery<StudentPackageWithPayments[]>(getMyPackages);
+  const { data, loading, refetch } = useQuery<StudentPackageWithPayments[]>(getMyPackages);
   const packages = data ?? [];
 
   const activateMut = useMutation(activatePackage);
@@ -71,12 +71,7 @@ export default function MyPackages() {
         <div className="mt-1 h-1 w-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
       </div>
 
-      {error && (
-        <div className="rounded-xl bg-rose-500/10 border border-rose-500/20 p-4 flex items-start gap-3">
-          <AlertCircle className="h-4 w-4 text-rose-400 mt-0.5 shrink-0" />
-          <p className="text-sm text-rose-400">{error}</p>
-        </div>
-      )}
+
 
       {packages.length === 0 ? (
         <EmptyState

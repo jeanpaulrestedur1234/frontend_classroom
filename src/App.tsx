@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { AuthProvider } from '@/context/AuthContext';
-import { ToastProvider } from '@/context/ToastContext';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import AppLayout from '@/components/layout/AppLayout';
@@ -37,15 +36,23 @@ function SuspenseWrapper({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<PageLoader />}>{children}</Suspense>;
 }
 
+import { Toaster } from 'sonner';
+
 function RootLayout() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <ToastProvider>
-          <ErrorBoundary>
-            <Outlet />
-          </ErrorBoundary>
-        </ToastProvider>
+        <ErrorBoundary>
+          <Toaster 
+            position="bottom-right" 
+            richColors 
+            closeButton
+            toastOptions={{
+              className: 'font-[family-name:var(--font-display)] rounded-xl border-[var(--border-main)] shadow-2xl',
+            }}
+          />
+          <Outlet />
+        </ErrorBoundary>
       </AuthProvider>
     </ThemeProvider>
   );

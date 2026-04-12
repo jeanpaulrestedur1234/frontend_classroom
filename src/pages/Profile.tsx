@@ -5,12 +5,11 @@ import {
   Phone,
   Shield,
   Hash,
-  CheckCircle2,
-  AlertCircle,
   Save,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/context/ToastContext';
 import { updateMe } from '@/services/users';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
@@ -22,12 +21,11 @@ export default function Profile() {
   const { t: tc } = useTranslation('common');
   const { t: tu } = useTranslation('users');
   const { user } = useAuth();
+  const { success: toastSuccess } = useToast();
 
   const [fullName, setFullName] = useState(user?.full_name ?? '');
   const [phone, setPhone] = useState(user?.phone ?? '');
   const [saving, setSaving] = useState(false);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
 
   if (!user) {
     return <LoadingSpinner size="lg" />;
@@ -51,8 +49,6 @@ export default function Profile() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSuccess('');
-    setError('');
     setSaving(true);
 
     try {
@@ -60,16 +56,9 @@ export default function Profile() {
         full_name: fullName,
         phone: phone || undefined,
       });
-      setSuccess(tu('edit.success'));
+      toastSuccess(tu('edit.success'));
     } catch (err: any) {
-      const detail = err?.response?.data?.detail;
-      if (typeof detail === 'string') {
-        setError(detail);
-      } else if (Array.isArray(detail)) {
-        setError(detail.map((d: any) => d.msg).join('. '));
-      } else {
-        setError(tc('errors.generic'));
-      }
+      // Errors handled by global axios interceptor
     } finally {
       setSaving(false);
     }
@@ -145,22 +134,6 @@ export default function Profile() {
             <h2 className="text-lg font-semibold font-[family-name:var(--font-display)] text-[var(--text-heading)] mb-6">
               {tu('edit.title')}
             </h2>
-
-            {/* Success feedback */}
-            {success && (
-              <div className="flex items-center gap-3 p-3.5 mb-5 rounded-xl bg-emerald-500/[0.07] backdrop-blur border border-emerald-500/15 text-emerald-300 text-sm">
-                <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-400" />
-                <span>{success}</span>
-              </div>
-            )}
-
-            {/* Error feedback */}
-            {error && (
-              <div className="flex items-center gap-3 p-3.5 mb-5 rounded-xl bg-rose-500/[0.07] backdrop-blur border border-rose-500/15 text-rose-300 text-sm">
-                <AlertCircle className="w-5 h-5 shrink-0 text-rose-400" />
-                <span>{error}</span>
-              </div>
-            )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email (read-only) */}

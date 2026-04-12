@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
@@ -18,7 +19,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-// ── Response interceptor: handle 401 with token refresh ─────────────────────
+// ── Response interceptor 1: handle 401 with token refresh ─────────────────────
 let isRefreshing = false;
 let failedQueue: Array<{
   resolve: (token: string) => void;
@@ -89,6 +90,44 @@ api.interceptors.response.use(
       } finally {
         isRefreshing = false;
       }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+// ── Response interceptor 2: Global error toasts ─────────────────────────────
+api.interceptors.response.use(
+  (response) => response,
+  async (error: any) => {
+    // Skip toast for 401 as it's handled by the refresh interceptor
+    // Also skip if it's a cancellation error
+    if (error.response?.status === 401 || axios.isCancel(error)) {
+      return Promise.reject(error);
+    }
+
+    const status = error.response?.status;
+    const detail = error.response?.data?.detail;
+
+    // Build error message
+    let message = 'An unexpected error occurred';
+    if (typeof detail === 'string') {
+      message = detail;
+    } else if (Array.isArray(detail)) {
+      message = detail.map((d: any) => d.msg).join('. ');
+    } else if (status === 403) {
+      message = 'You do not have permission to perform this action';
+    } else if (status === 404) {
+      message = 'Resource not found';
+    } else if (status >= 500) {
+      message = 'Server error, please try again later';
+    } else if (!status) {
+      message = 'Network error, please check your connection';
+    }
+
+    // Only show toast if not specifically suppressed in request config
+    if (!error.config?._quiet) {
+      toast.error(message);
     }
 
     return Promise.reject(error);

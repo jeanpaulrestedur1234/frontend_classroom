@@ -159,7 +159,7 @@ export default function CreateBooking() {
           room_id: !isVirtual && roomId ? roomId : undefined,
           scheduled_date: scheduledDate,
           start_time: startTime,
-          
+
         },
         selectedPackageId || undefined,
       );
@@ -201,7 +201,7 @@ export default function CreateBooking() {
         return <StepRoom t={t} tc={tc} rooms={rooms} loading={loadingData} roomId={roomId} setRoomId={setRoomId} />;
       case 3:
         return (
-        <StepDateTime
+          <StepDateTime
             t={t}
             tc={tc}
             teacherAvailability={teacherAvailability}
@@ -246,7 +246,7 @@ export default function CreateBooking() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('create.title')}

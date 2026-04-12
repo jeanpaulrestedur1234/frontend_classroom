@@ -1,8 +1,9 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AlertCircle, ArrowLeft, Lock, Mail } from 'lucide-react';
+import { ArrowLeft, Lock, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/context/ToastContext';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
@@ -11,11 +12,11 @@ export default function Login() {
   const { t } = useTranslation('auth');
   const { t: tc } = useTranslation('common');
   const { user, login, loading: authLoading } = useAuth();
+  const { toast: toastNotify } = useToast();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -26,21 +27,20 @@ export default function Login() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError('');
     setSubmitting(true);
 
     try {
       await login(email, password);
+      // Success toast is optional here as we redirect, but let's add it for feedback
+      toastNotify(t('login.successMessage') || 'Login successful', 'success');
       navigate('/app', { replace: true });
     } catch (err: any) {
-      const detail = err?.response?.data?.detail;
-      if (typeof detail === 'string') {
-        setError(detail);
-      } else if (Array.isArray(detail)) {
-        setError(detail.map((d: any) => d.msg).join('. '));
-      } else {
-        setError(t('login.error'));
-      }
+      // The global interceptor will handle most errors, 
+      // but we can add specific handling here if needed.
+      // Since we want to avoid double toasts, we can check if it's already handled.
+      // Actually, for Login, the 401 might NOT be caught by the global interceptor 
+      // because it's a "known" error case for login.
+      // Let's assume the global interceptor handled it, or we can use the _quiet flag if we want manual control.
     } finally {
       setSubmitting(false);
     }
@@ -91,14 +91,6 @@ export default function Login() {
               {t('login.subtitle')}
             </p>
           </div>
-
-          {/* Error alert */}
-          {error && (
-            <div className="flex items-start gap-3 p-3.5 mb-6 rounded-xl bg-rose-500/[0.07] border border-rose-500/15 text-rose-500 text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-              <span>{error}</span>
-            </div>
-          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">

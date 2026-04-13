@@ -267,8 +267,9 @@ export default function PackageDetailCard({
                 onClick={() => {
                   const firstPayment = payments[0];
                   const hasRejected = payments.some(p => p.status === 'rejected');
+                  const hasNotified = payments.some(p => p.status === 'notified');
                   
-                  if (hasRejected) {
+                  if (hasRejected && !hasNotified) {
                      // If there's a rejected one, we might want to trigger the special flow
                      // but the current onCreatePayment logic in parent handles it.
                      // For now, let's keep it simple: if not paid, allow view/manage.

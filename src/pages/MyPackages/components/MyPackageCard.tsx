@@ -298,7 +298,10 @@ export default function MyPackageCard({
             </div>
           )}
 
-          {!paymentsLoading && Array.isArray(paymentsData) && paymentsData.some((p) => p.status === 'rejected') && (
+          {!paymentsLoading && 
+            Array.isArray(paymentsData) && 
+            paymentsData.some((p) => p.status === 'rejected') && 
+            !paymentsData.some((p) => p.status === 'notified') && (
             <div className="pt-4 border-t border-[var(--border-main)]">
               <Button
                 size="sm"

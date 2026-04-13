@@ -203,7 +203,7 @@ export default function Payments() {
                 type="text"
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setDisplayPage(1); }}
-                placeholder={t('filter.searchPlaceholder', { defaultValue: 'Buscar…' })}
+                placeholder={t('filter.searchPlaceholder')}
                 className="pl-8 pr-3 h-8 text-xs rounded-lg border border-[var(--border-main)] bg-[var(--bg-surface)] text-[var(--text-body)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)]/50 w-44"
               />
             </div>
@@ -262,12 +262,12 @@ export default function Payments() {
                 value={sortKey}
                 onChange={(e) => { setSortKey(e.target.value as SortKey); setDisplayPage(1); }}
                 options={[
-                  { value: 'date_desc', label: t('filter.sort.dateDesc', { defaultValue: 'Más recientes' }) },
-                  { value: 'date_asc', label: t('filter.sort.dateAsc', { defaultValue: 'Más antiguos' }) },
-                  { value: 'amount_desc', label: t('filter.sort.amountDesc', { defaultValue: 'Mayor monto' }) },
-                  { value: 'amount_asc', label: t('filter.sort.amountAsc', { defaultValue: 'Menor monto' }) },
+                  { value: 'date_desc', label: t('filter.sort.dateDesc') },
+                  { value: 'date_asc', label: t('filter.sort.dateAsc') },
+                  { value: 'amount_desc', label: t('filter.sort.amountDesc') },
+                  { value: 'amount_asc', label: t('filter.sort.amountAsc') },
                 ]}
-                className="text-xs h-8"
+                className="text-xs h-9 py-1.5 rounded-lg"
               />
             </div>
 
@@ -278,7 +278,7 @@ export default function Payments() {
                 className="inline-flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--text-body)] px-2 py-1 rounded-md hover:bg-[var(--bg-subtle)] transition-colors"
               >
                 <X className="h-3 w-3" />
-                {t('filter.clear', { defaultValue: 'Limpiar' })}
+                {t('filter.clear')}
               </button>
             )}
           </div>
@@ -299,13 +299,13 @@ export default function Payments() {
       {!loading && filteredPayments.length === 0 && (
         <EmptyState
           icon={<CreditCard className="h-12 w-12" />}
-          title={isDirty ? t('filter.noResults', { defaultValue: 'Sin resultados' }) : t('noPayments')}
-          description={isDirty ? t('filter.noResultsDesc', { defaultValue: 'Prueba ajustando los filtros.' }) : t('noPaymentsDesc')}
+          title={isDirty ? t('filter.noResults') : t('noPayments')}
+          description={isDirty ? t('filter.noResultsDesc') : t('noPaymentsDesc')}
           action={
             isDirty ? (
               <Button size="sm" variant="secondary" onClick={resetFilters}>
                 <X className="h-3.5 w-3.5 mr-1.5" />
-                {t('filter.clear', { defaultValue: 'Limpiar filtros' })}
+                {t('filter.clear')}
               </Button>
             ) : undefined
           }

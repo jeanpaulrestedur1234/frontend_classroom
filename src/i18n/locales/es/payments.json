@@ -1,27 +1,39 @@
 {
-  "title": "Gestion de Pagos",
+  "title": "Gestión de Pagos",
   "table": {
     "paymentId": "ID de Pago",
+    "id": "ID",
     "studentId": "ID Estudiante",
     "packageId": "ID Paquete",
     "amount": "Monto",
     "status": "Estado",
     "proof": "Comprobante",
-    "rejectionReason": "Razon de Rechazo",
-    "reviewedAt": "Revisado El",
+    "rejectionReason": "Razón de Rechazo",
+    "reviewedAt": "Revisado",
     "reviewedBy": "Revisado Por",
     "createdAt": "Creado",
-    "updatedAt": "Actualizado"
+    "updatedAt": "Actualizado",
+    "unknownStudent": "Estudiante desconocido"
   },
   "filter": {
-    "allStatuses": "Todos los estados",
-    "byStatus": "Filtrar por estado"
+    "allStatuses": "Todos",
+    "byStatus": "Filtrar por estado",
+    "searchPlaceholder": "Buscar estudiante o paquete…",
+    "clear": "Limpiar",
+    "noResults": "Sin resultados",
+    "noResultsDesc": "No hay pagos que coincidan con los filtros actuales.",
+    "sort": {
+      "dateDesc": "Más recientes",
+      "dateAsc": "Más antiguos",
+      "amountDesc": "Mayor monto",
+      "amountAsc": "Menor monto"
+    }
   },
   "pagination": {
     "showing": "Mostrando {{from}}-{{to}} de {{total}} resultados",
     "previous": "Anterior",
     "next": "Siguiente",
-    "page": "Pagina {{current}} de {{total}}"
+    "page": "Página {{current}} de {{total}}"
   },
   "admin": {
     "workflow": {
@@ -31,19 +43,19 @@
       "step3": "El estudiante sube el comprobante",
       "step4": "El administrador aprueba o rechaza"
     },
-    "apiNote": "Los pagos aparecen cuando los estudiantes suben comprobantes. Usa la seccion de paquetes de cada estudiante para revisar pagos individuales.",
+    "apiNote": "Los pagos aparecen cuando los estudiantes suben comprobantes. Usa la sección de paquetes de cada estudiante para revisar pagos individuales.",
     "filterByStatus": "Filtrar por estado",
     "allStatuses": "Todos los estados",
     "amount": "Monto",
     "proofUrl": "Ver comprobante",
-    "rejectionReason": "Razon de rechazo",
+    "rejectionReason": "Razón de rechazo",
     "approveSuccess": "Pago aprobado exitosamente",
     "rejectSuccess": "Pago rechazado exitosamente",
     "error": "Error al procesar pago",
     "rejectModal": {
       "title": "Rechazar Pago",
-      "reasonLabel": "Razon del rechazo",
-      "reasonPlaceholder": "Describe la razon del rechazo..."
+      "reasonLabel": "Razón del rechazo",
+      "reasonPlaceholder": "Describe la razón del rechazo..."
     }
   },
   "student": {
@@ -60,7 +72,7 @@
     }
   },
   "noPayments": "No se encontraron pagos",
-  "noPaymentsDesc": "No hay pagos que coincidan con el filtro actual.",
+  "noPaymentsDesc": "Aún no hay pagos registrados en el sistema.",
   "viewProof": "Ver comprobante",
   "noProof": "Sin comprobante"
 }

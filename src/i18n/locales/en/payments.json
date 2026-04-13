@@ -2,20 +2,32 @@
   "title": "Payment Management",
   "table": {
     "paymentId": "Payment ID",
+    "id": "ID",
     "studentId": "Student ID",
     "packageId": "Package ID",
     "amount": "Amount",
     "status": "Status",
     "proof": "Receipt",
     "rejectionReason": "Rejection Reason",
-    "reviewedAt": "Reviewed At",
+    "reviewedAt": "Reviewed",
     "reviewedBy": "Reviewed By",
     "createdAt": "Created",
-    "updatedAt": "Updated"
+    "updatedAt": "Updated",
+    "unknownStudent": "Unknown student"
   },
   "filter": {
-    "allStatuses": "All statuses",
-    "byStatus": "Filter by status"
+    "allStatuses": "All",
+    "byStatus": "Filter by status",
+    "searchPlaceholder": "Search student or package…",
+    "clear": "Clear",
+    "noResults": "No results",
+    "noResultsDesc": "No payments match the current filters.",
+    "sort": {
+      "dateDesc": "Most recent",
+      "dateAsc": "Oldest first",
+      "amountDesc": "Highest amount",
+      "amountAsc": "Lowest amount"
+    }
   },
   "pagination": {
     "showing": "Showing {{from}}-{{to}} of {{total}} results",
@@ -60,7 +72,7 @@
     }
   },
   "noPayments": "No payments found",
-  "noPaymentsDesc": "There are no payments matching the current filter.",
+  "noPaymentsDesc": "No payments have been registered yet.",
   "viewProof": "View receipt",
   "noProof": "No receipt"
 }

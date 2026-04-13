@@ -33,7 +33,8 @@
     "cancelled": "Cancelado",
     "completed": "Completado",
     "notified": "Notificado",
-    "rejected": "Rechazado"
+    "rejected": "Rechazado",
+    "package": "Paquete"
   },
   "roles": {
     "super_admin": "Super Admin",

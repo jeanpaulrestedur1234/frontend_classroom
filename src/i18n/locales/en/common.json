@@ -29,7 +29,8 @@
     "cancelled": "Cancelled",
     "completed": "Completed",
     "notified": "Notified",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "package": "Package"
   },
   "roles": {
     "super_admin": "Super Admin",

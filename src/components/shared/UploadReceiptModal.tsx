@@ -7,13 +7,15 @@ import Button from '@/components/ui/Button';
 import { uploadFile } from '@/services/upload';
 
 interface UploadReceiptModalProps {
+  isOpen: boolean;
   paymentId: string | null;
   loading: boolean;
   onClose: () => void;
-  onSubmit: (id: string, url: string) => void;
+  onSubmit: (id: string | null, url: string) => void;
 }
 
 export default function UploadReceiptModal({
+  isOpen,
   paymentId,
   loading,
   onClose,
@@ -32,8 +34,6 @@ export default function UploadReceiptModal({
       return;
     }
 
-    if (!paymentId) return;
-
     setError(null);
     setIsUploading(true);
     try {
@@ -47,7 +47,7 @@ export default function UploadReceiptModal({
   }
 
   // Reset internal state
-  if (!paymentId && file) {
+  if (!isOpen && file) {
     setFile(null);
     setError(null);
   }
@@ -56,7 +56,7 @@ export default function UploadReceiptModal({
 
   return (
     <Modal
-      isOpen={!!paymentId}
+      isOpen={isOpen}
       onClose={onClose}
       title={t('myPackages.uploadModal.title')}
       size="md"

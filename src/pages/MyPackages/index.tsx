@@ -50,7 +50,8 @@ export default function MyPackages() {
   }
 
 
-  async function handleUploadReceipt(paymentId: string, url: string) {
+  async function handleUploadReceipt(paymentId: string | null, url: string) {
+    if (!paymentId) return;
     try {
       await uploadMut.execute(paymentId, { payment_proof_url: url });
       setUploadModal({ open: false, paymentId: '', packageId: '' });
@@ -113,6 +114,7 @@ export default function MyPackages() {
       )}
 
       <UploadReceiptModal
+        isOpen={uploadModal.open}
         paymentId={uploadModal.open ? uploadModal.paymentId : null}
         loading={uploadMut.loading}
         onClose={() => setUploadModal({ open: false, paymentId: '', packageId: '' })}

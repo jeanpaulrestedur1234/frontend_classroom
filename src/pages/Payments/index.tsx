@@ -89,7 +89,8 @@ export default function Payments() {
     }
   }
 
-  async function handleUploadReceipt(id: string, url: string) {
+  async function handleUploadReceipt(id: string | null, url: string) {
+    if (!id) return;
     try {
       await uploadMut.execute(id, { payment_proof_url: url });
       setUploadingId(null);
@@ -215,6 +216,7 @@ export default function Payments() {
       />
 
       <UploadReceiptModal
+        isOpen={!!uploadingId}
         paymentId={uploadingId}
         loading={uploadMut.loading}
         onClose={() => setUploadingId(null)}

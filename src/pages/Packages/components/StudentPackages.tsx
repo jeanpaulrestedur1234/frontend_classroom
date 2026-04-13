@@ -20,7 +20,8 @@ export default function StudentPackages() {
 
   const [acquiringId, setAcquiringId] = useState<string | null>(null);
   const [successId, setSuccessId] = useState<string | null>(null);
-  const [activePaymentPkgId, setActivePaymentPkgId] = useState<{paymentId: string, pkgId: string} | null>(null);
+  // This state will now represent the "pending" acquisition in the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -29,23 +30,23 @@ export default function StudentPackages() {
 
   async function handleAcquire(packageId: string) {
     setAcquiringId(packageId);
-    try {
-      const { payment } = await acquirePackage(packageId);
-      setActivePaymentPkgId({ paymentId: payment.id, pkgId: packageId });
-    } catch (err: any) {
-      console.error('Error acquiring package:', err);
-    } finally {
-      setAcquiringId(null);
-    }
+    setIsModalOpen(true);
   }
 
-  async function handleSubmitReceipt(paymentId: string, url: string) {
+  async function handleSubmitReceipt(_paymentId: string | null, url: string) {
+    if (!acquiringId) return;
+    
     setIsSubmitting(true);
     try {
-      await uploadReceipt(paymentId, { payment_proof_url: url });
+      // 1. Acquire the package first
+      const { payment } = await acquirePackage(acquiringId);
       
-      const pkgId = activePaymentPkgId?.pkgId;
-      setActivePaymentPkgId(null);
+      // 2. Upload the receipt using the newly created payment ID
+      await uploadReceipt(payment.id, { payment_proof_url: url });
+      
+      const pkgId = acquiringId;
+      setIsModalOpen(false);
+      setAcquiringId(null);
       
       if (pkgId) {
         setSuccessId(pkgId);
@@ -54,7 +55,7 @@ export default function StudentPackages() {
       
       refetch();
     } catch (err: any) {
-      console.error('Error uploading receipt:', err);
+      console.error('Error in sequential acquisition:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -123,9 +124,13 @@ export default function StudentPackages() {
         </div>
       )}
       <UploadReceiptModal
-        paymentId={activePaymentPkgId?.paymentId || null}
+        isOpen={isModalOpen}
+        paymentId={null} // We don't have one yet in this flow
         loading={isSubmitting}
-        onClose={() => setActivePaymentPkgId(null)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setAcquiringId(null);
+        }}
         onSubmit={handleSubmitReceipt}
       />
     </div>

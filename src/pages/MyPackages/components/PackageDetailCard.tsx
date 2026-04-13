@@ -19,31 +19,21 @@ function statusBadgeVariant(
   status: string,
 ): 'warning' | 'success' | 'danger' | 'info' | 'default' {
   switch (status) {
-    case 'inactive':
-      return 'warning';
-    case 'active':
-      return 'success';
-    case 'pending':
-      return 'warning';
-    case 'notified':
-      return 'info';
-    case 'confirmed':
-      return 'success';
-    case 'rejected':
-      return 'danger';
-    default:
-      return 'default';
+    case 'inactive': return 'warning';
+    case 'active': return 'success';
+    case 'pending': return 'warning';
+    case 'notified': return 'info';
+    case 'confirmed': return 'success';
+    case 'rejected': return 'danger';
+    default: return 'default';
   }
 }
 
 function classTypeBadgeVariant(ct: ClassType): 'info' | 'success' | 'warning' {
   switch (ct) {
-    case 'open_group':
-      return 'info';
-    case 'closed_group':
-      return 'success';
-    case 'private':
-      return 'warning';
+    case 'open_group': return 'info';
+    case 'closed_group': return 'success';
+    case 'private': return 'warning';
   }
 }
 
@@ -79,182 +69,240 @@ export default function PackageDetailCard({
   );
 
   return (
-    <Card className="space-y-5 relative overflow-hidden">
-      {/* Top accent line */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+    <Card className="overflow-hidden rounded-2xl border border-[var(--border-main)] bg-[var(--bg-surface)] shadow-sm">
 
-      {/* Package header */}
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-            <BookOpen className="h-5 w-5 text-blue-400" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <Badge variant={classTypeBadgeVariant(pkg.class_type)}>
-                {tc(`classTypes.${pkg.class_type}`)}
-              </Badge>
-              <Badge variant={statusBadgeVariant(pkg.status)}>
-                {tc(`status.${pkg.status}`)}
-              </Badge>
+      {/* Header */}
+      <div className="p-5 border-b border-[var(--border-main)]">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-xl bg-[var(--primary)]/10 border border-[var(--primary)]/20 flex items-center justify-center flex-shrink-0">
+              <BookOpen className="h-5 w-5 text-[var(--primary)]" />
             </div>
-            <p className="text-xs text-zinc-400 mt-1">
-              ID: {pkg.id.slice(0, 8)}...
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-[var(--text-dim)] font-medium mb-1">
+                {tc(`classTypes.${pkg.class_type}`)}
+              </p>
+              <p className="text-[10px] text-[var(--text-dim)]">
+                ID: {pkg.id.slice(0, 8)}…
+              </p>
+            </div>
+          </div>
+          <div className="text-right flex-shrink-0">
+            <p className="text-xl font-bold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
+              {formatCurrency(pkg.total_price)}
+            </p>
+            <p className="text-[9px] text-[var(--text-dim)] uppercase tracking-wider mt-0.5">
+              {t('myPackages.totalPrice')}
             </p>
           </div>
         </div>
-        <span className="text-lg font-bold text-blue-400 font-[family-name:var(--font-display)]">
-          {formatCurrency(pkg.total_price)}
-        </span>
+
+        <div className="mt-3">
+          <Badge variant={statusBadgeVariant(pkg.status)} className="capitalize text-xs px-2.5 py-1 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-current mr-1.5 inline-block" />
+            {tc(`status.${pkg.status}`)}
+          </Badge>
+        </div>
       </div>
 
-      {/* Package details */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-zinc-100">
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Clock className="h-4 w-4 text-zinc-400" />
-          <span>{t('catalog.hoursPerWeek', { hours: pkg.hours_per_week })}</span>
+      <div className="p-5 space-y-4">
+
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+            <div className="flex items-center gap-1.5 mb-1">
+              <Clock className="h-3 w-3 text-[var(--text-dim)]" />
+              <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                {tc('time.hoursPerWeek')}
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-[var(--text-body)]">{pkg.hours_per_week}h</p>
+          </div>
+
+          <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+            <div className="flex items-center gap-1.5 mb-1">
+              <CalendarDays className="h-3 w-3 text-[var(--text-dim)]" />
+              <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                {tc('time.weeks')}
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-[var(--text-body)]">{pkg.duration_weeks}w</p>
+          </div>
+
+          <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+            <div className="flex items-center gap-1.5 mb-1">
+              <BookOpen className="h-3 w-3 text-[var(--text-dim)]" />
+              <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                {t('myPackages.totalHours', { hours: '' }).trim()}
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-[var(--text-body)]">{totalHours}h</p>
+          </div>
+
+          {pkg.discount_pct > 0 && (
+            <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+              <div className="flex items-center gap-1.5 mb-1">
+                <CreditCard className="h-3 w-3 text-[var(--text-dim)]" />
+                <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                  {t('catalog.discount', { pct: '' }).trim()}
+                </p>
+              </div>
+              <p className="text-sm font-semibold text-[var(--text-body)]">{pkg.discount_pct}%</p>
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <CalendarDays className="h-4 w-4 text-zinc-400" />
-          <span>{t('catalog.weeks', { weeks: pkg.duration_weeks })}</span>
+
+        {/* Dates */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <Clock className="h-3 w-3 text-[var(--text-dim)]" />
+              <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                {t('myPackages.createdAt')}
+              </p>
+            </div>
+            <p className="text-xs font-semibold text-[var(--text-body)]">{formatDate(pkg.created_at)}</p>
+          </div>
+
+          {pkg.activated_at && (
+            <div className="bg-[var(--bg-subtle)] rounded-xl p-3 border border-[var(--border-main)]">
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <CalendarDays className="h-3 w-3 text-[var(--text-dim)]" />
+                <p className="text-[9px] uppercase tracking-wider text-[var(--text-dim)] font-medium">
+                  {t('myPackages.activatedAt')}
+                </p>
+              </div>
+              <p className="text-xs font-semibold text-[var(--text-body)]">{formatDate(pkg.activated_at)}</p>
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <BookOpen className="h-4 w-4 text-zinc-400" />
-          <span>{t('myPackages.totalHours', { hours: totalHours })}</span>
-        </div>
-        {pkg.discount_pct > 0 && (
-          <div className="flex items-center gap-2 text-sm text-zinc-400">
-            <CreditCard className="h-4 w-4 text-zinc-400" />
-            <span>{t('catalog.discount', { pct: pkg.discount_pct })}</span>
+
+        {/* Expiry */}
+        {pkg.expires_at && (
+          <div className="flex items-center justify-between bg-orange-500/8 rounded-xl px-3.5 py-3 border border-orange-500/20">
+            <div className="flex items-center gap-2">
+              <CalendarDays className="h-3.5 w-3.5 text-orange-500" />
+              <p className="text-[10px] uppercase tracking-wider font-semibold text-orange-500/80">
+                {t('myPackages.expiresAt')}
+              </p>
+            </div>
+            <p className="text-xs font-bold text-orange-500">{formatDate(pkg.expires_at)}</p>
           </div>
         )}
-      </div>
 
-      {/* Dates */}
-      <div className="flex flex-wrap gap-x-6 gap-y-1 text-xs text-zinc-500">
-        <span>
-          <span className="text-zinc-400">{t('myPackages.createdAt')}:</span>{' '}
-          {formatDate(pkg.created_at)}
-        </span>
-        {pkg.activated_at && (
-          <span>
-            <span className="text-zinc-400">{t('myPackages.activatedAt')}:</span>{' '}
-            {formatDate(pkg.activated_at)}
-          </span>
-        )}
-        {pkg.expires_at && (
-          <span>
-            <span className="text-zinc-400">{t('myPackages.expiresAt')}:</span>{' '}
-            {formatDate(pkg.expires_at)}
-          </span>
-        )}
-      </div>
+        {/* Payments */}
+        {payments.length > 0 ? (
+          <div className="space-y-2.5 pt-1">
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-dim)]">
+              {t('myPackages.payments')}
+            </h4>
+            <div className="space-y-2">
+              {payments.map((payment) => (
+                <div
+                  key={payment.id}
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border-main)] px-4 py-3"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-main)] flex items-center justify-center text-[var(--primary)]">
+                      <CreditCard className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-semibold text-[var(--text-body)]">
+                        {formatCurrency(payment.amount)}
+                      </span>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <Badge variant={statusBadgeVariant(payment.status)} className="text-[9px] uppercase px-1.5 py-0">
+                          {tc(`status.${payment.status}`)}
+                        </Badge>
+                        <span className="text-[10px] text-[var(--text-dim)]">
+                          {formatDate(payment.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-      {/* Payments section */}
-      {payments.length > 0 && (
-        <div className="space-y-3">
-          <h4 className="text-sm font-medium text-zinc-700 font-[family-name:var(--font-display)]">
-            {t('myPackages.payments')}
-          </h4>
-          <div className="space-y-2">
-            {payments.map((payment) => (
-              <div
-                key={payment.id}
-                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-zinc-50/50 border border-white/[0.05] px-4 py-3"
-              >
-                <div className="flex items-center gap-3">
-                  <CreditCard className="h-4 w-4 text-zinc-400" />
-                  <div>
-                    <span className="text-sm font-medium text-zinc-700">
-                      {formatCurrency(payment.amount)}
-                    </span>
-                    <span className="ml-3">
-                      <Badge variant={statusBadgeVariant(payment.status)}>
-                        {tc(`status.${payment.status}`)}
-                      </Badge>
-                    </span>
+                  <div className="flex items-center gap-2">
+                    {payment.payment_proof_url && (
+                      <a
+                        href={payment.payment_proof_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)]/20 transition-colors"
+                        title={tc('actions.viewDetails')}
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                    {payment.status === 'pending' && (
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        onClick={() => onUploadReceipt(payment.id, pkg.id)}
+                      >
+                        <Upload className="h-3.5 w-3.5" />
+                        {t('myPackages.uploadReceipt')}
+                      </Button>
+                    )}
+                    {payment.rejection_reason && (
+                      <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                        {payment.rejection_reason}
+                      </span>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  {payment.payment_proof_url && (
-                    <a
-                      href={payment.payment_proof_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                      {tc('actions.viewDetails')}
-                    </a>
-                  )}
-                  {payment.status === 'pending' && (
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      onClick={() => onUploadReceipt(payment.id, pkg.id)}
-                    >
-                      <Upload className="h-3 w-3" />
-                      {t('myPackages.uploadReceipt')}
-                    </Button>
-                  )}
-                  {payment.rejection_reason && (
-                    <span className="text-xs text-rose-400">
-                      {payment.rejection_reason}
-                    </span>
-                  )}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-
-      {payments.length === 0 && (
-        <p className="text-xs text-zinc-400 italic">{t('myPackages.noPayments')}</p>
-      )}
-
-      {/* Actions */}
-      <div className="flex flex-wrap gap-3 pt-1">
-        {pkg.status === 'inactive' && hasConfirmedPayment && (
-          <Button
-            size="sm"
-            loading={activatingId === pkg.id}
-            onClick={() => onActivate(pkg.id)}
-          >
-            <Play className="h-4 w-4" />
-            {t('myPackages.activatePackage')}
-          </Button>
+        ) : (
+          <p className="text-xs text-[var(--text-dim)] italic">{t('myPackages.noPayments')}</p>
         )}
 
-        {!hasConfirmedPayment && !hasPendingPayment && (
-          <Button
-            size="sm"
-            variant="secondary"
-            loading={creatingPaymentId === pkg.id}
-            onClick={() => onCreatePayment(pkg.id)}
-          >
-            <Plus className="h-4 w-4" />
-            {t('myPackages.newPayment')}
-          </Button>
-        )}
+        {/* Actions */}
+        {(pkg.status === 'inactive' && hasConfirmedPayment) ||
+          (!hasConfirmedPayment && !hasPendingPayment) ||
+          hasPendingPayment ? (
+          <div className="flex flex-wrap gap-2 pt-2 border-t border-[var(--border-main)]">
+            {pkg.status === 'inactive' && hasConfirmedPayment && (
+              <Button
+                size="sm"
+                loading={activatingId === pkg.id}
+                onClick={() => onActivate(pkg.id)}
+                className="flex-1"
+              >
+                <Play className="h-3.5 w-3.5" />
+                {t('myPackages.activatePackage')}
+              </Button>
+            )}
 
-        {hasPendingPayment && (
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={() => {
-              const pendingPayment = payments.find(
-                (p) => p.status === 'pending',
-              );
-              if (pendingPayment) {
-                onUploadReceipt(pendingPayment.id, pkg.id);
-              }
-            }}
-          >
-            <Upload className="h-4 w-4" />
-            {t('myPackages.uploadReceipt')}
-          </Button>
-        )}
+            {!hasConfirmedPayment && !hasPendingPayment && (
+              <Button
+                size="sm"
+                variant="secondary"
+                loading={creatingPaymentId === pkg.id}
+                onClick={() => onCreatePayment(pkg.id)}
+                className="flex-1"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                {t('myPackages.newPayment')}
+              </Button>
+            )}
+
+            {hasPendingPayment && (
+              <Button
+                size="sm"
+                variant="secondary"
+                className="flex-1"
+                onClick={() => {
+                  const pendingPayment = payments.find((p) => p.status === 'pending');
+                  if (pendingPayment) onUploadReceipt(pendingPayment.id, pkg.id);
+                }}
+              >
+                <Upload className="h-3.5 w-3.5" />
+                {t('myPackages.uploadReceipt')}
+              </Button>
+            )}
+          </div>
+        ) : null}
       </div>
     </Card>
   );

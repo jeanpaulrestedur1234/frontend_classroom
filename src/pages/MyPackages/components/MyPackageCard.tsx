@@ -284,23 +284,9 @@ export default function MyPackageCard({
                     </button>
                   )}
                   {payment.status === 'rejected' && payment.rejection_reason && (
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
-                        {payment.rejection_reason}
-                      </span>
-                      <Button
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => {
-                          setModalOpen(false);
-                          onCreatePaymentAndUpload(pkg.id);
-                        }}
-                        loading={isCreatingPayment}
-                        className="text-[10px]"
-                      >
-                        {t('myPackages.newPayment')} / {t('myPackages.uploadReceipt')}
-                      </Button>
-                    </div>
+                    <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                      {payment.rejection_reason}
+                    </span>
                   )}
                 </div>
               </div>
@@ -309,6 +295,24 @@ export default function MyPackageCard({
             <div className="py-10 text-center space-y-2">
               <CreditCard className="h-10 w-10 text-[var(--border-main)] mx-auto" />
               <p className="text-sm text-[var(--text-dim)] font-medium">{t('myPackages.noPayments')}</p>
+            </div>
+          )}
+
+          {!paymentsLoading && Array.isArray(paymentsData) && paymentsData.some((p) => p.status === 'rejected') && (
+            <div className="pt-4 border-t border-[var(--border-main)]">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => {
+                  setModalOpen(false);
+                  onCreatePaymentAndUpload(pkg.id);
+                }}
+                loading={isCreatingPayment}
+                className="w-full"
+              >
+                <CreditCard className="h-4 w-4" />
+                {t('myPackages.newPayment')} / {t('myPackages.uploadReceipt')}
+              </Button>
             </div>
           )}
 

@@ -231,26 +231,9 @@ export default function PackageDetailCard({
                       </Button>
                     )}
                     {payment.rejection_reason && (
-                      <div className="flex flex-col items-end gap-2">
-                        <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
-                          {payment.rejection_reason}
-                        </span>
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          onClick={() => {
-                            const firstPayment = payments[0];
-                            if (firstPayment) {
-                               onUploadReceipt(firstPayment.id, pkg.id);
-                            } else {
-                               onCreatePayment(pkg.id);
-                            }
-                          }}
-                          className="text-[10px]"
-                        >
-                          {t('myPackages.newPayment')} / {t('myPackages.uploadReceipt')}
-                        </Button>
-                      </div>
+                      <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                        {payment.rejection_reason}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -283,7 +266,14 @@ export default function PackageDetailCard({
                 className="flex-1"
                 onClick={() => {
                   const firstPayment = payments[0];
-                  if (firstPayment) {
+                  const hasRejected = payments.some(p => p.status === 'rejected');
+                  
+                  if (hasRejected) {
+                     // If there's a rejected one, we might want to trigger the special flow
+                     // but the current onCreatePayment logic in parent handles it.
+                     // For now, let's keep it simple: if not paid, allow view/manage.
+                     onCreatePayment(pkg.id);
+                  } else if (firstPayment) {
                      onUploadReceipt(firstPayment.id, pkg.id);
                   } else {
                      onCreatePayment(pkg.id);

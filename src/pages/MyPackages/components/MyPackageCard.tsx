@@ -1,4 +1,4 @@
-import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play, FileUp } from 'lucide-react';
+import { Clock, CalendarDays, BookOpen, CreditCard, ExternalLink, Play } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Card from '@/components/ui/Card';
@@ -74,8 +74,6 @@ export default function MyPackageCard({
   const progress = Math.min(100, (consumed / totalClasses) * 100);
 
   const payments = pkg.payments || [];
-  const hasConfirmedPayment = payments.some((p) => p.status === 'confirmed');
-  const hasPendingPayment = payments.some((p) => p.status === 'pending' || p.status === 'notified');
 
   return (
     <>
@@ -213,26 +211,23 @@ export default function MyPackageCard({
         </div>
 
         {/* Action Footer */}
-        {(pkg.status === 'inactive' && hasConfirmedPayment) || hasPendingPayment ? (
+        {(pkg.status === 'inactive' && pkg.payment_status === 'paid') || pkg.payment_status !== 'paid' ? (
           <div className="px-5 py-4 border-t border-[var(--border-main)] flex flex-wrap gap-2">
-            {pkg.status === 'inactive' && hasConfirmedPayment && (
+            {pkg.status === 'inactive' && pkg.payment_status === 'paid' && (
               <Button size="sm" loading={activatingId === pkg.id} onClick={() => onActivate(pkg.id)} className="flex-1">
                 <Play className="h-3.5 w-3.5" />
                 {t('myPackages.activatePackage')}
               </Button>
             )}
-            {hasPendingPayment && (
+            {pkg.payment_status !== 'paid' && (
               <Button
                 size="sm"
                 variant="secondary"
                 className="flex-1"
-                onClick={() => {
-                  const pendingPayment = payments.find((p) => p.status === 'pending');
-                  if (pendingPayment) onUploadModalOpen(pendingPayment.id, pkg.id);
-                }}
+                onClick={() => setModalOpen(true)}
               >
-                <FileUp className="h-3.5 w-3.5 text-orange-500" />
-                {t('myPackages.uploadReceipt')}
+                <CreditCard className="h-3.5 w-3.5 text-[var(--primary)]" />
+                {t('myPackages.viewPayments')}
               </Button>
             )}
           </div>
@@ -275,6 +270,14 @@ export default function MyPackageCard({
                     >
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
+                  )}
+                  {payment.status === 'pending' && (
+                    <button
+                      onClick={() => onUploadModalOpen(payment.id, pkg.id)}
+                      className="text-[10px] text-[var(--primary)] font-semibold hover:underline"
+                    >
+                      {t('myPackages.uploadReceipt')}
+                    </button>
                   )}
                   {payment.status === 'rejected' && payment.rejection_reason && (
                     <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">

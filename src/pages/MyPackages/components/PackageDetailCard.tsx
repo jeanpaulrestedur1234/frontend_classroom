@@ -5,11 +5,10 @@ import {
   CreditCard,
   Upload,
   Play,
-  Plus,
   ExternalLink,
   BookOpen,
 } from 'lucide-react';
-import type { StudentPackageDTO, PaymentDTO, ClassType } from '@/types';
+import type { StudentPackageDTO, PaymentDTO } from '@/types';
 import { formatDate, formatCurrency } from '@/utils';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -29,13 +28,7 @@ function statusBadgeVariant(
   }
 }
 
-function classTypeBadgeVariant(ct: ClassType): 'info' | 'success' | 'warning' {
-  switch (ct) {
-    case 'open_group': return 'info';
-    case 'closed_group': return 'success';
-    case 'private': return 'warning';
-  }
-}
+
 
 export interface StudentPackageWithPayments extends StudentPackageDTO {
   payments?: PaymentDTO[];
@@ -44,7 +37,6 @@ export interface StudentPackageWithPayments extends StudentPackageDTO {
 interface PackageDetailCardProps {
   pkg: StudentPackageWithPayments;
   activatingId: string | null;
-  creatingPaymentId: string | null;
   onActivate: (spId: string) => void;
   onCreatePayment: (spId: string) => void;
   onUploadReceipt: (paymentId: string, packageId: string) => void;
@@ -53,7 +45,6 @@ interface PackageDetailCardProps {
 export default function PackageDetailCard({
   pkg,
   activatingId,
-  creatingPaymentId,
   onActivate,
   onCreatePayment,
   onUploadReceipt,
@@ -63,10 +54,6 @@ export default function PackageDetailCard({
 
   const totalHours = pkg.hours_per_week * pkg.duration_weeks;
   const payments = pkg.payments || [];
-  const hasConfirmedPayment = payments.some((p) => p.status === 'confirmed');
-  const hasPendingPayment = payments.some(
-    (p) => p.status === 'pending' || p.status === 'notified',
-  );
 
   return (
     <Card className="overflow-hidden rounded-2xl border border-[var(--border-main)] bg-[var(--bg-surface)] shadow-sm">
@@ -258,11 +245,9 @@ export default function PackageDetailCard({
         )}
 
         {/* Actions */}
-        {(pkg.status === 'inactive' && hasConfirmedPayment) ||
-          (!hasConfirmedPayment && !hasPendingPayment) ||
-          hasPendingPayment ? (
+        {(pkg.status === 'inactive' && pkg.payment_status === 'paid') || pkg.payment_status !== 'paid' ? (
           <div className="flex flex-wrap gap-2 pt-2 border-t border-[var(--border-main)]">
-            {pkg.status === 'inactive' && hasConfirmedPayment && (
+            {pkg.status === 'inactive' && pkg.payment_status === 'paid' && (
               <Button
                 size="sm"
                 loading={activatingId === pkg.id}
@@ -274,31 +259,22 @@ export default function PackageDetailCard({
               </Button>
             )}
 
-            {!hasConfirmedPayment && !hasPendingPayment && (
-              <Button
-                size="sm"
-                variant="secondary"
-                loading={creatingPaymentId === pkg.id}
-                onClick={() => onCreatePayment(pkg.id)}
-                className="flex-1"
-              >
-                <Plus className="h-3.5 w-3.5" />
-                {t('myPackages.newPayment')}
-              </Button>
-            )}
-
-            {hasPendingPayment && (
+            {pkg.payment_status !== 'paid' && (
               <Button
                 size="sm"
                 variant="secondary"
                 className="flex-1"
                 onClick={() => {
-                  const pendingPayment = payments.find((p) => p.status === 'pending');
-                  if (pendingPayment) onUploadReceipt(pendingPayment.id, pkg.id);
+                  const firstPayment = payments[0];
+                  if (firstPayment) {
+                     onUploadReceipt(firstPayment.id, pkg.id);
+                  } else {
+                     onCreatePayment(pkg.id);
+                  }
                 }}
               >
-                <Upload className="h-3.5 w-3.5" />
-                {t('myPackages.uploadReceipt')}
+                <CreditCard className="h-3.5 w-3.5" />
+                {t('myPackages.viewPayments')}
               </Button>
             )}
           </div>

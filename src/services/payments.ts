@@ -9,10 +9,18 @@ import type {
 export async function listPayments(
   page = 1,
   pageSize = 50,
-  studentPackageId?: string,
+  filters: {
+    studentPackageId?: string;
+    status?: string;
+    startDate?: string;
+    endDate?: string;
+  } = {},
 ): Promise<PaginatedResponse<PaymentDTO>> {
   const params: Record<string, any> = { page, page_size: pageSize };
-  if (studentPackageId) params.student_package_id = studentPackageId;
+  if (filters.studentPackageId) params.student_package_id = filters.studentPackageId;
+  if (filters.status && filters.status !== 'all') params.status = filters.status;
+  if (filters.startDate) params.start_date = filters.startDate;
+  if (filters.endDate) params.end_date = filters.endDate;
 
   const response = await api.get<PaginatedResponse<PaymentDTO>>(
     '/api/payments',

@@ -139,6 +139,8 @@ export type PaymentDTO = {
   rejection_reason: string | null;
   reviewed_at: string | null;
   reviewed_by: string | null;
+  student_name?: string;
+  package_name?: string;
   created_at: string;
   updated_at: string;
 };

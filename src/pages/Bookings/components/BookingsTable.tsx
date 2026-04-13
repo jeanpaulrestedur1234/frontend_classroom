@@ -1,6 +1,6 @@
-import { Eye, CheckCircle, XCircle, Package } from 'lucide-react';
+import { Eye, CheckCircle, XCircle, Package, Video } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { formatDate } from '@/utils';
+import { formatDate, formatTime } from '@/utils';
 import type { StudentBookingDetailDto, BookingStatus, UserDTO } from '@/types';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -82,7 +82,7 @@ export default function BookingsTable({
                 {formatDate(b.scheduled_date)}
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
-                {b.start_time} - {b.end_time}
+                {formatTime(b.start_time)} - {formatTime(b.end_time)}
               </td>
               <td className="px-4 py-3">
                 <Badge variant={typeBadgeVariant(b.booking_type)}>
@@ -95,13 +95,23 @@ export default function BookingsTable({
                 </Badge>
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
-                {b.teacher?.full_name ?? '-'}
+                {b.teacher_name || b.teacher?.full_name || '-'}
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-[var(--text-body)]">
-                {b.booking_type === 'presencial' ? b.room?.name ?? '-' : '-'}
+                {b.booking_type === 'presencial' ? (b.room_name || b.room?.name || '-') : '-'}
               </td>
               <td className="px-4 py-3 text-right">
                 <div className="flex items-center justify-end gap-1">
+                  {b.booking_type === 'virtual' && b.status === 'confirmed' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => window.open(`/app/virtual-class/${b.id}`, '_blank')}
+                      title={t('actions.videoTooltip')}
+                    >
+                      <Video className="w-4 h-4 text-blue-500" />
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"

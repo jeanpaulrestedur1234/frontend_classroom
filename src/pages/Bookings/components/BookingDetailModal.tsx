@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { CheckCircle, XCircle } from 'lucide-react';
-import { formatDate } from '@/utils';
+import { CheckCircle, XCircle, Video } from 'lucide-react';
+import { formatDate, formatTime } from '@/utils';
 import type { StudentBookingDetailDto, UserDTO } from '@/types';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -52,7 +52,7 @@ export default function BookingDetailModal({
           <div>
             <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.time')}</span>
             <span className="font-medium text-[var(--text-main)]">
-              {booking.start_time} - {booking.end_time}
+              {formatTime(booking.start_time)} - {formatTime(booking.end_time)}
             </span>
           </div>
           <div>
@@ -63,12 +63,12 @@ export default function BookingDetailModal({
           </div>
           <div>
             <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.teacher')}</span>
-            <span className="font-medium text-[var(--text-main)]">{booking.teacher?.full_name ?? '-'}</span>
+            <span className="font-medium text-[var(--text-main)]">{booking.teacher_name || booking.teacher?.full_name || '-'}</span>
           </div>
           {booking.booking_type === 'presencial' && (
             <div>
               <span className="block text-[var(--text-muted)] text-xs mb-1">{t('table.room')}</span>
-              <span className="font-medium text-[var(--text-main)]">{booking.room?.name ?? '-'}</span>
+              <span className="font-medium text-[var(--text-main)]">{booking.room_name || booking.room?.name || '-'}</span>
             </div>
           )}
           <div>
@@ -93,6 +93,18 @@ export default function BookingDetailModal({
             >
               <CheckCircle className="w-4 h-4" />
               {t('actions.confirm')}
+            </Button>
+          )}
+          {booking.booking_type === 'virtual' && booking.status === 'confirmed' && (
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => {
+                window.open(`/app/virtual-class/${booking.id}`, '_blank');
+              }}
+            >
+              <Video className="w-4 h-4" />
+              {t('actions.joinClass')}
             </Button>
           )}
           {(booking.status === 'pending' || booking.status === 'confirmed') && (

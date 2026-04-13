@@ -80,8 +80,11 @@ export default function Bookings() {
 
   /* re-fetch from page 1 when status filter changes */
   useEffect(() => {
-    setPage(1);
-    refetch();
+    if (page === 1) {
+      refetch();
+    } else {
+      setPage(1);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusFilter, typeFilter]);
 
@@ -220,6 +223,10 @@ export default function Bookings() {
           {viewMode === 'week' ? (
             <WeeklyGrid
               availability={bookings.map(bookingToAvailability)}
+              onSlotClick={(id) => {
+                const b = bookings.find((x) => x.id === id);
+                if (b) setDetailBooking(b);
+              }}
             />
           ) : (
             <BookingsTable

@@ -29,7 +29,7 @@ export function usePaginatedQuery<T>(
   fetcherRef.current = fetcher;
 
   const execute = useCallback(
-    async (p: number = page) => {
+    async (p: number) => {
       setLoading(true);
       setError(null);
       try {
@@ -50,7 +50,7 @@ export function usePaginatedQuery<T>(
         setLoading(false);
       }
     },
-    [page, pageSize],
+    [pageSize],
   );
 
   useEffect(() => {

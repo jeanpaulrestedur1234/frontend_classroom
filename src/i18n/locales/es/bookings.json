@@ -22,7 +22,9 @@
     "confirmSuccess": "Reserva confirmada",
     "cancelSuccess": "Reserva cancelada",
     "addPackageSuccess": "Paquete vinculado exitosamente",
-    "error": "Error al procesar la acción"
+    "error": "Error al procesar la acción",
+    "joinClass": "Unirse a la clase",
+    "videoTooltip": "Abrir Aula Virtual"
   },
   "detail": {
     "title": "Detalle de Reserva",

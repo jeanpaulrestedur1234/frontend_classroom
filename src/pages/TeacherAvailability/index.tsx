@@ -56,7 +56,16 @@ export default function TeacherAvailability() {
     try {
       let data: TeacherAvailabilityDTO[];
       if (isAdmin && selectedTeacherId) {
-        data = await getTeacherAvailability(selectedTeacherId);
+        const rawData = await getTeacherAvailability(selectedTeacherId);
+        data = rawData.map(d => ({
+          id: d.availability_id,
+          teacher_id: d.teacher_id,
+          day_of_week: d.day_of_week,
+          start_time: d.range_start,
+          end_time: d.range_end,
+          is_virtual: d.is_virtual,
+          created_at: new Date().toISOString()
+        }));
       } else {
         data = await getMyAvailability();
       }

@@ -25,6 +25,7 @@ const Bookings = lazy(() => import('@/pages/Bookings'));
 const CreateBooking = lazy(() => import('@/pages/CreateBooking'));
 const TeacherAvailability = lazy(() => import('@/pages/TeacherAvailability'));
 const RoomAvailability = lazy(() => import('@/pages/RoomAvailability'));
+const VirtualClassRoom = lazy(() => import('@/pages/VirtualClassRoom'));
 
 /* ──────────────────── Suspense wrapper ───────────────────────────────────── */
 
@@ -87,6 +88,7 @@ const router = createBrowserRouter([
               { path: 'my-packages', element: <MyPackages /> },
               { path: 'bookings', element: <Bookings /> },
               { path: 'bookings/new', element: <CreateBooking /> },
+              { path: 'virtual-class/:bookingId', element: <VirtualClassRoom /> },
               { path: 'availability', element: <TeacherAvailability /> },
               
               /* Admin Specific Routes */

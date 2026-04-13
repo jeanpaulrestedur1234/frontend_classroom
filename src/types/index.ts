@@ -248,6 +248,8 @@ export type StudentBookingDetailDto = {
   updated_at: string;
   teacher?: TeacherRef;
   room?: RoomRef;
+  teacher_name?: string;
+  room_name?: string;
 };
 
 export type BookStudentPackageDTO = {

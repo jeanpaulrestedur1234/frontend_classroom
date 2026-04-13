@@ -19,6 +19,8 @@ interface MyPackageCardProps {
   activatingId: string | null;
   onActivate: (id: string) => void;
   onUploadModalOpen: (paymentId: string, packageId: string) => void;
+  onCreatePaymentAndUpload: (packageId: string) => void;
+  isCreatingPayment?: boolean;
 }
 
 function statusBadgeVariant(status: string): 'warning' | 'success' | 'danger' | 'info' | 'default' {
@@ -46,6 +48,8 @@ export default function MyPackageCard({
   activatingId,
   onActivate,
   onUploadModalOpen,
+  onCreatePaymentAndUpload,
+  isCreatingPayment,
 }: MyPackageCardProps) {
   const { t } = useTranslation('packages');
   const { t: tc } = useTranslation('common');
@@ -280,9 +284,23 @@ export default function MyPackageCard({
                     </button>
                   )}
                   {payment.status === 'rejected' && payment.rejection_reason && (
-                    <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
-                      {payment.rejection_reason}
-                    </span>
+                    <div className="flex flex-col items-end gap-2">
+                      <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                        {payment.rejection_reason}
+                      </span>
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        onClick={() => {
+                          setModalOpen(false);
+                          onCreatePaymentAndUpload(pkg.id);
+                        }}
+                        loading={isCreatingPayment}
+                        className="text-[10px]"
+                      >
+                        {t('myPackages.newPayment')} / {t('myPackages.uploadReceipt')}
+                      </Button>
+                    </div>
                   )}
                 </div>
               </div>

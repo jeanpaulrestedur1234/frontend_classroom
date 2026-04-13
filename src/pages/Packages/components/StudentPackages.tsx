@@ -10,7 +10,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
 import PackageCard from './PackageCard';
-import UploadReceiptModal from './UploadReceiptModal';
+import UploadReceiptModal from '@/components/shared/UploadReceiptModal';
 
 export default function StudentPackages() {
   const { t } = useTranslation('packages');

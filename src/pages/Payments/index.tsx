@@ -15,7 +15,7 @@ import EmptyState from '@/components/ui/EmptyState';
 
 import PaymentCard from './components/PaymentCard';
 import RejectPaymentModal from './components/RejectPaymentModal';
-import UploadReceiptModal from './components/UploadReceiptModal';
+import UploadReceiptModal from '@/components/shared/UploadReceiptModal';
 
 const PAGE_SIZE = 100;
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Package } from 'lucide-react';
 import { useQuery, useMutation } from '@/hooks';
 import { useToast } from '@/context/ToastContext';
-import { getMyPackages, activatePackage } from '@/services/packages';
+import { getMyPackages, activatePackage, createPaymentIntent } from '@/services/packages';
 import { uploadReceipt } from '@/services/payments';
 
 import Button from '@/components/ui/Button';
@@ -11,7 +11,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import EmptyState from '@/components/ui/EmptyState';
 
 import MyPackageCard, { type StudentPackageWithPayments } from './components/MyPackageCard';
-import UploadReceiptModal from '@/pages/Payments/components/UploadReceiptModal';
+import UploadReceiptModal from '@/components/shared/UploadReceiptModal';
 
 export default function MyPackages() {
   const { t } = useTranslation('packages');
@@ -23,6 +23,7 @@ export default function MyPackages() {
 
   const activateMut = useMutation(activatePackage);
   const uploadMut = useMutation(uploadReceipt);
+  const createPaymentMut = useMutation(createPaymentIntent);
 
   const [activatingId, setActivatingId] = useState<string | null>(null);
   const [uploadModal, setUploadModal] = useState<{ open: boolean; paymentId: string; packageId: string }>({
@@ -57,6 +58,15 @@ export default function MyPackages() {
       refetch();
     } catch {
       toastError(t('myPackages.uploadModal.error'));
+    }
+  }
+
+  async function handleCreatePaymentAndUpload(spId: string) {
+    try {
+      const newPayment = await createPaymentMut.execute(spId);
+      setUploadModal({ open: true, paymentId: newPayment.id, packageId: spId });
+    } catch {
+      toastError(tc('errors.unexpected'));
     }
   }
 
@@ -95,6 +105,8 @@ export default function MyPackages() {
               onUploadModalOpen={(paymentId, packageId) =>
                 setUploadModal({ open: true, paymentId, packageId })
               }
+              onCreatePaymentAndUpload={handleCreatePaymentAndUpload}
+              isCreatingPayment={createPaymentMut.loading}
             />
           ))}
         </div>

@@ -231,9 +231,26 @@ export default function PackageDetailCard({
                       </Button>
                     )}
                     {payment.rejection_reason && (
-                      <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
-                        {payment.rejection_reason}
-                      </span>
+                      <div className="flex flex-col items-end gap-2">
+                        <span className="text-xs font-medium text-rose-500 bg-rose-500/10 px-3 py-1 rounded-lg">
+                          {payment.rejection_reason}
+                        </span>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => {
+                            const firstPayment = payments[0];
+                            if (firstPayment) {
+                               onUploadReceipt(firstPayment.id, pkg.id);
+                            } else {
+                               onCreatePayment(pkg.id);
+                            }
+                          }}
+                          className="text-[10px]"
+                        >
+                          {t('myPackages.newPayment')} / {t('myPackages.uploadReceipt')}
+                        </Button>
+                      </div>
                     )}
                   </div>
                 </div>

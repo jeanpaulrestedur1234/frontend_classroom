@@ -37,6 +37,8 @@ function bookingBadgeVariant(
   }
 }
 
+import RecentActivity from './RecentActivity';
+
 export default function TeacherDashboard() {
   const { t } = useTranslation('dashboard');
   const { t: tc } = useTranslation('common');
@@ -87,81 +89,97 @@ export default function TeacherDashboard() {
         <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('teacher.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>
 
-      {/* Today's availability */}
-      <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
-          {t('teacher.availabilityToday', { day: dayName })}
-        </h2>
-        <Card>
-          {todayAvailability.length === 0 ? (
-            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
-              {t('teacher.noAvailabilityToday')}
-            </p>
-          ) : (
-            <ul className="space-y-2">
-              {todayAvailability.map((a) => (
-                <li
-                  key={a.id}
-                  className="flex items-center gap-3 rounded-xl bg-[var(--bg-subtle)] p-3"
-                >
-                  <Clock className="h-4 w-4 text-[var(--primary)]" />
-                  <span className="text-sm text-[var(--text-body)]">
-                    {a.start_time} - {a.end_time}
-                  </span>
-                  <Badge variant={a.is_virtual ? 'virtual' : 'presencial'}>
-                    {tc(`bookingTypes.${a.is_virtual ? 'virtual' : 'presencial'}`)}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+        {/* Today's availability */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
+            {t('teacher.availabilityToday', { day: dayName })}
+          </h2>
+          <Card className="h-full border-[var(--border-main)] shadow-sm">
+            {todayAvailability.length === 0 ? (
+              <div className="py-12 text-center">
+                <p className="text-sm text-[var(--text-muted)] italic">
+                  {t('teacher.noAvailabilityToday')}
+                </p>
+              </div>
+            ) : (
+              <ul className="space-y-3">
+                {todayAvailability.map((a) => (
+                  <li
+                    key={a.id}
+                    className="flex items-center gap-3 rounded-xl bg-[var(--bg-subtle)] p-3 transition-colors hover:bg-[var(--bg-surface-hover)]"
+                  >
+                    <div className="p-1.5 rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]">
+                       <Clock className="h-4 w-4" />
+                    </div>
+                    <span className="text-sm font-medium text-[var(--text-body)]">
+                      {a.start_time.slice(0, 5)} - {a.end_time.slice(0, 5)}
+                    </span>
+                    <Badge variant={a.is_virtual ? 'virtual' : 'presencial'} className="ml-auto">
+                      {tc(`bookingTypes.${a.is_virtual ? 'virtual' : 'presencial'}`)}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </div>
+
+        {/* Today's classes */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
+            {t('teacher.myClassesToday')}
+          </h2>
+          <Card className="h-full border-[var(--border-main)] shadow-sm">
+            {todayClasses.length === 0 ? (
+              <div className="py-12 text-center">
+                <p className="text-sm text-[var(--text-muted)] italic">
+                  {t('teacher.noClassesToday')}
+                </p>
+              </div>
+            ) : (
+              <ul className="divide-y divide-[var(--border-main)]">
+                {todayClasses.map((b) => (
+                  <li
+                    key={b.id}
+                    className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`h-10 w-1 rounded-full ${b.booking_type === 'virtual' ? 'bg-[var(--virtual)]' : 'bg-[var(--presencial)]'}`} />
+                      <div>
+                        <p className="text-sm font-semibold text-[var(--text-main)]">
+                          {b.start_time.slice(0, 5)} - {b.end_time.slice(0, 5)}
+                        </p>
+                        <p className="text-xs text-[var(--text-muted)]">
+                          {tc(`bookingTypes.${b.booking_type}`)}
+                          {b.room_name ? ` - ${b.room_name}` : b.room ? ` - ${b.room.name}` : ''}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge variant={bookingBadgeVariant(b.status)}>
+                      {tc(`status.${b.status}`)}
+                    </Badge>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </div>
       </div>
 
-      {/* Today's classes */}
-      <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
-          {t('teacher.myClassesToday')}
-        </h2>
-        <Card>
-          {todayClasses.length === 0 ? (
-            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
-              {t('teacher.noClassesToday')}
-            </p>
-          ) : (
-            <ul className="divide-y divide-[var(--border-main)]">
-              {todayClasses.map((b) => (
-                <li
-                  key={b.id}
-                  className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-1.5 rounded-full bg-[var(--primary)]/60" />
-                    <div>
-                      <p className="text-sm font-medium text-[var(--text-main)]">
-                        {b.start_time} - {b.end_time}
-                      </p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {tc(`bookingTypes.${b.booking_type}`)}
-                        {b.room ? ` - ${b.room.name}` : ''}
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant={bookingBadgeVariant(b.status)}>
-                    {tc(`status.${b.status}`)}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </div>
+      {/* Recent Activity */}
+      <RecentActivity
+        role="teacher"
+        title={t('teacher.recentActivity')}
+        emptyMessage={t('teacher.noRecentActivity')}
+        bookings={bookings.slice(0, 5)}
+      />
 
       {/* Quick link */}
-      <div className="mt-8">
+      <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
         <Link
           to="/app/availability"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--primary)] transition-colors hover:opacity-80"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--primary)] transition-all hover:gap-3"
         >
           {t('teacher.configureAvailability')}
           <ArrowRight className="h-4 w-4" />

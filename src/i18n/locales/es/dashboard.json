@@ -26,7 +26,9 @@
     "noAvailabilityToday": "No tienes disponibilidad configurada para hoy.",
     "myClassesToday": "Mis Clases de Hoy",
     "noClassesToday": "No tienes clases programadas para hoy.",
-    "configureAvailability": "Configurar disponibilidad"
+    "configureAvailability": "Configurar disponibilidad",
+    "recentActivity": "Actividad reciente",
+    "noRecentActivity": "No hay actividad reciente."
   },
   "student": {
     "activePackages": "Paquetes Activos",
@@ -36,6 +38,8 @@
     "totalPackages": "Paquetes Totales",
     "nextClass": "Próxima Clase",
     "noUpcomingClasses": "No tienes clases programadas.",
-    "bookClass": "Reservar Clase"
+    "bookClass": "Reservar Clase",
+    "recentActivity": "Actividad reciente",
+    "noRecentActivity": "No hay actividad reciente."
   }
 }

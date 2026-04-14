@@ -20,6 +20,8 @@ import type { StudentBookingDetailDto } from '@/types';
 import StatCard from './StatCard';
 import QuickAction from './QuickAction';
 
+import RecentActivity from './RecentActivity';
+
 function bookingBadgeVariant(
   status: string,
 ): 'success' | 'warning' | 'danger' | 'default' {
@@ -27,6 +29,7 @@ function bookingBadgeVariant(
     case 'confirmed': return 'success';
     case 'pending':   return 'warning';
     case 'cancelled': return 'danger';
+    case 'completed': return 'success';
     default:          return 'default';
   }
 }
@@ -70,7 +73,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Quick actions */}
-      <div className="mt-10">
+      <div className="mt-10 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
         <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
           {t('admin.quickActions')}
         </h2>
@@ -82,42 +85,12 @@ export default function AdminDashboard() {
       </div>
 
       {/* Recent activity */}
-      <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
-          {t('admin.recentActivity')}
-        </h2>
-        <Card>
-          {bookings.length === 0 ? (
-            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
-              {t('admin.noRecentActivity')}
-            </p>
-          ) : (
-            <ul className="divide-y divide-[var(--border-main)]">
-              {bookings.slice(0, 5).map((b) => (
-                <li
-                  key={b.id}
-                  className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-1.5 rounded-full bg-[var(--primary)]/60" />
-                    <div>
-                      <p className="text-sm font-medium text-[var(--text-main)]">
-                        {t('admin.booking')} #{b.id.slice(0, 8)}
-                      </p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {b.scheduled_date} &middot; {b.start_time} - {b.end_time}
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant={bookingBadgeVariant(b.status)}>
-                    {tc(`status.${b.status}`)}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </div>
+      <RecentActivity
+        role="admin"
+        title={t('admin.recentActivity')}
+        emptyMessage={t('admin.noRecentActivity')}
+        bookings={bookings}
+      />
     </>
   );
 }

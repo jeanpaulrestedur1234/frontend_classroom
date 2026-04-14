@@ -19,6 +19,8 @@ import type { StudentBookingDetailDto, StudentPackageDTO } from '@/types';
 import StatCard from './StatCard';
 import QuickAction from './QuickAction';
 
+import RecentActivity from './RecentActivity';
+
 export default function StudentDashboard() {
   const { t } = useTranslation('dashboard');
   const { t: tc } = useTranslation('common');
@@ -65,70 +67,87 @@ export default function StudentDashboard() {
         <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('student.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>
 
-      {/* Next class */}
-      <div className="mt-10">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
-          {t('student.nextClass')}
-        </h2>
-        <Card>
-          {upcomingBooking ? (
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
-                <CalendarDays className="h-7 w-7" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+        {/* Next class */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
+            {t('student.nextClass')}
+          </h2>
+          <Card className="h-full border-[var(--border-main)] shadow-sm">
+            {upcomingBooking ? (
+              <div className="flex items-center gap-5 p-2">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] shadow-inner">
+                  <CalendarDays className="h-8 w-8" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-base font-bold text-[var(--text-main)]">
+                    {upcomingBooking.scheduled_date}
+                  </p>
+                  <p className="text-sm font-medium text-[var(--text-muted)]">
+                    {upcomingBooking.start_time.slice(0, 5)} - {upcomingBooking.end_time.slice(0, 5)}
+                  </p>
+                  <p className="mt-1 text-xs text-[var(--text-dim)] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />
+                    {tc(`bookingTypes.${upcomingBooking.booking_type}`)}
+                    {upcomingBooking.teacher_name ? ` · ${upcomingBooking.teacher_name}` : upcomingBooking.teacher ? ` · ${upcomingBooking.teacher.full_name}` : ''}
+                    {upcomingBooking.room_name ? ` · ${upcomingBooking.room_name}` : upcomingBooking.room ? ` · ${upcomingBooking.room.name}` : ''}
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-[var(--text-main)]">
-                  {upcomingBooking.scheduled_date}
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  {upcomingBooking.start_time} - {upcomingBooking.end_time}
-                </p>
-                <p className="mt-0.5 text-xs text-[var(--text-dim)]">
-                  {tc(`bookingTypes.${upcomingBooking.booking_type}`)}
-                  {upcomingBooking.teacher ? ` - ${upcomingBooking.teacher.full_name}` : ''}
-                  {upcomingBooking.room ? ` - ${upcomingBooking.room.name}` : ''}
+            ) : (
+              <div className="py-12 text-center">
+                <p className="text-sm text-[var(--text-muted)] italic">
+                  {t('student.noUpcomingClasses')}
                 </p>
               </div>
-            </div>
-          ) : (
-            <p className="py-4 text-center text-sm text-[var(--text-muted)]">
-              {t('student.noUpcomingClasses')}
-            </p>
-          )}
-        </Card>
-      </div>
+            )}
+          </Card>
+        </div>
 
-      {/* Active packages summary */}
-      {packages.filter((p) => p.status === 'active').length > 0 && (
-        <div className="mt-10">
+        {/* Active packages summary */}
+        <div className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
             {t('student.activePackages')}
           </h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {packages
-              .filter((p) => p.status === 'active')
-              .slice(0, 4)
-              .map((p) => (
-                <Card key={p.id} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
-                    <BookOpen className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-[var(--text-main)] truncate">
-                      {tc(`classTypes.${p.class_type}`)}
-                    </p>
-                    <p className="text-xs text-[var(--text-muted)]">
-                      {p.hours_per_week}h/wk &middot; {p.duration_weeks}w
-                    </p>
-                  </div>
-                </Card>
-              ))}
-          </div>
+          {packages.filter((p) => p.status === 'active').length > 0 ? (
+            <div className="grid grid-cols-1 gap-3">
+              {packages
+                .filter((p) => p.status === 'active')
+                .slice(0, 3)
+                .map((p) => (
+                  <Card key={p.id} className="flex items-center gap-3 transition-colors hover:bg-[var(--bg-subtle)]">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                      <BookOpen className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-[var(--text-main)] truncate">
+                        {tc(`classTypes.${p.class_type}`)}
+                      </p>
+                      <p className="text-xs text-[var(--text-muted)]">
+                        {p.hours_per_week}h/wk &middot; {p.duration_weeks}w
+                      </p>
+                    </div>
+                  </Card>
+                ))}
+            </div>
+          ) : (
+            <Card className="flex items-center justify-center py-10 border-dashed">
+               <p className="text-sm text-[var(--text-muted)]">{t('student.noActivePackages') || 'No tienes paquetes activos'}</p>
+            </Card>
+          )}
         </div>
-      )}
+      </div>
+
+      {/* Recent Activity */}
+      <RecentActivity
+        role="student"
+        title={t('student.recentActivity')}
+        emptyMessage={t('student.noRecentActivity')}
+        bookings={bookings.slice(0, 5)}
+      />
 
       {/* Quick action */}
-      <div className="mt-8">
+      <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
         <QuickAction
           icon={<Plus className="h-4 w-4" />}
           label={t('student.bookClass')}

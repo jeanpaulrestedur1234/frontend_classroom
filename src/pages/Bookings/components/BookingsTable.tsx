@@ -12,6 +12,7 @@ interface BookingsTableProps {
   onViewDetail: (b: StudentBookingDetailDto) => void;
   onConfirm: (id: string) => void;
   onCancel: (id: string) => void;
+  onComplete: (id: string) => void;
   onAddPackage: (b: StudentBookingDetailDto) => void;
 }
 
@@ -36,6 +37,7 @@ export default function BookingsTable({
   onViewDetail,
   onConfirm,
   onCancel,
+  onComplete,
   onAddPackage,
 }: BookingsTableProps) {
   const { t } = useTranslation('bookings');
@@ -128,6 +130,18 @@ export default function BookingsTable({
                       loading={actionLoading === b.id}
                       onClick={() => onConfirm(b.id)}
                       title={t('actions.confirm')}
+                    >
+                      <CheckCircle className="w-4 h-4 text-emerald-500" />
+                    </Button>
+                  )}
+
+                  {isAdminOrTeacher && b.status === 'confirmed' && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      loading={actionLoading === b.id}
+                      onClick={() => onComplete(b.id)}
+                      title={t('actions.complete')}
                     >
                       <CheckCircle className="w-4 h-4 text-emerald-500" />
                     </Button>

@@ -60,6 +60,15 @@ export async function cancelBooking(bookingId: string): Promise<void> {
   await api.delete(`/api/bookings/${bookingId}`);
 }
 
+export async function completeBooking(
+  bookingId: string,
+): Promise<StudentBookingDetailDto> {
+  const response = await api.post<StudentBookingDetailDto>(
+    `/api/bookings/${bookingId}/complete`,
+  );
+  return response.data;
+}
+
 export async function getBookingDetails(
   bookingId: string,
 ): Promise<StudentBookingDetailDto> {

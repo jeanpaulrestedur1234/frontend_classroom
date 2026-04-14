@@ -4,7 +4,7 @@ import { CalendarDays, Plus, AlertCircle, ChevronLeft, ChevronRight, ListFilter 
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
 import { usePaginatedQuery, useMutation } from '@/hooks';
-import { listMyBookings, confirmBooking, cancelBooking } from '@/services/bookings';
+import { listMyBookings, confirmBooking, cancelBooking, completeBooking } from '@/services/bookings';
 import { useToast } from '@/context/ToastContext';
 import type { StudentBookingDetailDto } from '@/types';
 
@@ -91,12 +91,13 @@ export default function Bookings() {
   /* mutations */
   const confirmMut = useMutation(confirmBooking);
   const cancelMut = useMutation(cancelBooking);
+  const completeMut = useMutation(completeBooking);
 
   /* modals */
   const [detailBooking, setDetailBooking] = useState<StudentBookingDetailDto | null>(null);
   const [packageModalBooking, setPackageModalBooking] = useState<StudentBookingDetailDto | null>(null);
 
-  const isMutatingAny = confirmMut.loading || cancelMut.loading;
+  const isMutatingAny = confirmMut.loading || cancelMut.loading || completeMut.loading;
 
   if (!user) return null;
 
@@ -129,6 +130,16 @@ export default function Bookings() {
         prev.map((b) => (b.id === id ? { ...b, status: 'cancelled' as const } : b)),
       );
       toastSuccess(t('actions.cancelSuccess'));
+    } catch {
+      toastError(t('actions.error'));
+    }
+  }
+
+  async function handleComplete(id: string) {
+    try {
+      const updated = await completeMut.execute(id);
+      setBookings((prev) => prev.map((b) => (b.id === id ? updated : b)));
+      toastSuccess(t('actions.completeSuccess'));
     } catch {
       toastError(t('actions.error'));
     }
@@ -236,6 +247,7 @@ export default function Bookings() {
               onViewDetail={setDetailBooking}
               onConfirm={handleConfirm}
               onCancel={handleCancel}
+              onComplete={handleComplete}
               onAddPackage={setPackageModalBooking}
             />
           )}
@@ -276,6 +288,7 @@ export default function Bookings() {
         onClose={() => setDetailBooking(null)}
         onConfirm={handleConfirm}
         onCancel={handleCancel}
+        onComplete={handleComplete}
       />
 
       <AddPackageModal

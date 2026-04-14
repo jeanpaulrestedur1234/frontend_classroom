@@ -21,6 +21,8 @@
     "addPackage": "Add Package",
     "confirmSuccess": "Booking confirmed",
     "cancelSuccess": "Booking cancelled",
+    "complete": "Complete",
+    "completeSuccess": "Booking completed successfully",
     "addPackageSuccess": "Package linked successfully",
     "error": "Error processing action",
     "joinClass": "Join Class",

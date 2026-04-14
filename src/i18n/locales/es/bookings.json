@@ -21,6 +21,8 @@
     "addPackage": "Agregar Paquete",
     "confirmSuccess": "Reserva confirmada",
     "cancelSuccess": "Reserva cancelada",
+    "complete": "Completar",
+    "completeSuccess": "Reserva completada exitosamente",
     "addPackageSuccess": "Paquete vinculado exitosamente",
     "error": "Error al procesar la acción",
     "joinClass": "Unirse a la clase",

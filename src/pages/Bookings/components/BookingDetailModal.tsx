@@ -14,6 +14,7 @@ interface BookingDetailModalProps {
   onClose: () => void;
   onConfirm: (id: string) => void;
   onCancel: (id: string) => void;
+  onComplete: (id: string) => void;
 }
 
 export default function BookingDetailModal({
@@ -23,6 +24,7 @@ export default function BookingDetailModal({
   onClose,
   onConfirm,
   onCancel,
+  onComplete,
 }: BookingDetailModalProps) {
   const { t } = useTranslation('bookings');
   const { t: tc } = useTranslation('common');
@@ -105,6 +107,19 @@ export default function BookingDetailModal({
             >
               <Video className="w-4 h-4" />
               {t('actions.joinClass')}
+            </Button>
+          )}
+          {isAdminOrTeacher && booking.status === 'confirmed' && (
+            <Button
+              size="sm"
+              loading={actionLoading === booking.id}
+              onClick={() => {
+                onComplete(booking.id);
+                onClose();
+              }}
+            >
+              <CheckCircle className="w-4 h-4" />
+              {t('actions.complete')}
             </Button>
           )}
           {(booking.status === 'pending' || booking.status === 'confirmed') && (

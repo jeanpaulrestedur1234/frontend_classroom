@@ -1,6 +1,7 @@
 import { Monitor, Building2, ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import type { TeacherAvailabilityDTO } from '@/types';
+import Button from '@/components/ui/Button';
 
 interface WeeklyGridProps {
   availability: (TeacherAvailabilityDTO & { scheduled_date?: string })[];

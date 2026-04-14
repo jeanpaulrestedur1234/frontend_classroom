@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Lock, Mail } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
 import { useToast } from '@/context/ToastContext';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -13,6 +14,7 @@ export default function Login() {
   const { t: tc } = useTranslation('common');
   const { user, login, loading: authLoading } = useAuth();
   const { toast: toastNotify } = useToast();
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -76,7 +78,7 @@ export default function Login() {
         <div className="bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl p-8 shadow-2xl shadow-black/10">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-12 mb-4" />
+            <img src={theme === 'dark' ? '/valley-white.png' : '/valley-dark.png'} alt="Valley Spanish School" className="h-12 mb-4" />
             <h1 className="text-2xl font-bold font-[family-name:var(--font-display)] bg-gradient-to-r from-[var(--primary)] via-blue-500 to-violet-500 bg-clip-text text-transparent">
               {tc('appName')}
             </h1>

@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
           <a href="#" className="flex items-center">
-            <img src="/valley-logo.png" alt="Valley Spanish School" className="h-10" />
+            <img src={theme === "dark" ? "/valley-white.png" : "/valley-dark.png"} alt="Valley Spanish School" className="h-10" />
           </a>
 
           {/* Desktop links */}

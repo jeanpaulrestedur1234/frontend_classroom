@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/context/ThemeContext";
 
 interface FooterLink {
   labelKey: string;
@@ -41,6 +42,7 @@ const linkGroups: FooterGroup[] = [
 
 export default function Footer() {
   const { t } = useTranslation("landing");
+  const { theme } = useTheme();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -53,7 +55,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#" className="inline-flex items-center mb-5">
-              <img src="/valley-logo.png" alt="Valley Spanish School" className="h-10" />
+              <img src={theme === "dark" ? "/valley-white.png" : "/valley-dark.png"} alt="Valley Spanish School" className="h-10" />
             </a>
             <p className="text-[var(--text-muted)] text-sm leading-relaxed max-w-xs">
               {t("footer.description")}

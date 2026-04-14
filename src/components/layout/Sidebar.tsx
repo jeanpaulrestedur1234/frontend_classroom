@@ -152,7 +152,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
       <div className="flex h-16 items-center justify-between px-4 border-b border-[var(--border-main)]">
         <div className="flex items-center gap-2.5 overflow-hidden">
           {/* Logo */}
-          <img src="/valley-logo.png" alt="Valley Spanish School" className={expanded ? "h-8" : "h-6 w-6 object-contain"} />
+          <img src={theme === 'dark' ? '/valley-white.png' : '/valley-dark.png'} alt="Valley Spanish School" className={expanded ? "h-8" : "h-6 w-6 object-contain"} />
         </div>
         <button
           onClick={onToggle}

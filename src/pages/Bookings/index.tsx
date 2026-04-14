@@ -19,7 +19,16 @@ import WeeklyGrid from '../TeacherAvailability/components/WeeklyGrid';
 import BookingDetailModal from './components/BookingDetailModal';
 import AddPackageModal from './components/AddPackageModal';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 50;
+
+function getMonday(date: Date): Date {
+  const copy = new Date(date);
+  const dow = copy.getDay();
+  const diff = copy.getDate() - dow + (dow === 0 ? -6 : 1);
+  copy.setDate(diff);
+  copy.setHours(0, 0, 0, 0);
+  return copy;
+}
 
 function bookingToAvailability(booking: StudentBookingDetailDto) {
   const date = new Date(booking.scheduled_date);
@@ -33,6 +42,7 @@ function bookingToAvailability(booking: StudentBookingDetailDto) {
     start_time: booking.start_time,
     end_time: booking.end_time,
     is_virtual: booking.booking_type === 'virtual',
+    scheduled_date: booking.scheduled_date,
     created_at: booking.created_at,
   };
 }
@@ -49,6 +59,9 @@ export default function Bookings() {
   const [statusFilter, setStatusFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [viewMode, setViewMode] = useState<'table' | 'week'>('week');
+
+  const [currentWeekStart, setCurrentWeekStart] = useState<Date>(() => getMonday(new Date()));
+  const initialMonday = getMonday(new Date());
 
   /* server-side paginated query */
   const fetcher = useCallback(
@@ -145,6 +158,25 @@ export default function Bookings() {
     }
   }
 
+  const isPrevDisabled = currentWeekStart.getTime() <= initialMonday.getTime();
+
+  function handleNextWeek() {
+    setCurrentWeekStart((prev) => {
+      const next = new Date(prev);
+      next.setDate(next.getDate() + 7);
+      return next;
+    });
+  }
+
+  function handlePrevWeek() {
+    setCurrentWeekStart((prev) => {
+      const p = new Date(prev);
+      p.setDate(p.getDate() - 7);
+      if (p.getTime() < initialMonday.getTime()) return prev;
+      return p;
+    });
+  }
+
   /* pagination info */
   const showPagination = !loading && !error && total > PAGE_SIZE;
   const from = (page - 1) * PAGE_SIZE + 1;
@@ -234,6 +266,10 @@ export default function Bookings() {
           {viewMode === 'week' ? (
             <WeeklyGrid
               availability={bookings.map(bookingToAvailability)}
+              baseDate={currentWeekStart}
+              onNextWeek={handleNextWeek}
+              onPrevWeek={handlePrevWeek}
+              isPrevDisabled={isPrevDisabled}
               onSlotClick={(id) => {
                 const b = bookings.find((x) => x.id === id);
                 if (b) setDetailBooking(b);

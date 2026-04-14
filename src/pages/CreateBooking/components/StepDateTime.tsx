@@ -13,9 +13,17 @@ const TIME_SLOTS = HOURS.map((h) => ({ value: h, label: h }));
 
 function getWeekStart(date: Date): Date {
   const copy = new Date(date);
-  const dow = copy.getDay();
-  const daysUntilNextMonday = (1 - dow + 7) % 7 || 7;
-  copy.setDate(copy.getDate() + daysUntilNextMonday);
+  const day = copy.getDay(); // 0 = Sunday
+  
+  // If it's Sunday, we want to show the next week starting tomorrow
+  if (day === 0) {
+    copy.setDate(copy.getDate() + 1);
+  }
+  
+  // Find Monday of the target date
+  const targetDay = copy.getDay();
+  const diff = copy.getDate() - targetDay + (targetDay === 0 ? -6 : 1);
+  copy.setDate(diff);
   copy.setHours(0, 0, 0, 0);
   return copy;
 }

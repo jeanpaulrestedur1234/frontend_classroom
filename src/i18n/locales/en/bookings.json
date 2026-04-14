@@ -53,8 +53,8 @@
       "package": "Choose Package",
       "review": "Confirm Booking"
     },
-    "noActivePackage": "No active packages available"
-    ,
+    "noActivePackage": "No active packages available",
+    "noActivePackageDesc": "You must have at least one active package to create a booking. Please acquire one first.",
     "selectType": "How will your class be?",
     "virtualDesc": "Online class with no physical room needed",
     "presencialDesc": "In-person class at an academy room",

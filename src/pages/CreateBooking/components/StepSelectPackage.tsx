@@ -17,7 +17,7 @@ export function StepPackage({ t, tc, myPackages, selectedPackageId, setSelectedP
           <div>
             <p className="text-sm font-semibold text-rose-500">{t('create.noActivePackage')}</p>
             <p className="text-xs text-rose-500/80 mt-1">
-              Debes tener al menos un paquete activo para poder crear una reserva. Por favor adquiere uno primero.
+              {t('create.noActivePackageDesc')}
             </p>
           </div>
         </div>

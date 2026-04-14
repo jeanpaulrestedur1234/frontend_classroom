@@ -53,8 +53,8 @@
       "package": "Elegir Paquete",
       "review": "Confirmar Reserva"
     },
-    "noActivePackage": "No hay paquetes activos disponibles"
-    ,
+    "noActivePackage": "No hay paquetes activos disponibles",
+    "noActivePackageDesc": "Debes tener al menos un paquete activo para poder crear una reserva. Por favor adquiere uno primero.",
     "selectType": "¿Cómo será tu clase?",
     "virtualDesc": "Clase en línea sin necesidad de salón físico",
     "presencialDesc": "Clase presencial en un salón de la academia",

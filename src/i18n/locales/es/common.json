@@ -95,8 +95,12 @@
   "pagination": {
     "showing": "Mostrando",
     "of": "de",
-    "results": "resultados"
+    "results": "resultados",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {{current}} de {{total}}"
   },
+  "weeklyCalendar": "Vista semanal",
   "time": {
     "today": "Hoy",
     "yesterday": "Ayer",

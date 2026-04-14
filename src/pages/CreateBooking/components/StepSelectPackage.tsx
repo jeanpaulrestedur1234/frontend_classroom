@@ -1,4 +1,5 @@
 import Select from '@/components/ui/Select';
+import { AlertCircle } from 'lucide-react';
 
 export function StepPackage({ t, tc, myPackages, selectedPackageId, setSelectedPackageId }: any) {
   const selectedPackage = myPackages.find((p: any) => p.id === selectedPackageId);
@@ -11,7 +12,15 @@ export function StepPackage({ t, tc, myPackages, selectedPackageId, setSelectedP
       <p className="text-sm text-[var(--text-muted)] mb-6">{t('create.choosePackage')}</p>
 
       {myPackages.length === 0 ? (
-        <p className="text-sm text-[var(--text-muted)]">{t('create.noActivePackage')}</p>
+        <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-rose-500 mt-0.5 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-semibold text-rose-500">{t('create.noActivePackage')}</p>
+            <p className="text-xs text-rose-500/80 mt-1">
+              Debes tener al menos un paquete activo para poder crear una reserva. Por favor adquiere uno primero.
+            </p>
+          </div>
+        </div>
       ) : (
         <Select
           label={t('create.selectPackage')}

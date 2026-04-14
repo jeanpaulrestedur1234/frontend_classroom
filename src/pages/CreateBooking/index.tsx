@@ -115,7 +115,7 @@ export default function CreateBooking() {
       case 3:
         return scheduledDate !== '' && startTime !== '';
       case 4:
-        return !hasPackageStep || myPackages.length === 0 || selectedPackageId !== '';
+        return !hasPackageStep || (myPackages.length > 0 && selectedPackageId !== '');
       default:
         return false;
     }

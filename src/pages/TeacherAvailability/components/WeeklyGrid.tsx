@@ -26,10 +26,17 @@ function getWeekStart(date: Date): Date {
   return copy;
 }
 
+function toISODate(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 function getDayDate(apiDay: number, baseDate?: Date): string {
   const date = baseDate ? new Date(baseDate) : getWeekStart(new Date());
   date.setDate(date.getDate() + apiDay);
-  return date.toISOString().split('T')[0];
+  return toISODate(date);
 }
 
 function formatTime(t: string | undefined): string {
@@ -64,12 +71,12 @@ export default function WeeklyGrid({ availability, onSlotClick, baseDate, onPrev
       {(onPrevWeek || onNextWeek) && (
         <div className="flex items-center justify-between bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-2xl px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="bg-[var(--primary-subtle)] p-2 rounded-lg">
+            <div className="bg-[var(--primary)]/10 p-2 rounded-lg">
               <Calendar className="w-5 h-5 text-[var(--primary)]" />
             </div>
             <div>
               <p className="text-sm font-semibold text-[var(--text-main)]">{rangeLabel}</p>
-              <p className="text-xs text-[var(--text-muted)]">{t('weeklyCalendar')}</p>
+              <p className="text-xs text-[var(--text-muted)]">{tc('weeklyCalendar')}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -142,8 +149,8 @@ export default function WeeklyGrid({ availability, onSlotClick, baseDate, onPrev
                           <div
                             onClick={() => onSlotClick && onSlotClick(slot.id)}
                             className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${onSlotClick ? 'cursor-pointer hover:opacity-80' : 'cursor-default'} ${slot.is_virtual
-                                ? 'bg-sky-400/15 text-sky-500 ring-1 ring-sky-500/20'
-                                : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20'
+                                ? 'bg-[var(--virtual-bg)] text-[var(--virtual)] ring-1 ring-[var(--virtual-border)]'
+                                : 'bg-[var(--presencial-bg)] text-[var(--presencial)] ring-1 ring-[var(--presencial-border)]'
                               }`}
                             title={`${slot.start_time.slice(0, 5)} - ${slot.end_time.slice(0, 5)} (${slot.is_virtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial')})`}
                           >

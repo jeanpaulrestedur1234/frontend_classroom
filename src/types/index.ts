@@ -191,12 +191,13 @@ export type SlotBookingInfo = {
   status: BookingStatus;
   scheduled_date: string;
   student_count: number;
-  students: BookingStudentRef[];
+  is_enrolled: boolean;
   room: { id: number; name: string; capacity: number } | null;
 };
 
 export type AvailabilitySlot = {
   day_of_week: number;
+  date: string;
   start_time: string;
   end_time: string;
   is_virtual: boolean;
@@ -208,6 +209,7 @@ export type TeacherBookingAvailabilityDTO = {
   availability_id: string;
   teacher_id: number;
   day_of_week: number;
+  date: string;
   is_virtual: boolean;
   range_start: string;
   range_end: string;

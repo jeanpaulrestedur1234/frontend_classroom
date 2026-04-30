@@ -11,48 +11,31 @@ const HOURS = Array.from({ length: 15 }, (_, i) => {
 
 const TIME_SLOTS = HOURS.map((h) => ({ value: h, label: h }));
 
-function getWeekStart(date: Date): Date {
-  const copy = new Date(date);
-  const day = copy.getDay(); // 0 = Sunday
-  
-  // If it's Sunday, we want to show the next week starting tomorrow
-  if (day === 0) {
-    copy.setDate(copy.getDate() + 1);
-  }
-  
-  // Find Monday of the target date
-  const targetDay = copy.getDay();
-  const diff = copy.getDate() - targetDay + (targetDay === 0 ? -6 : 1);
-  copy.setDate(diff);
-  copy.setHours(0, 0, 0, 0);
-  return copy;
+/** Returns the Monday of the current week (or next Monday if today is Sunday). */
+function getWeekStart(): Date {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const day = today.getDay(); // 0=Sun
+  const diff = day === 0 ? 1 : 1 - day; // advance to Monday
+  today.setDate(today.getDate() + diff);
+  return today;
 }
 
-function toISODate(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
+/** Format a Date as YYYY-MM-DD without timezone shift. */
+function toISODate(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${dd}`;
 }
 
-function getDayDate(apiDay: number): string {
-  const date = getWeekStart(new Date());
-  date.setDate(date.getDate() + apiDay);
-  return toISODate(date);
+/** Get the ISO date for a given day_of_week (0=Mon … 6=Sun) in the current week. */
+function calcDayDate(dayOfWeek: number): string {
+  const base = getWeekStart();
+  base.setDate(base.getDate() + dayOfWeek);
+  return toISODate(base);
 }
 
-function findSlot(
-  day: number,
-  hour: string,
-  availability: TeacherBookingAvailabilityDTO[],
-): AvailabilitySlot | undefined {
-  for (const avail of availability) {
-    if (avail.day_of_week !== day) continue;
-    const slot = avail.slots.find((s) => s.start_time <= hour && s.end_time > hour);
-    if (slot) return slot;
-  }
-  return undefined;
-}
 
 function formatTime(t: string) {
   return t.slice(0, 5);
@@ -75,43 +58,38 @@ function resolveSlotState(
   isVirtual: boolean,
   roomId: string,
   isPast: boolean,
-  myPackageIds: string[],
 ): SlotState {
   if (isPast) return { kind: 'past' };
 
   if (!slot.is_booked) {
-    // Free slot — but for presencial we need a room selected
     if (!isVirtual && !roomId) return { kind: 'no_room_selected' };
     return { kind: 'free' };
   }
 
-  // Booked slot
   const booking = slot.booking!;
 
-  // Check if the current user is already enrolled in this slot
-  const alreadyIn = myPackageIds.length > 0 &&
-    booking.students.some((s) => myPackageIds.includes(s.student_package_id));
-  if (alreadyIn) {
+  // Backend tells us directly if the current user is enrolled
+  if (booking.is_enrolled) {
     return { kind: 'already_booked', count: booking.student_count };
   }
 
-  if (isVirtual) {
-    // Virtual: always joinable, just show how many are in
+  // Use booking.room to determine the actual booking type —
+  // NOT slot.is_virtual, which reflects availability config, not the booking itself.
+  const bookingIsPresencial = booking.room !== null;
+
+  if (!bookingIsPresencial) {
+    // Pure virtual: always joinable, just show occupancy
     return { kind: 'virtual_booked', count: booking.student_count };
   }
 
   // Presencial: check room match and capacity
-  const room = booking.room;
-  if (!room) return { kind: 'free' }; // safety fallback
-
+  const room = booking.room!;
   const selectedRoomId = parseInt(roomId, 10);
 
   if (room.id !== selectedRoomId) {
-    // Teacher is committed to a different room in this slot
     return { kind: 'wrong_room', roomName: room.name };
   }
 
-  // Same room — check capacity
   if (booking.student_count < room.capacity) {
     return {
       kind: 'presencial_available',
@@ -192,11 +170,10 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
           type="button"
           onClick={onClick}
           title={`${state.roomName} · ${state.count}/${state.capacity} students`}
-          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${
-            selected
+          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${selected
               ? 'bg-amber-500/30 text-amber-700 ring-2 ring-amber-500 ring-offset-1'
               : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20 hover:bg-amber-400/30 hover:ring-amber-500/40'
-          }`}
+            }`}
         >
           {selected ? (
             <CheckCircle2 className="w-3 h-3" />
@@ -216,11 +193,10 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
           type="button"
           onClick={onClick}
           title={`${state.count} student${state.count !== 1 ? 's' : ''} already booked`}
-          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${
-            selected
+          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${selected
               ? 'bg-sky-500/30 text-sky-700 ring-2 ring-sky-500 ring-offset-1'
               : 'bg-sky-400/15 text-sky-500 ring-1 ring-sky-500/20 hover:bg-sky-400/30 hover:ring-sky-500/40'
-          }`}
+            }`}
         >
           {selected ? <CheckCircle2 className="w-3 h-3" /> : <Monitor className="w-3 h-3" />}
           <span className="flex items-center gap-0.5">
@@ -244,15 +220,14 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
         <button
           type="button"
           onClick={onClick}
-          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${
-            selected
+          className={`w-full rounded-lg px-1.5 py-2 text-xs font-medium transition-all flex flex-col items-center gap-0.5 ${selected
               ? isVirtual
                 ? 'bg-sky-500/30 text-sky-700 ring-2 ring-sky-500 ring-offset-1'
                 : 'bg-amber-500/30 text-amber-700 ring-2 ring-amber-500 ring-offset-1'
               : isVirtual
-              ? 'bg-sky-400/15 text-sky-500 ring-1 ring-sky-500/20 hover:bg-sky-400/30 hover:ring-sky-500/40'
-              : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20 hover:bg-amber-400/30 hover:ring-amber-500/40'
-          }`}
+                ? 'bg-sky-400/15 text-sky-500 ring-1 ring-sky-500/20 hover:bg-sky-400/30 hover:ring-sky-500/40'
+                : 'bg-amber-400/15 text-amber-600 ring-1 ring-amber-500/20 hover:bg-amber-400/30 hover:ring-amber-500/40'
+            }`}
         >
           {selected ? (
             <CheckCircle2 className="w-3 h-3" />
@@ -280,7 +255,6 @@ export function StepDateTime({
   setStartTime,
   bookingType,
   roomId = '',
-  myPackageIds = [] as string[],
 }: any) {
   const isVirtual = bookingType === 'virtual';
 
@@ -343,27 +317,32 @@ export function StepDateTime({
               <thead>
                 <tr className="border-b border-[var(--border-main)] bg-[var(--bg-subtle)]">
                   <th className="sticky left-0 z-10 w-14 bg-[var(--bg-subtle)] px-3 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]" />
-                  {Array.from({ length: 7 }, (_, idx) => (
-                    <th
-                      key={idx}
-                      className="min-w-[100px] px-2 py-3 text-center font-medium text-[var(--text-body)] font-[family-name:var(--font-display)]"
-                    >
-                      {tc(`days.${idx}`)}
-                      <div className="text-xs font-normal text-[var(--text-muted)] mt-0.5">
-                        {new Date(getDayDate(idx) + 'T12:00:00').toLocaleDateString(undefined, {
-                          month: 'short',
-                          day: 'numeric',
-                        })}
-                      </div>
-                    </th>
-                  ))}
+                  {Array.from({ length: 7 }, (_, dayIdx) => {
+                    // Use the date from the API if this day has availability, else compute it
+                    const avail = filteredAvailability.find((a) => a.day_of_week === dayIdx);
+                    const date = avail ? avail.date : calcDayDate(dayIdx);
+                    return (
+                      <th
+                        key={dayIdx}
+                        className="min-w-[100px] px-2 py-3 text-center font-medium text-[var(--text-body)] font-[family-name:var(--font-display)]"
+                      >
+                        {tc(`days.${dayIdx}`)}
+                        <div className="text-xs font-normal text-[var(--text-muted)] mt-0.5">
+                          {new Date(date + 'T12:00:00').toLocaleDateString(undefined, {
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </div>
+                      </th>
+                    );
+                  })}
                 </tr>
               </thead>
               <tbody>
                 {HOURS.map((hour) => {
-                  const rowHasAny = Array.from({ length: 7 }, (_, d) =>
-                    findSlot(d, hour, filteredAvailability),
-                  ).some(Boolean);
+                  const rowHasAny = filteredAvailability.some((avail) =>
+                    avail.slots.some((s) => s.start_time <= hour && s.end_time > hour),
+                  );
 
                   if (!rowHasAny) return null;
 
@@ -376,20 +355,23 @@ export function StepDateTime({
                         {hour}
                       </td>
                       {Array.from({ length: 7 }, (_, dayIdx) => {
-                        const slot = findSlot(dayIdx, hour, filteredAvailability);
-                        const dayDate = getDayDate(dayIdx);
-                        const selected = scheduledDate === dayDate && startTime === hour;
-                        const slotTime = new Date(`${dayDate}T${hour}:00`);
+                        const avail = filteredAvailability.find((a) => a.day_of_week === dayIdx);
+                        const slot = avail?.slots.find(
+                          (s) => s.start_time <= hour && s.end_time > hour,
+                        );
+                        const slotDate = slot?.date ?? avail?.date ?? calcDayDate(dayIdx);
+                        const selected = scheduledDate === slotDate && startTime === hour;
+                        const slotTime = new Date(`${slotDate}T${hour}:00`);
                         const isPast = slotTime.getTime() - Date.now() < 24 * 60 * 60 * 1000;
 
-                        if (!slot) return <td key={dayIdx} className="px-1.5 py-1.5"><div className="h-10" /></td>;
+                        if (!avail || !slot)
+                          return <td key={dayIdx} className="px-1.5 py-1.5"><div className="h-10" /></td>;
 
-                        const state = resolveSlotState(slot, isVirtual, roomId, isPast, myPackageIds);
+                        const state = resolveSlotState(slot, isVirtual, roomId, isPast);
                         const isClickable =
                           state.kind === 'free' ||
                           state.kind === 'virtual_booked' ||
                           state.kind === 'presencial_available';
-                        // Already enrolled: don't let them re-book the same slot
 
                         return (
                           <td key={dayIdx} className="px-1.5 py-1.5 text-center">
@@ -399,7 +381,7 @@ export function StepDateTime({
                               selected={selected}
                               onClick={() => {
                                 if (!isClickable) return;
-                                setScheduledDate(dayDate);
+                                setScheduledDate(slotDate);
                                 setStartTime(hour);
                               }}
                             />

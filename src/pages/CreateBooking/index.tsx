@@ -68,8 +68,8 @@ export default function CreateBooking() {
 
   useEffect(() => {
     if (user?.role !== 'student' || step !== 1 || myPackages.length > 0) return;
-    getMyPackages()
-      .then((pkgs) => setMyPackages(pkgs.filter((p) => p.status === 'active')))
+    getMyPackages({ status: 'active', size: 100 })
+      .then((res) => setMyPackages(res.items))
       .catch(() => setMyPackages([]));
   }, [user, step, myPackages.length]);
 

@@ -51,6 +51,7 @@ type SlotState =
   | { kind: 'presencial_available'; count: number; capacity: number; roomName: string } // same room, has space
   | { kind: 'presencial_full'; count: number; capacity: number; roomName: string }      // same room, full
   | { kind: 'wrong_room'; roomName: string }            // booked in a different room
+  | { kind: 'wrong_type' }                              // slot is for different booking type
   | { kind: 'no_room_selected' };                       // presencial but no room chosen yet
 
 function resolveSlotState(
@@ -62,6 +63,7 @@ function resolveSlotState(
   if (isPast) return { kind: 'past' };
 
   if (!slot.is_booked) {
+    if (slot.is_virtual !== isVirtual) return { kind: 'wrong_type' };
     if (!isVirtual && !roomId) return { kind: 'no_room_selected' };
     return { kind: 'free' };
   }
@@ -214,6 +216,13 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
         </div>
       );
 
+    case 'wrong_type':
+      return (
+        <div className="w-full rounded-lg px-1.5 py-2 text-xs cursor-not-allowed opacity-30 bg-[var(--bg-subtle)] text-[var(--text-dim)] ring-1 ring-dashed ring-[var(--border-main)] flex flex-col items-center gap-0.5">
+          <span>·</span>
+        </div>
+      );
+
     case 'free':
     default:
       return (
@@ -258,9 +267,9 @@ export function StepDateTime({
 }: any) {
   const isVirtual = bookingType === 'virtual';
 
-  const filteredAvailability: TeacherBookingAvailabilityDTO[] = teacherAvailability.filter(
-    (a: TeacherBookingAvailabilityDTO) => a.is_virtual === isVirtual,
-  );
+  // Show ALL availability (both virtual and presencial) so the calendar always has
+  // consistent columns. resolveSlotState handles whether individual slots are bookable.
+  const filteredAvailability: TeacherBookingAvailabilityDTO[] = teacherAvailability;
 
   const hasAvailability = filteredAvailability.length > 0;
 
@@ -355,16 +364,25 @@ export function StepDateTime({
                         {hour}
                       </td>
                       {Array.from({ length: 7 }, (_, dayIdx) => {
-                        const avail = filteredAvailability.find((a) => a.day_of_week === dayIdx);
-                        const slot = avail?.slots.find(
-                          (s) => s.start_time <= hour && s.end_time > hour,
-                        );
-                        const slotDate = slot?.date ?? avail?.date ?? calcDayDate(dayIdx);
+                        const availsForDay = filteredAvailability.filter((a) => a.day_of_week === dayIdx);
+                        let slot: AvailabilitySlot | undefined;
+                        let parentAvail: TeacherBookingAvailabilityDTO | undefined;
+
+                        for (const a of availsForDay) {
+                          const s = a.slots.find((s) => s.start_time <= hour && s.end_time > hour);
+                          if (s) {
+                            slot = s;
+                            parentAvail = a;
+                            break;
+                          }
+                        }
+
+                        const slotDate = slot?.date ?? parentAvail?.date ?? calcDayDate(dayIdx);
                         const selected = scheduledDate === slotDate && startTime === hour;
                         const slotTime = new Date(`${slotDate}T${hour}:00`);
                         const isPast = slotTime.getTime() - Date.now() < 24 * 60 * 60 * 1000;
 
-                        if (!avail || !slot)
+                        if (!slot)
                           return <td key={dayIdx} className="px-1.5 py-1.5"><div className="h-10" /></td>;
 
                         const state = resolveSlotState(slot, isVirtual, roomId, isPast);

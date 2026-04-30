@@ -46,12 +46,11 @@ function formatTime(t: string) {
 type SlotState =
   | { kind: 'past' }
   | { kind: 'free' }
-  | { kind: 'already_booked'; count: number }           // current user is already in this slot
+  | { kind: 'already_booked'; count: number; capacity?: number; roomName?: string } // current user is already in this slot
   | { kind: 'virtual_booked'; count: number }           // virtual: show count, still bookable
   | { kind: 'presencial_available'; count: number; capacity: number; roomName: string } // same room, has space
   | { kind: 'presencial_full'; count: number; capacity: number; roomName: string }      // same room, full
-  | { kind: 'wrong_room'; roomName: string }            // booked in a different room
-  | { kind: 'wrong_type' }                              // slot is for different booking type
+  | { kind: 'wrong_room'; roomName: string; count: number; capacity: number }           // booked in a different room
   | { kind: 'no_room_selected' };                       // presencial but no room chosen yet
 
 function resolveSlotState(
@@ -63,7 +62,6 @@ function resolveSlotState(
   if (isPast) return { kind: 'past' };
 
   if (!slot.is_booked) {
-    if (slot.is_virtual !== isVirtual) return { kind: 'wrong_type' };
     if (!isVirtual && !roomId) return { kind: 'no_room_selected' };
     return { kind: 'free' };
   }
@@ -72,7 +70,12 @@ function resolveSlotState(
 
   // Backend tells us directly if the current user is enrolled
   if (booking.is_enrolled) {
-    return { kind: 'already_booked', count: booking.student_count };
+    return {
+      kind: 'already_booked',
+      count: booking.student_count,
+      capacity: booking.room?.capacity,
+      roomName: booking.room?.name
+    };
   }
 
   // Use booking.room to determine the actual booking type —
@@ -89,7 +92,12 @@ function resolveSlotState(
   const selectedRoomId = parseInt(roomId, 10);
 
   if (room.id !== selectedRoomId) {
-    return { kind: 'wrong_room', roomName: room.name };
+    return {
+      kind: 'wrong_room',
+      roomName: room.name,
+      count: booking.student_count,
+      capacity: room.capacity
+    };
   }
 
   if (booking.student_count < room.capacity) {
@@ -130,6 +138,12 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
         >
           <BadgeCheck className="w-3.5 h-3.5" />
           <span className="leading-tight text-center">You're in</span>
+          {state.capacity && (
+            <span className="flex items-center gap-0.5 opacity-80 text-[10px]">
+              <Users className="w-2 h-2" />
+              {state.count}/{state.capacity}
+            </span>
+          )}
         </div>
       );
 
@@ -144,11 +158,15 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
     case 'wrong_room':
       return (
         <div
-          title={`Booked in: ${state.roomName}`}
+          title={`Booked in: ${state.roomName} · ${state.count}/${state.capacity} students`}
           className="w-full rounded-lg px-1.5 py-2 text-xs font-medium cursor-not-allowed bg-orange-500/15 text-orange-500 ring-1 ring-orange-500/30 flex flex-col items-center gap-0.5 overflow-hidden"
         >
           <Building2 className="w-3 h-3 flex-shrink-0" />
           <span className="truncate w-full text-center leading-tight">{state.roomName}</span>
+          <span className="flex items-center gap-0.5 opacity-80 text-[10px]">
+            <Users className="w-2 h-2" />
+            {state.count}/{state.capacity}
+          </span>
         </div>
       );
 
@@ -216,13 +234,6 @@ function SlotCell({ slot, state, selected, onClick }: SlotCellProps) {
         </div>
       );
 
-    case 'wrong_type':
-      return (
-        <div className="w-full rounded-lg px-1.5 py-2 text-xs cursor-not-allowed opacity-30 bg-[var(--bg-subtle)] text-[var(--text-dim)] ring-1 ring-dashed ring-[var(--border-main)] flex flex-col items-center gap-0.5">
-          <span>·</span>
-        </div>
-      );
-
     case 'free':
     default:
       return (
@@ -267,9 +278,9 @@ export function StepDateTime({
 }: any) {
   const isVirtual = bookingType === 'virtual';
 
-  // Show ALL availability (both virtual and presencial) so the calendar always has
-  // consistent columns. resolveSlotState handles whether individual slots are bookable.
-  const filteredAvailability: TeacherBookingAvailabilityDTO[] = teacherAvailability;
+  const filteredAvailability: TeacherBookingAvailabilityDTO[] = teacherAvailability.filter(
+    (a: TeacherBookingAvailabilityDTO) => a.is_virtual === isVirtual,
+  );
 
   const hasAvailability = filteredAvailability.length > 0;
 

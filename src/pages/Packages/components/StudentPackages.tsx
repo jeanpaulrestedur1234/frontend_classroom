@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Package, ShoppingCart, CheckCircle } from 'lucide-react';
 import { useQuery } from '@/hooks';
@@ -24,9 +24,7 @@ export default function StudentPackages() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+
 
   async function handleAcquire(packageId: string) {
     setAcquiringId(packageId);

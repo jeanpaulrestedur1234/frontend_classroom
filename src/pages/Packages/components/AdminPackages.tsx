@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Package, Plus } from 'lucide-react';
 import { useQuery } from '@/hooks';
@@ -18,9 +18,7 @@ export default function AdminPackages() {
   const { data: packages, loading, error, refetch } = useQuery(listPackages);
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+
 
   if (loading) return <LoadingSpinner />;
 

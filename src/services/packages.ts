@@ -27,11 +27,16 @@ export async function acquirePackage(
   return response.data;
 }
 
-export async function getMyPackages(): Promise<StudentPackageDTO[]> {
+export async function getMyPackages(params?: {
+  status?: string;
+  page?: number;
+  size?: number;
+}): Promise<PaginatedResponse<StudentPackageDTO>> {
   const response = await api.get<PaginatedResponse<StudentPackageDTO>>(
     '/api/student-packages/me',
+    { params }
   );
-  return response.data.items;
+  return response.data;
 }
 
 export async function activatePackage(

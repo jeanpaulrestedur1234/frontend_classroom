@@ -34,7 +34,8 @@
     "completed": "Completado",
     "notified": "Notificado",
     "rejected": "Rechazado",
-    "package": "Paquete"
+    "package": "Paquete",
+    "expired": "Expirado"
   },
   "roles": {
     "super_admin": "Super Admin",

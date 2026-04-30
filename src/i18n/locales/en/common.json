@@ -30,7 +30,8 @@
     "completed": "Completed",
     "notified": "Notified",
     "rejected": "Rejected",
-    "package": "Package"
+    "package": "Package",
+    "expired": "Expired"
   },
   "roles": {
     "super_admin": "Super Admin",

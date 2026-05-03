@@ -1,0 +1,98 @@
+{
+  "catalog": {
+    "title": "Catálogo de Paquetes",
+    "newPackage": "Nuevo Paquete",
+    "hoursPerWeek": "{{hours}} hrs/semana",
+    "weeks": "{{weeks}} semanas",
+    "discount": "{{pct}}% descuento",
+    "empty": {
+      "title": "No hay paquetes",
+      "description": "Crea el primer paquete educativo."
+    }
+  },
+  "create": {
+    "title": "Crear Paquete",
+    "classType": "Tipo de clase",
+    "hoursPerWeek": "Horas por semana",
+    "durationWeeks": "Duración (semanas)",
+    "basePrice": "Precio base",
+    "discountPct": "Descuento (%)",
+    "success": "Paquete creado exitosamente",
+    "error": "Error al crear paquete"
+  },
+  "student": {
+    "availablePackages": "Paquetes Disponibles",
+    "acquire": "Adquirir",
+    "acquired": "¡Adquirido!",
+    "acquireError": "Error al adquirir paquete"
+  },
+  "myPackages": {
+    "title": "Mis Paquetes",
+    "subtitle": "Gestiona y consulta los paquetes que has adquirido.",
+    "buyNew": "Comprar nuevo paquete",
+    "showing": "Mostrando {{count}} de {{total}} paquetes",
+    "expiredAgo": "Hace {{count}} días",
+    "expirestoday": "Vence hoy",
+    "expiresIn1": "Falta 1 día",
+    "expiresInN": "Faltan {{count}} días",
+    "expiredOn": "Venció el",
+    "expiresOn": "Vence el",
+    "activateBefore": "Activar antes del",
+    "renew": "Renovar paquete",
+    "viewDetails": "Ver detalles",
+    "stats": {
+      "active": "Activos",
+      "activeSub": "Paquetes en uso",
+      "expired": "Vencidos",
+      "expiredSub": "Paquetes expirados",
+      "toActivate": "Por activar",
+      "toActivateSub": "Paquetes por activar"
+    },
+    "col": {
+      "package": "Paquete",
+      "price": "Precio",
+      "hrsWeek": "Horas / semana",
+      "weeks": "Semanas",
+      "totalHrs": "Total horas",
+      "discount": "Descuento",
+      "usage": "Uso",
+      "status": "Estado",
+      "expiry": "Vence / Activación",
+      "actions": "Acciones",
+      "perWeek": "por semana",
+      "weeksLabel": "semanas",
+      "totals": "totales",
+      "discountLabel": "descuento"
+    },
+    "totalHours": "Total: {{hours}} horas",
+    "totalPrice": "Precio total",
+    "createdAt": "Adquirido",
+    "activatedAt": "Activado",
+    "expiresAt": "Vence",
+    "payments": "Pagos",
+    "activatePackage": "Activar Paquete",
+    "uploadReceipt": "Subir Comprobante",
+    "newPayment": "Nuevo Pago",
+    "noPayments": "Sin pagos registrados",
+    "activateSuccess": "Paquete activado exitosamente",
+    "activateError": "Error al activar paquete",
+    "empty": {
+      "title": "No tienes paquetes",
+      "description": "Adquiere tu primer paquete en el catálogo."
+    },
+    "uploadModal": {
+      "title": "Subir Comprobante de Pago",
+      "urlLabel": "URL del comprobante",
+      "urlPlaceholder": "https://ejemplo.com/comprobante.jpg",
+      "fileLabel": "Archivo del comprobante",
+      "confirm": "Confirmar y Adquirir",
+      "success": "Comprobante cargado exitosamente",
+      "error": "Error al cargar comprobante"
+    },
+    "viewPayments": "Ver pagos",
+    "consumedClasses": "Clases consumidas",
+    "totalClasses": "Total de clases",
+    "usage": "Uso del paquete",
+    "remaining": "{{count}} restantes"
+  }
+}

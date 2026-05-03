@@ -1,0 +1,41 @@
+{
+  "title": "Gestión de Salones",
+  "newRoom": "Nuevo Salón",
+  "capacity": "Capacidad",
+  "students": "estudiantes",
+  "create": {
+    "title": "Crear Salón",
+    "name": "Nombre del salón",
+    "capacity": "Capacidad",
+    "isActive": "Salón activo",
+    "success": "Salón creado exitosamente",
+    "error": "Error al crear salón"
+  },
+  "edit": {
+    "title": "Editar Salón",
+    "success": "Salón actualizado exitosamente",
+    "error": "Error al actualizar salón"
+  },
+  "delete": {
+    "title": "Eliminar Salón",
+    "message": "¿Estás seguro de que deseas eliminar el salón {{name}}?",
+    "success": "Salón eliminado exitosamente",
+    "error": "Error al eliminar salón"
+  },
+  "empty": {
+    "title": "No hay salones",
+    "description": "Comienza creando el primer salón."
+  },
+  "availability": {
+    "title": "Disponibilidad de Salones",
+    "selectRoom": "Seleccionar salón",
+    "dateRange": "Rango de fechas",
+    "from": "Desde",
+    "to": "Hasta",
+    "query": "Consultar",
+    "occupancy": "Ocupación",
+    "remaining": "lugares restantes",
+    "full": "Lleno",
+    "empty": "No hay reservas confirmadas para este período."
+  }
+}

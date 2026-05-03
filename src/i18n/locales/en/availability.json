@@ -1,0 +1,28 @@
+{
+  "title": "My Weekly Availability",
+  "adminTitle": "Teacher Availability",
+  "fridayWarning": "Availability can only be modified on Fridays. Today is {{day}}.",
+  "fridayReady": "Today is Friday — you can configure your availability.",
+  "configure": "Configure Availability",
+  "legend": {
+    "virtual": "Virtual",
+    "presencial": "In-Person"
+  },
+  "configModal": {
+    "title": "Configure Availability",
+    "addRange": "Add range",
+    "day": "Day",
+    "startTime": "Start time",
+    "endTime": "End time",
+    "isVirtual": "Virtual",
+    "remove": "Remove",
+    "replaceNote": "Saving will replace your entire current configuration.",
+    "save": "Save Availability",
+    "success": "Availability updated successfully",
+    "error": "Error updating availability",
+    "fridayError": "You can only modify availability on Fridays."
+  },
+  "selectTeacher": "Select teacher",
+  "noAvailability": "No availability configured.",
+  "hours": "Hours"
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Gestión de Pagos",
+  "table": {
+    "paymentId": "ID de Pago",
+    "id": "ID",
+    "studentId": "ID Estudiante",
+    "packageId": "ID Paquete",
+    "amount": "Monto",
+    "status": "Estado",
+    "proof": "Comprobante",
+    "rejectionReason": "Razón de Rechazo",
+    "reviewedAt": "Revisado",
+    "reviewedBy": "Revisado Por",
+    "createdAt": "Creado",
+    "updatedAt": "Actualizado",
+    "unknownStudent": "Estudiante desconocido"
+  },
+  "filter": {
+    "allStatuses": "Todos",
+    "byStatus": "Filtrar por estado",
+    "searchPlaceholder": "Buscar estudiante o paquete…",
+    "clear": "Limpiar",
+    "noResults": "Sin resultados",
+    "noResultsDesc": "No hay pagos que coincidan con los filtros actuales.",
+    "sort": {
+      "dateDesc": "Más recientes",
+      "dateAsc": "Más antiguos",
+      "amountDesc": "Mayor monto",
+      "amountAsc": "Menor monto"
+    }
+  },
+  "pagination": {
+    "showing": "Mostrando {{from}}-{{to}} de {{total}} resultados",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {{current}} de {{total}}"
+  },
+  "admin": {
+    "workflow": {
+      "title": "Flujo de Pagos",
+      "step1": "El estudiante adquiere un paquete",
+      "step2": "Se genera un intento de pago",
+      "step3": "El estudiante sube el comprobante",
+      "step4": "El administrador aprueba o rechaza"
+    },
+    "apiNote": "Los pagos aparecen cuando los estudiantes suben comprobantes. Usa la sección de paquetes de cada estudiante para revisar pagos individuales.",
+    "filterByStatus": "Filtrar por estado",
+    "allStatuses": "Todos los estados",
+    "amount": "Monto",
+    "proofUrl": "Ver comprobante",
+    "rejectionReason": "Razón de rechazo",
+    "approveSuccess": "Pago aprobado exitosamente",
+    "rejectSuccess": "Pago rechazado exitosamente",
+    "error": "Error al procesar pago",
+    "rejectModal": {
+      "title": "Rechazar Pago",
+      "reasonLabel": "Razón del rechazo",
+      "reasonPlaceholder": "Describe la razón del rechazo..."
+    }
+  },
+  "student": {
+    "title": "Mis Pagos",
+    "viewPackages": "Ver en Mis Paquetes",
+    "packageSummary": "Resumen de paquetes y pagos",
+    "uploadReceipt": "Subir Comprobante",
+    "uploadSuccess": "Comprobante subido exitosamente",
+    "uploadError": "Error al subir comprobante",
+    "uploadModal": {
+      "title": "Subir Comprobante de Pago",
+      "urlLabel": "URL del comprobante",
+      "urlPlaceholder": "https://ejemplo.com/comprobante.jpg"
+    }
+  },
+  "noPayments": "No se encontraron pagos",
+  "noPaymentsDesc": "Aún no hay pagos registrados en el sistema.",
+  "viewProof": "Ver comprobante",
+  "noProof": "Sin comprobante"
+}

@@ -1,5 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+function toISODate(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/** Monday of the current week (Sunday counts as previous week). */
+function getThisMonday(): Date {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay(); // 0=Sun
+  d.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+  return d;
+}
+
+/**
+ * First Monday where at least one slot (up to Sun 21:00) is ≥ 24 h in the future.
+ * If the current week still has bookable slots, returns this week's Monday.
+ * Otherwise advances one week.
+ */
+function getInitialWeekStart(): Date {
+  const monday = getThisMonday();
+  const sundayEnd = new Date(monday);
+  sundayEnd.setDate(monday.getDate() + 6);
+  sundayEnd.setHours(21, 0, 0, 0);
+  if (sundayEnd.getTime() < Date.now() + 24 * 60 * 60 * 1000) {
+    monday.setDate(monday.getDate() + 7);
+  }
+  return monday;
+}
 import { ChevronLeft, ChevronRight, CircleCheck } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { createBooking } from '@/services/bookings';
@@ -46,6 +75,11 @@ export default function CreateBooking() {
   const [selectedPackageId, setSelectedPackageId] = useState('');
   const [loadingData, setLoadingData] = useState(false);
 
+  /* week navigation */
+  const [minWeekStart] = useState<Date>(getInitialWeekStart);
+  const [weekStart, setWeekStart] = useState<Date>(getInitialWeekStart);
+  const weekStartISO = useMemo(() => toISODate(weekStart), [weekStart]);
+
   /* submit */
   const [submitting, setSubmitting] = useState(false);
   const [createdBooking, setCreatedBooking] = useState<StudentBookingDetailDto | null>(null);
@@ -80,11 +114,11 @@ export default function CreateBooking() {
     }
 
     setLoadingData(true);
-    getTeacherAvailability(teacherId)
+    getTeacherAvailability(teacherId, weekStartISO)
       .then((availability) => setTeacherAvailability(availability))
       .catch(() => setTeacherAvailability([]))
       .finally(() => setLoadingData(false));
-  }, [teacherId]);
+  }, [teacherId, weekStartISO]);
 
   useEffect(() => {
     if (step === 2 && !isVirtual && rooms.length === 0) {
@@ -148,6 +182,19 @@ export default function CreateBooking() {
     }
 
     setStep((s) => Math.max(s - 1, 0));
+  }
+
+  /* ──── week navigation ──── */
+  function handlePrevWeek() {
+    setWeekStart((w) => { const d = new Date(w); d.setDate(d.getDate() - 7); return d; });
+    setScheduledDate('');
+    setStartTime('');
+  }
+
+  function handleNextWeek() {
+    setWeekStart((w) => { const d = new Date(w); d.setDate(d.getDate() + 7); return d; });
+    setScheduledDate('');
+    setStartTime('');
   }
 
   /* ──── submit ──── */
@@ -228,6 +275,10 @@ export default function CreateBooking() {
             bookingType={bookingType}
             roomId={roomId}
             myPackageIds={myPackages.map((p) => p.id)}
+            weekStart={weekStart}
+            onPrevWeek={handlePrevWeek}
+            onNextWeek={handleNextWeek}
+            isPrevDisabled={weekStart.getTime() <= minWeekStart.getTime()}
           />
         );
       case 4:

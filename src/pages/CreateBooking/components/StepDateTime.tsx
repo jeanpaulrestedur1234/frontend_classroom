@@ -1,7 +1,5 @@
-import { Monitor, Building2, Users, Lock, CheckCircle2, Clock, Info, BadgeCheck } from 'lucide-react';
+import { Monitor, Building2, Users, Lock, CheckCircle2, Clock, Info, BadgeCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { TeacherBookingAvailabilityDTO, AvailabilitySlot } from '@/types';
-import Input from '@/components/ui/Input';
-import Select from '@/components/ui/Select';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 const HOURS = Array.from({ length: 15 }, (_, i) => {
@@ -9,17 +7,6 @@ const HOURS = Array.from({ length: 15 }, (_, i) => {
   return `${h.toString().padStart(2, '0')}:00`;
 });
 
-const TIME_SLOTS = HOURS.map((h) => ({ value: h, label: h }));
-
-/** Returns the Monday of the current week (or next Monday if today is Sunday). */
-function getWeekStart(): Date {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const day = today.getDay(); // 0=Sun
-  const diff = day === 0 ? 1 : 1 - day; // advance to Monday
-  today.setDate(today.getDate() + diff);
-  return today;
-}
 
 /** Format a Date as YYYY-MM-DD without timezone shift. */
 function toISODate(d: Date): string {
@@ -29,9 +16,9 @@ function toISODate(d: Date): string {
   return `${y}-${m}-${dd}`;
 }
 
-/** Get the ISO date for a given day_of_week (0=Mon … 6=Sun) in the current week. */
-function calcDayDate(dayOfWeek: number): string {
-  const base = getWeekStart();
+/** Get the ISO date for a given day_of_week (0=Mon … 6=Sun) relative to weekStart. */
+function calcDayDate(dayOfWeek: number, weekStart: Date): string {
+  const base = new Date(weekStart);
   base.setDate(base.getDate() + dayOfWeek);
   return toISODate(base);
 }
@@ -275,6 +262,10 @@ export function StepDateTime({
   setStartTime,
   bookingType,
   roomId = '',
+  weekStart,
+  onPrevWeek,
+  onNextWeek,
+  isPrevDisabled,
 }: any) {
   const isVirtual = bookingType === 'virtual';
 
@@ -305,6 +296,41 @@ export function StepDateTime({
         <div className="mb-4 flex items-start gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-xs text-amber-500">
           <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span>Go back and select a room first — availability depends on your chosen room's capacity.</span>
+        </div>
+      )}
+
+      {/* Week navigation — always visible when weekStart is provided */}
+      {weekStart && (
+        <div className="flex items-center justify-between mb-4 px-0.5">
+          <button
+            type="button"
+            onClick={onPrevWeek}
+            disabled={isPrevDisabled}
+            title={t('create.prevWeek')}
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${
+              isPrevDisabled
+                ? 'border-[var(--border-main)] text-[var(--text-dim)] cursor-not-allowed opacity-40'
+                : 'border-[var(--border-main)] text-[var(--text-body)] hover:bg-[var(--bg-subtle)]'
+            }`}
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <span className="text-sm font-semibold text-[var(--text-body)]">
+            {(() => {
+              const sun = new Date(weekStart);
+              sun.setDate(weekStart.getDate() + 6);
+              const fmt = (d: Date) => d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+              return `${fmt(weekStart)} – ${sun.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}`;
+            })()}
+          </span>
+          <button
+            type="button"
+            onClick={onNextWeek}
+            title={t('create.nextWeek')}
+            className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[var(--border-main)] text-sm font-medium text-[var(--text-body)] hover:bg-[var(--bg-subtle)] transition-colors"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       )}
 
@@ -340,7 +366,7 @@ export function StepDateTime({
                   {Array.from({ length: 7 }, (_, dayIdx) => {
                     // Use the date from the API if this day has availability, else compute it
                     const avail = filteredAvailability.find((a) => a.day_of_week === dayIdx);
-                    const date = avail ? avail.date : calcDayDate(dayIdx);
+                    const date = avail ? avail.date : calcDayDate(dayIdx, weekStart);
                     return (
                       <th
                         key={dayIdx}
@@ -388,7 +414,7 @@ export function StepDateTime({
                           }
                         }
 
-                        const slotDate = slot?.date ?? parentAvail?.date ?? calcDayDate(dayIdx);
+                        const slotDate = slot?.date ?? parentAvail?.date ?? calcDayDate(dayIdx, weekStart);
                         const selected = scheduledDate === slotDate && startTime === hour;
                         const slotTime = new Date(`${slotDate}T${hour}:00`);
                         const isPast = slotTime.getTime() - Date.now() < 24 * 60 * 60 * 1000;
@@ -470,21 +496,18 @@ export function StepDateTime({
           )}
         </div>
       ) : (
-        /* Fallback: teacher has no availability configured */
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md">
-          <Input
-            label={t('create.selectDate')}
-            type="date"
-            value={scheduledDate}
-            onChange={(e) => setScheduledDate(e.target.value)}
-            min={new Date().toISOString().split('T')[0]}
-          />
-          <Select
-            label={t('create.selectTime')}
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            options={TIME_SLOTS}
-          />
+        /* No availability for this week — prompt user to navigate */
+        <div className="py-10 text-center space-y-3 rounded-2xl border border-dashed border-[var(--border-main)] bg-[var(--bg-subtle)]">
+          <Clock className="w-8 h-8 text-[var(--text-dim)] mx-auto" />
+          <p className="text-sm text-[var(--text-muted)]">{t('create.noAvailabilityThisWeek')}</p>
+          <button
+            type="button"
+            onClick={onNextWeek}
+            className="inline-flex items-center gap-1 px-4 py-2 rounded-lg border border-[var(--border-main)] text-sm font-medium text-[var(--text-body)] hover:bg-[var(--bg-surface)] transition-colors"
+          >
+            {t('create.nextWeek')}
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       )}
     </div>

@@ -38,6 +38,9 @@
   "create": {
     "title": "New Booking",
     "selectAvailability": "Choose an available slot from the teacher's calendar",
+    "noAvailabilityThisWeek": "This teacher has no availability this week. Try another.",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
     "choice": "Selected slot:",
     "choosePackage": "Select an active package to use for this booking",
     "packageUsed": "Package applied to booking successfully",

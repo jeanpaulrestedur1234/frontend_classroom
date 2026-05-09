@@ -20,9 +20,11 @@ export async function setMyAvailability(
 
 export async function getTeacherAvailability(
   teacherId: string,
+  weekStart?: string,
 ): Promise<TeacherBookingAvailabilityDTO[]> {
   const response = await api.get<TeacherBookingAvailabilityDTO[]>(
     `/api/teachers/${teacherId}/availability`,
+    weekStart ? { params: { week_start: weekStart } } : undefined,
   );
   return response.data;
 }

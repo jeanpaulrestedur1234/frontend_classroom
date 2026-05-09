@@ -38,6 +38,9 @@
   "create": {
     "title": "Nueva Reserva",
     "selectAvailability": "Elige una franja de disponibilidad en el calendario del profesor",
+    "noAvailabilityThisWeek": "Este profesor no tiene disponibilidad esta semana. Intenta otra.",
+    "prevWeek": "Semana anterior",
+    "nextWeek": "Semana siguiente",
     "choice": "Franja seleccionada:",
     "choosePackage": "Selecciona un paquete activo para esta reserva",
     "packageUsed": "Paquete aplicado a la reserva exitosamente",

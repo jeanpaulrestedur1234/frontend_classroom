@@ -21,10 +21,11 @@ function getThisMonday(): Date {
  */
 function getInitialWeekStart(): Date {
   const monday = getThisMonday();
-  const sundayEnd = new Date(monday);
-  sundayEnd.setDate(monday.getDate() + 6);
-  sundayEnd.setHours(21, 0, 0, 0);
-  if (sundayEnd.getTime() < Date.now() + 24 * 60 * 60 * 1000) {
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+  sunday.setHours(23, 59, 59, 999);
+  const minBookableTime = Date.now() + 24 * 60 * 60 * 1000;
+  if (sunday.getTime() < minBookableTime) {
     monday.setDate(monday.getDate() + 7);
   }
   return monday;

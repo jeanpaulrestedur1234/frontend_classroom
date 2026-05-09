@@ -33,6 +33,11 @@ export default function BookingDetailModal({
 
   const isAdminOrTeacher = user.role === 'admin' || user.role === 'super_admin' || user.role === 'teacher';
 
+  // TODO(backend): Validar también en backend que no se permita cambiar status de clases pasadas. Hablar con Paul.
+  const bookingDateTime = new Date(`${booking.scheduled_date}T${booking.start_time}`);
+  const isPastBooking = bookingDateTime.getTime() < Date.now();
+  const pastTooltip = t('actions.pastBookingTooltip');
+
   return (
     <Modal isOpen={!!booking} onClose={onClose} title={t('detail.title')} size="lg">
       <div className="space-y-5">
@@ -88,6 +93,8 @@ export default function BookingDetailModal({
             <Button
               size="sm"
               loading={actionLoading === booking.id}
+              disabled={isPastBooking}
+              title={isPastBooking ? pastTooltip : t('actions.confirm')}
               onClick={() => {
                 onConfirm(booking.id);
                 onClose();
@@ -113,6 +120,8 @@ export default function BookingDetailModal({
             <Button
               size="sm"
               loading={actionLoading === booking.id}
+              disabled={isPastBooking}
+              title={isPastBooking ? pastTooltip : t('actions.complete')}
               onClick={() => {
                 onComplete(booking.id);
                 onClose();
@@ -127,6 +136,8 @@ export default function BookingDetailModal({
               variant="danger"
               size="sm"
               loading={actionLoading === booking.id}
+              disabled={isPastBooking}
+              title={isPastBooking ? pastTooltip : t('actions.cancel')}
               onClick={() => {
                 onCancel(booking.id);
                 onClose();

@@ -7,6 +7,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { formatDateLocale } from '@/utils';
 import {
   getDashboardStats,
   type StudentDashboardStats,
@@ -23,7 +24,7 @@ import RecentActivity from './RecentActivity';
 
 export default function StudentDashboard() {
   const { t } = useTranslation('dashboard');
-  const { t: tc } = useTranslation('common');
+  const { t: tc, i18n } = useTranslation('common');
 
   const [stats, setStats] = useState<StudentDashboardStats | null>(null);
   const [packages, setPackages] = useState<StudentPackageDTO[]>([]);
@@ -48,8 +49,12 @@ export default function StudentDashboard() {
     fetchData();
   }, []);
 
+  const todayStr = new Date().toISOString().slice(0, 10);
   const upcomingBooking = bookings
-    .filter((b) => b.status === 'confirmed' || b.status === 'pending')
+    .filter((b) =>
+      (b.status === 'confirmed' || b.status === 'pending') &&
+      b.scheduled_date >= todayStr
+    )
     .sort((a, b) => {
       const dateA = `${a.scheduled_date}T${a.start_time}`;
       const dateB = `${b.scheduled_date}T${b.start_time}`;
@@ -81,7 +86,7 @@ export default function StudentDashboard() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-base font-bold text-[var(--text-main)]">
-                    {upcomingBooking.scheduled_date}
+                    {formatDateLocale(upcomingBooking.scheduled_date, i18n.language)}
                   </p>
                   <p className="text-sm font-medium text-[var(--text-muted)]">
                     {upcomingBooking.start_time.slice(0, 5)} - {upcomingBooking.end_time.slice(0, 5)}

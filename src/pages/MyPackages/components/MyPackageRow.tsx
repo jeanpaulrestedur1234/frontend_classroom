@@ -12,7 +12,7 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import type { ClassType, PaymentDTO } from '@/types';
-import { formatDate, formatCurrency } from '@/utils';
+import { formatDateLocale, formatCurrency } from '@/utils';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
@@ -86,7 +86,7 @@ export default function MyPackageRow({
   isCreatingPayment,
 }: MyPackageRowProps) {
   const { t } = useTranslation('packages');
-  const { t: tc } = useTranslation('common');
+  const { t: tc, i18n } = useTranslation('common');
 
   const [modalOpen, setModalOpen]       = useState(false);
   const [menuOpen, setMenuOpen]         = useState(false);
@@ -206,7 +206,7 @@ export default function MyPackageRow({
                   ? t('myPackages.expiredOn')
                   : t('myPackages.expiresOn')}
               </div>
-              <p className={`text-sm font-semibold ${expColor}`}>{formatDate(pkg.expires_at)}</p>
+              <p className={`text-sm font-semibold ${expColor}`}>{formatDateLocale(pkg.expires_at, i18n.language)}</p>
               <p className={`text-[11px] mt-0.5 ${expColor}`}>{daysLabel(daysLeft, t)}</p>
             </>
           ) : pkg.status === 'inactive' ? (
@@ -216,7 +216,7 @@ export default function MyPackageRow({
                 {t('myPackages.activateBefore')}
               </div>
               <p className="text-sm font-semibold text-green-700">
-                {pkg.activation_deadline ? formatDate(pkg.activation_deadline) : '—'}
+                {pkg.activation_deadline ? formatDateLocale(pkg.activation_deadline, i18n.language) : '—'}
               </p>
               {pkg.activation_deadline && (
                 <p className="text-[11px] mt-0.5 text-green-700">
@@ -354,7 +354,7 @@ export default function MyPackageRow({
                         {tc(`status.${payment.status}`)}
                       </Badge>
                       <span className="text-[10px] text-[var(--text-dim)]">
-                        {formatDate(payment.created_at)}
+                        {formatDateLocale(payment.created_at, i18n.language)}
                       </span>
                     </div>
                   </div>

@@ -364,9 +364,7 @@ export function StepDateTime({
                 <tr className="border-b border-[var(--border-main)] bg-[var(--bg-subtle)]">
                   <th className="sticky left-0 z-10 w-14 bg-[var(--bg-subtle)] px-3 py-3 text-left font-medium text-[var(--text-muted)] font-[family-name:var(--font-display)]" />
                   {Array.from({ length: 7 }, (_, dayIdx) => {
-                    // Use the date from the API if this day has availability, else compute it
-                    const avail = filteredAvailability.find((a) => a.day_of_week === dayIdx);
-                    const date = avail ? avail.date : calcDayDate(dayIdx, weekStart);
+                    const date = calcDayDate(dayIdx, weekStart);
                     return (
                       <th
                         key={dayIdx}
@@ -403,18 +401,17 @@ export function StepDateTime({
                       {Array.from({ length: 7 }, (_, dayIdx) => {
                         const availsForDay = filteredAvailability.filter((a) => a.day_of_week === dayIdx);
                         let slot: AvailabilitySlot | undefined;
-                        let parentAvail: TeacherBookingAvailabilityDTO | undefined;
 
                         for (const a of availsForDay) {
                           const s = a.slots.find((s) => s.start_time <= hour && s.end_time > hour);
-                          if (s) {
-                            slot = s;
-                            parentAvail = a;
-                            break;
-                          }
+                          if (s) { slot = s; break; }
                         }
 
-                        const slotDate = slot?.date ?? parentAvail?.date ?? calcDayDate(dayIdx, weekStart);
+                        // TODO(BACKEND): Esta fecha asume que el backend devuelve un patrón semanal de disponibilidad.
+                        // Cuando el backend implemente el param `week_start` y devuelva slots por fecha real, hay que
+                        // validar que slot.date coincida con calcDayDate(dayIdx, weekStart). Si no coincide, mostrar
+                        // "no disponible" en lugar de mostrar el slot — riesgo de doble booking.
+                        const slotDate = calcDayDate(dayIdx, weekStart);
                         const selected = scheduledDate === slotDate && startTime === hour;
                         const slotTime = new Date(`${slotDate}T${hour}:00`);
                         const isPast = slotTime.getTime() - Date.now() < 24 * 60 * 60 * 1000;

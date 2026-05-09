@@ -26,7 +26,8 @@
     "addPackageSuccess": "Paquete vinculado exitosamente",
     "error": "Error al procesar la acción",
     "joinClass": "Unirse a la clase",
-    "videoTooltip": "Abrir Aula Virtual"
+    "videoTooltip": "Abrir Aula Virtual",
+    "pastBookingTooltip": "No puedes modificar clases pasadas"
   },
   "detail": {
     "title": "Detalle de Reserva",

@@ -26,7 +26,8 @@
     "addPackageSuccess": "Package linked successfully",
     "error": "Error processing action",
     "joinClass": "Join Class",
-    "videoTooltip": "Open Virtual Classroom"
+    "videoTooltip": "Open Virtual Classroom",
+    "pastBookingTooltip": "You can't modify past classes"
   },
   "detail": {
     "title": "Booking Details",

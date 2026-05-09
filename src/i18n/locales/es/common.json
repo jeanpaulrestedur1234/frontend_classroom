@@ -23,7 +23,8 @@
     "viewDetails": "Ver detalle",
     "activate": "Activar",
     "reject": "Rechazar",
-    "approve": "Aprobar"
+    "approve": "Aprobar",
+    "completed": "completado"
   },
   "status": {
     "active": "Activo",

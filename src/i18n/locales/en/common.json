@@ -19,7 +19,8 @@
     "viewDetails": "View details",
     "activate": "Activate",
     "reject": "Reject",
-    "approve": "Approve"
+    "approve": "Approve",
+    "completed": "completed"
   },
   "status": {
     "active": "Active",

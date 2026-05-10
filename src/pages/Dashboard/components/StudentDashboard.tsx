@@ -40,7 +40,12 @@ export default function StudentDashboard() {
           listMyBookings({ page_size: 10 }),
         ]);
         if (s.status === 'fulfilled') setStats(s.value as StudentDashboardStats);
-        if (pkg.status === 'fulfilled') setPackages(Array.isArray(pkg.value) ? pkg.value : []);
+        if (pkg.status === 'fulfilled') {
+          // BUG-014/BUG-018: getMyPackages() returns a paginated response { total, items }, not an array.
+          // Reading pkg.value directly leaves packages empty and breaks both the stat card and the list.
+          const items = Array.isArray((pkg.value as { items?: unknown })?.items) ? (pkg.value as { items: StudentPackageDTO[] }).items : [];
+          setPackages(items);
+        }
         if (bk.status === 'fulfilled') setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
       } finally {
         setLoading(false);
@@ -61,13 +66,18 @@ export default function StudentDashboard() {
       return dateA.localeCompare(dateB);
     })[0];
 
+  // BUG-014/BUG-018: derive active count from packages array, not from stats.active_packages.
+  // The backend /api/dashboard/stats currently returns the total of all packages instead of filtering by status='active'.
+  // Single source of truth: the same packages array already used by the list below.
+  const activePackagesCount = packages.filter((p) => p.status === 'active').length;
+
   if (loading) return <LoadingSpinner size="lg" />;
 
   return (
     <>
       {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard icon={<Package className="h-6 w-6" />} label={t('student.activePackages')} value={stats?.active_packages ?? 0} color="blue" />
+        <StatCard icon={<Package className="h-6 w-6" />} label={t('student.activePackages')} value={activePackagesCount} color="blue" />
         <StatCard icon={<CalendarDays className="h-6 w-6" />} label={t('student.pendingBookings')} value={stats?.pending_bookings ?? 0} color="sky" />
         <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('student.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>

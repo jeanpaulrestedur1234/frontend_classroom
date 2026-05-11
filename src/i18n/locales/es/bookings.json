@@ -36,7 +36,7 @@
     "updatedAt": "Actualizada el"
   },
   "create": {
-    "title": "Nueva Reserva",
+    "title": "Reservar Clase",
     "selectAvailability": "Elige una franja de disponibilidad en el calendario del profesor",
     "noAvailabilityThisWeek": "Este profesor no tiene disponibilidad esta semana. Intenta otra.",
     "prevWeek": "Semana anterior",

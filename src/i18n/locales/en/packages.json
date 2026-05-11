@@ -45,8 +45,8 @@
       "activeSub": "Packages in use",
       "expired": "Expired",
       "expiredSub": "Expired packages",
-      "toActivate": "To activate",
-      "toActivateSub": "Packages to activate"
+      "toActivate": "Inactive",
+      "toActivateSub": "Packages pending activation"
     },
     "col": {
       "package": "Package",

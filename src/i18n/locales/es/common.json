@@ -53,6 +53,12 @@
     "virtual": "Virtual",
     "presencial": "Presencial"
   },
+    "recentActivity": {
+      "adminTitle": "{{type}} - {{teacher}}",
+      "studentTitle": "{{type}} con {{teacher}}",
+      "teacherTitle": "Clase {{type}} en {{room}}",
+      "teacherTitleNoRoom": "Clase {{type}}"
+    },
   "navigation": {
     "dashboard": "Dashboard",
     "profile": "Mi Perfil",

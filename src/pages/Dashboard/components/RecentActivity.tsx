@@ -51,11 +51,11 @@ export default function RecentActivity({ bookings, title, emptyMessage, role }: 
               
               let activityTitle = '';
               if (role === 'admin') {
-                activityTitle = `${isVirtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial')} - ${teacherName}`;
+                activityTitle = tc('recentActivity.adminTitle', { type: isVirtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial'), teacher: teacherName });
               } else if (role === 'student') {
-                activityTitle = `${tc(`bookingTypes.${b.booking_type}`)} con ${teacherName}`;
+                activityTitle = tc('recentActivity.studentTitle', { type: tc(`bookingTypes.${b.booking_type}`), teacher: teacherName });
               } else {
-                activityTitle = `Clase ${tc(`bookingTypes.${b.booking_type}`)} ${roomName ? `en ${roomName}` : ''}`;
+                activityTitle = roomName ? tc('recentActivity.teacherTitle', { type: tc(`bookingTypes.${b.booking_type}`), room: roomName }) : tc('recentActivity.teacherTitleNoRoom', { type: tc(`bookingTypes.${b.booking_type}`) });
               }
 
               return (

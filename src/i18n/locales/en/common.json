@@ -49,6 +49,12 @@
     "virtual": "Virtual",
     "presencial": "In-Person"
   },
+    "recentActivity": {
+      "adminTitle": "{{type}} - {{teacher}}",
+      "studentTitle": "{{type}} with {{teacher}}",
+      "teacherTitle": "{{type}} class in {{room}}",
+      "teacherTitleNoRoom": "{{type}} class"
+    },
   "navigation": {
     "dashboard": "Dashboard",
     "profile": "My Profile",

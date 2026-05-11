@@ -184,7 +184,7 @@ export default function MyPackageRow({
           </div>
           <div className="flex justify-between mt-1">
             <span className="text-[10px] text-[var(--text-dim)]">{progress}% {tc('actions.completed')}</span>
-            <span className="text-[10px] text-[var(--text-dim)]">{remaining} {t('myPackages.remaining', { count: remaining })}</span>
+            <span className="text-[10px] text-[var(--text-dim)]">{t('myPackages.remaining', { count: remaining })}</span>
           </div>
         </td>
 

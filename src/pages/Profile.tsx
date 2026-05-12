@@ -20,11 +20,14 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 export default function Profile() {
   const { t: tc } = useTranslation('common');
   const { t: tu } = useTranslation('users');
+  const { t: ta } = useTranslation('auth');
   const { user } = useAuth();
   const { success: toastSuccess } = useToast();
 
   const [fullName, setFullName] = useState(user?.full_name ?? '');
   const [phone, setPhone] = useState(user?.phone ?? '');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState<string | undefined>();
   const [saving, setSaving] = useState(false);
 
   if (!user) {
@@ -49,14 +52,23 @@ export default function Profile() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setPasswordError(undefined);
+
+    if (password && password.length < 6) {
+      setPasswordError(tc('validation.minLength', { min: 6 }));
+      return;
+    }
+
     setSaving(true);
 
     try {
       await updateMe({
         full_name: fullName,
         phone: phone || undefined,
+        password: password || undefined,
       });
       toastSuccess(tu('edit.success'));
+      setPassword('');
     } catch (err: any) {
       // Errors handled by global axios interceptor
     } finally {
@@ -172,6 +184,21 @@ export default function Profile() {
                   className="pl-10"
                 />
                 <Phone className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
+              </div>
+
+              {/* Password */}
+              <div className="relative">
+                <Input
+                  id="password"
+                  type="password"
+                  label={tu('edit.password')}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={ta('login.passwordPlaceholder')}
+                  error={passwordError}
+                  className="pl-10"
+                />
+                <Shield className="absolute left-3 top-[38px] w-4 h-4 text-[var(--text-dim)] pointer-events-none" />
               </div>
 
               <div className="pt-2">

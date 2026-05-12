@@ -27,6 +27,7 @@ export default function UserEditModal({
   const [form, setForm] = useState({
     full_name: '',
     phone: '',
+    password: '',
     role: '',
     is_active: true,
     configuration_days: [] as string[],
@@ -39,6 +40,7 @@ export default function UserEditModal({
       setForm({
         full_name: user.full_name,
         phone: user.phone || '',
+        password: '',
         role: user.role,
         is_active: user.is_active,
         configuration_days: user.metadata?.configuration_days || [
@@ -71,6 +73,7 @@ export default function UserEditModal({
     onSubmit(user.id, {
       full_name: form.full_name.trim(),
       phone: form.phone.trim() || undefined,
+      password: form.password.trim() || undefined,
       role: form.role,
       is_active: form.is_active,
       metadata,
@@ -112,6 +115,13 @@ export default function UserEditModal({
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
+          />
+          <Input
+            label={t('edit.password')}
+            type="password"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            placeholder="••••••••"
           />
           <Select
             label={t('edit.role')}

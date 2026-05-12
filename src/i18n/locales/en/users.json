@@ -25,6 +25,7 @@
     "title": "Edit User",
     "fullName": "Full name",
     "phone": "Phone",
+    "password": "Password",
     "role": "Role",
     "isActive": "Active user",
     "configurationDays": "Configuration Days (Teacher)",

@@ -25,6 +25,7 @@
     "title": "Editar Usuario",
     "fullName": "Nombre completo",
     "phone": "Teléfono",
+    "password": "Contraseña",
     "role": "Rol",
     "isActive": "Usuario activo",
     "configurationDays": "Días de configuración (Profesor)",

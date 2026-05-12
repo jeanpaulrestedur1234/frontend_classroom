@@ -53,12 +53,14 @@ export type CreateUserDTO = {
 export type UpdateUserDTO = {
   full_name?: string;
   phone?: string;
+  password?: string;
   metadata?: Record<string, any>;
 };
 
 export type AdminUpdateUserDTO = {
   full_name?: string;
   phone?: string;
+  password?: string;
   role?: string;
   is_active?: boolean;
   metadata?: Record<string, any>;

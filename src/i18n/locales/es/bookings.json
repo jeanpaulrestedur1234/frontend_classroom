@@ -26,7 +26,8 @@
     "addPackageSuccess": "Paquete vinculado exitosamente",
     "error": "Error al procesar la acción",
     "joinClass": "Unirse a la clase",
-    "videoTooltip": "Abrir Aula Virtual"
+    "videoTooltip": "Abrir Aula Virtual",
+    "pastBookingTooltip": "No puedes modificar clases pasadas"
   },
   "detail": {
     "title": "Detalle de Reserva",
@@ -35,8 +36,11 @@
     "updatedAt": "Actualizada el"
   },
   "create": {
-    "title": "Nueva Reserva",
+    "title": "Reservar Clase",
     "selectAvailability": "Elige una franja de disponibilidad en el calendario del profesor",
+    "noAvailabilityThisWeek": "Este profesor no tiene disponibilidad esta semana. Intenta otra.",
+    "prevWeek": "Semana anterior",
+    "nextWeek": "Semana siguiente",
     "choice": "Franja seleccionada:",
     "choosePackage": "Selecciona un paquete activo para esta reserva",
     "packageUsed": "Paquete aplicado a la reserva exitosamente",

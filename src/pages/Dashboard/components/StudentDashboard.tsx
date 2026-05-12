@@ -7,6 +7,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { formatDateLocale } from '@/utils';
 import {
   getDashboardStats,
   type StudentDashboardStats,
@@ -23,7 +24,7 @@ import RecentActivity from './RecentActivity';
 
 export default function StudentDashboard() {
   const { t } = useTranslation('dashboard');
-  const { t: tc } = useTranslation('common');
+  const { t: tc, i18n } = useTranslation('common');
 
   const [stats, setStats] = useState<StudentDashboardStats | null>(null);
   const [packages, setPackages] = useState<StudentPackageDTO[]>([]);
@@ -39,7 +40,12 @@ export default function StudentDashboard() {
           listMyBookings({ page_size: 10 }),
         ]);
         if (s.status === 'fulfilled') setStats(s.value as StudentDashboardStats);
-        if (pkg.status === 'fulfilled') setPackages(Array.isArray(pkg.value) ? pkg.value : []);
+        if (pkg.status === 'fulfilled') {
+          // BUG-014/BUG-018: getMyPackages() returns a paginated response { total, items }, not an array.
+          // Reading pkg.value directly leaves packages empty and breaks both the stat card and the list.
+          const items = Array.isArray((pkg.value as { items?: unknown })?.items) ? (pkg.value as { items: StudentPackageDTO[] }).items : [];
+          setPackages(items);
+        }
         if (bk.status === 'fulfilled') setBookings(Array.isArray(bk.value?.items) ? bk.value.items : []);
       } finally {
         setLoading(false);
@@ -48,13 +54,22 @@ export default function StudentDashboard() {
     fetchData();
   }, []);
 
+  const todayStr = new Date().toISOString().slice(0, 10);
   const upcomingBooking = bookings
-    .filter((b) => b.status === 'confirmed' || b.status === 'pending')
+    .filter((b) =>
+      (b.status === 'confirmed' || b.status === 'pending') &&
+      b.scheduled_date >= todayStr
+    )
     .sort((a, b) => {
       const dateA = `${a.scheduled_date}T${a.start_time}`;
       const dateB = `${b.scheduled_date}T${b.start_time}`;
       return dateA.localeCompare(dateB);
     })[0];
+
+  // BUG-014/BUG-018: derive active count from packages array, not from stats.active_packages.
+  // The backend /api/dashboard/stats currently returns the total of all packages instead of filtering by status='active'.
+  // Single source of truth: the same packages array already used by the list below.
+  const activePackagesCount = packages.filter((p) => p.status === 'active').length;
 
   if (loading) return <LoadingSpinner size="lg" />;
 
@@ -62,7 +77,7 @@ export default function StudentDashboard() {
     <>
       {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard icon={<Package className="h-6 w-6" />} label={t('student.activePackages')} value={stats?.active_packages ?? 0} color="blue" />
+        <StatCard icon={<Package className="h-6 w-6" />} label={t('student.activePackages')} value={activePackagesCount} color="blue" />
         <StatCard icon={<CalendarDays className="h-6 w-6" />} label={t('student.pendingBookings')} value={stats?.pending_bookings ?? 0} color="sky" />
         <StatCard icon={<CheckCircle2 className="h-6 w-6" />} label={t('student.completedBookings')} value={stats?.completed_bookings ?? 0} color="emerald" />
       </div>
@@ -81,7 +96,7 @@ export default function StudentDashboard() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-base font-bold text-[var(--text-main)]">
-                    {upcomingBooking.scheduled_date}
+                    {formatDateLocale(upcomingBooking.scheduled_date, i18n.language)}
                   </p>
                   <p className="text-sm font-medium text-[var(--text-muted)]">
                     {upcomingBooking.start_time.slice(0, 5)} - {upcomingBooking.end_time.slice(0, 5)}

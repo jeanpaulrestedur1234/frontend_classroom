@@ -26,7 +26,8 @@
     "addPackageSuccess": "Package linked successfully",
     "error": "Error processing action",
     "joinClass": "Join Class",
-    "videoTooltip": "Open Virtual Classroom"
+    "videoTooltip": "Open Virtual Classroom",
+    "pastBookingTooltip": "You can't modify past classes"
   },
   "detail": {
     "title": "Booking Details",
@@ -35,8 +36,11 @@
     "updatedAt": "Updated on"
   },
   "create": {
-    "title": "New Booking",
+    "title": "Book a Class",
     "selectAvailability": "Choose an available slot from the teacher's calendar",
+    "noAvailabilityThisWeek": "This teacher has no availability this week. Try another.",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
     "choice": "Selected slot:",
     "choosePackage": "Select an active package to use for this booking",
     "packageUsed": "Package applied to booking successfully",

@@ -44,9 +44,9 @@
       "active": "Activos",
       "activeSub": "Paquetes en uso",
       "expired": "Vencidos",
-      "expiredSub": "Paquetes expirados",
-      "toActivate": "Por activar",
-      "toActivateSub": "Paquetes por activar"
+      "expiredSub": "Paquetes vencidos",
+      "toActivate": "Inactivos",
+      "toActivateSub": "Paquetes pendientes de activación"
     },
     "col": {
       "package": "Paquete",

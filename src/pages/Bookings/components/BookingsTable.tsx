@@ -75,7 +75,13 @@ export default function BookingsTable({
           </tr>
         </thead>
         <tbody>
-          {bookings.map((b) => (
+          {bookings.map((b) => {
+            // TODO(backend): Validar también en backend que no se permita cambiar status de clases pasadas. Hablar con Paul.
+            const bookingDateTime = new Date(`${b.scheduled_date}T${b.start_time}`);
+            const isPastBooking = bookingDateTime.getTime() < Date.now();
+            const pastTooltip = t('actions.pastBookingTooltip');
+
+            return (
             <tr
               key={b.id}
               className="border-b border-[var(--border-main)] last:border-0 hover:bg-[var(--bg-surface-hover)] transition-colors"
@@ -129,7 +135,8 @@ export default function BookingsTable({
                       size="sm"
                       loading={actionLoading === b.id}
                       onClick={() => onConfirm(b.id)}
-                      title={t('actions.confirm')}
+                      disabled={isPastBooking}
+                      title={isPastBooking ? pastTooltip : t('actions.confirm')}
                     >
                       <CheckCircle className="w-4 h-4 text-emerald-500" />
                     </Button>
@@ -141,7 +148,8 @@ export default function BookingsTable({
                       size="sm"
                       loading={actionLoading === b.id}
                       onClick={() => onComplete(b.id)}
-                      title={t('actions.complete')}
+                      disabled={isPastBooking}
+                      title={isPastBooking ? pastTooltip : t('actions.complete')}
                     >
                       <CheckCircle className="w-4 h-4 text-emerald-500" />
                     </Button>
@@ -153,7 +161,8 @@ export default function BookingsTable({
                       size="sm"
                       loading={actionLoading === b.id}
                       onClick={() => onCancel(b.id)}
-                      title={t('actions.cancel')}
+                      disabled={isPastBooking}
+                      title={isPastBooking ? pastTooltip : t('actions.cancel')}
                     >
                       <XCircle className="w-4 h-4 text-rose-500" />
                     </Button>
@@ -172,7 +181,8 @@ export default function BookingsTable({
                 </div>
               </td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
     </div>

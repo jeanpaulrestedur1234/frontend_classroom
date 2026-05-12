@@ -1,5 +1,6 @@
 import { Monitor, Building2, CalendarDays, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { formatDateLocale } from '@/utils';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import type { StudentBookingDetailDto } from '@/types';
@@ -24,7 +25,7 @@ function bookingBadgeVariant(
 }
 
 export default function RecentActivity({ bookings, title, emptyMessage, role }: RecentActivityProps) {
-  const { t: tc } = useTranslation('common');
+  const { t: tc, i18n } = useTranslation('common');
 
   return (
     <div className="mt-10 animate-fade-in-up">
@@ -50,11 +51,11 @@ export default function RecentActivity({ bookings, title, emptyMessage, role }: 
               
               let activityTitle = '';
               if (role === 'admin') {
-                activityTitle = `${isVirtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial')} - ${teacherName}`;
+                activityTitle = tc('recentActivity.adminTitle', { type: isVirtual ? tc('bookingTypes.virtual') : tc('bookingTypes.presencial'), teacher: teacherName });
               } else if (role === 'student') {
-                activityTitle = `${tc(`bookingTypes.${b.booking_type}`)} con ${teacherName}`;
+                activityTitle = tc('recentActivity.studentTitle', { type: tc(`bookingTypes.${b.booking_type}`), teacher: teacherName });
               } else {
-                activityTitle = `Clase ${tc(`bookingTypes.${b.booking_type}`)} ${roomName ? `en ${roomName}` : ''}`;
+                activityTitle = roomName ? tc('recentActivity.teacherTitle', { type: tc(`bookingTypes.${b.booking_type}`), room: roomName }) : tc('recentActivity.teacherTitleNoRoom', { type: tc(`bookingTypes.${b.booking_type}`) });
               }
 
               return (
@@ -77,7 +78,7 @@ export default function RecentActivity({ bookings, title, emptyMessage, role }: 
                       <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-xs text-[var(--text-muted)]">
                         <span className="flex items-center gap-1.5">
                           <CalendarDays className="h-3.5 w-3.5 text-[var(--text-dim)]" />
-                          {b.scheduled_date}
+                          {formatDateLocale(b.scheduled_date, i18n.language)}
                         </span>
                         <span className="flex items-center gap-1.5">
                           <Clock className="h-3.5 w-3.5 text-[var(--text-dim)]" />

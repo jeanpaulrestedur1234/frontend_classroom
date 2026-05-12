@@ -19,7 +19,8 @@
     "viewDetails": "View details",
     "activate": "Activate",
     "reject": "Reject",
-    "approve": "Approve"
+    "approve": "Approve",
+    "completed": "completed"
   },
   "status": {
     "active": "Active",
@@ -48,6 +49,12 @@
     "virtual": "Virtual",
     "presencial": "In-Person"
   },
+    "recentActivity": {
+      "adminTitle": "{{type}} - {{teacher}}",
+      "studentTitle": "{{type}} with {{teacher}}",
+      "teacherTitle": "{{type}} class in {{room}}",
+      "teacherTitleNoRoom": "{{type}} class"
+    },
   "navigation": {
     "dashboard": "Dashboard",
     "profile": "My Profile",

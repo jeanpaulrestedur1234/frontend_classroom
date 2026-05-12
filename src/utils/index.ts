@@ -7,6 +7,16 @@ export function formatDate(dateStr: string): string {
   });
 }
 
+export function formatDateLocale(dateStr: string, lang: string): string {
+  const locale = lang.startsWith('en') ? 'en-US' : 'es-CO';
+  return new Date(dateStr).toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'America/Bogota',
+  });
+}
+
 export function formatCurrency(amount: number): string {
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',

@@ -37,7 +37,8 @@
     "totalBookings": "Reservas Totales",
     "totalPackages": "Paquetes Totales",
     "nextClass": "Próxima Clase",
-    "noUpcomingClasses": "No tienes clases programadas.",
+    "noActivePackages": "No tienes paquetes activos",
+    "noUpcomingClasses": "No tienes próximas clases.",
     "bookClass": "Reservar Clase",
     "recentActivity": "Actividad reciente",
     "noRecentActivity": "No hay actividad reciente."

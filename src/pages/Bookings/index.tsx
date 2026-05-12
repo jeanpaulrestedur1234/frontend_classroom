@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarDays, Plus, AlertCircle, ChevronLeft, ChevronRight, ListFilter } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -61,7 +61,11 @@ export default function Bookings() {
   const [viewMode, setViewMode] = useState<'table' | 'week'>('week');
 
   const [currentWeekStart, setCurrentWeekStart] = useState<Date>(() => getMonday(new Date()));
-  const initialMonday = getMonday(new Date());
+  const minWeekStart = useMemo(() => {
+    const d = getMonday(new Date());
+    d.setDate(d.getDate() - 26 * 7);
+    return d;
+  }, []);
 
   /* server-side paginated query */
   const fetcher = useCallback(
@@ -158,7 +162,7 @@ export default function Bookings() {
     }
   }
 
-  const isPrevDisabled = currentWeekStart.getTime() <= initialMonday.getTime();
+  const isPrevDisabled = currentWeekStart.getTime() <= minWeekStart.getTime();
 
   function handleNextWeek() {
     setCurrentWeekStart((prev) => {
@@ -172,7 +176,7 @@ export default function Bookings() {
     setCurrentWeekStart((prev) => {
       const p = new Date(prev);
       p.setDate(p.getDate() - 7);
-      if (p.getTime() < initialMonday.getTime()) return prev;
+      if (p.getTime() < minWeekStart.getTime()) return prev;
       return p;
     });
   }

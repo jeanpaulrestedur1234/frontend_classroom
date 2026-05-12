@@ -37,6 +37,7 @@
     "totalBookings": "Total Bookings",
     "totalPackages": "Total Packages",
     "nextClass": "Next Class",
+    "noActivePackages": "You have no active packages",
     "noUpcomingClasses": "You have no upcoming classes.",
     "bookClass": "Book a Class",
     "recentActivity": "Recent activity",

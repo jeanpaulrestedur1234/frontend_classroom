@@ -23,7 +23,8 @@
     "viewDetails": "Ver detalle",
     "activate": "Activar",
     "reject": "Rechazar",
-    "approve": "Aprobar"
+    "approve": "Aprobar",
+    "completed": "completado"
   },
   "status": {
     "active": "Activo",
@@ -35,7 +36,7 @@
     "notified": "Notificado",
     "rejected": "Rechazado",
     "package": "Paquete",
-    "expired": "Expirado"
+    "expired": "Vencido"
   },
   "roles": {
     "super_admin": "Super Admin",
@@ -52,6 +53,12 @@
     "virtual": "Virtual",
     "presencial": "Presencial"
   },
+    "recentActivity": {
+      "adminTitle": "{{type}} - {{teacher}}",
+      "studentTitle": "{{type}} con {{teacher}}",
+      "teacherTitle": "Clase {{type}} en {{room}}",
+      "teacherTitleNoRoom": "Clase {{type}}"
+    },
   "navigation": {
     "dashboard": "Dashboard",
     "profile": "Mi Perfil",

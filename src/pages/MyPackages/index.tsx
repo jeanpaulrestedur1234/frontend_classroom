@@ -195,7 +195,7 @@ export default function MyPackages() {
                     : 'bg-[var(--bg-surface)] text-[var(--text-dim)] border border-[var(--border-main)] hover:bg-[var(--bg-subtle)] hover:text-[var(--text-body)]'
                 }`}
               >
-                {st === 'all' ? tc('status.all', 'Todos') : tc(`status.${st}`)}
+                {st === 'all' ? tc('select.all') : tc(`status.${st}`)}
               </button>
             ))}
           </div>

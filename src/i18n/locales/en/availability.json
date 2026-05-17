@@ -3,6 +3,7 @@
   "adminTitle": "Teacher Availability",
   "fridayWarning": "Availability can only be modified on Fridays. Today is {{day}}.",
   "fridayReady": "Today is Friday — you can configure your availability.",
+  "recurringWarning": "Your saved availability applies to all future weeks until you reconfigure it. Review the grid and update it if you need changes for this week.",
   "configure": "Configure Availability",
   "legend": {
     "virtual": "Virtual",

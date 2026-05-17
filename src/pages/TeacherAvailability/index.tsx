@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Clock, Calendar, AlertTriangle } from 'lucide-react';
+import { Clock, Calendar, AlertTriangle, Info } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { getMyAvailability, setMyAvailability, getTeacherAvailability } from '@/services/availability';
 import { listUsers } from '@/services/users';
@@ -152,6 +152,18 @@ export default function TeacherAvailability() {
           <div>
             <p className="text-sm font-medium text-[var(--primary)]">
               {isFriday() ? t('fridayReady') : t('fridayWarning', { day: getCurrentDayName(tc) })}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Recurring availability warning banner */}
+      {isTeacher && (
+        <div className="flex items-start gap-3 p-4 rounded-2xl bg-amber-500/5 border border-amber-500/15 backdrop-blur-xl">
+          <Info className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+          <div>
+            <p className="text-sm font-medium text-amber-600">
+              {t('recurringWarning')}
             </p>
           </div>
         </div>

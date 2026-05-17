@@ -3,6 +3,7 @@
   "adminTitle": "Disponibilidad de Profesores",
   "fridayWarning": "La disponibilidad solo puede modificarse los viernes. Hoy es {{day}}.",
   "fridayReady": "Hoy es viernes — puedes configurar tu disponibilidad.",
+  "recurringWarning": "Tu disponibilidad guardada se aplica a todas las semanas futuras hasta que la reconfigures. Revisa la grilla y actualízala si necesitas cambios para esta semana.",
   "configure": "Configurar Disponibilidad",
   "legend": {
     "virtual": "Virtual",

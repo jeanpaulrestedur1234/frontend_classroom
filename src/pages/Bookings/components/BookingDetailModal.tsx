@@ -122,7 +122,7 @@ export default function BookingDetailModal({
               {t('actions.joinClass')}
             </Button>
           )}
-          {isAdminOrTeacher && booking.status === 'confirmed' && (
+          {isAdminOrTeacher && booking.status === 'confirmed' && isPastBooking && (
             <Button
               size="sm"
               loading={actionLoading === booking.id}

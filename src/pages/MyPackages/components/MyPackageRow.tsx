@@ -190,9 +190,9 @@ export default function MyPackageRow({
 
         {/* Status badge */}
         <td className="px-4 py-3.5">
-          <Badge variant={statusBadgeVariant(pkg.status)} className="capitalize text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap">
+          <Badge variant={statusBadgeVariant(isExpired ? 'expired' : pkg.status)} className="capitalize text-[11px] px-2.5 py-1 rounded-full whitespace-nowrap">
             <span className="w-1.5 h-1.5 rounded-full bg-current mr-1.5 inline-block" />
-            {tc(`status.${pkg.status}`)}
+            {tc(`status.${isExpired ? 'expired' : pkg.status}`)}
           </Badge>
         </td>
 

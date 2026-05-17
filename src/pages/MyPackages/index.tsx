@@ -14,6 +14,17 @@ import MyPackageRow, { type StudentPackageWithPayments } from './components/MyPa
 import UploadReceiptModal from '@/components/shared/UploadReceiptModal';
 import type { PaginatedResponse, StudentPackageDTO } from '@/types';
 
+const getEffectiveStatus = (pkg: { status: string; expires_at?: string | null }): string => {
+  // BUG-039: backend doesn't auto-update status to 'expired' when expires_at passes.
+  // Treat the package as expired if its expiration date is in the past.
+  if (pkg.status === 'expired') return 'expired';
+  if (pkg.expires_at) {
+    const expiresMs = new Date(pkg.expires_at).getTime();
+    if (!isNaN(expiresMs) && expiresMs < Date.now()) return 'expired';
+  }
+  return pkg.status;
+};
+
 export default function MyPackages() {
   const { t } = useTranslation('packages');
   const { t: tc } = useTranslation('common');
@@ -40,7 +51,7 @@ export default function MyPackages() {
     const items = data?.items ?? [];
     if (data && data.total <= data.page_size) {
       if (statusFilter === 'all') return items;
-      return items.filter((p) => p.status === statusFilter);
+      return items.filter((p) => getEffectiveStatus(p) === statusFilter);
     }
     return items;
   }, [data, statusFilter]);
@@ -59,9 +70,9 @@ export default function MyPackages() {
 
 
   const allPackagesForStats = data?.items ?? [];
-  const activeCount = allPackagesForStats.filter((p) => p.status === 'active').length;
-  const expiredCount = allPackagesForStats.filter((p) => p.status === 'expired').length;
-  const inactiveCount = allPackagesForStats.filter((p) => p.status === 'inactive').length;
+  const activeCount = allPackagesForStats.filter((p) => getEffectiveStatus(p) === 'active').length;
+  const expiredCount = allPackagesForStats.filter((p) => getEffectiveStatus(p) === 'expired').length;
+  const inactiveCount = allPackagesForStats.filter((p) => getEffectiveStatus(p) === 'inactive').length;
 
   const handleFilterChange = (newStatus: string) => {
     setStatusFilter(newStatus);

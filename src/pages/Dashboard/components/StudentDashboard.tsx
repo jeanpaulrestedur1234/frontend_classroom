@@ -22,6 +22,17 @@ import QuickAction from './QuickAction';
 
 import RecentActivity from './RecentActivity';
 
+const isPackageActive = (pkg: { status: string; expires_at?: string | null }): boolean => {
+  // BUG-039: backend doesn't auto-update status to 'expired' when expires_at passes.
+  // A package is truly active only if status='active' AND expires_at hasn't passed.
+  if (pkg.status !== 'active') return false;
+  if (pkg.expires_at) {
+    const expiresMs = new Date(pkg.expires_at).getTime();
+    if (!isNaN(expiresMs) && expiresMs < Date.now()) return false;
+  }
+  return true;
+};
+
 export default function StudentDashboard() {
   const { t } = useTranslation('dashboard');
   const { t: tc, i18n } = useTranslation('common');
@@ -69,7 +80,7 @@ export default function StudentDashboard() {
   // BUG-014/BUG-018: derive active count from packages array, not from stats.active_packages.
   // The backend /api/dashboard/stats currently returns the total of all packages instead of filtering by status='active'.
   // Single source of truth: the same packages array already used by the list below.
-  const activePackagesCount = packages.filter((p) => p.status === 'active').length;
+  const activePackagesCount = packages.filter(isPackageActive).length;
 
   if (loading) return <LoadingSpinner size="lg" />;
 
@@ -124,10 +135,10 @@ export default function StudentDashboard() {
           <h2 className="mb-4 text-lg font-semibold text-[var(--text-heading)] font-[family-name:var(--font-display)]">
             {t('student.activePackages')}
           </h2>
-          {packages.filter((p) => p.status === 'active').length > 0 ? (
+          {packages.filter(isPackageActive).length > 0 ? (
             <div className="grid grid-cols-1 gap-3">
               {packages
-                .filter((p) => p.status === 'active')
+                .filter(isPackageActive)
                 .slice(0, 3)
                 .map((p) => (
                   <Card key={p.id} className="flex items-center gap-3 transition-colors hover:bg-[var(--bg-subtle)]">

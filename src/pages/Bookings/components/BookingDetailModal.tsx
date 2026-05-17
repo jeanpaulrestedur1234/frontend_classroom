@@ -34,11 +34,12 @@ export default function BookingDetailModal({
   const isAdminOrTeacher = user.role === 'admin' || user.role === 'super_admin' || user.role === 'teacher';
 
   // TODO(backend): Validar también en backend que no se permita cambiar status de clases pasadas. Hablar con Paul.
-  const bookingDateTime = new Date(`${booking.scheduled_date}T${booking.start_time}`);
+  // BUG-033: scheduled_date may come as full ISO ("2026-05-14T11:00:00Z") OR just date ("2026-05-14").
+  // Strip any time portion from scheduled_date, then combine with start_time (also stripping trailing Z).
+  const dateOnly = booking.scheduled_date.split('T')[0];
+  const timeOnly = booking.start_time.replace('Z', '');
+  const bookingDateTime = new Date(`${dateOnly}T${timeOnly}`);
   const isPastBooking = bookingDateTime.getTime() < Date.now();
-  console.log('DEBUG scheduled_date:', booking.scheduled_date);
-  console.log('DEBUG start_time:', booking.start_time);
-  console.log('DEBUG bookingDateTime:', bookingDateTime.toISOString(), 'now:', new Date().toISOString(), 'isPast:', isPastBooking);
   const pastTooltip = t('actions.pastBookingTooltip');
 
   return (

@@ -26,6 +26,17 @@ function getWeekStart(date: Date): Date {
   return copy;
 }
 
+// BUG-031: Fri/Sat/Sun show next week (teachers configure availability for upcoming week on Fridays)
+function getDisplayWeekStart(): Date {
+  const today = new Date();
+  const monday = getWeekStart(today);
+  const day = today.getDay();
+  if (day === 5 || day === 6 || day === 0) {
+    monday.setDate(monday.getDate() + 7);
+  }
+  return monday;
+}
+
 function toISODate(date: Date): string {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -34,7 +45,7 @@ function toISODate(date: Date): string {
 }
 
 function getDayDate(apiDay: number, baseDate?: Date): string {
-  const date = baseDate ? new Date(baseDate) : getWeekStart(new Date());
+  const date = baseDate ? new Date(baseDate) : getDisplayWeekStart();
   date.setDate(date.getDate() + apiDay);
   return toISODate(date);
 }
@@ -59,7 +70,7 @@ export default function WeeklyGrid({ availability, onSlotClick, baseDate, onPrev
   const { t } = useTranslation('availability');
   const { t: tc } = useTranslation('common');
 
-  const currentMonday = baseDate || getWeekStart(new Date());
+  const currentMonday = baseDate || getDisplayWeekStart();
   const Sunday = new Date(currentMonday);
   Sunday.setDate(Sunday.getDate() + 6);
 

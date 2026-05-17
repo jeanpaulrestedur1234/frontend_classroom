@@ -36,6 +36,9 @@ export default function BookingDetailModal({
   // TODO(backend): Validar también en backend que no se permita cambiar status de clases pasadas. Hablar con Paul.
   const bookingDateTime = new Date(`${booking.scheduled_date}T${booking.start_time}`);
   const isPastBooking = bookingDateTime.getTime() < Date.now();
+  console.log('DEBUG scheduled_date:', booking.scheduled_date);
+  console.log('DEBUG start_time:', booking.start_time);
+  console.log('DEBUG bookingDateTime:', bookingDateTime.toISOString(), 'now:', new Date().toISOString(), 'isPast:', isPastBooking);
   const pastTooltip = t('actions.pastBookingTooltip');
 
   return (
@@ -108,6 +111,8 @@ export default function BookingDetailModal({
             <Button
               size="sm"
               variant="primary"
+              disabled={isPastBooking}
+              title={isPastBooking ? t('actions.classEndedTooltip') : t('actions.joinClass')}
               onClick={() => {
                 window.open(`/app/virtual-class/${booking.id}`, '_blank');
               }}
@@ -120,8 +125,7 @@ export default function BookingDetailModal({
             <Button
               size="sm"
               loading={actionLoading === booking.id}
-              disabled={isPastBooking}
-              title={isPastBooking ? pastTooltip : t('actions.complete')}
+              title={t('actions.complete')}
               onClick={() => {
                 onComplete(booking.id);
                 onClose();
@@ -136,8 +140,7 @@ export default function BookingDetailModal({
               variant="danger"
               size="sm"
               loading={actionLoading === booking.id}
-              disabled={isPastBooking}
-              title={isPastBooking ? pastTooltip : t('actions.cancel')}
+              title={t('actions.cancel')}
               onClick={() => {
                 onCancel(booking.id);
                 onClose();

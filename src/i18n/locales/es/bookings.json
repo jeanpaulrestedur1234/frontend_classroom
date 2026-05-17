@@ -27,7 +27,8 @@
     "error": "Error al procesar la acción",
     "joinClass": "Unirse a la clase",
     "videoTooltip": "Abrir Aula Virtual",
-    "pastBookingTooltip": "No puedes modificar clases pasadas"
+    "pastBookingTooltip": "No puedes modificar clases pasadas",
+    "classEndedTooltip": "La clase ya terminó"
   },
   "detail": {
     "title": "Detalle de Reserva",

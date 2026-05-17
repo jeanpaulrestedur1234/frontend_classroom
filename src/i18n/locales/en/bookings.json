@@ -27,7 +27,8 @@
     "error": "Error processing action",
     "joinClass": "Join Class",
     "videoTooltip": "Open Virtual Classroom",
-    "pastBookingTooltip": "You can't modify past classes"
+    "pastBookingTooltip": "You can't modify past classes",
+    "classEndedTooltip": "Class already ended"
   },
   "detail": {
     "title": "Booking Details",
